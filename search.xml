@@ -1,0 +1,2144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>在安逸时，停下来静静的思考</title>
+    <url>/2020/11/28/aysjjdsk/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="在安逸时，停下来静静的思考"><a href="#在安逸时，停下来静静的思考" class="headerlink" title="在安逸时，停下来静静的思考"></a>在安逸时，停下来静静的思考</h2><a id="more"></a>
+
+<p>又是平平淡淡的一个周末，似乎一切都在每一周重复的生活，哪怕现在有了可以远行的工具，也依旧把自己困扰在过去的思维框架中。</p>
+<p>懒散，忧愁，平静，就如这两周不停的小雨般，温度在骤降，雨水伴随着微风带来的不是舒适，是不断的寒冷，衣物又添加了一件又一件也和它人一样，总会感觉还是缺少一件。</p>
+<p>平静的生活，固定工作，已经让自己提前过上了养老般的生活，没有激进的日子里，生活缺少了一种上进的动力，也许明年又会再忙碌起来，但再怎么样，感觉自己缺少了点变数，清晰明了的未来，真的是你想要的生活吗？</p>
+<p>该让自己来场头脑风暴了，催动现在安逸的生活，让自己每时每刻忙碌起来，让未来不在已知，让自己充满无穷的变数</p>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux中使用nohup详解</title>
+    <url>/2020/11/10/nohupxj/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="Linux中使用nohup详解"><a href="#Linux中使用nohup详解" class="headerlink" title="Linux中使用nohup详解"></a>Linux中使用nohup详解</h2><a id="more"></a>
+
+<h3 id="nohup"><a href="#nohup" class="headerlink" title="nohup"></a>nohup</h3><p>nohup 命令运行由 Command参数和任何相关的 Arg参数指定的命令，忽略所有挂断（SIGHUP）信号。在注销后使用 nohup 命令运行后台中的程序。要运行后台中的 nohup 命令，添加 &amp; （ 表示“and”的符号）到命令的尾部。</p>
+<p>nohup 是 no hang up 的缩写，就是不挂断的意思。</p>
+<p>nohup命令：如果你正在运行一个进程，而且你觉得在退出帐户时该进程还不会结束，那么可以使用nohup命令。该命令可以在你退出帐户/关闭终端之后继续运行相应的进程。</p>
+<p>在缺省情况下该作业的所有输出都被重定向到一个名为nohup.out的文件中。</p>
+<hr>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p> <code>nohup command &gt; myout.file 2&gt;&amp;1 &amp;</code></p>
+<p>在上面的例子中，0 – stdin (standard input)，1 – stdout (standard output)，2 – stderr (standard error) ；<br>2&gt;&amp;1是将标准错误（2）重定向到标准输出（&amp;1），标准输出（&amp;1）再被重定向输入到myout.file文件中。<br> <code>0 22 * * * /usr/bin/python /home/pu/download_pdf/download_dfcf_pdf_to_oss.py &gt; /home/pu/download_pdf/download_dfcf_pdf_to_oss.log 2&gt;&amp;1</code></p>
+<p>这是放在crontab中的定时任务，晚上22点时候怕这个任务，启动这个python的脚本，并把日志写在download_dfcf_pdf_to_oss.log文件中</p>
+<hr>
+<h3 id="nohup和-amp-的区别"><a href="#nohup和-amp-的区别" class="headerlink" title="nohup和&amp;的区别"></a>nohup和&amp;的区别</h3><p>&amp; ： 指在后台运行</p>
+<p>nohup ： 不挂断的运行，注意并没有后台运行的功能，，就是指，用nohup运行命令可以使命令永久的执行下去，和用户终端没有关系，例如我们断开SSH连接都不会影响他的运行，注意了nohup没有后台运行的意思；&amp;才是后台运行</p>
+<p><code>&amp;是指在后台运行，但当用户推出(挂起)的时候，命令自动也跟着退出</code></p>
+<p>那么，我们可以巧妙的吧他们结合起来用就是<br><code>nohup COMMAND &amp;</code></p>
+<p>这样就能使命令永久的在后台执行<br>例如：<br><code>sh test.sh &amp;</code></p>
+<p>将sh test.sh任务放到后台 ，即使关闭xshell退出当前session依然继续运行，但标准输出和标准错误信息会丢失（缺少的日志的输出）</p>
+<p>将sh test.sh任务放到后台 ，关闭xshell，对应的任务也跟着停止。</p>
+<p><code>nohup sh test.sh</code></p>
+<p>将sh test.sh任务放到后台，关闭标准输入，终端不再能够接收任何输入（标准输入），重定向标准输出和标准错误到当前目录下的nohup.out文件，即使关闭xshell退出当前session依然继续运行</p>
+<p><code>nohup sh test.sh  &amp;</code></p>
+<p>将sh test.sh任务放到后台，但是依然可以使用标准输入，终端能够接收任何输入，重定向标准输出和标准错误到当前目录下的nohup.out文件，即使关闭xshell退出当前session依然继续运行。</p>
+<hr>
+<p> <code>ps -aux | grep &quot;hexo&quot;</code></p>
+<p>查询进程</p>
+]]></content>
+      <categories>
+        <category>软件教程</category>
+      </categories>
+      <tags>
+        <tag>软件</tag>
+        <tag>阅读</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英雄梦想的重启</title>
+    <url>/2020/10/27/Restart/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="每次都前进了一步-也许会倒退一点儿-可绝不会完全退回原处。"><a href="#每次都前进了一步-也许会倒退一点儿-可绝不会完全退回原处。" class="headerlink" title="每次都前进了一步,也许会倒退一点儿,可绝不会完全退回原处。"></a>每次都前进了一步,也许会倒退一点儿,可绝不会完全退回原处。</h2><a id="more"></a>
+
+<blockquote>
+<p>尽自己的力量去做就是了,只要看到这一点就行;<br>每次都前进了一步,也许会倒退一点儿,可绝不会完全退回原处。这是事实可以证明的。<br>这么一想,就觉得很有意义了,就是说,从表面看好像白费力气,其实不会的。<br>-约翰·斯坦贝克&lt;&lt;愤怒的葡萄&gt;&gt;-</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>夜语新说</title>
+    <url>/2020/10/21/Future/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="没有人能回到过去重新活过，-但你我都可以从现在开始，决定我们未来的模样。"><a href="#没有人能回到过去重新活过，-但你我都可以从现在开始，决定我们未来的模样。" class="headerlink" title="没有人能回到过去重新活过， 但你我都可以从现在开始，决定我们未来的模样。"></a>没有人能回到过去重新活过， 但你我都可以从现在开始，决定我们未来的模样。</h2><a id="more"></a>
+
+<p><code>读史使人明智，读诗使人聪慧，学习数学使人精密，物理学使人深刻，伦理学使人高尚，逻辑修辞使人善辩。总之，“知识能塑造人的性格”。——培根</code></p>
+<blockquote>
+<p>你的地图是一张白纸，所以即使想决定目的地，也不知道路在哪里。可是换个角度来看，正因为是一张白纸，才可以随心所欲地描绘地图。一切全在你自己。对你来说，一切都是自由的，在你面前是无限的可能。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>蓦然回首，已是半年之期</title>
+    <url>/2020/06/30/dg/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="因为草莓有季节，我会患得患失，柠檬蛋糕永远都在，我喜欢永永远远的事情。"><a href="#因为草莓有季节，我会患得患失，柠檬蛋糕永远都在，我喜欢永永远远的事情。" class="headerlink" title="因为草莓有季节，我会患得患失，柠檬蛋糕永远都在，我喜欢永永远远的事情。"></a>因为草莓有季节，我会患得患失，柠檬蛋糕永远都在，我喜欢永永远远的事情。</h2><a id="more"></a>
+
+<h3 id="柠檬蛋糕不是永远都在的，比起换季时草莓的消失，我更害怕柠檬蛋糕的突然消失。"><a href="#柠檬蛋糕不是永远都在的，比起换季时草莓的消失，我更害怕柠檬蛋糕的突然消失。" class="headerlink" title="柠檬蛋糕不是永远都在的，比起换季时草莓的消失，我更害怕柠檬蛋糕的突然消失。"></a>柠檬蛋糕不是永远都在的，比起换季时草莓的消失，我更害怕柠檬蛋糕的突然消失。</h3><hr>
+<blockquote>
+<center>
+
+<p><code>佳期何遇，芳草依旧，残灯弱影，如梦如幻。</code></p>
+<p><code>元灯初上，如幻略影，仰观明月依旧，身前却无佳人。</code></p>
+<p><code>天灾疫情，离合悲欢，亿白画如前，却不知所言。</code></p>
+<p><code>无音无信，天地之彼，藏之沧海，藏之幽梦，藏之心头。</code></p>
+<p><code>愿妳愿我，寻得真正属于彼此的托付</code></center></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>爱的人们</title>
+    <url>/2020/06/04/Pwlove/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="与人相见时应尽量热情，也许什么时候会分离，也许再也无法再见。"><a href="#与人相见时应尽量热情，也许什么时候会分离，也许再也无法再见。" class="headerlink" title="与人相见时应尽量热情，也许什么时候会分离，也许再也无法再见。"></a>与人相见时应尽量热情，也许什么时候会分离，也许再也无法再见。</h2><a id="more"></a>
+
+<blockquote>
+<p>很多人都是这样，他们都把自己当成身在梦中一样，浑浑噩噩的过日子，</p>
+<p>只有痛苦、爱或危险可以让他们重新感到这个世界的真实</p>
+<p>-杰克 凯鲁亚克 《达摩流浪者》-</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>历史一刻</title>
+    <url>/2020/05/31/Msk-sc/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="「太空竞赛·商业载人航天纪元开端」"><a href="#「太空竞赛·商业载人航天纪元开端」" class="headerlink" title="「太空竞赛·商业载人航天纪元开端」"></a>「太空竞赛·商业载人航天纪元开端」</h2><a id="more"></a>
+
+
+
+<p>“北京时间2020年5月31日3时22分(美国东部时间2020年5月30日15时22分)，特斯拉CEO埃隆·马斯克（Elon Musk）旗下太空探索技术公司SpaceX的载人龙飞船发射成功，两位宇航员乘坐着 SpaceX 载人龙飞船，在猎鹰 9 号火箭的助推下离开地球，一道绚丽的烟火划破长空，闯进了那个深邃的良夜。</p>
+<p>在佛罗里达肯尼迪航天中心，这个见证了阿波罗 11 号 的登月者飞船和首架航天飞机哥伦比亚号升空的航天圣地，又增添了传奇的一笔：人类首次商业载人航天发射。</p>
+<p>这是史上首次上由民营企业研发的火箭和飞船将宇航员送入地球轨道，也是自 2011 年美国最后一架航天飞机退役后，首次在美国本土执行的载人航天任务。</p>
+<p>马斯克创立的 SpaceX，在人类航天史上留下了一座新的里程碑，一如当年在月球踏出第一步的阿姆斯特朗。就像 NASA 局长 Jim Bridenstine 所说：这开启了人类航天的新时代。</p>
+<p><code>为什么说 SpaceX 载人飞行是历史性壮举？</code></p>
+<p>虽然从人类对宇宙的探索来看，航天飞机项目毫无疑问是失败的，但是它降低了对宇航员身体素质的要求，提出了可重用航天器的概念，做出了先行者的伟大尝试。今天，美国首次使用可重用火箭进行载人航天将是更加具有历史性的壮举。这意味着现代科技成果将有可能实质性降低太空开发成本，甚至有可能为经济、文化和社会发展做出重大贡献。</p>
+<p>与此同时，此次发射成功也意味着太空商业化发展的里程碑。</p>
+<p>长期以来，航天技术始终掌握在政府手中，生产和设计的严格控制导致该领域缺乏竞争，每次研发都需要花费高昂的代价，政府仅能够雇佣承包商制造火箭，所有的核心技术必须拥有严格控制权，如何降低研发成本一直是各国想要解决的难题。</p>
+<p>2004年布什政府呼吁取消航天飞机计划，给铁桶一般的航天领域撕开一道裂口。</p>
+<p>吉姆·布里登斯汀也曾表示，“我们设想在未来的某一天，我们将在低地球轨道上建立十二座空间站，它们全部由商业机构运营。”</p>
+<p>踩在政府试图改革的档口，马斯克成功将自己的愿景变成带给航天工业和火箭制造的变革。</p>
+<p>但在6年前，没有人想到马斯克能够打败波音，从纸面实力上看波音绝对碾压SpaceX：一家是在航空航天领域深耕多年的巨头，NASA的老牌承包商；一家是被认为有些痴心妄想的初创公司，看起来像是亿万富翁的玩票行为。</p>
+<p>这一点，2014年在NASA与两家公司签署合约时，很明显体现了出来，波音公司获得最大的份额，占据了60%，获得了42亿美元，而SpaceX仅获得了26亿美元。马斯克甚至在推特上直呼，这不公平，波音和SpaceX做着同样的事情，却拿了更多的钱。</p>
+<p>于是有人戏称说，波音像是NASA的亲儿子，而SpaceX则更像干儿子。</p>
+<p>尽管在财力、物力方面，波音都看似碾压了SpaceX，但是对于技术和钱的使用方面，波音不如SpaceX。</p>
+<p>长期担任承包商，波音可能已经习惯于大型政府计划（例如其太空发射系统火箭）上经常使用的成本加成合同，该合同允许增加支出和延长时间表。这种情况对SpaceX来说基本不存在，发射火箭庞大的支出迫使其随时面临死亡边缘的危险，必须用好帐面上的每一份钱。“如果我们以标准方式做到这一点，我们将会用光所有钱。”马斯克在接受《华盛顿邮报》的采访中说道。</p>
+<p>困难和挑战是存在的，对于两家公司而言他们的进度远落后于原定的2017年，SpaceX在经历两枚猎鹰9号火箭爆炸、载人龙飞船紧急中止系统测试爆炸等失败后，发现了问题的根本原因并加以解决，终于得以成功发射载人航天飞船进入太空。</p>
+<p>而同时，波音公司仍在继续挣扎。去年底，波音公司的载人飞船“星际客机”在不载人试飞中未进入预定轨道，取消原定前往国际空间站的计划，于当月22日提前返回地球，在美国新墨西哥州的白沙导弹靶场着陆。美航天局和波音公司也随后成立了联合调查团队进行调查。</p>
+<p>后来，波音发现了另一种软件故障，需要将重新执行试飞任务，据称波音可能会在今年年底进行试飞，这意味着波音公司的首次试飞要到2021年才能进行。</p>
+<p>这次的发射成功，让马斯克的SpaceX成功赢得了这场载人航天飞船竞赛，干儿子逆袭了亲儿子，拿着更少的钱，却做着更多的事，一步步打破人类极限。</p>
+<p>如果这次SpaceX成功将把NASA宇航员从佛罗里达发射到国际空间站——民营公司将成功实现首次将宇航员带入宇宙，SpaceX也将由此成为全球第一家承运航天员往返国际空间站的私人太空公司，结束只有政府拥有航天器的时代，代表着太空商业化的里程碑。</p>
+<p>从这一刻起，我们距离太空旅行、重返月球、移民火星，距离那些浩瀚苍穹中的群星，又迈出了重要一步。”</p>
+]]></content>
+      <categories>
+        <category>历史</category>
+      </categories>
+      <tags>
+        <tag>历史</tag>
+        <tag>实事</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>日常小记，报了一个培训班</title>
+    <url>/2020/05/22/Dhbx/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="若要灯火不熄，需以盗火，并以薪火相传"><a href="#若要灯火不熄，需以盗火，并以薪火相传" class="headerlink" title="若要灯火不熄，需以盗火，并以薪火相传"></a>若要灯火不熄，需以盗火，并以薪火相传</h2><a id="more"></a>
+
+<p><code>又到了周末的前夕，</code></p>
+<p><code>日复一日的工作和闲暇时光，总是想给自己找点事情做</code></p>
+<p><code>人不能闲着，一旦闲下来，</code></p>
+<p><code>人的精神和意志总是在不知不觉间，</code></p>
+<p><code>被社会红尘这个大染缸所侵染，适当可还行</code></p>
+<p><code>今天听了一节钟平老师的英语公开课，很有趣味，</code></p>
+<p><code>开拓创新的精神很是让人觉得敬佩，值得我学习</code></p>
+<p><code>虽然老师的闲话说的不少，挺唠叨的，但专业性质不容忽视</code></p>
+<p><code>我主动报了名，也是给自己一段时间的安排和磨练，</code></p>
+<p><code>也是为了未来做打算，只可提前，不可忽略</code></p>
+<p><code>以后每个月来记录一次，自己的阶段性试炼情况</code></p>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>艺术思维和编程</title>
+    <url>/2020/05/12/sixiang/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="跨出思维误区-思想优先-编程是手段"><a href="#跨出思维误区-思想优先-编程是手段" class="headerlink" title="跨出思维误区,思想优先,编程是手段"></a>跨出思维误区,思想优先,编程是手段</h2><a id="more"></a>
+<p><code>艺术之于编程,设计之于编程,编程不重要,思想才重要!</code></p>
+<blockquote>
+<ul>
+<li>艺术:思想优先,编程是手段</li>
+<li>设计:想法和编程同等重要</li>
+<li>工程:编程优先,思想次之</li>
+<li>认识自己:明确自己的目标,有自己的思想(想法)</li>
+<li>方式方法:编程只是手段,熟练之,未雨绸缪为思想服务</li>
+<li>为谁编程:将自身发展与祖国发展相结合,创造真正价值</li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>初夏小诗</title>
+    <url>/2020/05/05/Bgosummer/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="蝉鸣与漫天星辰的邂逅"><a href="#蝉鸣与漫天星辰的邂逅" class="headerlink" title="蝉鸣与漫天星辰的邂逅"></a>蝉鸣与漫天星辰的邂逅</h2><a id="more"></a>
+
+<blockquote>
+<p>当暴风雨来临之前，我知道我又可以在乌云之下，</p>
+<p>透过一簇簇浓绿的枝桠，注视远处可凭借心安的光</p>
+<p>那时候蝉鸣与漫天的星光</p>
+<p>拥有着草做的蒲扇</p>
+<p>三三俩俩的伙伴撒欢奔跑，无所束缚</p>
+<p>在仲夏的夜晚，蝉与蛙声</p>
+<p>像忘了关闭的音乐盒</p>
+<p>远处吹来徐徐轻柔的晚风</p>
+<p>冒着汗的碎冰冰</p>
+<p>都在诉说着</p>
+<p>夏天到来了</p>
+<p>… …</p>
+<p>一切都会过去的</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>思想为什么运动</title>
+    <url>/2020/04/21/swdyyd/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="为什么它始终在运动？什么是运动？运动便是时间对不对？"><a href="#为什么它始终在运动？什么是运动？运动便是时间对不对？" class="headerlink" title="为什么它始终在运动？什么是运动？运动便是时间对不对？"></a>为什么它始终在运动？什么是运动？运动便是时间对不对？</h2><a id="more"></a>
+
+<p> <code>当“它”同运动没有关联的时候，为什么“它”始终在运动着？什么是运动？运动便是时间对不对？</code></p>
+<blockquote>
+<p>运动即是时间<br>当然，这是显然的，从物理层面上来说，从这里移动到伦敦，从此处移动到纽约。从心理层面上来讲，这里移动到那里（正是！）<br>思想是一种崭新的运动，我们正在研究运动，即思想。</p>
+<p>想一下：假如思想停止了，那么也就没有任何运动了。</p>
+<p>有个想法,或许会有所帮助：问下我自己，是什么使得我继续思考或者交谈的？</p>
+<p>我可以经常观察人们，看到他们陷入困境，只有因为他们在继续交谈着，假如他们停止了谈话，那么这整个问题便将消失不见。我的意思是，所出现的正是话语的流动，而它仿佛是一种真实的存在，于是他们声称这是我的问题，我必须要思考的更多一些。</p>
+<p>有一种反馈说道：“我有了一个问题，我在思考”</p>
+<p>所以我有了一种“我”的想法，因此我感到我是真实的。</p>
+<p>比如：我在想着我的痛苦，这里面包含的意思是，“我”便是这个存在着的事物，痛苦神真实的，因为我是真实的，我被迫始终都在思考着这一想法：“ 在存在中维持着我自己 ”</p>
+<p>你是否明白我的意思？</p>
+<p>存在着一种反馈，这意味着说：如果思想是一种运动，也就是时间，那么倘若没有运动，“我”便死亡了！</p>
+<p>是的，如果这一运动停止了，那么有关“我真实存在着”这一感觉必然就会消失，因为“我是真实的”</p>
+<p>这一感觉，正是思想的产物。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心理学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>秩序和混乱？</title>
+    <url>/2020/04/19/gudu/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="秩序-孤独？混乱-真实？"><a href="#秩序-孤独？混乱-真实？" class="headerlink" title="秩序=孤独？混乱=真实？"></a>秩序=孤独？混乱=真实？</h2><a id="more"></a>
+
+<blockquote>
+<p>在古希腊，宇宙意味着有序，世界、宇宙意味着秩序</p><br>而我们则生活在混乱中</p><br>我如何认为在我身上拥有着宇宙的秩序呢？</p><br>这是一个心灵的老把戏了，</p><br>它声称，虽然存在着无序，</p><br>然而在你的内心却有着完美的秩序。</p><br>其实这只是一种错觉。</p></p><br>它是思想放在我们头脑里的概念，</p><br>它给予了我某种希望，</p><br>可这却只是一种幻想，</p><br>它是不真实的。</p><br>而混乱才是切实存在的真实。</p><br>我的混乱，我能够想象，</p><br>能够想象有序和协调，</p><br>然而这同样是一种幻觉。</p><br>所以，我要从我是谁这一实际出发，</p><br>即从我的混乱角度出发。</p><br>我从属于某个群体，</p><br>所以从群体中离开，</p><br>进入到彻底有序、协调之中，</p><br>这意味着我是孤独一个人的。</p><br>存在着与无序，混乱没有关联的绝对的秩序，</p><br>这便是有序，</p><br>这便是孤独。</p></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心理学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>归兮·何时</title>
+    <url>/2020/03/30/xyxz/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="星河夜转，西园小筑·夜·末"><a href="#星河夜转，西园小筑·夜·末" class="headerlink" title="星河夜转，西园小筑·夜·末"></a>星河夜转，西园小筑·夜·末</h2><a id="more"></a>
+
+<p><code>西园小筑，做不完的梦，说不出的叹息</code></p>
+<blockquote>
+<p>不知来此地多久了，恍恍惚惚间又是大约两年之期</p>
+<p>源头两岸，岛屿渤公，樱花飘落也观赏了两期</p>
+<p>远处灯火阑珊，近观白鹿顶，横竖都是世间沧桑</p>
+<p>憧憬，但愿，欢笑，别离，伤悲，新生命 。。。</p>
+<p>不看年岁，仅仅不到天数六百，却经历人世间的“别死离生”</p>
+<p>欢声笑语是昨日黄花，青灯黄卷亦是明日朝暮</p>
+<p>但愿在红尘间，你我都能找到自己的路</p>
+<p>别了 ·西园小筑</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>GitHub下载速度慢怎么办？</title>
+    <url>/2020/03/29/tisuGithub/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="一招解决GitHub致命的下载速度"><a href="#一招解决GitHub致命的下载速度" class="headerlink" title="一招解决GitHub致命的下载速度"></a>一招解决GitHub致命的下载速度</h1><a id="more"></a>
+
+<blockquote>
+<p>通过码云来导入github，通过码云下载 </p>
+</blockquote>
+<p>第一步：<br><strong>找一个你需要下载的GitHub项目</strong></p>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/XiaZaiTiSuGithub/tisu1.png" data-fancybox="images" data-caption="找一个你需要下载的GitHub项目"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/XiaZaiTiSuGithub/tisu1.png" /></a>
+
+<p><strong>第二步：<br>复制链接</strong></p>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/XiaZaiTiSuGithub/tisu2.png" data-fancybox="images" data-caption="复制链接"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/XiaZaiTiSuGithub/tisu2.png" /></a>
+
+
+
+<p><strong>第三步：<br>打开码云，然后选择从GitHub导入</strong></p>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/XiaZaiTiSuGithub/tisu3.png" data-fancybox="images" data-caption="从GitHub导入"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/XiaZaiTiSuGithub/tisu3.png" /></a>
+
+
+
+<p><strong>第四步：<br>复制刚才的连接，起个名字，点击导入</strong></p>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/XiaZaiTiSuGithub/tisu4.png" data-fancybox="images" data-caption="起个名字，点击导入"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/XiaZaiTiSuGithub/tisu4.png" /></a>
+
+
+
+
+<p><strong>这个过程大概一两分钟</strong></p>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/XiaZaiTiSuGithub/tisu5.png" data-fancybox="images" data-caption="这个过程大概一两分钟"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/XiaZaiTiSuGithub/tisu5.png" /></a>
+
+
+
+<p>导入完成：直接下载zip</p>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/XiaZaiTiSuGithub/tisu6.png" data-fancybox="images" data-caption="导入完成：直接下载zip"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/XiaZaiTiSuGithub/tisu6.png" /></a>
+
+
+
+<p>一个完整的过程动图</p>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/XiaZaiTiSuGithub/tisu.gif" data-fancybox="images" data-caption="一个完整的过程动图"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/XiaZaiTiSuGithub/tisu.gif" /></a>
+
+
+
+<p><a href="https://telegra.ph/%E4%B8%80%E6%8B%9B%E8%A7%A3%E5%86%B3GitHub%E8%87%B4%E5%91%BD%E7%9A%84%E4%B8%8B%E8%BD%BD%E9%80%9F%E5%BA%A6GitHub%E4%B8%8B%E8%BD%BD%E9%80%9F%E5%BA%A6%E6%85%A2%E6%80%8E%E4%B9%88%E5%8A%9E-%E5%8D%97-%E5%A2%99-CSDN%E5%8D%9A%E5%AE%A2-03-28">本文收录来源</a></p>
+]]></content>
+      <categories>
+        <category>软件教程</category>
+      </categories>
+      <tags>
+        <tag>软件</tag>
+        <tag>阅读</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>豁然开朗</title>
+    <url>/2020/03/22/lyself/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="人一辈子都在高潮与低潮中浮沉，唯有庸碌的人，生活才如死水一般；或者要有极高的修养，方能廓然无累，真正的解脱。——傅雷"><a href="#人一辈子都在高潮与低潮中浮沉，唯有庸碌的人，生活才如死水一般；或者要有极高的修养，方能廓然无累，真正的解脱。——傅雷" class="headerlink" title="人一辈子都在高潮与低潮中浮沉，唯有庸碌的人，生活才如死水一般；或者要有极高的修养，方能廓然无累，真正的解脱。——傅雷"></a>人一辈子都在高潮与低潮中浮沉，唯有庸碌的人，生活才如死水一般；或者要有极高的修养，方能廓然无累，真正的解脱。——傅雷</h2><a id="more"></a>
+
+
+
+<blockquote>
+<p>你若爱,生活哪里都可爱。你若恨，生活哪里都可恨。</p>
+<p>你若成长，事事可成长。你若感恩，处处可感恩。</p>
+<p>不是世界选择了你，是你选择了这个世界。</p>
+<p>既然无处可躲，不如傻乐。</p>
+<p>既然无处可逃，不如喜悦。</p>
+<p>既然没有净土，不如静心。</p>
+<p>既然没有如愿，不如释然。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于js逆向</title>
+    <url>/2020/03/18/ReverseJs/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文适合爬虫新手阅读，欢迎指正和调教。</p>
+<a id="more"></a>
+<p>js逆向是让爬虫萌新们比较头疼的一块领域，因为市面上大部分的爬虫书籍等教程都未涉及这方面知识，需要爬取用js加密的网站时常常无从下手，只能使用selenium等自动化框架来模拟人工点击。但这种方式往往效率低下，所以本文将以企名片这个网站为例，带大家初探js逆向。</p>
+<p>之所以选择这个网站，首先它难度不大，适合练手；其次即便破解了加密参数，想爬取数据还是得下些功夫，因为未登录情况下只显示一页数据，即便登录还得认证啥的比较麻烦。</p>
+<p>废话不多说，下面进入正题。</p>
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>因为涉及js的调试验证，所以除了Python环境外，你还需要<a href="https://nodejs.org/en/">Nodejs</a>（js的运行环境）和<a href="https://www.jetbrains.com/webstorm/">WebStorm</a>（IDE）。</p>
+<p>Nodejs去官网下载安装包后直接一键安装即可，安装完毕后去控制台运行<code>node --version</code>，如果出现版本号即代表安装成功。</p>
+<p>WebStorm安装完后需要激活，激活教程网上很多，大家自行搜索。它是Jet Brains的产品（和PyCharm是同一家公司），所以使用方式与PyCharm很类似。</p>
+<h2 id="分析过程"><a href="#分析过程" class="headerlink" title="分析过程"></a>分析过程</h2><p>直接访问这个地址<a href="https://www.qimingpian.com/finosda/project/pinvestment，看到的是这个界面：">https://www.qimingpian.com/finosda/project/pinvestment，看到的是这个界面：</a></p>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/qmkjtp.png" data-fancybox="images" data-caption="引用网站"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/qmkjtp.png" /></a>
+
+<p>我们需要获取图中红框里的数据，也就是创业项目列表。打开开发者工具，刷新一下页面，看看它发起了哪些请求：</p>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/f12zhuizong1.png" data-fancybox="images" data-caption="获取图中红框里的数据"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/f12zhuizong1.png" /></a>
+
+<p>为减少干扰，先只看XHR和Doc的请求，一共有三个：pinvestment、productListVip、industryFieldVip。</p>
+<p>在pinvestment的响应内容里，只能看到一堆js的调用，并没有我们想要的html，说明网页是由js动态生成的。</p>
+<p>而在productListVip和industryFieldVip的响应内容里，都有一个”encrypt_data”的参数，很明显这是一个加密参数，参数内容像是一串Base64字符。既然网站对这个参数做了加密，说明它不想被爬取，所以可以做个假设：我们的目标数据就是encrypt_data参数里的内容。</p>
+<p>有了这个假设，目的就很明确了，只要破解这个加密参数就行。</p>
+<p>爬虫新手们往往走完上面步骤就止步不前。不妨思考一下，参数虽做了加密，但网页毕竟要正常显示内容，所以在网页渲染的过程中，一定有个地方对这个参数做了解密，然后将数据写入html。</p>
+<p>也就是说，我们需要在网页渲染的过程里，一步步观察，看看到底是哪个位置对这个参数做了解密。</p>
+<p>在开发者工具里的Sources选项卡中，可以找到这个网页的js文件夹，界面右侧有断点调试栏。</p>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/f12zhuizong2.png" data-fancybox="images" data-caption="找到这个网页的js文件夹"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/f12zhuizong2.png" /></a>
+
+<p>在js文件里打上断点，然后一步步调试，就能重现网页渲染的过程。那么断点应该打在哪个位置呢？在断点调试栏里有个XHR/fetch Breakpoints，它支持在发送XHR请求的位置打上断点，我们找到的两个含加密参数的请求就是XHR类型的，正好用上这个功能。点击<code>+</code>号输入请求名称即可：</p>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/f12zhuizong3.png" data-fancybox="images" data-caption="在js文件里打上断点，然后一步步调试"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/f12zhuizong3.png" /></a>
+
+<p>刷新页面，然后一步一步执行，发现可疑信息就把鼠标移上去看下。</p>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/f12zhuizong4.png" data-fancybox="images" data-caption="刷新页面，然后一步一步执行"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/f12zhuizong4.png" /></a>
+
+<p>调试的两个小技巧：</p>
+<ul>
+<li>压缩的js点击左下角的花括号来美化</li>
+</ul>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/f12zhuizong5.png" data-fancybox="images" data-caption="左下角的花括号来美化"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/f12zhuizong5.png" /></a>
+
+<ul>
+<li>在调试过程中使用Console执行js代码。比如我觉得这个函数很可疑，想执行一下看看。</li>
+</ul>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/f12zhuizong6.png" data-fancybox="images" data-caption="使用Console执行js代码"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/f12zhuizong6.png" /></a>
+
+<p>其实上图中执行<code>Object(d.a)(e.encrypt_data)</code>返回的内容就是我们需要的数据了。进到这个函数体里边，就能找到解密函数：</p>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/f12zhuizong7.png" data-fancybox="images" data-caption="我们需要的数据"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/f12zhuizong7.png" /></a>
+
+<p><code>function o(t)</code>就是我们需要的解密函数，可以看到它先调用<code>s</code>函数，传入了四个参数，除了<code>a.a.decode(t)</code>外其他三个都是写死的，最后用<code>JSON.parse</code>转为json对象。</p>
+<p>然而，找到解密函数后，我们要做的不是去分析它函数内部做了什么，虽然可以研究它的解密算法然后用Python重写，但这样太复杂且没必要。因为我们可以用<a href="https://pypi.org/project/PyExecJS/">PyExecJS</a>这个库，直接用Python调用并执行js代码。</p>
+<p>这时候，WebStorm就派上用场了。新建一个js文件，把<code>function o</code>里涉及的代码全部抠下来。然后执行<code>console.log</code>把执行结果打印出来。篇幅问题就只贴部分代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//解密函数</span><br><span class="line">function my_decrypt(t) &#123;</span><br><span class="line">    return JSON.parse(s(&quot;5e5062e82f15fe4ca9d24bc5&quot;, my_decode(t), 0, 0, &quot;012345677890123&quot;, 1))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//解密函数依赖项</span><br><span class="line">function my_decode(t) &#123;</span><br><span class="line">    c = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span><br><span class="line">    f = /[\t\n\f\r ]/g</span><br><span class="line">    var e = (t = String(t).replace(f, &quot;&quot;)).length;</span><br><span class="line">    e % 4 == 0 &amp;&amp; (e = (t = t.replace(/==?$/, &quot;&quot;)).length),</span><br><span class="line">    (e % 4 == 1 || /[^+a-zA-Z0-9/]/.test(t)) &amp;&amp; l(&quot;Invalid character: the string to be decoded is not correctly encoded.&quot;);</span><br><span class="line">    for (var n, r, i = 0, o = &quot;&quot;, a = -1; ++a &lt; e; )</span><br><span class="line">        r = c.indexOf(t.charAt(a)),</span><br><span class="line">            n = i % 4 ? 64 * n + r : r,</span><br><span class="line">        i++ % 4 &amp;&amp; (o += String.fromCharCode(255 &amp; n &gt;&gt; (-2 * i &amp; 6)));</span><br><span class="line">    return o</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//测试代码，加密参数太长就不贴上来了</span><br><span class="line">encrypt_data = &quot;xxx&quot;</span><br><span class="line">decrypt_data = my_decrypt(encrypt_data)</span><br><span class="line">console.log(decrypt_data)</span><br></pre></td></tr></table></figure>
+
+<p>执行结果：</p>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/f12zhuizong8.png" data-fancybox="images" data-caption="执行结果"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/img/yingyong/f12zhuizong8.png" /></a>
+
+<p>确实是我们需要的数据没错，最后用Python去调用解密函数就行了。调用时还有个需要注意的地方，因为直接返回object给Python会报错，所以这里将JSON.parse移除了，返回parse前的json字符串，</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//解密函数</span><br><span class="line">function my_decrypt(t) &#123;</span><br><span class="line">    return s(&quot;5e5062e82f15fe4ca9d24bc5&quot;, my_decode(t), 0, 0, &quot;012345677890123&quot;, 1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同时为了防止这串字符串内有特殊编码的字符，这里将它转成base64再return：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function my_decrypt(t) &#123;</span><br><span class="line">    return new Buffer(s(&quot;5e5062e82f15fe4ca9d24bc5&quot;, my_decode(t), 0, 0, &quot;012345677890123&quot;, 1)).toString(&quot;base64&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在Python中用base64库的b64decode方法来解码即可。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>最后总结一下，说说关于逆向的个人看法。</p>
+<p>之所以市面上很少有爬虫逆向的书籍，除了因为它比较”敏感”之外，也因为它并没有固定的方法论。上文提供的也只是一种思路，其实还是有很多取巧的方式，比如在我们已知参数名为<code>encrypt_data</code>的情况下，在js文件夹下全局搜索，分分钟就能找到解密函数。</p>
+<p>逆向过程挺糟心，也挺有趣的，且逆向成功后会有很大的成就感。</p>
+<p>总而言之，逆向是一个提出假设和实际验证的过程，比如上文中的<code>encrypt_data</code>，我们不能百分百确定它就是我们需要的数据，但可以假设它是，来作为我们的突破口，即便最后发现不是，大不了再做新的假设。这有点像侦探探案，通过已知的信息作为线索来抽丝剥茧，最终破案。</p>
+<p><a href="http://www.threetails.xyz/2019/05/10/%E5%88%9D%E6%8E%A2js%E9%80%86%E5%90%91/">本文收录来源</a></p>
+]]></content>
+      <categories>
+        <category>软件教程</category>
+      </categories>
+      <tags>
+        <tag>软件</tag>
+        <tag>阅读</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>星与尘</title>
+    <url>/2020/03/10/xinyucheng/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="擦肩一眼星成河-告别一辞心化尘"><a href="#擦肩一眼星成河-告别一辞心化尘" class="headerlink" title="擦肩一眼星成河,告别一辞心化尘"></a>擦肩一眼星成河,告别一辞心化尘</h2><blockquote>
+<a id="more"></a>
+<p align="center">
+夜暗方显万颗星，灯明始见一缕尘。
+</p>
+
+</p>
+
+<center>
+- 多谢你如此精彩耀眼,做我平淡岁月里的星辰! -</p>
+- 我们,顶峰相见 -
+</center>
+</blockquote>
+]]></content>
+      <categories>
+        <category>岁月</category>
+      </categories>
+      <tags>
+        <tag>岁月</tag>
+        <tag>话题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>寻求理解的人生</title>
+    <url>/2020/03/08/lijie/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="总有人会因为你是你而爱你"><a href="#总有人会因为你是你而爱你" class="headerlink" title="总有人会因为你是你而爱你"></a>总有人会因为你是你而爱你</h2><a id="more"></a>
+
+<blockquote>
+<center> 你不需要这个世界理解你。</p>
+没关系的。</p>
+有的人永远不会真的理解</p>他们没经过的事情，</p>
+但有些人会理解，</p>
+要对理解你的人心怀感激。</p>
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;-马特.海格 -</center>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>说给自己听</title>
+    <url>/2020/03/07/Aspirations/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="谁在谈论胜利-挺住就是一切。"><a href="#谁在谈论胜利-挺住就是一切。" class="headerlink" title="谁在谈论胜利?挺住就是一切。"></a>谁在谈论胜利?挺住就是一切。</h2><a id="more"></a>
+
+<blockquote>
+<center>
+ 我要你静心学习那份等待时机成熟的情绪,</p>
+也要你一定保有这份等待之外的努力和坚持。
+<p align="right" background-color:yellow></p>
+​&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp; - 三毛 <<说给自己听>> - </center>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>忘却终点的路人</title>
+    <url>/2020/03/06/LoveEvil/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="愿你早安午安晚安每天都安好"><a href="#愿你早安午安晚安每天都安好" class="headerlink" title="愿你早安午安晚安每天都安好"></a>愿你早安午安晚安每天都安好</h2><a id="more"></a>
+
+<ul>
+<li>安赫莱斯.玛斯特尔塔《爱之恶》<br><code>愿你获得爱情，同时享受孤独。</code><br><code>愿你如星辰般永恒、蚂蚁般果决、宗教般思辨。</code><br><code>愿你信仰语言、逝者的呼唤、冒险家的话语、</code><br><code>忘却终点的路人的平静、记忆的力量和未来。</code><center></center>
+<p align="center"></p>
+
+
+
+</li>
+</ul>
+<blockquote>
+<p>&ensp;&ensp;&ensp;&ensp;这一段话我初读起来觉得意象有些混乱，便试着根.据自己的理解来整理它们背后的逻辑:</p>
+<p>&ensp;&ensp;&ensp;&ensp;愿你获得爱情，同时保有孤独饱满的灵魂。一个孤独饱满的灵魂，有着他星辰般永恒的信仰，行军蚁般的果决，宗教般虔诚的思辨(宗教的思辨，而非科学的思辨。宗教原是“不可思、不可议”的，宗教本身与“思辨”之间存在一定的矛盾，但是这里用了“宗教般的思辨”，我想，作者可能是说这种思辨，不是冷冰冰的，它有着宗教的虔诚和关怀)。</p>
+<p>&ensp;&ensp;&ensp;&ensp;我觉得，这里的三个意象并非随意堆砌，有它内在的逻辑:孤独饱满的灵魂有着它永恒的信仰和果决，有它不变与果断的一面，但同时也有“犹豫”的一面，有思辨与否定，而这种思辨又带着宗教的温.度。</p>
+<p>&ensp;&ensp;&ensp;&ensp;愿你永远相信些什么，有着永恒的信仰。信仰语言、信仰代代相传的古老记述;信仰逝者的呼唤、信仰生命另一头的永恒、相信逝者的陪伴(《寻梦环游记》中展现了墨西哥传统文化中对于死亡的一种理解) ;相信冒险家的话语也相信忘却终点的路人的平静，这正是一种思辨:前者是一种探索的热情(《百年孤独》中第一代布恩迪亚的那种冒险与求知的精神)，后者，我想可能是- -种“释然”，一种忘却了终点只是行在路_上的平静(也许这有点类似于《百年孤独》中第二代阿玛兰塔为自己织寿衣时的平静)。相信记忆的力量、相信时间的沉淀,相信未来、相信时间将带你前往的远方。</p>
+<p>&ensp;&ensp;&ensp;&ensp;我想，正因为这些信仰与思辦，人才能享受孤独。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>路人</title>
+    <url>/2020/03/05/Passerby/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="你治好我的忧郁-而后赐我悲伤-忧郁和悲伤之间的片刻欢喜-透支了我生命全部热情储蓄"><a href="#你治好我的忧郁-而后赐我悲伤-忧郁和悲伤之间的片刻欢喜-透支了我生命全部热情储蓄" class="headerlink" title="你治好我的忧郁,而后赐我悲伤,忧郁和悲伤之间的片刻欢喜,透支了我生命全部热情储蓄"></a>你治好我的忧郁,而后赐我悲伤,忧郁和悲伤之间的片刻欢喜,透支了我生命全部热情储蓄</h2><a id="more"></a>
+
+<p><strong><code>你尽管往前走,能够追上你固然好,就算追不上,那些因为你而努力想要成为更好的人的日子也已经是馈赠了</code></strong></p>
+<blockquote>
+<center>想饮一些酒,让灵魂失重,好被风吹走
+
+<p>可一想到终将是你的路人</p></p>
+<p>便觉得,沦为整个世界的路人</p></p>
+<p>风虽大,都绕过我的灵魂</p></p>
+<ul>
+<li><strong><em><code>西贝 &lt;&lt;路人&gt;&gt;</code></em></strong>  </center></li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>偶然还是必然</title>
+    <url>/2020/03/04/ouran/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="所谓偶然-都是蓄谋已久的必然"><a href="#所谓偶然-都是蓄谋已久的必然" class="headerlink" title="所谓偶然,都是蓄谋已久的必然"></a>所谓偶然,都是蓄谋已久的必然</h2><a id="more"></a>
+<p><strong><code>就像&lt;&lt;请回答1988&gt;&gt;一样,错过的都是因为一而再而三的犹豫,得到的是一次次的勇敢和果断.</code></strong> </p>
+<blockquote>
+<center>她本来浑身是光。</p>
+有那么一瞬间,</p>
+突然就黯淡了,</p>
+成为宇宙里一颗尘埃。</p></p>
+我努力回想起她全身神光的样子,</p>
+却怎么也想不起来。</p>
+后来发现,</p>
+其实那是我眼里的光,</p>
+偶然间照亮了她。</p></center>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>杂事记</title>
+    <url>/2020/03/03/zsj/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="屏幕仍在发着不熄的光亮-要和街灯一较高下"><a href="#屏幕仍在发着不熄的光亮-要和街灯一较高下" class="headerlink" title="屏幕仍在发着不熄的光亮,要和街灯一较高下"></a>屏幕仍在发着不熄的光亮,要和街灯一较高下</h2><a id="more"></a>
+
+<blockquote>
+<center>
+月光洒落窗前 </p>
+
+<p>小雨滴答落星檐 </p></p>
+<p>忙里偷闲</p></p>
+<p>笔落书思绪</p></p>
+<p>紧而不乱</p></p>
+<p>卧床品人生</p></p>
+</center>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>月光下的海</title>
+    <url>/2020/02/26/Thesitm/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="真实的自我就像月光下的海，庞大，安静，想证明给别人看的时候，却只能拍出一团焦糊的黑暗。"><a href="#真实的自我就像月光下的海，庞大，安静，想证明给别人看的时候，却只能拍出一团焦糊的黑暗。" class="headerlink" title="真实的自我就像月光下的海，庞大，安静，想证明给别人看的时候，却只能拍出一团焦糊的黑暗。"></a>真实的自我就像月光下的海，庞大，安静，想证明给别人看的时候，却只能拍出一团焦糊的黑暗。</h2><a id="more"></a>
+
+<blockquote>
+<center>
+在这个世界，做自己并不是件容易的事情，总有人在评判你，衡量你，给你劝告；</p>
+有时你也希望做另外一个人，或者做一些事情去取悦别人，</p>
+我们总是在以自己的眼光去衡量别人，有时你自己可能都没察觉，</p>
+在你经历一些事或遇到某个人后，你就像换了一种性格，悄悄地告别了从前的自己。</p>
+而有的时候，</p>
+构成我们学习最大障碍的是已知的东西，</p>
+而不是未知的东西……
+</center>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>答与问</title>
+    <url>/2020/02/26/Aaq/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="窗台搁着青枣，绿态黯然，想着明日光耀中伸懒腰的姿态，是慵卧，肃立，还是亲吻大地，这忧郁温柔的夜晚，囫囵形色"><a href="#窗台搁着青枣，绿态黯然，想着明日光耀中伸懒腰的姿态，是慵卧，肃立，还是亲吻大地，这忧郁温柔的夜晚，囫囵形色" class="headerlink" title="窗台搁着青枣，绿态黯然，想着明日光耀中伸懒腰的姿态，是慵卧，肃立，还是亲吻大地，这忧郁温柔的夜晚，囫囵形色"></a>窗台搁着青枣，绿态黯然，想着明日光耀中伸懒腰的姿态，是慵卧，肃立，还是亲吻大地，这忧郁温柔的夜晚，囫囵形色</h2><a id="more"></a>
+
+<blockquote>
+<center>
+
+<p>那天我一个人</p></p>
+<p>一整天什么也没有做</p></p>
+<p>一撮羊毛被风吹进我的房间</p></p>
+<p>我太高兴了，因为已经没有人可以听我说话了</p></p>
+<p>我不断地向它提出问题</p></p>
+<p>你从那里来</p></p>
+<p>那里有大草原吗</p></p>
+<p>草是怎样天是怎样</p></p>
+<p>你是怎样来到我身边</p></p>
+<p>飘洋过海还是风雨兼程</p></p>
+<p>可曾累了休息或者落地为安</p></p>
+<p>羊毛轻柔地躺在膝盖上</p></p>
+<p>耐心地回答</p></p>
+<p>我从一只叫柏拉图的羊身上飘下</p></p>
+<p>它的脚下是无边的草原</p></p>
+<p>草是摇曳的温床，天是日月的剧场</p></p>
+<p>我借助风来到你身边</p></p>
+<p>淋过大雨跌过谷底</p></p>
+<p>也曾累了随风飘荡</p></p>
+<p>但我从未放弃来到你的身边</p>
+</center>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>灯下的诗与心情</title>
+    <url>/2020/02/19/PUTL/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="不是在一瞬间就能脱胎换骨的，生命原是一次又一次的试探"><a href="#不是在一瞬间就能脱胎换骨的，生命原是一次又一次的试探" class="headerlink" title="不是在一瞬间就能脱胎换骨的，生命原是一次又一次的试探"></a>不是在一瞬间就能脱胎换骨的，生命原是一次又一次的试探</h2><a id="more"></a>
+
+
+<blockquote>
+<center>
+
+<p>所以 请耐心地等待 </p></p>
+<p>我爱 让昼与夜交替地过去</p></p>
+<p>让白发逐日滋长</p></p>
+<p>让我们慢慢地改变了心情</p></p>
+<p>让焚烧了整个春与夏的渴望</p></p>
+<p>终于熄灭 换成了</p></p>
+<p>一种淡然的逐渐远去的心酸</p></p></p>
+<p>月亮出来的时候</p></p>
+<p>也能不再开门去探望</p></p>
+<p>也能 终于</p></p>
+<p>由得它去疯狂地照进</p></p>
+<p>所有的山林</p> </center></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>目光</title>
+    <url>/2020/02/18/Eye/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="月亮在天上，星星在河里，它们目光交汇，对白被写进黑夜里"><a href="#月亮在天上，星星在河里，它们目光交汇，对白被写进黑夜里" class="headerlink" title="月亮在天上，星星在河里，它们目光交汇，对白被写进黑夜里"></a>月亮在天上，星星在河里，它们目光交汇，对白被写进黑夜里</h2><blockquote>
+<a id="more"></a>
+
+<center>
+
+<p>当我意识到生命里一些人即将远行时 </p></p>
+<p>我更喜欢用送别的目光代替对白</p></p>
+<p>不仅是为了埋藏说不出的眷恋</p></p>
+<p>更是我由衷却不愿说出口的祝福</p></p>
+<p>再也不见也不必让我们留有愧疚</p></p>
+<p>每个人都要学会的离别成为风景</p></p>
+<p>一杯苦楚兑上半滴释然就是深爱</p></center></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>眠</title>
+    <url>/2020/02/18/Sleep/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="我们究竟是过了365天，还是把一天过了365遍？"><a href="#我们究竟是过了365天，还是把一天过了365遍？" class="headerlink" title="我们究竟是过了365天，还是把一天过了365遍？"></a>我们究竟是过了365天，还是把一天过了365遍？</h2><a id="more"></a>
+
+</p>
+</p>
+ <center>我仅仅是感到惊讶，</p>
+
+<p>惊讶于昨天与前天毫无区别，</p></p>
+<p>惊讶于自己被编排入这样的人生</p></p>
+<p>惊讶于自己留下的足迹甚至于还未及认清，</p></p>
+<p>就在转瞬间被风吹走，</p></p>
+<p>变得无影无踪。</p></p>
+<ul>
+<li>村上春树 《眠》</center></li>
+</ul>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux_Deepin使用命令</title>
+    <url>/2020/02/17/linuxCZ/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="Linux-Deepin-系统-apt-get-命令的使用：安装、更新、卸载软件包"><a href="#Linux-Deepin-系统-apt-get-命令的使用：安装、更新、卸载软件包" class="headerlink" title="Linux(Deepin)系统 apt-get 命令的使用：安装、更新、卸载软件包"></a>Linux(Deepin)系统 apt-get 命令的使用：安装、更新、卸载软件包</h1><a id="more"></a>
+
+<p>apt-get 命令适用于 deb 包管理式的 Linux 操作系统（Debian、Ubuntu等），主要用于自动从互联网软件仓库中搜索、下载、安装、升级、卸载软件或操作系统。</p>
+<p>Ubuntu 软件包查找: <a href="https://packages.ubuntu.com/">https://packages.ubuntu.com/</a></p>
+<h3 id="1-安装-软件包"><a href="#1-安装-软件包" class="headerlink" title="1. 安装 软件包"></a>1. 安装 软件包</h3><blockquote>
+<ul>
+<li>apt-get install PackageName // 普通安装</li>
+<li>apt-get install PackageName=VersionName // 安装指定包的指定版</li>
+<li>apt-get –reinstall install PackageName // 重新安装</li>
+<li>apt-get build-dep PackageName // 安装源码包所需要的编译环境</li>
+<li>apt-get -f install // 修复依赖关系</li>
+<li>apt-get source PackageName // 下载软件包的源码</li>
+</ul>
+</blockquote>
+<h3 id="2-卸载-软件包"><a href="#2-卸载-软件包" class="headerlink" title="2. 卸载 软件包"></a>2. 卸载 软件包</h3><blockquote>
+<ul>
+<li>apt-get remove PackageName // 删除软件包, 保留配置文件</li>
+<li>apt-get –purge remove PackageName // 删除软件包, 同时删除配置文件</li>
+<li>apt-get purge PackageName // 删除软件包, 同时删除配置文件</li>
+<li>apt-get autoremove PackageName // 删除软件包, 同时删除为满足依赖<br>// 而自动安装且不再使用的软件包</li>
+<li>apt-get –purge autoremove PackageName // 删除软件包, 删除配置文件,<br>// 删除不再使用的依赖包</li>
+<li>apt-get clean &amp;&amp; apt-get autoclean // 清除 已下载的软件包 和 旧软件包</li>
+</ul>
+</blockquote>
+<h3 id="3-更新-软件包"><a href="#3-更新-软件包" class="headerlink" title="3. 更新 软件包"></a>3. 更新 软件包</h3><blockquote>
+<ul>
+<li>apt-get update // 更新安装源（Source）</li>
+<li>apt-get upgrade // 更新已安装的软件包</li>
+<li>apt-get dist-upgrade //更新已安装的软件包（识别并处理依赖关系的改变）</li>
+</ul>
+</blockquote>
+<h3 id="4-查询-软件包"><a href="#4-查询-软件包" class="headerlink" title="4. 查询 软件包"></a>4. 查询 软件包</h3><blockquote>
+<ul>
+<li>dpkg -l // 列出已安装的所有软件包</li>
+<li>apt-cache search PackageName // 搜索软件包</li>
+<li>apt-cache show PackageName // 获取软件包的相关信息, 如说明、大小、版本等</li>
+<li>apt-cache depends PackageName // 查看该软件包需要哪些依赖</li>
+<li>apt-cache rdepends PackageName // 查看该软件包被哪些包依</li>
+<li>apt-get check // 检查是否有损坏的依赖</li>
+</ul>
+</blockquote>
+<h3 id="5-apt-get-–help"><a href="#5-apt-get-–help" class="headerlink" title="5. apt-get –help"></a>5. apt-get –help</h3><p>执行命令: apt-get –help，输出:</p>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/images/wzyy/apt-get-help.jpg" data-fancybox="images" data-caption="apt-get"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/wzyy/apt-get-help.jpg" /></a>]]></content>
+      <categories>
+        <category>软件教程</category>
+      </categories>
+      <tags>
+        <tag>软件</tag>
+        <tag>阅读</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>立春</title>
+    <url>/2020/02/04/spring/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="立春"><a href="#立春" class="headerlink" title="立春"></a>立春</h2><a id="more"></a>
+
+<blockquote>
+<p><code>樱花会开</code><br><code>春天会来</code><br><code>风雨过后春更暖</code><br><code>愿春光、春风、春雨、春花……</code><br><code>春天里的一切美好</code><br><code>能带给我们勇往直前的信心</code><br><code>一起静待春暖花开</code></p>
+</blockquote>
+<a href="http://cdns.zhongshenglong.xyz/cdn-photos/img/cover/(12).jpg.webp" data-fancybox="images" data-caption="悄悄告诉你哦"><img src="http://cdns.zhongshenglong.xyz/cdn-photos/img/cover/(12).jpg.webp" /></a>
+<h6 id="无论什么时间，我依旧在这里等你，也请想起我"><a href="#无论什么时间，我依旧在这里等你，也请想起我" class="headerlink" title="无论什么时间，我依旧在这里等你，也请想起我"></a>无论什么时间，我依旧在这里等你，也请想起我</h6><hr>
+
+        <div id="aplayer-DpdqVxEw" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-DpdqVxEw"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "平凡天使",
+              author: "邓紫棋",
+              url: "http://music.zhongshenglong.xyz/平凡天使-邓紫棋.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭建个人博客图床</title>
+    <url>/2020/02/03/tuchuang/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="Github-jsDelivr-PicGo-打造稳定快速、高效免费图床"><a href="#Github-jsDelivr-PicGo-打造稳定快速、高效免费图床" class="headerlink" title="Github+jsDelivr+PicGo 打造稳定快速、高效免费图床"></a>Github+jsDelivr+PicGo 打造稳定快速、高效免费图床</h1><a id="more"></a>
+
+<h2 id="–-前言"><a href="#–-前言" class="headerlink" title="– 前言"></a>– 前言</h2><p>图床是个啥东西就不用过多介绍了，先来对比一下各路图床：</p>
+<ul>
+<li>微博图床：以前用的人比较多，从2019年4月开始开启了防盗链，凉凉</li>
+<li>SM.MS：运营四年多了，也变得越来越慢了，到了晚上直接打不开图片，速度堪忧</li>
+<li>其他小众图床：随时有挂掉的风险</li>
+<li>Imgur等国外图床：国内访问速度太慢，随时有被墙的风险</li>
+<li>大厂储存服务：例如七牛云、又拍云、腾讯云COS、阿里云OSS等，容量限制，操作繁琐，又是实名认证又是域名备案的，麻烦，而且还要花钱（有钱又不怕麻烦的当我没说）</li>
+</ul>
+<p>因此，GitHub图床是个不错的选择，利用jsDelivr CDN加速访问（jsDelivr 是一个免费开源的 CDN 解决方案），PicGo工具一键上传，操作简单高效，GitHub和jsDelivr都是大厂，不用担心跑路问题，不用担心速度和容量问题，而且完全免费，可以说是目前免费图床的最佳解决方案！</p>
+<hr>
+<h2 id="–-新建GitHub仓库"><a href="#–-新建GitHub仓库" class="headerlink" title="– 新建GitHub仓库"></a>– 新建GitHub仓库</h2><p>登录/注册GitHub，新建一个仓库，填写好仓库名，仓库描述，根据需求选择是否为仓库初始化一个README.md描述文件</p>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/images/wzyy/tuchuang1.jpg" data-fancybox="images" data-caption="新建一个仓库"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/wzyy/tuchuang1.jpg" /></a>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/images/wzyy/tuchuang2.jpg" data-fancybox="images" data-caption="仓库初始化一个README.md描述文件"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/wzyy/tuchuang2.jpg" /></a>
+
+<h2 id="–-生成一个Token"><a href="#–-生成一个Token" class="headerlink" title="– 生成一个Token"></a>– 生成一个Token</h2><p>在主页依次选择【Settings】-【Developer settings】-【Personal access tokens】-【Generate new token】，填写好描述，勾选【repo】，然后点击【Generate token】生成一个Token，注意这个Token只会显示一次，自己先保存下来，或者等后面配置好PicGo后再关闭此网页</p>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/images/wzyy/tuchuang3.jpg" data-fancybox="images" data-caption="选择【Settings】"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/wzyy/tuchuang3.jpg" /></a>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/images/wzyy/tuchuang4.jpg" data-fancybox="images" data-caption="选择【Developer"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/wzyy/tuchuang4.jpg" /></a>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/images/wzyy/tuchuang5.jpg" data-fancybox="images" data-caption="选择【Personal"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/wzyy/tuchuang5.jpg" /></a>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/images/wzyy/tuchuang6.jpg" data-fancybox="images" data-caption="选择"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/wzyy/tuchuang6.jpg" /></a>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/images/wzyy/tuchuang7.jpg" data-fancybox="images" data-caption="点击【Generate"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/wzyy/tuchuang7.jpg" /></a>
+
+<h2 id="–-配置PicGo"><a href="#–-配置PicGo" class="headerlink" title="– 配置PicGo"></a>– 配置PicGo</h2><p>前往下载PicGo，安装好后开始配置图床</p>
+<a href="https://cdn.jsdelivr.net/gh/longhz/cdn/images/wzyy/tuchuang8.png" data-fancybox="images" data-caption="点击【Generate"><img src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/wzyy/tuchuang8.png" /></a>
+
+<hr>
+<blockquote>
+<ol>
+<li><p>设定仓库名：按照【用户名 / 图床仓库名】的格式填写</p>
+</li>
+<li><p>设定分支名：【master】</p>
+</li>
+<li><p>设定Token：粘贴之前生成的【Token】</p>
+</li>
+<li><p>指定存储路径：填写想要储存的路径，如【ITRHX-PIC/】，这样就会在仓库下创建一个名为 ITRHX-PIC 的文件夹，图片将会储存在此文件夹中</p>
+</li>
+<li><p>设定自定义域名：它的作用是，在图片上传后，PicGo会按照【自定义域名+储存路径+上传的图片名】的方式生成访问链接，放到粘贴板上，因为我们要使用 jsDelivr 加速访问，所以可以设置为</p>
+<p>【 <a href="https://cdn.jsdelivr.net/gh/用户名/图床仓库名">https://cdn.jsdelivr.net/gh/用户名/图床仓库名</a> 】，</p>
+</li>
+<li><p>上传完毕后，我们就可以通过【 <a href="https://cdn.jsdelivr.net/gh/用户名/图床仓库名/图片路径">https://cdn.jsdelivr.net/gh/用户名/图床仓库名/图片路径</a> 】</p>
+</li>
+<li><p>加速访问我们的图片了，比如：<a href="https://cdn.jsdelivr.net/gh/TRHX/ImageHosting/ITRHX-PIC/A27/08.png">https://cdn.jsdelivr.net/gh/TRHX/ImageHosting/ITRHX-PIC/A27/08.png</a></p>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="–-进行高效创作"><a href="#–-进行高效创作" class="headerlink" title="– 进行高效创作"></a>– 进行高效创作</h2><p>   配置好PicGo后，我们就可以进行高效创作了，将图片拖拽到上传区，将会自动上传并复制访问链接，将链接粘贴到博文中就行了，访问速度杠杠的，此外PicGo还有相册功能，可以对已上传的图片进行删除，修改链接等快捷操作，PicGo还可以生成不同格式的链接、支持批量上传、快捷键上传、自定义链接格式、上传前重命名等，更多功能自己去探索吧！</p>
+]]></content>
+      <categories>
+        <category>软件教程</category>
+      </categories>
+      <tags>
+        <tag>开源</tag>
+        <tag>图床工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>世界很大，幸福很小</title>
+    <url>/2020/02/02/Symmetric/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="喜欢上你，并不是你长的好不好看的原因，而是你在特殊的时间里给了我别人给不了的感觉。"><a href="#喜欢上你，并不是你长的好不好看的原因，而是你在特殊的时间里给了我别人给不了的感觉。" class="headerlink" title="喜欢上你，并不是你长的好不好看的原因，而是你在特殊的时间里给了我别人给不了的感觉。"></a>喜欢上你，并不是你长的好不好看的原因，而是你在特殊的时间里给了我别人给不了的感觉。</h2><a id="more"></a>
+
+<p>据说今天是千年一遇的对称日！ </p></p>
+<p>世界很大，幸福很小， </p></p>
+<p>希望如期而至的不止春天， </p></p>
+<p>还有疫情过后平安的你……！</p>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>respect</title>
+    <url>/2020/01/27/respect/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="我甚至一秒都没拥有过你，却好像失去了你一万次"><a href="#我甚至一秒都没拥有过你，却好像失去了你一万次" class="headerlink" title="我甚至一秒都没拥有过你，却好像失去了你一万次"></a></p><center>我甚至一秒都没拥有过你，却好像失去了你一万次</center></h2><a id="more"></a>
+<hr>
+ <center>每个人都是独立的个体</p>
+每个个体都应该是完整的</p>
+爱不是控制和索取</p>
+爱是接纳和尊重。</center>
+
+<hr>
+ 
+
+<meting-js
+
+  server="netease"
+
+  type="playlist"
+
+  id="3215696754"
+
+  autoplay="true"
+
+  mutex="true">
+
+</meting-js>
+
+
+]]></content>
+      <categories>
+        <category>文章</category>
+      </categories>
+      <tags>
+        <tag>文章</tag>
+        <tag>悦读</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>尘世挽歌</title>
+    <url>/2020/01/02/pingxing/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="在人世风波-其实是很容易走散的"><a href="#在人世风波-其实是很容易走散的" class="headerlink" title="在人世风波,其实是很容易走散的"></a>在人世风波,其实是很容易走散的</h2><a id="more"></a>
+<hr>
+ <center>你相信吗,
+ 也许在另一个平行时空
+ </p>
+ 也有一个跟你长得很像很像的人
+  </p>
+ 正在热烈得爱着
+ </p>
+ 那个你爱不到的人❤ </center>
+
+<hr>
+
+        <div id="aplayer-ivQAVTBL" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-ivQAVTBL"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "红尘别",
+              author: "刘增瞳",
+              url: "http://music.zhongshenglong.xyz/%E5%88%98%E5%A2%9E%E7%9E%B3%20-%20%E7%BA%A2%E5%B0%98%E5%88%AB.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>]]></content>
+      <categories>
+        <category>文章</category>
+      </categories>
+      <tags>
+        <tag>文章</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>红袖为谁添香</title>
+    <url>/2020/01/01/tcdy/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="嘉平月雪地冰天倚阑望待使深情续长"><a href="#嘉平月雪地冰天倚阑望待使深情续长" class="headerlink" title="嘉平月雪地冰天倚阑望待使深情续长"></a>嘉平月雪地冰天倚阑望待使深情续长</h2><a id="more"></a>
+<hr>
+<p>思念是一种心绪，<br>总是一不小心就惊起了心湖的涟漪，<br>让无尽的思绪随波荡漾;<br>思念更是一种情怀，<br>思念会让笔下的文字涓涓流淌，<br>流淌着诗情和画意 ……<br><img src="https://i.postimg.cc/265mhY7W/dzyy.jpg" alt="思念是一种病"><br> 龙潜月寒雨阵阵我叹笑语难引孤芳， 露月枕上流年复还回忆铺满厢<br> 菊月野店名花尽萎败情难匡， 桂月豆蔻长成时唯缺情郎<br> 兰月为君喃吟十独悲伤， 荷月夜夜萤火透高墙<br> 蒲月游园独自一方， 梅月碑惹泪三行<br> 桃月遗书茫茫， 杏月祭未张<br> 正月离殇，一月添香</p>
+<h2 id="又是新一年-妳可还好-我又可曾被妳思念"><a href="#又是新一年-妳可还好-我又可曾被妳思念" class="headerlink" title=" 又是新一年,妳可还好,我又可曾被妳思念"></a> 又是新一年,妳可还好,我又可曾被妳思念</h2>
+        <div id="aplayer-AKoYkdXg" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-AKoYkdXg"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "唐朝的雨",
+              author: "萝莉大大",
+              url: "http://music.zhongshenglong.xyz/%E8%90%9D%E8%8E%89%E5%A4%A7%E5%A4%A7%20-%20%E5%94%90%E6%9C%9D%E7%9A%84%E9%9B%A8.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>]]></content>
+      <categories>
+        <category>文章</category>
+      </categories>
+      <tags>
+        <tag>文章</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>无题</title>
+    <url>/2019/10/20/wuti/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script></p>
+
+<center>Littlesen - 山木诗词</center>
+
+
+
+<a id="more"></a>
+<hr>
+<center>曲曲池边路，春来少人行
+
+<p>含水芙蓉叶，春去气犹清</p>
+<p>夕岚分彩翠，高树藏莺声</p>
+<p>乍向风中看，花落更分明</p>
+<p>徘徊觉露冷，清宵月影横</p>
+<p>泠泠砭肌发，疑是晓寒生</p>
+<p>一望可相见，一步如重城</p>
+<p>所爱隔山海，山海不可平</p>
+<p>海有舟可渡，山有路可行</p>
+<p>此爱翻山海，山海皆可平</center></p>
+<blockquote>
+<p>译:</p>
+<p>爱的人与我相隔高山大海，是我总不能越过的山海，</p>
+<p>但为了这份爱，我也可以乘船横渡；</p>
+<p>山道再险，我也可以寻路穿行，</p>
+<p>山山海海都不能阻挡我的脚步</p>
+</blockquote>
+<p><a href="https://postimg.cc/dh5bpMwV"><img src="https://i.postimg.cc/ZqDZw3RF/hzkd.jpg" alt="shanhai.jpg"></a></p>
+<hr>
+
+        <div id="aplayer-UEiIyuMl" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-UEiIyuMl"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "Ordinary Day",
+              author: "Melanie Pen",
+              url: "http://music.zhongshenglong.xyz/Melanie Penn - Ordinary Day.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>]]></content>
+      <categories>
+        <category>诗文鉴赏</category>
+      </categories>
+      <tags>
+        <tag>诗文鉴赏</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>于心</title>
+    <url>/2019/10/11/Greatfreedom/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="执着的追求：于心"><a href="#执着的追求：于心" class="headerlink" title="执着的追求：于心"></a>执着的追求：于心<a id="more"></a></h2><p>因为有妳在,从此向往才有了追求，在追求中释放心中的自我</p>
+<p><img src="https://i.postimg.cc/3xZtrW1G/mdz5.jpg" alt="在乎妳吖"></p>
+<p><strong>晨光</strong></p>
+<p>透过微凉的晨光,照耀着愉悦的心身</p>
+<p>于心无愧,任何事,于心欣慰</p>
+<p>逐渐长大的心,看淡天海的深源</p>
+<p>阴影抛出心灵境外,怕明亮的思维</p>
+<p>模糊了细腻的触觉</p>
+<p>带着,厌淡的情绪,冲出体魄烦恼</p>
+<p>调整情绪,永于自我,包容余万象</p>
+<p><img src="https://i.postimg.cc/SsndGdhL/mdz2.jpg" alt="在乎妳说"></p>
+<p><strong>愿</strong></p>
+<p>莲花的清澈,淡雅恬静,随风飘然</p>
+<p>一路而来,薰陶见底的心劲</p>
+<p>摆脱,内心的杂念</p>
+<p>永于浮出尘世间的浮躁</p>
+<p>自始至终的纯,让尘土远离</p>
+<p>飞扬跋扈境地</p>
+<p><img src="https://i.postimg.cc/9fFJDVgn/mdz3.jpg" alt="在乎妳月"></p>
+<p><strong>攀登</strong></p>
+<p>若大的天空,无数,强有力的翅膀</p>
+<p>在清澈坚定的,心底飞翔盘旋</p>
+<p>繁华的地表层,驻守着,滚烫的心脏</p>
+<p>奋发前行中</p>
+<p>翻腾,迈开,已过的岁月</p>
+<p>彷徨年轮,勇往的挥舞</p>
+<p><strong>向上攀登着</strong></p>
+<p><img src="https://i.postimg.cc/2jPc2s31/mdz4.jpg" alt="喜欢妳月"></p>
+
+        <div id="aplayer-TlTyHnaV" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-TlTyHnaV"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "千寻",
+              author: "沈煜伦",
+              url: "http://music.zhongshenglong.xyz/%E6%B2%88%E7%85%9C%E4%BC%A6%20-%20%E5%8D%83%E5%AF%BB.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>]]></content>
+      <categories>
+        <category>文章</category>
+      </categories>
+      <tags>
+        <tag>文章</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>光影</title>
+    <url>/2019/09/09/sydb/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="独白-不放弃"><a href="#独白-不放弃" class="headerlink" title="独白-不放弃"></a>独白-不放弃</h2><a id="more"></a>
+<p>我所有的自负皆来自我的自卑，<br>所有的英雄气概都来自于我的软弱。<br>嘴里振振有词是因为心里满是怀疑，<br>深情是因为痛恨自己无情。<br>这世界没有一件事情是虚空而生的，<br>站在光里，背后就会有阴影，<br>这深夜里一片寂静，是因为你还没有听见声音。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://i.postimg.cc/pXCjp8NP/db2.png" alt="独白"></h2>
+        <div id="aplayer-UkdipbUj" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-UkdipbUj"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "遇见",
+              author: "沈虫虫-丫蛋蛋",
+              url: "http://music.zhongshenglong.xyz/%E6%B2%88%E8%99%AB%E8%99%AB;%E4%B8%AB%E8%9B%8B%E8%9B%8B%20-%20%E9%81%87%E8%A7%81%20%28Cover%20%EF%BC%9A%E5%AD%99%E7%87%95%E5%A7%BF%29.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我们便是唯一的光</title>
+    <url>/2019/09/08/bwcx/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="此后如竟没有炬火：我们便是唯一的光。"><a href="#此后如竟没有炬火：我们便是唯一的光。" class="headerlink" title="此后如竟没有炬火：我们便是唯一的光。"></a>此后如竟没有炬火：我们便是唯一的光。</h2><a id="more"></a>
+
+<blockquote>
+<p>如果你觉得你的祖国不好，你就去建设它；如果你觉得政府不好，你就去考公务员去做官；<br>如果你觉得人民没素质，就从你开始做一个高素质的公民；如果你觉得同胞愚昧无知，就从你开始学习并改变身边的人，<br>她有缺点，我们一起修正，而不是一昧的谩骂，抱怨，逃离。<br>横眉冷对千夫指，俯首甘为孺子牛。</p>
+</blockquote>
+<p><img src="https://i.postimg.cc/yx5T5ZVq/zy1.jpg" alt="&quot;意志&quot;"></p>
+<blockquote>
+<p>你所站立的地方，正是你的中国；你怎么样，中国便怎么样；你是什么，中国便是什么；<br>你若光明，中国便不黑暗”，愿中国青年都摆脱冷气，只是向上走，不必听自暴自弃者流的话。<br>能做事的做事，能发声的发声。有一分热，发一分光，就令萤火一般，也可以在黑暗里发一点光，不必等候炬火。<br>此后如竟没有炬火：我们便是唯一的光。</p>
+</blockquote>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://i.postimg.cc/260GQtMS/zy2.jpg" alt="&quot;我思故我在&quot;"></h2>
+        <div id="aplayer-HHaKRPgi" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-HHaKRPgi"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "深渊中的等待",
+              author: "刘惜君",
+              url: "http://music.zhongshenglong.xyz/%E5%88%98%E6%83%9C%E5%90%9B%20-%20%E6%B7%B1%E6%B8%8A%E7%9A%84%E7%AD%89%E5%BE%85.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>]]></content>
+      <categories>
+        <category>文章</category>
+      </categories>
+      <tags>
+        <tag>文章</tag>
+        <tag>微光</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>BOOK文学阅读</title>
+    <url>/2019/09/06/endwx/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="文学书籍各类图书免费看"><a href="#文学书籍各类图书免费看" class="headerlink" title="文学书籍各类图书免费看"></a>文学书籍各类图书免费看</h2><a id="more"></a>
+
+<blockquote>
+<h5 id="好久不见，拖更Long-又回来冒泡了！正好最近这几天一场又一场的大雨将我困在了家中，吃饱喝足后继续为大家更新文章了，嗝"><a href="#好久不见，拖更Long-又回来冒泡了！正好最近这几天一场又一场的大雨将我困在了家中，吃饱喝足后继续为大家更新文章了，嗝" class="headerlink" title="好久不见，拖更Long 又回来冒泡了！正好最近这几天一场又一场的大雨将我困在了家中，吃饱喝足后继续为大家更新文章了，嗝~"></a>好久不见，拖更Long 又回来冒泡了！正好最近这几天一场又一场的大雨将我困在了家中，吃饱喝足后继续为大家更新文章了，嗝<del>~</del></h5><p>之前有分享此类的APP，就拿阅读APP来说吧，基本上都是看网络小说为主的，那么有没有看文学名著以及周刊图书类的阅读APP呢? 就在今天他来了，那个风一样的男人带着资源终于来了！</p>
+<p>这款工具就叫<a href="https://www.lanzous.com/i61ityd">BOOK</a>👈(点击下载)，名字起的很随性几乎网上搜一圈也不能搜到该应用的相关信息，作为一名对知识无比渴望的有志青年，怎么能没有一款称心如意的学习好帮手呢！<br>有了它各种文学、名著都能随时随地想看就看了，有了它就有了打着学习为理由玩手机的理由了，有了它就可以拓展知识丰富视野了！就看了几分钟都学会用排比句吹牛批了，安排！</p>
+<p><a href="https://www.lanzous.com/i61ityd">BOOK</a>👈(点击下载)这款工具的功能以及分类可谓是把我看花了眼，可以毫不犹豫的说远远的超出了我的知识储备量一大截，奈何本人没文化一句卧槽行天下！</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><img src="https://i.postimg.cc/jq9QRyrm/wx2.png" alt="&quot;读书时&quot;"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>首页就几个大版块，有随笔记、书架、功能、设置几个操作键，下面的就是阅读专区了，图文故事什么的一应俱全，点击更多就是大吃一惊的开始了，面对铺面而来的神秘力量本人居然颤了颤手，额头微微一皱发现并非如此简单：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><img src="https://i.postimg.cc/x8WKgVRn/wx3.png" alt="&quot;加油&quot;"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>好家伙，期刊、图书啥类型的都有，甚至听书内容都是琳琅满目的，科技科普、教学研究、农村农业、财经管理……更有精选专题每天推送优质内容，软件都这么努力了你还有什么破理由赖床不起！</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><img src="https://i.postimg.cc/x1VvzY8P/wx1.png" alt="&quot;读书&quot;"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>搜索功能同样不含糊，支持全局搜索也可以根据需求选择分类精确搜索，本人没文化，这里就拿小时候最喜欢的一个文学名著开始文体开花吧，搜索展现的内容很多，点击就能进入书籍详情介绍页了，可以添加至书架或者直接阅读</p>
+</blockquote>
+<hr>
+
+        <div id="aplayer-EsXVJoyB" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-EsXVJoyB"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "森林-纯音乐",
+              author: "灰澈",
+              url: "http://music.zhongshenglong.xyz/%E7%81%B0%E6%BE%88%20-%20%E6%A3%AE%E6%9E%97.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>]]></content>
+      <categories>
+        <category>软件教程</category>
+      </categories>
+      <tags>
+        <tag>破解</tag>
+        <tag>阅读工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Zeigarnik effect</title>
+    <url>/2019/09/04/sjgl/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="时间管理最根本的理论基础是什么"><a href="#时间管理最根本的理论基础是什么" class="headerlink" title="时间管理最根本的理论基础是什么?"></a>时间管理最根本的理论基础是什么?</h2><a id="more"></a>
+<p>是一个叫做“蔡格尼克效应（Zeigarnik effect）”的心理学效应。这个效应是说，没有完成的任务，会给我们带来精神压力。<br>比如你有一个今天一定要做完的作业，同时你还想看个其实不看也行的电影，那你就应该先把作业写完，再看电影。<br>否则“作业还没写完”这个想法就会一直困扰你，让你无法放松心情，看电影也看不痛快。而要是你有一大堆尚未完成的任务，你就会心烦意乱丢三落四。</p>
+<p>这就好像打游戏的时候，你路过一个敌对地区，有些武力值并不强的野生小怪跑过来咬你。<br>你要不理他们，你就会一直掉血。那你何不把它们杀死再赶路呢？</p>
+<p>这就是戴维·艾伦（David Allen）发明的 GTD —— Getting Things Done —— 系统的精髓：Done。<br>把这个任务做完，done了，你就不用想它了。不用想是目的，done是手段。<br>可是任务太多做不过来怎么办呢？GTD 要求你用一个<em>外部系统</em>去记录在什么时间、什么场合要做什么事情，而不要用自己的脑子记。<br>脑子是用来想事儿的，不是用来记事儿的。有了可靠的任务记录系统，你就可以在任何时候都不用担心自己还有哪些该做的事儿没有做，<br>你就达到了心止如水的境界，你就可以好好享受工作本身，你的效率就会提高。<br><img src="https://i.postimg.cc/yNPyK5Vy/zyr.jpg" alt="时间"></p>
+<hr>
+
+        <div id="aplayer-JSuoMLSc" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-JSuoMLSc"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "时间飞行",
+              author: "西瓜JUN",
+              url: "http://music.zhongshenglong.xyz/%E8%A5%BF%E7%93%9CJUN%20-%20%E6%97%B6%E9%97%B4%E9%A3%9E%E8%A1%8C%EF%BC%88%E5%8F%A4%E9%A3%8E%E7%89%88%EF%BC%89%EF%BC%88Cover%20%E7%99%BD%E5%AE%87%EF%BC%89.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>]]></content>
+      <categories>
+        <category>文章</category>
+      </categories>
+      <tags>
+        <tag>文章</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>安卓无损音乐下载工具</title>
+    <url>/2019/09/02/wsxz/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="现在很多平台都是有限制了，一些比较经典的歌曲都不能下载甚至试听-确实有点恼火-还好发现了款不错的APP-有兴趣的可以下载试试"><a href="#现在很多平台都是有限制了，一些比较经典的歌曲都不能下载甚至试听-确实有点恼火-还好发现了款不错的APP-有兴趣的可以下载试试" class="headerlink" title="现在很多平台都是有限制了，一些比较经典的歌曲都不能下载甚至试听,确实有点恼火,还好发现了款不错的APP,有兴趣的可以下载试试"></a>现在很多平台都是有限制了，一些比较经典的歌曲都不能下载甚至试听,确实有点恼火,还好发现了款不错的APP,有兴趣的可以下载试试<a id="more"></a></h2><h2 id="魔音APP👈-点击下载"><a href="#魔音APP👈-点击下载" class="headerlink" title="魔音APP👈(点击下载)"></a><a href="https://www.lanzous.com/i5zmt6h">魔音APP</a>👈(点击下载)</h2><p>平时听一些喜欢的歌曲经常需要几个APP之间来回切换，实在是不得劲，有了<a href="https://www.lanzous.com/i5zmt6h">魔音</a>这款工具就能搜全网音乐资源了，功能全部免费使用，软件也比较简洁。</p>
+<table>
+<thead>
+<tr>
+<th><img src="https://i.postimg.cc/T3nc71FS/yyy2.png" alt="读书"></th>
+</tr>
+</thead>
+</table>
+<p>搜索歌曲时可以按照自己需求选择无损接口或者其他接口，试了一圈下来都能搜索得到，而且下载还是挺快的。魔音不仅仅是一个无损下载工具而且还支持在线试听，导入本地音乐文件播放等，算是一款比较简单的音乐播放器了虽然功能不怎么多。播放页可以开启悬浮球操控，使用更加多元化。 </p>
+<table>
+<thead>
+<tr>
+<th><img src="https://i.postimg.cc/dtk6C4BJ/yyy1.jpg" alt="读书时"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+</tr>
+</tbody></table>
+<p>目前软件才发布不久缺点还是有点的，首先就是不支持18:9的全面屏，打开底部会显得特别宽，其次就是歌单导入功能貌似不能用，其他一些细微之处就不一一揪出来了，用来下载音乐倒是不错的选择，当做播放器还是有些勉强，毕竟主流的音乐APP功能还是非常人性化与实用的。</p>
+<table>
+<thead>
+<tr>
+<th><img src="https://i.postimg.cc/jqkvCGy8/yyy3.jpg" alt="好好读书"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充:"></a>补充:</h2><p>之前的一些同类软件也在其中,但目前都已被强制下架,目前仅存的几款之一，至少在手机端中大家下载无损的问题算是解决了。分享归分享，自己喜欢的单曲或者歌手还是值得去支持一波的。一些经典的老歌还是非常的耐人寻味，很庆幸这些经典之声陪伴着我长大，而不是鸡你太美<del>~</del></p>
+<hr>
+
+        <div id="aplayer-efagfqYb" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-efagfqYb"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "失眠飞行",
+              author: "薛明媛",
+              url: "http://music.zhongshenglong.xyz/%E8%96%9B%E6%98%8E%E5%AA%9B%20-%20%E5%A4%B1%E7%9C%A0%E9%A3%9E%E8%A1%8C.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>]]></content>
+      <categories>
+        <category>软件教程</category>
+      </categories>
+      <tags>
+        <tag>破解</tag>
+        <tag>音乐工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>九月你好</title>
+    <url>/2019/09/01/September/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="时间悄无声息，带走了炎热的八月。"><a href="#时间悄无声息，带走了炎热的八月。" class="headerlink" title="时间悄无声息，带走了炎热的八月。"></a>时间悄无声息，带走了炎热的八月。</h2><a id="more"></a>
+<p>经历了酷夏的闷热，感受到秋天的凉爽！与八月挥手再见，对九月说声你好！<br>崭新的九月，凉爽的季节，倒一壶酒，品一杯茶，看窗外的细雨，听微微的风声，把过往的忧愁丢进风里！<br><img src="https://i.postimg.cc/1XZFNr53/aa7.jpg" alt="读书时"><br>秋天是一个循序渐进的过程，就像人生，是一步一个脚印走出来的。</p>
+<h2 id="纵有风霜雨露，也要坚定向前，勇敢地面对风霜的洗礼。"><a href="#纵有风霜雨露，也要坚定向前，勇敢地面对风霜的洗礼。" class="headerlink" title="纵有风霜雨露，也要坚定向前，勇敢地面对风霜的洗礼。"></a>纵有风霜雨露，也要坚定向前，勇敢地面对风霜的洗礼。</h2>
+        <div id="aplayer-zcqRrgtX" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-zcqRrgtX"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "芒种",
+              author: "音阙诗听☆赵方婧",
+              url: "http://music.zhongshenglong.xyz/%E9%9F%B3%E9%98%99%E8%AF%97%E5%90%AC;%E8%B5%B5%E6%96%B9%E5%A9%A7%20-%20%E8%8A%92%E7%A7%8D.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>阅读APP&amp;精心整理的1000+书源</title>
+    <url>/2019/09/01/rjxs/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="你是否在网络上寻找一部心灵读物-一本好书-但书源匮乏而又需支出额外的经费-那么现在你找到了不得了的神器"><a href="#你是否在网络上寻找一部心灵读物-一本好书-但书源匮乏而又需支出额外的经费-那么现在你找到了不得了的神器" class="headerlink" title="你是否在网络上寻找一部心灵读物,一本好书,但书源匮乏而又需支出额外的经费,那么现在你找到了不得了的神器"></a>你是否在网络上寻找一部心灵读物,一本好书,但书源匮乏而又需支出额外的经费,那么现在你找到了不得了的神器<a id="more"></a></h2><h6 id="使用方法，先安装阅读APP-点击跳转-这个应用，目前仅限安卓环境。随便搜索一个书名后不管能不能搜得到，点击右上角的会弹出书源管理了，找到网络导入点击进入，不会的看下面图片：操作完毕后接着复制下方提供的链接，"><a href="#使用方法，先安装阅读APP-点击跳转-这个应用，目前仅限安卓环境。随便搜索一个书名后不管能不能搜得到，点击右上角的会弹出书源管理了，找到网络导入点击进入，不会的看下面图片：操作完毕后接着复制下方提供的链接，" class="headerlink" title="使用方法，先安装阅读APP(点击跳转)这个应用，目前仅限安卓环境。随便搜索一个书名后不管能不能搜得到，点击右上角的会弹出书源管理了，找到网络导入点击进入，不会的看下面图片：操作完毕后接着复制下方提供的链接，"></a>使用方法，先安装<a href="https://www.lanzous.com/i5xdu4f">阅读APP</a>(点击跳转)这个应用，目前仅限安卓环境。随便搜索一个书名后不管能不能搜得到，点击右上角的会弹出书源管理了，找到网络导入点击进入，不会的看下面图片：操作完毕后接着复制下方提供的链接，</h6><table>
+<thead>
+<tr>
+<th><img src="https://i.postimg.cc/vmMtpMdm/yd2.jpg" alt="第一张"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+</tr>
+</tbody></table>
+<h6 id="操作完毕后接着复制下方提供的链接，"><a href="#操作完毕后接着复制下方提供的链接，" class="headerlink" title="操作完毕后接着复制下方提供的链接，"></a>操作完毕后接着复制下方提供的链接，</h6><blockquote>
+<p><a href="https://gedoor.github.io/MyBookshelf/bookSource.json">https://gedoor.github.io/MyBookshelf/bookSource.json</a></p>
+</blockquote>
+<h6 id="将复制好的链接粘贴至刚才网络书源导入的输入框点击确认即可，然后工具就会逐步开始导入书源，考虑到书源数量过多以及网络环境差异，一时半会可能没反应，静等片刻书源便导入完成了，导入完成后就大功告成，想看什么直接搜索就行了！"><a href="#将复制好的链接粘贴至刚才网络书源导入的输入框点击确认即可，然后工具就会逐步开始导入书源，考虑到书源数量过多以及网络环境差异，一时半会可能没反应，静等片刻书源便导入完成了，导入完成后就大功告成，想看什么直接搜索就行了！" class="headerlink" title="将复制好的链接粘贴至刚才网络书源导入的输入框点击确认即可，然后工具就会逐步开始导入书源，考虑到书源数量过多以及网络环境差异，一时半会可能没反应，静等片刻书源便导入完成了，导入完成后就大功告成，想看什么直接搜索就行了！"></a>将复制好的链接粘贴至刚才网络书源导入的输入框点击确认即可，然后工具就会逐步开始导入书源，考虑到书源数量过多以及网络环境差异，一时半会可能没反应，静等片刻书源便导入完成了，导入完成后就大功告成，想看什么直接搜索就行了！</h6><table>
+<thead>
+<tr>
+<th><img src="https://i.postimg.cc/FsMZV3W3/yd3.jpg" alt="第二张"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>书源切换:</strong></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><img src="https://i.postimg.cc/Y9CfC30K/yd4.png" alt="第三张"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+</tr>
+</tbody></table>
+<h6 id="补充"><a href="#补充" class="headerlink" title="补充:"></a>补充:</h6><hr>
+<blockquote>
+<p>如果是安卓用户还是非常推荐这个工具的，免费开源终身无广告还可以听书，再加上这次这么多书源附上毫不夸张的讲没有什么市面上找不到的畅销书籍，而且资源也是其他同类工具无法比拟的，就是搜索的时候比较慢，毕竟书源太多一圈下来肯定得耗费点时间。此外这款工具还有太多太多的功能还没被挖掘出来，大家可以自行感受下！如果条件允许，请支持<a href="https://gedoor.github.io/MyBookshelf/">原创作者</a>！ </p>
+</blockquote>
+<h2 id="By"><a href="#By" class="headerlink" title="By"></a>By</h2>
+        <div id="aplayer-JZcXWfYU" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-JZcXWfYU"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "追光者",
+              author: "汪苏泷",
+              url: "http://music.zhongshenglong.xyz/%E6%B1%AA%E8%8B%8F%E6%B3%B7%20-%20%E8%BF%BD%E5%85%89%E8%80%85.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+
+]]></content>
+      <categories>
+        <category>软件教程</category>
+      </categories>
+      <tags>
+        <tag>破解</tag>
+        <tag>阅读工具</tag>
+        <tag>开源</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>祢豆子</title>
+    <url>/2019/08/21/mdz/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="2019年8月21日-新增相册功能-测试新增图片"><a href="#2019年8月21日-新增相册功能-测试新增图片" class="headerlink" title="2019年8月21日 新增相册功能,测试新增图片"></a>2019年8月21日 新增相册功能,测试新增图片</h2><a id="more"></a>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="http://q3bz05pry.bkt.clouddn.com/longz-photos/images/gm1.jpg" alt="豆1" title="如梦"></th>
+<th><img src="http://q3bz05pry.bkt.clouddn.com/longz-photos/images/gm2.jpg" alt="豆2" title="如梦"></th>
+<th><img src="http://q3bz05pry.bkt.clouddn.com/longz-photos/images/gm7.jpg" alt="豆7" title="如梦"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="http://q3bz05pry.bkt.clouddn.com/longz-photos/images/gm10.jpg" alt="豆10" title="如梦"></td>
+<td><img src="http://q3bz05pry.bkt.clouddn.com/longz-photos/images/gm12.jpg" alt="豆5" title="如梦"></td>
+<td><img src="http://q3bz05pry.bkt.clouddn.com/longz-photos/images/gm9.jpg" alt="豆9" title="如梦"></td>
+</tr>
+<tr>
+<td align="center"><img src="http://q3bz05pry.bkt.clouddn.com/longz-photos/images/gm3.jpg" alt="豆3" title="如梦"></td>
+<td><img src="http://q3bz05pry.bkt.clouddn.com/longz-photos/images/gm8.jpg" alt="豆8" title="如梦"></td>
+<td><img src="http://q3bz05pry.bkt.clouddn.com/longz-photos/images/gm11.jpg" alt="豆11" title="如梦"></td>
+</tr>
+</tbody></table>
+<h2 id="来源-鬼灭之刃"><a href="#来源-鬼灭之刃" class="headerlink" title="来源:鬼灭之刃"></a>来源:鬼灭之刃</h2>
+        <div id="aplayer-EYQrPFnU" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-EYQrPFnU"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "紅蓮華",
+              author: "忆殇",
+              url: "http://music.zhongshenglong.xyz/%E5%BF%86%E6%AE%87%20-%20%E7%B4%85%E8%93%AE%E8%8F%AF%EF%BC%88TV-size%EF%BC%89%EF%BC%88TV%E5%8A%A8%E7%94%BB%E3%80%8A%E9%AC%BC%E7%81%AD%E4%B9%8B%E5%88%83%E3%80%8Bop%EF%BC%89%EF%BC%88Cover%EF%BC%9ALiSA%EF%BC%89.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>]]></content>
+      <categories>
+        <category>相册</category>
+      </categories>
+      <tags>
+        <tag>相册</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>此夜星繁河正白，人传织女牵牛客</title>
+    <url>/2019/08/06/qixi/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="如果没有一千年的等候-就不会有今生短暂的邂逅"><a href="#如果没有一千年的等候-就不会有今生短暂的邂逅" class="headerlink" title="如果没有一千年的等候,就不会有今生短暂的邂逅"></a>如果没有一千年的等候,就不会有今生短暂的邂逅</h2><a id="more"></a>
+<blockquote>
+<p>也许还要一千年的相守才能换来今生的携手白头！<br>遇到你之前，世界是一片荒原，遇到你之后，世界是一个乐园，过去的许多岁月，对我像是一缕轻烟，想和你并肩看日出东方，看夕阳西回。想和你一起面朝大海，观潮落潮涨。因为世界也终将有终结的一天，而我有幸生于这个世上，能与你遇上，或许我是世界上最幸福的人。既然这样，我会尽情地生存在天堂，守候在最接近你的地方。</p>
+<p>​                                                     亲爱的,晚安! </p>
+</blockquote>
+<p><img src="https://i.postimg.cc/bN9xkWnc/aa66.jpg" alt="想说爱你"></p>
+<hr>
+
+        <div id="aplayer-DLhlkKHW" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-DLhlkKHW"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "说爱你",
+              author: "刘至佳",
+              url: "http://music.zhongshenglong.xyz/%E5%88%98%E8%87%B3%E4%BD%B3%20-%20%E8%AF%B4%E7%88%B1%E4%BD%A0.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+
+]]></content>
+      <categories>
+        <category>文章</category>
+      </categories>
+      <tags>
+        <tag>文章</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>用一种宁静和从容，温柔地聆听花开花落的声音</title>
+    <url>/2019/07/31/anjy/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="有个懂你的人，一定是最大的幸福。"><a href="#有个懂你的人，一定是最大的幸福。" class="headerlink" title="有个懂你的人，一定是最大的幸福。"></a>有个懂你的人，一定是最大的幸福。</h2><a id="more"></a>
+<p>这个人，不一定十全十美，但它能读懂你，能走进你的心灵深处，能看懂你心里的一切。最懂你的人，总是会一直的在你身边，默默守护你，不让你受一点点的委屈。真正爱你的人不会说许多爱你的话，却会做许多爱你的事</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://i.postimg.cc/GtJyPTHJ/aa3.jpg" alt="“懂得爱”"></h2>
+        <div id="aplayer-zxHfttln" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-zxHfttln"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "想要拥抱你",
+              author: "任然",
+              url: "http://music.zhongshenglong.xyz/%E4%BB%BB%E7%84%B6;Xun%EF%BC%88%E6%98%93%E7%A1%95%E6%88%90%EF%BC%89%20-%20%E6%83%B3%E8%A6%81%E6%8B%A5%E6%8A%B1%E4%BD%A0.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>用心,在乎</title>
+    <url>/2019/07/22/ganwu/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="我很喜欢这段话：无论是对朋友还是最爱的人，不需要花言巧语，实实在在就好"><a href="#我很喜欢这段话：无论是对朋友还是最爱的人，不需要花言巧语，实实在在就好" class="headerlink" title="我很喜欢这段话：无论是对朋友还是最爱的人，不需要花言巧语，实实在在就好"></a>我很喜欢这段话：无论是对朋友还是最爱的人，不需要花言巧语，实实在在就好</h2><a id="more"></a>
+<p><code>不需要山盟海誓，真正做到就好；不需要彼此埋怨，相互理解就好；不需要相互猜疑，相信对方就好；不需要成天生气，懂得包容就好；不需要时刻不离，心里有你就好；不需要轰轰烈烈，走到最后就好；不需要大富大贵，平平安安就好！
+其实，生活中， 有人在乎，就是幸福，有人心疼，就是温暖。</code></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="/ganwu/cc2.jpg" alt="风华" title="在乎妳"></h2>
+        <div id="aplayer-ZbJigZBU" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-ZbJigZBU"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "衷情诉",
+              author: "Pig小优",
+              url: "http://music.zhongshenglong.xyz/Pig%E5%B0%8F%E4%BC%98%20-%20%E8%A1%B7%E6%83%85%E8%AF%89.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+]]></content>
+      <categories>
+        <category>文章</category>
+      </categories>
+      <tags>
+        <tag>心情</tag>
+        <tag>文章</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前行路上,需要有协伴而行</title>
+    <url>/2019/07/22/xtl/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="不要多想-累了就休息"><a href="#不要多想-累了就休息" class="headerlink" title="不要多想,累了就休息"></a>不要多想,累了就休息</h2><a id="more"></a>
+
+<blockquote>
+<p>你要想一想,还有人在等你,莫要辜负</p>
+</blockquote>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://i.postimg.cc/cJpgVB3B/a4.jpg" alt="醒来"></h2>
+        <div id="aplayer-RUfyUPZT" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-RUfyUPZT"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "キラメキ",
+              author: "wacci",
+              url: "http://music.zhongshenglong.xyz/wacci%20-%20%E3%82%AD%E3%83%A9%E3%83%A1%E3%82%AD.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>图片</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>比起不停地获取大量的讯息，更重要的是学会屏蔽。</title>
+    <url>/2019/07/19/sdjx/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="台灯是夜猫子的日光-黑夜是梦想者的倔强"><a href="#台灯是夜猫子的日光-黑夜是梦想者的倔强" class="headerlink" title="台灯是夜猫子的日光 黑夜是梦想者的倔强"></a>台灯是夜猫子的日光 黑夜是梦想者的倔强</h2><a id="more"></a>
+<p><code>互联网时代盛产焦虑，有时候我们一天刷刷微博热点和短视频，很快就过去了。明星绯闻或是抖音才艺，都和你没有半毛钱关系，长期把时间花在这些事上，大脑的阈值会不断提高，渐渐地，对读书学习这样的低刺激事产生脱敏，越来越缺乏耐性和意志力。学着尽量去屏蔽外界的声音，才能更好的提高专注力和深度思考问题。</code><br><code>要做好自我警惕</code></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://i.postimg.cc/qq0t7Bjt/a3.jpg" alt="静心"></h2>
+        <div id="aplayer-ZrHeXgoI" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-ZrHeXgoI"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "唯你才知道",
+              author: "任然",
+              url: "http://music.zhongshenglong.xyz/%E4%BB%BB%E7%84%B6%20-%20%E5%94%AF%E4%BD%A0%E6%89%8D%E7%9F%A5%E9%81%93.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+
+
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>图片</tag>
+        <tag>心得</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>用心,感受</title>
+    <url>/2019/07/12/yxtw/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="爱情是什么，我觉得真的很难用文字来形容。"><a href="#爱情是什么，我觉得真的很难用文字来形容。" class="headerlink" title="爱情是什么，我觉得真的很难用文字来形容。"></a>爱情是什么，我觉得真的很难用文字来形容。</h2><a id="more"></a>
+
+<p><code>觉得很多事情可以让自己成长，在自身还有感情交往上的。但我并不觉得这些跟恋爱次数有多大关系。</code></p>
+<p><code>我只希望他们能真的看开一些 道理都懂 只不过很多时候 感受都是一阵一阵的。</code></p>
+<p><code>追求爱是很好的 不过很多人都不懂真正的意义。</code></p>
+<p><code>平平淡淡才是生活的本质 爱是需要持续的事.</code></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://i.postimg.cc/vmgxqN4m/a2.jpg" alt="&quot;a2&quot;"></h2>
+        <div id="aplayer-TfbEiJJq" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-TfbEiJJq"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "偏爱",
+              author: "张芸京",
+              url: "http://music.zhongshenglong.xyz/%E5%BC%A0%E8%8A%B8%E4%BA%AC%20-%20%E5%81%8F%E7%88%B1.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>图片</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>不断学习,让人生更充实</title>
+    <url>/2019/07/09/miwang/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="迷惘人生-路寻何处"><a href="#迷惘人生-路寻何处" class="headerlink" title="迷惘人生,路寻何处"></a>迷惘人生,路寻何处</h2><a id="more"></a>
+
+<p>​      <code>有时候总感觉自己会有一丝迷茫.为什么会迷茫，因为缺少了对生活的向往，枯燥,重复性的工作已然使此时的自己已经变得心中无目标，生活的动力也已经跑到九霄云外,对未来的不确定性，心中的理想被生活打的一片狼藉！这是一种迷茫的状态表现。</code></p>
+<p>​       <code>当然,这其实也是日常中比较闲散的生活不断的叠加而引起.在持续性的心灵和身体处于松散状态,短时间会放松,长时间就是焦躁,心烦等等.</code></p>
+<p>​       <code>可谓时而学习之，不亦乐乎！不断学习，多看书，给自己充电，追求完善自我，此时你不再去想什么迷茫，一些消极的的想法统统抛到九霄云外，根本无暇顾及这些闲心思,有时真的还觉得自己时间不够用呢，何来胡思乱想</code>.</p>
+<p>​      <code>唯有充实的生活才能让人处于一种紧张而不紊乱的状态.</code></p>
+<p>​      <code>给自己一个目标,不要太高,就让自己比昨天懂得多一点就行,说起易,做起来可不容易,也唯有每天的记录,才能让自身明白有无增益</code></p>
+<p>​                 <code>心中自有量天尺,迩来万事怎懵知</code></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="/miwang/cc1.jpg" alt="风华" title="不断学习"></h2>
+        <div id="aplayer-PVwSagVU" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-PVwSagVU"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "Fractures",
+              author: "ILLENIUM;Nevve",
+              url: "http://music.zhongshenglong.xyz/ILLENIUM;Nevve%20-%20Fractures.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+]]></content>
+      <categories>
+        <category>文章</category>
+      </categories>
+      <tags>
+        <tag>文章</tag>
+        <tag>寻路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>不离不弃，独爱一人</title>
+    <url>/2019/07/05/kjyy/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="浅淡流年，漫卷诗书，文字含香"><a href="#浅淡流年，漫卷诗书，文字含香" class="headerlink" title="浅淡流年，漫卷诗书，文字含香 "></a>浅淡流年，漫卷诗书，文字含香 </h2><a id="more"></a> 
+<p><code>是会开出花儿来的。
+不问经年若何，我只愿做一朵淡雅的小花，
+盛放在文字的原野，
+面朝阳光，寂静守望。</code><br><code>做安静的笔者，写如莲的心事，
+无关风月，只做自己。</code></p>
+<p><img src="/kjyy/aw12.jpg" alt="风华" title="不离不弃"></p>
+<p><code>读万卷书，行万里路，
+感悟人生浮华沧桑。
+不管下世若何？
+我只愿此生能畅谈人生事，</code><br><code>与心上人共赏明&quot;月&quot;，
+清风拂面，尽享温柔。
+做守护的使者，
+当贴心的情郎，
+不离不弃，独爱一人。</code></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="/kjyy/aw11.jpg" alt="风华" title="独爱一人"></h2>
+        <div id="aplayer-KjSDwLWr" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-KjSDwLWr"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "拾繁花一梦",
+              author: "Pig小优",
+              url: "http://music.zhongshenglong.xyz/Pig%E5%B0%8F%E4%BC%98%20-%20%E6%8B%BE%E7%B9%81%E8%8A%B1%E4%B8%80%E6%A2%A6.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+
+]]></content>
+      <categories>
+        <category>文章</category>
+      </categories>
+      <tags>
+        <tag>文章</tag>
+        <tag>持墨</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>时光会见证一切吗</title>
+    <url>/2019/07/03/Love/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="与你一见如故，是我今生最美丽的相遇。"><a href="#与你一见如故，是我今生最美丽的相遇。" class="headerlink" title="与你一见如故，是我今生最美丽的相遇。"></a>与你一见如故，是我今生最美丽的相遇。</h2><a id="more"></a>
+<p><code>你一诺相许，是我素色年华里最永恒的风景。
+  一直想说，无论走到哪里，最想去的是你的身边。</code></p>
+<p><img src="/Love/aw1.jpg" alt="风华" title="爱"></p>
+<p><code>我相信我们可以一起，等青丝变白发。
+你在，我在，就是海枯石烂。
+没有过多的华丽，只有一句我喜欢你，却能让彼此牵挂于心。</code></p>
+<p><code>亲爱的，你知道吗，哪怕遍体鳞伤，我仍有爱你的余力。
+有的人你只看了一眼，却影响其一生。</code></p>
+<h2 id="愿我们彼此相爱，一直到时间的尽头。"><a href="#愿我们彼此相爱，一直到时间的尽头。" class="headerlink" title="愿我们彼此相爱，一直到时间的尽头。"></a>愿我们彼此相爱，一直到时间的尽头。</h2>
+        <div id="aplayer-rbZHvesd" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-rbZHvesd"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "告白气球",
+              author: "爱-好难",
+              url: "http://music.zhongshenglong.xyz/%E5%91%8A%E7%99%BD%E6%B0%94%E7%90%83.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+]]></content>
+      <categories>
+        <category>文章</category>
+      </categories>
+      <tags>
+        <tag>文章</tag>
+        <tag>邂逅</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>晚安</title>
+    <url>/2019/07/02/wa/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="天上有多少星光-世间有多少女孩"><a href="#天上有多少星光-世间有多少女孩" class="headerlink" title="天上有多少星光, 世间有多少女孩"></a>天上有多少星光, 世间有多少女孩</h2><a id="more"></a>
+
+<p><strong><code>但天上只有一个月亮,世间只有一个你。</code></strong> </p>
+<p><code>每天早上夸自己一下，每天中午夸自己一下，每天晚上夸自己一下，每天梦里夸自己一下，也许世界不会变好，但至少心情会变好。</code></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="/wa/aw11.jpg" alt="风华" title="晚安"></h2>
+        <div id="aplayer-ymTvJtLr" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-ymTvJtLr"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "晚安",
+              author: "颜人中",
+              url: "http://music.zhongshenglong.xyz/%E9%A2%9C%E4%BA%BA%E4%B8%AD%20-%20%E6%99%9A%E5%AE%89.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+]]></content>
+      <categories>
+        <category>文章</category>
+      </categories>
+      <tags>
+        <tag>文章</tag>
+        <tag>图片</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>再见六月,七月你好</title>
+    <url>/2019/07/01/Hello/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><code>和七月道一声你好，希望这个崭新的月份可以善待自己，你的另一半和美丽的风景在前方等待着自己。<a id="more"></a>也会尽最大的努力去改变自己，磨练自己，让自己成长。我们要更加用心去经营好这个月份，永远相信越努力越幸运，愿意付出辛勤和愿意改变自己的人都应该获得成功的青睐。</code></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="/Hello/aw1.jpg" alt="风华" title="你好七月"></h2>
+        <div id="aplayer-qjRpodhE" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-qjRpodhE"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "画舫烟中浅",
+              author: "Pig小优",
+              url: "http://music.zhongshenglong.xyz/Pig%E5%B0%8F%E4%BC%98%20-%20%E7%94%BB%E8%88%AB%E7%83%9F%E4%B8%AD%E6%B5%85.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+]]></content>
+      <categories>
+        <category>文章</category>
+      </categories>
+      <tags>
+        <tag>心情</tag>
+        <tag>文章</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>总有个地方想再去看看～</title>
+    <url>/2019/07/01/xf/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="最近情绪突然变化的很快，一句话或者一个动作就会莫名烦躁，心烦意乱"><a href="#最近情绪突然变化的很快，一句话或者一个动作就会莫名烦躁，心烦意乱" class="headerlink" title="最近情绪突然变化的很快，一句话或者一个动作就会莫名烦躁，心烦意乱"></a>最近情绪突然变化的很快，一句话或者一个动作就会莫名烦躁，心烦意乱</h2><a id="more"></a>
+
+<p><code>,似乎控制不住自己的情绪,太浮躁了,气候和环境都是会有些影响人的情绪, 还是得多读读书,多走走,将心静下来</code></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="/xf/cover233.jpg" alt="风华" title="静心"></h2>
+        <div id="aplayer-PZtZKaiJ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-PZtZKaiJ"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "山外小楼夜听雨",
+              author: "任然",
+              url: "http://music.zhongshenglong.xyz/%E4%BB%BB%E7%84%B6%20-%20%E5%B1%B1%E5%A4%96%E5%B0%8F%E6%A5%BC%E5%A4%9C%E5%90%AC%E9%9B%A8.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+
+
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>给上半年打个分</title>
+    <url>/2019/06/30/nights/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="云一样的思绪，飘过来又飘过去，最终还是落在我的手掌上。"><a href="#云一样的思绪，飘过来又飘过去，最终还是落在我的手掌上。" class="headerlink" title="云一样的思绪，飘过来又飘过去，最终还是落在我的手掌上。"></a>云一样的思绪，飘过来又飘过去，最终还是落在我的手掌上。</h2><a id="more"></a> 
+<p><code>绚丽如霓霞，哀怨如晨雾。我看得清你，你看得清我，我们在同一地平线，做着不同的梦，我的梦白如花朵，你的梦红如晚霞。</code></p>
+<p>一天尽处紫云稠，横出暮中烟水舟。莫问孤舟何所载，于今堪忘不堪收</p>
+<p><img src="/nights/aw2.jpg" alt="风华" title="如梦"></p>
+<hr>
+<p><code>太湖之畔,蠡湖之光,从冬季到夏季,不知不觉间已经有半年之久,回首半年前往事，日子中竟全是斑斓的光影，记忆的屏障中，曾经熟悉关爱的声音已渐渐远去,带走属于我幼年的童真记忆,真想截取下那段过往的时光。</code></p>
+<p>​    <code>在上半年,我给自己打个5分这样,与前两年相比,各方面都有相对进步,也许是今年的事情发生的太多吧,但是遗憾的事情太多,只能让更多参杂的记忆来覆盖这段难以回忆的片段.</code></p>
+<p><code>不管怎么样,还是要好好珍惜现在的一切,要让自身的怠惰,迟疑,在下半年少一点,时刻有限，不只由于人生短促，更由于人的纷繁。我们就应力求把我们所有的时刻用去做最有益的事。</code></p>
+<p><code>就如俄国诗人普希金说的：“而那过去了的就会成为亲切的怀恋！”</code></p>
+<hr>
+
+        <div id="aplayer-jJqfdznq" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-jJqfdznq"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "キラメキ",
+              author: "wacci",
+              url: "http://music.zhongshenglong.xyz/wacci%20-%20%E3%82%AD%E3%83%A9%E3%83%A1%E3%82%AD.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>入坑首作</title>
+    <url>/2019/06/29/title/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="个人博客入坑"><a href="#个人博客入坑" class="headerlink" title="个人博客入坑"></a>个人博客入坑</h1><h4 id="第一次发表个人博客-过程还是比较坎坷的-但一步一步走下来-学习了不少"><a href="#第一次发表个人博客-过程还是比较坎坷的-但一步一步走下来-学习了不少" class="headerlink" title="第一次发表个人博客,过程还是比较坎坷的,但一步一步走下来,学习了不少"></a>第一次发表个人博客,过程还是比较坎坷的,但一步一步走下来,学习了不少<a id="more"></a></h4><p><img src="/title/aw1.jpg" alt="示例图片" title="示例图片"></p>
+<hr>
+
+        <div id="aplayer-CZwwxfWa" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-CZwwxfWa"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "纯白",
+              author: "Pig小优",
+              url: "http://music.zhongshenglong.xyz/Pig%E5%B0%8F%E4%BC%98%20-%20%E7%BA%AF%E7%99%BD.mp3",
+              pic: "http://music.zhongshenglong.xyz/music6.ico",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+]]></content>
+      <tags>
+        <tag>文章</tag>
+        <tag>日志</tag>
+      </tags>
+  </entry>
+</search>
