@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="每日一句">
+    <meta name="author" content="ドラゴンボールのLong">
+    
+    <title>
+        
+            ArchLinux-kde和gnome桌面系统基础安装 |
+        
+        ドラゴンボールのLong
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"https://cdn.jsdelivr.net/gh/longhz/cdn@1.0/img/custom/avatar1.jpg","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"黄色的森林分出两条路，我选择了人迹更少的那一条，从此决定我一生的道路。"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                ドラゴンボールのLong
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">ArchLinux-kde和gnome桌面系统基础安装</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="https://cdn.jsdelivr.net/gh/longhz/cdn@1.0/img/custom/avatar1.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">ドラゴンボールのLong</span>
+                        
+                            <span class="author-label">Lv3</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2018-03-06 20:10:12</span>
+        <span class="mobile">2018-03-06 20:10</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%BF%83%E5%BE%97/">心得</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.4k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>10 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="ArchLinux安装图文教程"><a href="#ArchLinux安装图文教程" class="headerlink" title="ArchLinux安装图文教程"></a><strong>ArchLinux安装图文教程</strong></h1><h2 id="一．安装Arch-linux前的准备"><a href="#一．安装Arch-linux前的准备" class="headerlink" title="一．安装Arch linux前的准备"></a><strong>一．安装Arch linux前的准备</strong></h2><h3 id="1-下载VMware安装包及Arch-Linux镜像"><a href="#1-下载VMware安装包及Arch-Linux镜像" class="headerlink" title="1.下载VMware安装包及Arch Linux镜像"></a>1.下载VMware安装包及Arch Linux镜像</h3><p><a class="link"   target="_blank" rel="noopener" href="https://www.vmware.com/cn/products/workstation-pro.html" >https://www.vmware.com/cn/products/workstation-pro.html<i class="fas fa-external-link-alt"></i></a></p>
+<p>（注意：VMware workstation11、12仅支持64位操作系统，而VMware workstation10同时支持32和64位操作系统）</p>
+<h3 id="2-打开软件，选择“创建虚拟机”按钮"><a href="#2-打开软件，选择“创建虚拟机”按钮" class="headerlink" title="2. 打开软件，选择“创建虚拟机”按钮"></a>2. 打开软件，选择“创建虚拟机”按钮</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps1.jpg"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps2.jpg"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps3.jpg"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps4.jpg"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps5.jpg"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps6.jpg"
+                     
+                ><br>选处理器核心数量为2个</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps9.jpg"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps7.jpg"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps8.jpg"
+                     
+                ></p>
+<p>然后一直下一步</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps10.jpg"
+                     
+                ></p>
+<p>点下一步直至完成</p>
+<p>编辑虚拟机设置，选择ISO文件</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps11.jpg"
+                     
+                ></p>
+<p>开启虚拟机</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps12.jpg"
+                     
+                ></p>
+<h3 id="3-默认选中第一个"><a href="#3-默认选中第一个" class="headerlink" title="3.默认选中第一个"></a>3.默认选中第一个</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps13.jpg"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps14.jpg"
+                     
+                ></p>
+<p>二. 现在开始分区</p>
+<p> 输入以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># fdisk /dev/sda</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps15.jpg"
+                     
+                ></p>
+<p>创建分区表：</p>
+<p>· Command (m for help): 输入 o 并按下 Enter</p>
+<p>然后建立第一个分区：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. Command (m for help): 输入 n 并按下 Enter </span><br><span class="line"></span><br><span class="line">2. Partition type: Select (default p): 按下 Enter </span><br><span class="line"></span><br><span class="line">3. Partition number (1-4, default 1): 按下 Enter </span><br><span class="line"></span><br><span class="line">4. First sector (2048-209715199, default 2048): 按下 Enter </span><br><span class="line"></span><br><span class="line">5. Last sector, +sectors or +size&#123;K,M,G (2048-209715199....., default 209715199): 输入 +15G 并按下 Enter &#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps16.jpg"
+                      alt="img"
+                > </p>
+<p>然后建立第二个分区：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">1. Command (m for help): 输入 n 并按下 Enter </span><br><span class="line"></span><br><span class="line">2. Partition type: Select (default p): 按下 Enter </span><br><span class="line"></span><br><span class="line">3. Partition number (1-4, default 2): 按下 Enter </span><br><span class="line"></span><br><span class="line">4. First sector (31459328-209715199, default 31459328): 按下 Enter </span><br><span class="line"></span><br><span class="line">5. Last sector, +sectors or +size&#123;K,M,G (31459328-209715199....., default 209715199): 按下 Enter 现在预览下新的分区表:</span><br><span class="line"></span><br><span class="line">· Command (m for help): 输入 p 并按下 Enter </span><br><span class="line"></span><br><span class="line">Disk /dev/sda: 107.4 GB, 107374182400 bytes, 209715200 sectors</span><br><span class="line"></span><br><span class="line">Units = sectors of 1 * 512 = 512 bytes</span><br><span class="line"></span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line"></span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line"></span><br><span class="line">Disk identifier: 0x5698d902</span><br><span class="line"></span><br><span class="line">Device Boot   Start     End   Blocks  Id  System</span><br><span class="line"></span><br><span class="line">/dev/sda1      2048   31459327  15728640  83  Linux</span><br><span class="line"></span><br><span class="line">/dev/sda2    31459328  209715199  89127936  83  Linux</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps17.jpg"
+                     
+                ></p>
+<p>然后向磁盘写入这些改动：</p>
+<blockquote>
+<p>· Command (m for help): 输入 w 并按下 Enter </p>
+</blockquote>
+<p>如果一切顺利无错误的话，fdisk 程序将显示如下信息:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps18.jpg"
+                     
+                ></p>
+<p>The partition table has been altered!</p>
+<p>Calling ioctl() to re-read partition table.</p>
+<p>Syncing disks.</p>
+<p>若因 fdisk 遇到错误导致以上操作无法完成，可以用 q 命令来退出。</p>
+<p>（当然你也可以分多个分区，分别挂载&#x2F;boot,&#x2F;home&#x2F;,&#x2F;,&#x2F;var等）</p>
+<p>3、接下来格式化成ext4文件系统</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># mkfs.ext4 /dev/sda1</span><br><span class="line"></span><br><span class="line"># mkfs.ext4 /dev/sda2</span><br></pre></td></tr></table></figure>
+
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps19.jpg"
+                     
+                ></p>
+<p>若您分了一个 swap 区，也不要忘了格式化并启用它（x代表你的那个分区数字）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># mkswap /dev/sdaX</span><br><span class="line"></span><br><span class="line"># swapon /dev/sdaX</span><br></pre></td></tr></table></figure>
+
+
+<p>注意要按照顺序挂载，先挂载根分区到 &#x2F;mnt （你实际所要挂载的分区名当然可能会不同）：</p>
+<p><code># mount /dev/sda1 /mnt</code></p>
+<p>然后挂载 &#x2F;home 分区（以及其它其余单独分区，比如 &#x2F;boot，&#x2F;var，如果您有的话）：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps20.jpg"
+                     
+                ></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># mkdir /mnt/home</span><br><span class="line"></span><br><span class="line"># mount /dev/sda2 /mnt/home</span><br></pre></td></tr></table></figure>
+
+
+<p>（如果有其他分区，先创建目录，再挂载）</p>
+<p>（三）安装基本系统</p>
+<p>重申一遍，这里及以后一些步骤必须联网，尤其是运行pacman命令时。关于联网问题请参照archwiki,里面有十分详细的解说。</p>
+<p>先进行网络设置，在上面的livecd中一般会自动联网,但虚拟机如果这里不配置，后面无法下载安装操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># ip link</span><br></pre></td></tr></table></figure>
+
+
+<p>找到网络设备，我的是ens33</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># ip link set ens33 up</span><br><span class="line"></span><br><span class="line"># dhcpcd ens33</span><br><span class="line"></span><br><span class="line"># systemctl enable dhcpcd@ens33.service </span><br></pre></td></tr></table></figure>
+
+<p>以后系统就会自动联网了</p>
+<p>后面如果遇到重启步骤，还需要配置下</p>
+<p>对于无线还未尝试，可以看archwiki。</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" >https://wiki.archlinux.org/index.php/Installation_guide_(简体中文)<i class="fas fa-external-link-alt"></i></a></p>
+<p>1、安装前需要编辑文件&#x2F;etc&#x2F;pacman.d&#x2F;mirrorlist, 你的系统和软件将从这里的地址下载。将偏好的镜像放到最前面，下面加入了一个比较快的源，当然你可以去网上搜其他比较好的源：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># nano /etc/pacman.d/mirrorlist</span><br><span class="line"></span><br><span class="line">##</span><br><span class="line"></span><br><span class="line">## Arch Linux repository mirrorlist</span><br><span class="line"></span><br><span class="line">## Sorted by mirror score from mirror status page</span><br><span class="line"></span><br><span class="line">## Generated on 2012-MM-DD</span><br><span class="line"></span><br><span class="line">##</span><br><span class="line"></span><br><span class="line">Server = http://mirror.bjtu.edu.cn/archlinux//os/</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+
+<p>如果您愿意，您可以只使用一个镜像并全删光其他行，但为保险，还是留其他几个离您较近的镜像作备用好</p>
+<p>然后敲入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># pacman -Syy      刷新列表</span><br><span class="line"></span><br><span class="line"># pacstrap -i /mnt base   安装基本系统</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>若运行 <em>pacstrap</em> 时卡住并出现<br><em>failed retrieving file ‘core.db’ from mirror… : Connection time-out</em><br>字样，请检查刚才的源是否正确或去网上搜索其他能用的源。</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps21.jpg"
+                     
+                ><br>一直回车这这个界面</p>
+<p>2、生成fstab分区表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># genfstab -U -p /mnt &gt;&gt; /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
+
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps22.jpg"
+                     
+                ></p>
+<p>3、下面要 chroot 到新系统开始配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># arch-chroot /mnt /bin/bash</span><br></pre></td></tr></table></figure>
+
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps23.jpg"
+                     
+                ></p>
+<p>4、系统本地化，设置本地语言，地点等信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># nano /etc/locale.gen</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps24.jpg"
+                     
+                ></p>
+<p>去掉#</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">en_US.UTF-8 UTF-8</span><br><span class="line"></span><br><span class="line">zh_CN.UTF-8 UTF-8</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>接着执行locale-gen以生成locale讯息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># locale-gen</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps25.jpg"
+                     
+                ></p>
+<p>（创建 locale.conf 并提交您的本地化选项：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps26.jpg"
+                     
+                ></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># echo LANG=en_US.UTF-8 &gt; /etc/locale.conf</span><br></pre></td></tr></table></figure>
+
+
+<p>&#x2F;<em><strong>这里先不要设置中文编码，等安装了图形界面再修改，否则会乱码）</strong></em>&#x2F;</p>
+<p>5、设置时区，一般以上海就行：</p>
+<p><code># ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime </code></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps27.jpg"
+                     
+                ></p>
+<p>6、设置时间</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># hwclock --systohc --utc</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps28.jpg"
+                     
+                ></p>
+<p>7、设置个您喜欢的主机名，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># echo longz &gt; /etc/hostname</span><br></pre></td></tr></table></figure>
+
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps29.jpg"
+                     
+                ></p>
+<p>并在 &#x2F;etc&#x2F;hosts 添加同样的主机名：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># nano /etc/hosts</span><br><span class="line"></span><br><span class="line"># /etc/hosts: static lookup table for host names</span><br><span class="line"></span><br><span class="line">#&lt;ip-address&gt; &lt;hostname.domain.org&gt; &lt;hostname&gt;</span><br><span class="line"></span><br><span class="line">127.0.0.1   localhost.localdomain  localhost 主机名  </span><br><span class="line"></span><br><span class="line">::1      localhost.localdomain  localhost</span><br><span class="line"></span><br><span class="line"># End of file</span><br></pre></td></tr></table></figure>
+
+
+<p>8、设置root密码</p>
+<p><code># passwd </code></p>
+<blockquote>
+<p>输入两次密码:简单点123456</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps30.jpg"
+                     
+                ></p>
+<p>9、安装启动引导器grub:</p>
+<p>安装 grub 包，并执行 grub-install 已安装到 MBR:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># pacman -S grub</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps31.jpg"
+                     
+                ></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># grub-install --target=i386-pc --recheck /dev/sda</span><br></pre></td></tr></table></figure>
+
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps32.jpg"
+                     
+                ></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps33.jpg"
+                     
+                ></p>
+<p>须根据实际分区自行调整 &#x2F;dev&#x2F;sda, 切勿在块设备后附加数字，</p>
+<blockquote>
+<p>比如 dev&#x2F;sda1 就不对</p>
+</blockquote>
+<p>添加新用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># useradd -m -g users -s /bin/bash 用户名</span><br></pre></td></tr></table></figure>
+
+
+<p>（务必添加一个 用户 ，否则后面sddm显示管理器登录的时候无法登录，sddm不会列出root用户） </p>
+<p>为刚才添加的用户设置密码<br>执行<code>：# passwd 用户名 </code></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps34.jpg"
+                     
+                ></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># nano /etc/sudoers</span><br></pre></td></tr></table></figure>
+
+
+<p>在 root ALL&#x3D;(ALL) ALL 下面添加<br><code>用户名 ALL=(ALL) ALL </code></p>
+<p>为你刚才创建的用户 添加sudo权限</p>
+<p>10、卸载分区并重启系统</p>
+<p>离开 <strong>chroot</strong> 环境：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># exit</span><br></pre></td></tr></table></figure>
+
+
+<p>重启计算机：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># reboot</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>好了，一个最基本的字符系统建好了，接下来可以选择安装桌面等图形环境了。</strong></p>
+<ol start="11">
+<li>进入系统后首先更新软件包，但先检查下网络，虚拟机尽量再配置下</li>
+</ol>
+<p>找到网络设备，我的是ens33</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># ip link set ens33 up</span><br><span class="line"></span><br><span class="line"># dhcpcd ens33</span><br><span class="line"></span><br><span class="line"># systemctl enable dhcpcd@ens33.service</span><br></pre></td></tr></table></figure>
+<p> 以后系统就会自动联网了</p>
+<p>（1）安装显卡驱动</p>
+<p>确定显卡型号<br>执行:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># lspci | grep VGA</span><br></pre></td></tr></table></figure>
+
+
+<p>执行：</p>
+<p><code># pacman -S </code>驱动包:</p>
+<p>官方仓库提供的驱动包: </p>
+<blockquote>
+<p>通用虚拟机———————————-pacman -S xf86-video-vesa<br>intel———————————pacman -S xf86-video-intel </p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># pacman -S xf86-video-nouveau # Nvidia</span><br><span class="line"># pacman -S nouveau-dri</span><br><span class="line"># pacman -S xf86-video-ati # Ati</span><br></pre></td></tr></table></figure>
+
+<p>Geforce7+(显卡型号)————————–pacman -S xf86-video-nouveau<br>Geforce6&#x2F;7（显卡型号）————————-pacman -S xf86-video-304xx</p>
+<p>安装声卡驱动键入 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># pacman -S alsa-utils</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps35.jpg"
+                     
+                ></p>
+<h3 id="（2）安装X窗口系统"><a href="#（2）安装X窗口系统" class="headerlink" title="（2）安装X窗口系统"></a><strong>（2）安装X窗口系统</strong></h3><p>执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># pacman -S xorg</span><br></pre></td></tr></table></figure>
+
+
+<p>安装X窗口系统<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps36.jpg"
+                     
+                ><br>执行：</p>
+<p><code># pacman -S xf86-input-synaptics </code><br>（触摸板驱动，笔记版可装，台式机就不用了）执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># pacman -S ttf-dejavu wqy-microhei</span><br></pre></td></tr></table></figure>
+
+
+<p>安装字体：Dejavu 和 微米黑字体（不安装的话 后面进入桌面环境设置系统语言为简体中文的时候会出现字体显示不全的问题）<br><a class="link"   href="ttp://img.blog.csdn.net/20170720110819958?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcjhsOHE4/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" >安装字体：Dejavu 和 微米黑字体<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="（3）安装kde-plasma桌面环境"><a href="#（3）安装kde-plasma桌面环境" class="headerlink" title="（3）安装kde-plasma桌面环境"></a><strong>（3）安装kde-plasma桌面环境</strong></h3><p>安装　Gnome桌面环境的直接跳到第(4)步<br>（kde和gnome桌面环境自带了大部分的驱动 ，安装其他桌面环境可能需要额外配置一些驱动，比如声卡）<br>想安装其他桌面环境 参照官方wiki：<a class="link"   target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/Desktop_environment_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" >官方wiki<i class="fas fa-external-link-alt"></i></a><br>执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># pacman -S plasma</span><br></pre></td></tr></table></figure>
+
+
+<p>安装plasma<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps37.jpg"
+                     
+                ><br>执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># pacman -S konsole</span><br></pre></td></tr></table></figure>
+
+
+<p>安装 kde下的控制台终端<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps38.jpg"
+                     
+                ><br>执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># pacman -S dolphin</span><br></pre></td></tr></table></figure>
+
+
+<p>安装kde下的文件管理器<br>（可以直接执行:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># pacman -S kde-applications</span><br></pre></td></tr></table></figure>
+
+
+<p>安装kde套件，包含了常用的系统工具）<br>安装完后<br>执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># systemctl enable sddm</span><br></pre></td></tr></table></figure>
+
+
+<p>启用 sddm显示管理器<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps39.jpg"
+                     
+                ><br>执行：</p>
+<h1 id="systemctl-enable-NetworkManager"><a href="#systemctl-enable-NetworkManager" class="headerlink" title="systemctl enable NetworkManager"></a>systemctl enable NetworkManager</h1><p>启用网络管理<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps40.jpg"
+                     
+                ><br>执行:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># pacman -S plasma-nm</span><br></pre></td></tr></table></figure>
+
+
+<p>安装 网络管理的前端工具（图形界面）<br>执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># reboot</span><br></pre></td></tr></table></figure>
+
+
+<p>重启</p>
+<p>进入系统后界面如下：<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps41.jpg"
+                     
+                ><br>（4）安装Gnome桌面环境<br>执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># pacman -S gnome</span><br></pre></td></tr></table></figure>
+
+
+<p>安装gnome桌面<br>执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># pacman -S gnome-tweak-tool</span><br></pre></td></tr></table></figure>
+
+
+<p>安装gnome桌面优化工具<br>执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># pacman -S alacarte</span><br></pre></td></tr></table></figure>
+
+
+<p>安装gnome桌面菜单编辑器<br>执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># systemctl enable gdm</span><br></pre></td></tr></table></figure>
+
+
+<p>启用gnome窗口管理器服务<br>执行：</p>
+<p><code>    # systemctl enable NetworkManager</code></p>
+<p>启用网络管理器服务<br>执行：</p>
+<p><code> # reboot</code></p>
+<h2 id="13-安装完后的工作"><a href="#13-安装完后的工作" class="headerlink" title="13.安装完后的工作"></a><strong>13.安装完后的工作</strong></h2><p> <strong>（1）添加archlinuxcn源（里面包含了很多中国人常用而官方仓库又没有的软件）</strong></p>
+<p>（2）安装中文输入法<br>执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># pacman -S fcitx-im fcitx-configtool</span><br></pre></td></tr></table></figure>
+
+
+<p>执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># nano /etc/pacman.conf</span><br></pre></td></tr></table></figure>
+
+
+<p>在 &#x2F;etc&#x2F;pacman.conf 文件末尾添加两行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[archlinuxcn]SigLevel=NeverServer = https://mirrors.ustc.edu.cn/archlinuxcn/</span><br></pre></td></tr></table></figure>
+
+
+<p>安装输入法引擎 </p>
+<blockquote>
+<p>（官方仓库里的输入法：<br>fcitx-cloudpinyin<br>fcitx-googlepinyin<br>fcitx-libpinyin<br>fcitx-sunpinyin） </p>
+</blockquote>
+<p>执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># nano ~/.xprofile</span><br></pre></td></tr></table></figure>
+
+
+<p>添加一下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export GTK_IM_MODULE=fcitx</span><br><span class="line"></span><br><span class="line">export QT_IM_MODULE=fcitx</span><br><span class="line"></span><br><span class="line">export XMODIFIERS=&quot;@im=fcitx&quot;</span><br></pre></td></tr></table></figure>
+
+
+<p>执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># pacman -S fcitx-sogoupinyin</span><br></pre></td></tr></table></figure>
+
+
+<p>安装搜狗输入法</p>
+<p><strong>（3）安装网易云音乐</strong></p>
+<p>执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># pacman -S netease-cloud-music</span><br></pre></td></tr></table></figure>
+
+
+<p>安装网易云音乐</p>
+<p> <strong>（4）安装yaourt使用aur</strong></p>
+<p>执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># pacman -S yaourt</span><br></pre></td></tr></table></figure>
+
+
+<p>安装yarourt<br>以后可以使用yaourt 安装aur中的软件了 ，yaourt跟pacman使用方法一样<br>安装kde下的文件管理器<br>（5）安装浏览器<br>执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># pacman -S google-chrome</span><br></pre></td></tr></table></figure>
+
+
+<p>安装google浏览器（没法在线观看视频）<br>执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># pacman -S firefox</span><br></pre></td></tr></table></figure>
+
+
+<p>安装火狐浏览器<br>（执行: # pacman -S flashplugin 安装flas插件，否则无法在线观看视频，chrome浏览器不支持flash）</p>
+<h3 id="（6）其他常用软件"><a href="#（6）其他常用软件" class="headerlink" title="（6）其他常用软件"></a><strong>（6）其他常用软件</strong></h3><blockquote>
+<p>可在<a class="link"   target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/List_of_applications_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" >官方文档中查找<i class="fas fa-external-link-alt"></i></a><br>进行查找</p>
+</blockquote>
+<p>（7）桌面美化 </p>
+<p>Kde-Plasma桌面：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps42.png"
+                     
+                ></p>
+<p>Gnome桌面：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/wps43.jpg"
+                     
+                ></p>
+<p>可自行安装一些主题，请自己探索。</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：ArchLinux-kde和gnome桌面系统基础安装</li>
+        <li>本文作者：ドラゴンボールのLong</li>
+        <li>创建时间：2018-03-06 20:10:12</li>
+        <li>
+            本文链接：https://zhongshenglong.xyz/2018/03/06/ArchLinux-kde和gnome桌面系统基础安装/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%8A%80%E6%9C%AF/">#技术</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%BF%83%E5%BE%97/">#心得</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2019/07/19/sdjx/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">比起不停地获取大量的讯息，更重要的是学会屏蔽。</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;评论</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: '2TGCOmDNikdxOnVmQJEFhTOK-gzGzoHsz',
+                    appKey: 'lU21jvewvcy043UjfpHRXfvA',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'zh-CN'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'ドラゴンボールのLong';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2019</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">ドラゴンボールのLong</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+            <div class="icp-info info-item"><a target="_blank" rel="nofollow" href="https://beian.miit.gov.cn">苏ICP备20001538号-1</a></div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ArchLinux%E5%AE%89%E8%A3%85%E5%9B%BE%E6%96%87%E6%95%99%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">ArchLinux安装图文教程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%EF%BC%8E%E5%AE%89%E8%A3%85Arch-linux%E5%89%8D%E7%9A%84%E5%87%86%E5%A4%87"><span class="nav-number">1.1.</span> <span class="nav-text">一．安装Arch linux前的准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%8B%E8%BD%BDVMware%E5%AE%89%E8%A3%85%E5%8C%85%E5%8F%8AArch-Linux%E9%95%9C%E5%83%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.下载VMware安装包及Arch Linux镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%89%93%E5%BC%80%E8%BD%AF%E4%BB%B6%EF%BC%8C%E9%80%89%E6%8B%A9%E2%80%9C%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA%E2%80%9D%E6%8C%89%E9%92%AE"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 打开软件，选择“创建虚拟机”按钮</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%BB%98%E8%AE%A4%E9%80%89%E4%B8%AD%E7%AC%AC%E4%B8%80%E4%B8%AA"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.默认选中第一个</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%AE%89%E8%A3%85X%E7%AA%97%E5%8F%A3%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.1.4.</span> <span class="nav-text">（2）安装X窗口系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E5%AE%89%E8%A3%85kde-plasma%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.5.</span> <span class="nav-text">（3）安装kde-plasma桌面环境</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#systemctl-enable-NetworkManager"><span class="nav-number">2.</span> <span class="nav-text">systemctl enable NetworkManager</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#13-%E5%AE%89%E8%A3%85%E5%AE%8C%E5%90%8E%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">13.安装完后的工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%886%EF%BC%89%E5%85%B6%E4%BB%96%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6"><span class="nav-number">2.1.1.</span> <span class="nav-text">（6）其他常用软件</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
