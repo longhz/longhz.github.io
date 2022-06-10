@@ -9,7 +9,7 @@
     
     <title>
         
-            上传项目到GitHub |
+            Centos7安装mysql5.7 |
         
         ドラゴンボールのBlog
     </title>
@@ -181,7 +181,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">上传项目到GitHub</span>
+            <span class="title-hover-animation">Centos7安装mysql5.7</span>
         </div>
 
         
@@ -200,8 +200,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-03-06 20:10:12</span>
-        <span class="mobile">2022-03-06 20:10</span>
+        <span class="pc">2021-11-02 19:10:12</span>
+        <span class="mobile">2021-11-02 19:10</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -229,7 +229,11 @@
                     </li>
                 
                     <li>
-                        | <a href="/tags/GitHub/">GitHub</a>&nbsp;
+                        | <a href="/tags/%E5%BF%83%E5%BE%97/">心得</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/mysql/">mysql</a>&nbsp;
                     </li>
                 
             </ul>
@@ -239,12 +243,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.2k 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>592 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>4 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>2 分钟</span>
         </span>
     
     
@@ -260,142 +264,62 @@
         
 
         <div class="article-content markdown-body">
-            <h2 id="linux上传项目到github，及一些git命令"><a href="#linux上传项目到github，及一些git命令" class="headerlink" title="linux上传项目到github，及一些git命令"></a>linux上传项目到github，及一些git命令</h2><span id="more"></span>
+            <h3 id="1、在安装之前，如果你的系统曾经安装过Mariadb，请先卸载："><a href="#1、在安装之前，如果你的系统曾经安装过Mariadb，请先卸载：" class="headerlink" title="1、在安装之前，如果你的系统曾经安装过Mariadb，请先卸载："></a>1、在安装之前，如果你的系统曾经安装过Mariadb，请先卸载：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove mariadb*</span><br></pre></td></tr></table></figure>
 
+<h3 id="2、安装依赖"><a href="#2、安装依赖" class="headerlink" title="2、安装依赖"></a>2、安装依赖</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install -y epel-release</span><br><span class="line">yum update -y</span><br><span class="line">yum install -y cmake gcc-c++ ncurses-devel perl-Data-Dumper boost-doc boost-devel libaio-devel</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、下载解压MySQL源码包"><a href="#3、下载解压MySQL源码包" class="headerlink" title="3、下载解压MySQL源码包"></a>3、下载解压MySQL源码包</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.20-linux-glibc2.12-x86_64.tar.gz</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>或者通过以下链接下载上传<br><a class="link"   target="_blank" rel="noopener" href="https://kdy.zhongshenglong.xyz:163/#s/8NA6ajaA" >https://kdy.zhongshenglong.xyz:163/#s/8NA6ajaA<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxf mysql-5.7.20-linux-glibc2.12-x86_64.tar.gz </span><br><span class="line">mv mysql-5.7.20-linux-glibc2.12-x86_64 mysql</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、配置环境变量"><a href="#4、配置环境变量" class="headerlink" title="4、配置环境变量"></a>4、配置环境变量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#添加如下内容</span><br><span class="line">export PATH=/opt/mysql/bin:$PATH</span><br></pre></td></tr></table></figure>
+<p><strong>然后source生效</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<h3 id="5、添加用户并授权相关"><a href="#5、添加用户并授权相关" class="headerlink" title="5、添加用户并授权相关"></a>5、添加用户并授权相关</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">useradd mysql</span><br><span class="line">id mysql</span><br><span class="line">mkdir /u01/data/mysql -p</span><br><span class="line">mkdir /var/log/mariadb</span><br><span class="line">touch /var/log/mariadb/mariadb.log</span><br><span class="line">chown -R mysql:mysql /opt/mysql/*</span><br><span class="line">chown -R mysql:mysql /u01/data/*</span><br><span class="line">chown -R mysql:mysql /var/log/mariadb/</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>其中：</strong></p>
+<blockquote>
+<p>&#x2F;opt&#x2F;mysql&#x2F; 是MySQL软件所在目录。<br>&#x2F;u01&#x2F;data&#x2F;mysql 是将来存放MySQL数据的目录。</p>
+</blockquote>
+<h3 id="6、初始化数据库"><a href="#6、初始化数据库" class="headerlink" title="6、初始化数据库"></a>6、初始化数据库</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld --initialize-insecure  --user=mysql --basedir=/opt/mysql --datadir=/u01/data/mysql</span><br></pre></td></tr></table></figure>
+
+<p>上述参数，并不难理解：</p>
+<ul>
+<li>–initialize-insecure，表示不安全的初始化。这个参数来自于–initialize参数，在MySQL5.7版本中，在初始化成功后，会生成一个临时密码，相对比较麻烦，所以这里改为–initialize-insecure，初始化成功后，密码为空。</li>
+<li>–user&#x3D;mysql，管理MySQL的用户是mysql。</li>
+<li>–basedir&#x3D;&#x2F;opt&#x2F;mysql，是你MySQL的安装目录。</li>
+<li>–datadir&#x3D;&#x2F;u01&#x2F;data&#x2F;mysql，是管理数据的目录。</li>
+</ul>
+<h3 id="7、在初始化完成后，你的MySQL的数据目录，应该有这些文件："><a href="#7、在初始化完成后，你的MySQL的数据目录，应该有这些文件：" class="headerlink" title="7、在初始化完成后，你的MySQL的数据目录，应该有这些文件："></a>7、在初始化完成后，你的MySQL的数据目录，应该有这些文件：</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610180928.png"
+                     
+                ></p>
+<h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/my.cnf</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">　user=mysql</span><br><span class="line">　basedir=/opt/mysql</span><br><span class="line">　datadir=/u01/data/mysql</span><br><span class="line">　server_id=6</span><br><span class="line">　port=3306</span><br><span class="line">　socket=/tmp/mysql.sock</span><br><span class="line">　[mysql]</span><br><span class="line">　socket=/tmp/mysql.sock</span><br><span class="line">　prompt=3306 [\\d]&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="8、管理MySQL-etc-x2F-init-d"><a href="#8、管理MySQL-etc-x2F-init-d" class="headerlink" title="8、管理MySQL_etc&#x2F;init.d"></a>8、管理MySQL_etc&#x2F;init.d</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /opt/mysql/support-files/mysql.server /etc/init.d/mysqld</span><br></pre></td></tr></table></figure>
+
+<h3 id="9、启动、重启命令"><a href="#9、启动、重启命令" class="headerlink" title="9、启动、重启命令"></a>9、启动、重启命令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service mysqld start</span><br><span class="line">service mysqld restart</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="10、如果设置密码不成功，可绕过密码登录，重新设置"><a href="#10、如果设置密码不成功，可绕过密码登录，重新设置" class="headerlink" title="10、如果设置密码不成功，可绕过密码登录，重新设置"></a>10、如果设置密码不成功，可绕过密码登录，重新设置</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/mysqld stop</span><br><span class="line">mysqld_safe --user=mysql --skip-grant-tables --skip-networking &amp;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">update mysql.user set authentication_string=PASSWORD(&quot;123456&quot;) where user=&#x27;root&#x27;and host=&#x27;localhost&#x27;;</span><br><span class="line"></span><br><span class="line">flush privileges;</span><br><span class="line"></span><br><span class="line">/etc/init.d/mysqld restart</span><br><span class="line">mysql -uroot -p</span><br><span class="line"></span><br><span class="line">成功！！</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>打开github，找到头像-&gt;setting-&gt;SSH and GPG keys-&gt;new SSH key<br>创建一个新项目(名字和本地项目相同)，</p>
-</blockquote>
-<h2 id="１．在github创建空仓库-如gitcode-．"><a href="#１．在github创建空仓库-如gitcode-．" class="headerlink" title="１．在github创建空仓库(如gitcode)．"></a>１．在github创建空仓库(如gitcode)．</h2><blockquote>
-<p>步骤一：首先在用户右侧的‘+’下选择新储存库新建项目。如图一：</p>
-</blockquote>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607120234.png"
-                     
-                ></p>
-<blockquote>
-<p>然后自定义新项目的名称和对新项目的描述，并确定新建该项目。如图二：</p>
-</blockquote>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607120244.png"
-                     
-                ></p>
-<p>步骤二：点击图三蓝色圈圈里的图标进行复制链接，并在Linux上执行git clone+链接（用shift+insert进行拷贝）。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607120259.png"
-                     
-                ></p>
-<h2 id="２．在linux上安装git："><a href="#２．在linux上安装git：" class="headerlink" title="２．在linux上安装git："></a>２．在linux上安装git：</h2><p>安装git：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install git</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="３．linux配置GitHub："><a href="#３．linux配置GitHub：" class="headerlink" title="３．linux配置GitHub："></a>３．linux配置GitHub：</h2><p> 绑定GitHub用户：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;XXX&quot;</span><br><span class="line">git config --global user.email &quot;xxx@xxx.com&quot;</span><br></pre></td></tr></table></figure>
-
-<p>查看git配置：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list</span><br></pre></td></tr></table></figure>
-<p>为GitHub账户设置SSH key</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">（1）检查是否有SSH key：cd ~/.ssh</span><br><span class="line">（2）生成SSH key：ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/home/you/.ssh/id_rsa): 默认回车</span><br><span class="line">Enter passphrase (empty for no passphrase):默认回车</span><br><span class="line">Enter same passphrase again: 默认回车</span><br><span class="line">Your identification has been saved in /home/XXX/.ssh/id_rsa. </span><br><span class="line">Your public key has been saved in /home/XXX/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is: XXX</span><br></pre></td></tr></table></figure>
-<p>（3）添加SSH公钥到GitHub：<br>在GitHub设置内找到添加SSH，将id_rsa.pub内容复制到key中【复制时注意空格】<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607122137.png"
-                     
-                ><br>（4）测试是否连接成功ssh -T <a class="link"   href="mailto:&#x67;&#105;&#x74;&#64;&#103;&#x69;&#116;&#104;&#x75;&#98;&#46;&#x63;&#x6f;&#x6d;" >&#x67;&#105;&#x74;&#64;&#103;&#x69;&#116;&#104;&#x75;&#98;&#46;&#x63;&#x6f;&#x6d;<i class="fas fa-external-link-alt"></i></a><br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607122157.png"
-                     
-                ></p>
-<h2 id="４．在linux创建和仓库同名的文件夹并初始化："><a href="#４．在linux创建和仓库同名的文件夹并初始化：" class="headerlink" title="４．在linux创建和仓库同名的文件夹并初始化："></a>４．在linux创建和仓库同名的文件夹并初始化：</h2><p>进入你想要上传的目录，然后把这个目录变成git可以管理的仓库 git init</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /gitcode</span><br><span class="line">cd /gitcode</span><br><span class="line">git init</span><br></pre></td></tr></table></figure>
-<p>Git仓库和本地仓库进行关联</p>
-<p>在本地仓库的命令行输入：</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> git remote add origin https://github.com/fgguo/gitcode.git</span><br><span class="line">origin后面为git项目的地址。</span><br></pre></td></tr></table></figure>
-
-<h2 id="５．添加文件"><a href="#５．添加文件" class="headerlink" title="５．添加文件"></a>５．添加文件</h2>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add fdw_adapter src</span><br><span class="line">（如果是所有项目就是git add .）</span><br></pre></td></tr></table></figure>
-<p>  将文件添加到仓库并查看当前工作区（相当于缓存区）的状态<br>添加文件：<code>git add XXX</code><br>查看缓存区的内容：<code>git status</code></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607122904.png"
-                     
-                ></p>
-<h2 id="６．提交备注"><a href="#６．提交备注" class="headerlink" title="６．提交备注"></a>６．提交备注</h2>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &#x27;first commit&#x27;</span><br><span class="line">这里提交备注</span><br></pre></td></tr></table></figure>
-<h2 id="７．推送本地项目到github"><a href="#７．推送本地项目到github" class="headerlink" title="７．推送本地项目到github"></a>７．推送本地项目到github</h2><p><code>  git push -u origin master</code></p>
-<blockquote>
-<p>由于新建的远程仓库是空的，所以要加上-u这个参数，等远程仓库里面有了内容之后，下次再从本地库上传内容的时候只需下面这样就可以了。<br>上传项目的过程可能需要等一段时间.</p>
-</blockquote>
-<p>这里可能踩坑</p>
-<ol>
-<li><p>超时<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607121350.png"
-                     
-                ><br><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/w5688414/article/details/99816109" >处理方法<i class="fas fa-external-link-alt"></i></a></p>
-</li>
-<li><p>输入git密码不行，需要自己去生成token<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607121419.png"
-                     
-                ><br><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41010198/article/details/119698015" >处理方法<i class="fas fa-external-link-alt"></i></a></p>
-</li>
-</ol>
-<p>这时候你再重新刷新你的Github页面进入刚才新建的那个仓库里面就会发现项目已经成功上传了：</p>
-<h2 id="８．查看以前的commit"><a href="#８．查看以前的commit" class="headerlink" title="８．查看以前的commit"></a>８．查看以前的commit</h2>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --oneline</span><br></pre></td></tr></table></figure>
-<h2 id="９．添加tag"><a href="#９．添加tag" class="headerlink" title="９．添加tag"></a>９．添加tag</h2> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag -a v1.０.1 8a5cbc2</span><br><span class="line"> (commit的标识代码)</span><br></pre></td></tr></table></figure>
-<h2 id="１０．查看tag"><a href="#１０．查看tag" class="headerlink" title="１０．查看tag"></a>１０．查看tag</h2><p><code>  git tag</code></p>
-<h2 id="11．push-到github"><a href="#11．push-到github" class="headerlink" title="11．push 到github"></a>11．push 到github</h2>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin tag名</span><br></pre></td></tr></table></figure>
-<h2 id="12．本地创建并切换分支"><a href="#12．本地创建并切换分支" class="headerlink" title="12．本地创建并切换分支"></a>12．本地创建并切换分支</h2>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b 本地分支</span><br></pre></td></tr></table></figure>
-<h2 id="13．push到远端与原来不同的新分支"><a href="#13．push到远端与原来不同的新分支" class="headerlink" title="13．push到远端与原来不同的新分支"></a>13．push到远端与原来不同的新分支</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git push origin 本地分支:远端的分支</span><br><span class="line">如果是同名，则</span><br><span class="line">git push -u origin &lt;本地分支名&gt;</span><br></pre></td></tr></table></figure>
-
-<p>到目前为止，你已经把你想上传的文件放到本地仓库上了，也已经把本地仓库和远程仓库连起来了，现在需要把文件从本地仓库push到远程仓库<code>git push origin master</code></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607122454.png"
-                     
-                ></p>
-<blockquote>
-<p>Tips1：通常在Linux上init后主分支是master，而GitHub上新建的仓库，默认主分支是main，所以直接push过去，会默认在GitHub远程仓库创建master分支<br>解决办法：<br>将本地的master分支改名为main分支；<br>或 push的时候指明git push origin master:main<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607122535.png"
-                     
-                ></p>
-</blockquote>
-<blockquote>
-<p>Tips2：查看目前已经关联的远程仓库：git remote<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607122615.png"
-                     
-                ></p>
-</blockquote>
-<blockquote>
-<p>Tips3：通常在GitHub端创建好仓库后会有license和readme文件，这时如果直接将本地仓库push到远程仓库就会出问题，因为远程已经有东西了，而这个东西你本地还没有，所以你需要先把远程仓库先pull到本地，然后再一块push过去<br>git pull origin main<br>git push origin main<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607122719.png"
-                     
-                ></p>
-</blockquote>
-<h2 id="14．有大文件时，通过提示，先物理删除，然后git-rm-在仓库删除，然后在git-commit"><a href="#14．有大文件时，通过提示，先物理删除，然后git-rm-在仓库删除，然后在git-commit" class="headerlink" title="14．有大文件时，通过提示，先物理删除，然后git rm 在仓库删除，然后在git commit"></a>14．有大文件时，通过提示，先物理删除，然后git rm 在仓库删除，然后在git commit</h2><h2 id="15．拉取远端代码："><a href="#15．拉取远端代码：" class="headerlink" title="15．拉取远端代码："></a>15．拉取远端代码：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">git  pull     </span><br><span class="line">从远程拉取最新版本 到本地  自动合并 merge            </span><br><span class="line">git pull origin master</span><br><span class="line"></span><br><span class="line">git  fetch   </span><br><span class="line">从远程获取最新版本 到本地   不会自动合并 merge    </span><br><span class="line">git fetch  origin master       </span><br><span class="line">git log  -p master ../origin/master     </span><br><span class="line">git merge orgin/master</span><br><span class="line"></span><br><span class="line">实际使用中  使用git fetch 更安全    </span><br><span class="line">在merge之前可以看清楚 更新情况  再决定是否合并</span><br></pre></td></tr></table></figure>
-
-
-<blockquote>
-<p>上述都是基本操作，如果你需要更高级的操作或者对命令理解的更为透彻，建议看git教程<br>参考：<br><a class="link"   target="_blank" rel="noopener" href="https://www.yiibai.com/git/git_remote.html" >https://www.yiibai.com/git/git_remote.html<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/hxf0663/article/details/79527453" >https://blog.csdn.net/hxf0663/article/details/79527453<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://www.jianshu.com/p/ad148fda5860" >https://www.jianshu.com/p/ad148fda5860<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33755557/article/details/86217211ickoak/article/details/115579689" >https://blog.csdn.net/weixin_33755557/article/details/86217211ickoak/article/details/115579689<i class="fas fa-external-link-alt"></i></a></p>
+<p>centos8 安装mysql5.7 后，mysql命令登录不成功，<br>报错：mysql: error while loading shared libraries: libncurses.so.5: cannot open shared object file: No such file or directory。<br>按照百度的方法都不成功，应该和系统版本有关，后来自己想到一个方法：yum install libncurses*，完美解决问题。</p>
 </blockquote>
 
         </div>
@@ -404,11 +328,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：上传项目到GitHub</li>
+        <li>本文标题：Centos7安装mysql5.7</li>
         <li>本文作者：ドラゴンボールのLong</li>
-        <li>创建时间：2022-03-06 20:10:12</li>
+        <li>创建时间：2021-11-02 19:10:12</li>
         <li>
-            本文链接：https://zhongshenglong.xyz/2022/03/06/上传项目到GitHub/
+            本文链接：https://zhongshenglong.xyz/2021/11/02/Centos安装mysql5.7/
         </li>
         <li>
             版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -431,7 +355,11 @@
                     </li>
                 
                     <li class="tag-item">
-                        <a href="/tags/GitHub/">#GitHub</a>&nbsp;
+                        <a href="/tags/%E5%BF%83%E5%BE%97/">#心得</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/mysql/">#mysql</a>&nbsp;
                     </li>
                 
             </ul>
@@ -440,14 +368,29 @@
         
             <div class="article-nav">
                 
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/01/06/%E6%95%B0%E4%BB%93%E5%88%86%E5%B1%82%E6%80%9D%E6%83%B3%E5%92%8C%E4%BD%9C%E7%94%A8/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">数仓分层思想和作用</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/01/06/%E6%95%B0%E4%BB%93%E5%88%86%E5%B1%82%E6%80%9D%E6%83%B3%E5%92%8C%E4%BD%9C%E7%94%A8/"
+                           href="/2021/09/06/12c%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85%EF%BC%88%E6%97%A0%E7%95%8C%E9%9D%A2%EF%BC%89/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">数仓分层思想和作用</span>
+                                <span class="post-nav-title-item">12c静默安装（无界面）</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -713,7 +656,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#linux%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AE%E5%88%B0github%EF%BC%8C%E5%8F%8A%E4%B8%80%E4%BA%9Bgit%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">linux上传项目到github，及一些git命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%91%EF%BC%8E%E5%9C%A8github%E5%88%9B%E5%BB%BA%E7%A9%BA%E4%BB%93%E5%BA%93-%E5%A6%82gitcode-%EF%BC%8E"><span class="nav-number">2.</span> <span class="nav-text">１．在github创建空仓库(如gitcode)．</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%92%EF%BC%8E%E5%9C%A8linux%E4%B8%8A%E5%AE%89%E8%A3%85git%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">２．在linux上安装git：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%93%EF%BC%8Elinux%E9%85%8D%E7%BD%AEGitHub%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">３．linux配置GitHub：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%94%EF%BC%8E%E5%9C%A8linux%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BB%93%E5%BA%93%E5%90%8C%E5%90%8D%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%B9%B6%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">４．在linux创建和仓库同名的文件夹并初始化：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%95%EF%BC%8E%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">５．添加文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%96%EF%BC%8E%E6%8F%90%E4%BA%A4%E5%A4%87%E6%B3%A8"><span class="nav-number">7.</span> <span class="nav-text">６．提交备注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%97%EF%BC%8E%E6%8E%A8%E9%80%81%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E5%88%B0github"><span class="nav-number">8.</span> <span class="nav-text">７．推送本地项目到github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%98%EF%BC%8E%E6%9F%A5%E7%9C%8B%E4%BB%A5%E5%89%8D%E7%9A%84commit"><span class="nav-number">9.</span> <span class="nav-text">８．查看以前的commit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%99%EF%BC%8E%E6%B7%BB%E5%8A%A0tag"><span class="nav-number">10.</span> <span class="nav-text">９．添加tag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%91%EF%BC%90%EF%BC%8E%E6%9F%A5%E7%9C%8Btag"><span class="nav-number">11.</span> <span class="nav-text">１０．查看tag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11%EF%BC%8Epush-%E5%88%B0github"><span class="nav-number">12.</span> <span class="nav-text">11．push 到github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12%EF%BC%8E%E6%9C%AC%E5%9C%B0%E5%88%9B%E5%BB%BA%E5%B9%B6%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF"><span class="nav-number">13.</span> <span class="nav-text">12．本地创建并切换分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13%EF%BC%8Epush%E5%88%B0%E8%BF%9C%E7%AB%AF%E4%B8%8E%E5%8E%9F%E6%9D%A5%E4%B8%8D%E5%90%8C%E7%9A%84%E6%96%B0%E5%88%86%E6%94%AF"><span class="nav-number">14.</span> <span class="nav-text">13．push到远端与原来不同的新分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14%EF%BC%8E%E6%9C%89%E5%A4%A7%E6%96%87%E4%BB%B6%E6%97%B6%EF%BC%8C%E9%80%9A%E8%BF%87%E6%8F%90%E7%A4%BA%EF%BC%8C%E5%85%88%E7%89%A9%E7%90%86%E5%88%A0%E9%99%A4%EF%BC%8C%E7%84%B6%E5%90%8Egit-rm-%E5%9C%A8%E4%BB%93%E5%BA%93%E5%88%A0%E9%99%A4%EF%BC%8C%E7%84%B6%E5%90%8E%E5%9C%A8git-commit"><span class="nav-number">15.</span> <span class="nav-text">14．有大文件时，通过提示，先物理删除，然后git rm 在仓库删除，然后在git commit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15%EF%BC%8E%E6%8B%89%E5%8F%96%E8%BF%9C%E7%AB%AF%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="nav-number">16.</span> <span class="nav-text">15．拉取远端代码：</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%9C%A8%E5%AE%89%E8%A3%85%E4%B9%8B%E5%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E4%BD%A0%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%9B%BE%E7%BB%8F%E5%AE%89%E8%A3%85%E8%BF%87Mariadb%EF%BC%8C%E8%AF%B7%E5%85%88%E5%8D%B8%E8%BD%BD%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">1、在安装之前，如果你的系统曾经安装过Mariadb，请先卸载：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="nav-number">2.</span> <span class="nav-text">2、安装依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E4%B8%8B%E8%BD%BD%E8%A7%A3%E5%8E%8BMySQL%E6%BA%90%E7%A0%81%E5%8C%85"><span class="nav-number">3.</span> <span class="nav-text">3、下载解压MySQL源码包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">4.</span> <span class="nav-text">4、配置环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8E%88%E6%9D%83%E7%9B%B8%E5%85%B3"><span class="nav-number">5.</span> <span class="nav-text">5、添加用户并授权相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">6.</span> <span class="nav-text">6、初始化数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%E3%80%81%E5%9C%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%8C%E6%88%90%E5%90%8E%EF%BC%8C%E4%BD%A0%E7%9A%84MySQL%E7%9A%84%E6%95%B0%E6%8D%AE%E7%9B%AE%E5%BD%95%EF%BC%8C%E5%BA%94%E8%AF%A5%E6%9C%89%E8%BF%99%E4%BA%9B%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="nav-number">7.</span> <span class="nav-text">7、在初始化完成后，你的MySQL的数据目录，应该有这些文件：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">7.1.</span> <span class="nav-text">配置文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8%E3%80%81%E7%AE%A1%E7%90%86MySQL-etc-x2F-init-d"><span class="nav-number">8.</span> <span class="nav-text">8、管理MySQL_etc&#x2F;init.d</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9%E3%80%81%E5%90%AF%E5%8A%A8%E3%80%81%E9%87%8D%E5%90%AF%E5%91%BD%E4%BB%A4"><span class="nav-number">9.</span> <span class="nav-text">9、启动、重启命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10%E3%80%81%E5%A6%82%E6%9E%9C%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81%E4%B8%8D%E6%88%90%E5%8A%9F%EF%BC%8C%E5%8F%AF%E7%BB%95%E8%BF%87%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95%EF%BC%8C%E9%87%8D%E6%96%B0%E8%AE%BE%E7%BD%AE"><span class="nav-number">10.</span> <span class="nav-text">10、如果设置密码不成功，可绕过密码登录，重新设置</span></a></li></ol>
     </div>
 </div>
         </aside>
