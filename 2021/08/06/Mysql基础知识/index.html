@@ -243,7 +243,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>5.2k 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>5.3k 字</span>
         </span>
     
     
@@ -313,7 +313,7 @@
 <h3 id="日期和时间类型"><a href="#日期和时间类型" class="headerlink" title="日期和时间类型"></a>日期和时间类型</h3><blockquote>
 <p>表示时间值的日期和时间类型为 DATETIME、DATE、TIMESTAMP、TIME和YEAR</p>
 </blockquote>
-<p>每个时间类型有一个有效值范围和一个“零”值,当指定不合法的MySQL不能表示的值时使用“零”MySQL支持所有标准SQL数值数据类型。</p>
+<p>每个时间类型有一个有效值范围和一个”零”值,当指定不合法的MySQL不能表示的值时使用”零”MySQL支持所有标准SQL数值数据类型。</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
@@ -343,7 +343,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show tables;</span><br></pre></td></tr></table></figure>
 
 <p>创建表：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">create table 表名(列名 数据类型 约束···，列名 数据类型 约束···）engine=innodb default charset=utf8   创建表</span><br><span class="line"></span><br><span class="line">create table 表名(列名 数据类型 primary key auto_increment,列名 数据类型 约束···）engine=innodb default charset=utf8 创建含主键的表</span><br><span class="line"></span><br><span class="line">create table 表名(列名 数据类型 primary key,列名 数据类型 constraint fk_外键名 foreign key (列名[,]) references 表名2（列名[,]）···）engine=innodb default charset=utf8  创建含外键的表</span><br><span class="line"></span><br><span class="line">create table if not exists tb_stu(id int,name varchar(3),age int, birthdatetime);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">create table 表名(列名 数据类型 约束···，列名 数据类型 约束···）engine=innodb default charset=utf8   创建表</span><br><span class="line"></span><br><span class="line">create table 表名(列名 数据类型 primary key auto_increment,列名 数据类型 约束···）engine=innodb default charset=utf8 创建含主键的表</span><br><span class="line"></span><br><span class="line">create table 表名(列名 数据类型 primary key,列名 数据类型 constraint fk_外键名 foreign key (列名[,]) references 表名2（列名[,]）···）engine=innodb default charset=utf8  创建含外键的表</span><br><span class="line"></span><br><span class="line">create table if not exists tb_stu(id int,name varchar(3),age int, birth datetime);</span><br></pre></td></tr></table></figure>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
@@ -361,11 +361,11 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop table tb_stu;</span><br></pre></td></tr></table></figure>
 
 <h3 id="表中数据的增删改查基础"><a href="#表中数据的增删改查基础" class="headerlink" title="表中数据的增删改查基础"></a>表中数据的增删改查基础</h3><h4 id="插入数据-insert"><a href="#插入数据-insert" class="headerlink" title="插入数据 insert"></a>插入数据 insert</h4><p><strong>指定列插入：可以指定单独个一个或几个列信息进程插入，并且前缀列信息</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert [into] tb_stu(id,name) values (1,“韩云溪”);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into tb_stu(id,name) values (1,&quot;韩云溪&quot;);</span><br></pre></td></tr></table></figure>
 <p><strong>全列插入：可以省略前缀的列信息，按照列顺序插入所有列的数据</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">insert [into] tb_stu values (1,“韩云溪”,21,“2000-03-19 12:00:00”);</span><br><span class="line">insert [into] tb_stu values (2,“夏紫藤”,21,“2000-05-18 11:00:00”);</span><br><span class="line">insert [into] tb_stu values (3,“三三”,17,“2021-06-26 11:43:01”);</span><br><span class="line">insert [into] tb_stu values (4,“四四”,18,“2021-06-26 11:43:01”);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">insert into tb_stu values (1,&quot;韩云溪&quot;,21,&quot;2000-03-19 12:00:00&quot;);</span><br><span class="line">insert into tb_stu values (2,&quot;夏紫藤&quot;,21,&quot;2000-05-18 11:00:00&quot;);</span><br><span class="line">insert into tb_stu values (3,&quot;三三&quot;,17,&quot;2021-06-26 11:43:01&quot;);</span><br><span class="line">insert into tb_stu values (4,&quot;四四&quot;,18,&quot;2021-06-26 11:43:01&quot;);</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>多行插入：<br>insert [into] tb_name values(val1,val2…),(val1,val2…),…;<br>insert [into] tb_stu values (3,“三三”,17,now()),(4,“四四”,18,now());</p>
+<p>多行插入：<br>insert into tb_name values(val1,val2…),(val1,val2…),…;<br>insert into tb_stu values (3,”三三”,17,now()),(4,”四四”,18,now());</p>
 </blockquote>
 <p><img  
                      lazyload
@@ -467,7 +467,7 @@
 <p>判断查询的数据是否是给予的多个选项之一</p>
 </blockquote>
 <p>例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_stu where name in(“韩云溪”,“夏紫藤”);</span><br><span class="line">--查询名字为韩云溪或夏紫藤的项，符合则显示，不符合则忽略</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_stu where name in(&quot;韩云溪&quot;,&quot;夏紫藤&quot;);</span><br><span class="line">--查询名字为韩云溪或夏紫藤的项，符合则显示，不符合则忽略</span><br></pre></td></tr></table></figure>
 
 <p><img  
                      lazyload
@@ -476,7 +476,7 @@
                      
                 ></p>
 <p><strong>between A and B 的使用</strong>：查询范围介于AB两者之间项</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_name where id between 1 and 3; </span><br><span class="line">--查询id介于1和3之间的项</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_stu where id between 1 and 3; </span><br><span class="line">--查询id介于1和3之间的项</span><br></pre></td></tr></table></figure>
 
 <p><img  
                      lazyload
@@ -485,7 +485,7 @@
                      
                 ></p>
 <p><strong>LIKE 模糊匹配的使用</strong>：查询一个数据看起来像某个条件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_stu where name like ‘韩%’;</span><br><span class="line">--查询表中姓名以韩开头的项，%为通配符</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_stu where name like &#x27;韩%&#x27;;</span><br><span class="line">--查询表中姓名以韩开头的项，%为通配符</span><br></pre></td></tr></table></figure>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
@@ -537,7 +537,7 @@
 <blockquote>
 <p>可以看情况决定要不要把两个外键弄成联合唯一索引。</p>
 </blockquote>
-<h3 id="自增"><a href="#自增" class="headerlink" title="自增"></a>自增</h3><h4 id="查看表的创建信息"><a href="#查看表的创建信息" class="headerlink" title="查看表的创建信息"></a>查看表的创建信息</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show create table 表名 [\G];</span><br></pre></td></tr></table></figure>
+<h3 id="自增"><a href="#自增" class="headerlink" title="自增"></a>自增</h3><h4 id="查看表的创建信息"><a href="#查看表的创建信息" class="headerlink" title="查看表的创建信息"></a>查看表的创建信息</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show create table 表名 ;</span><br></pre></td></tr></table></figure>
 
 <p><strong>对于自增键，我们可以设置它的初始值以及与自增步长</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table auto_increment=value; --设置自增初始值</span><br></pre></td></tr></table></figure>
@@ -585,7 +585,7 @@
                      
                 ></p>
 <p><strong>追究其原有，原因出在sql语句字符串拼接上</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">拼接的字符串为 ‘’ or 1=1 -- ‘‘ and passwd=&#x27;123&#x27;,有1=1，当然成立</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">拼接的字符串为 &#x27;&#x27; or 1=1 -- &#x27;&#x27; and passwd=&#x27;123&#x27;,有1=1，当然成立</span><br></pre></td></tr></table></figure>
 
 <p><strong>解决办法：</strong></p>
 <blockquote>
@@ -638,7 +638,7 @@
 </blockquote>
 <p><strong>场景:在开发中，有多条语句可能会有同时成功的要求，如果只有一部分成功，则全部失败，回滚到原来的状态。</strong></p>
 <h4 id="mysql中如何控制事务"><a href="#mysql中如何控制事务" class="headerlink" title="mysql中如何控制事务"></a>mysql中如何控制事务</h4><p><strong>通过</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select @@autocommit; </span><br><span class="line">--语句查询自动提交是否开启，1表示开启，0表示没有开启</span><br><span class="line">--当查询结果为1时，自动提交开启，执行sql语句(insert into，alter),</span><br><span class="line">--系统默认提交确认，在物理表生效</span><br><span class="line">--当查询结果为0时，自动提交关闭，执行sql语句，</span><br><span class="line">--系统会等待用户手动提交确认(commit;)</span><br><span class="line">--否则可以撤回修改,回滚为原状态(rollback;）</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select @@autocommit; </span><br><span class="line">--语句查询自动提交是否开启，1表示开启，0表示没有开启</span><br><span class="line">--当查询结果为1时，自动提交开启，执行sql语句(insert into ，alter),</span><br><span class="line">--系统默认提交确认，在物理表生效</span><br><span class="line">--当查询结果为0时，自动提交关闭，执行sql语句，</span><br><span class="line">--系统会等待用户手动提交确认(commit;)</span><br><span class="line">--否则可以撤回修改,回滚为原状态(rollback;）</span><br></pre></td></tr></table></figure>
 
 <h4 id="开启事务"><a href="#开启事务" class="headerlink" title="开启事务"></a><strong>开启事务</strong></h4><p><strong>一般@@autocommit我们默认开启，否则每次都需手动提交太麻烦，但当我们想开启一个事务时应该怎么做？</strong></p>
 <blockquote>
@@ -806,10 +806,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/06/11/CentOs%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/"
+                           href="/2021/07/06/mysql%E6%8A%A5%E9%94%99-1130/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">虚拟机环境下安装CentOs7系统</span>
+                                <span class="post-nav-title-item">Mysql报错-1130</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
