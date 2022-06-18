@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="Hexo Theme Keep">
-    <meta name="description" content="每次都前进了一步,也许会倒退一点儿,可绝不会完全退回原处。">
+    <meta name="description" content="每日一句">
     <meta name="author" content="ドラゴンボールのLong">
     
     <title>
         
-            Linux中使用nohup详解 |
+            rac相关操作知识 |
         
         ドラゴンボールのBlog
     </title>
@@ -181,7 +181,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Linux中使用nohup详解</span>
+            <span class="title-hover-animation">rac相关操作知识</span>
         </div>
 
         
@@ -200,8 +200,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2020-11-10 00:27:10</span>
-        <span class="mobile">2020-11-10 00:27</span>
+        <span class="pc">2021-08-06 20:10:12</span>
+        <span class="mobile">2021-08-06 20:10</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -209,7 +209,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/%E8%BD%AF%E4%BB%B6%E6%95%99%E7%A8%8B/">软件教程</a>&nbsp;
+                        <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;
                     </li>
                 
             </ul>
@@ -221,15 +221,19 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/linux/">linux</a>&nbsp;
+                        <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;
                     </li>
                 
                     <li>
-                        | <a href="/tags/%E8%BD%AF%E4%BB%B6/">软件</a>&nbsp;
+                        | <a href="/tags/linux/">linux</a>&nbsp;
                     </li>
                 
                     <li>
-                        | <a href="/tags/%E9%98%85%E8%AF%BB/">阅读</a>&nbsp;
+                        | <a href="/tags/oracle/">oracle</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%BF%83%E5%BE%97/">心得</a>&nbsp;
                     </li>
                 
             </ul>
@@ -239,12 +243,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>722 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>848 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>2 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>4 分钟</span>
         </span>
     
     
@@ -260,43 +264,70 @@
         
 
         <div class="article-content markdown-body">
-            <span id="more"></span>
+            <h1 id="CRS及相关服务的常用命令的演示"><a href="#CRS及相关服务的常用命令的演示" class="headerlink" title="CRS及相关服务的常用命令的演示"></a>CRS及相关服务的常用命令的演示</h1><h2 id="1、查看状态的命令"><a href="#1、查看状态的命令" class="headerlink" title="1、查看状态的命令"></a>1、查看状态的命令</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># su-oracle --先切换到oracle用户</span><br><span class="line">$ crs_stat -t --查看crs及所有的service的状态</span><br><span class="line">$ crsctl check crs --用crsctl命令，检查crs相关服务的状态</span><br><span class="line">$ srvctl config database --查看服务名称</span><br><span class="line">$ srvctl config database -d rac -a # 检查数据库相关的信息</span><br><span class="line">$ srvctl status database -d prod --使用srvctl查看数据库状态</span><br><span class="line">--srvctl status instance -d prod -i rac1 # 检查指定实例的状态</span><br><span class="line">$ srvctl config asm -a # ASM配置</span><br><span class="line">$ srvctl status asm # ASM的状态</span><br><span class="line">$ srvctl status asm -n rac1 (rac2) --使用srvctl查看asm状态</span><br><span class="line"></span><br><span class="line">$ srvctl status nodeapps --使用srvctl查看所有节点上的服务是否正常</span><br><span class="line">$ srvctl status nodeapps -n rac1 (rac2) </span><br><span class="line"></span><br><span class="line">srvctl status vip -n rac1 (rac2) --VIP各个节点的状态以及配置</span><br><span class="line">srvctl status scan --SCAN的状态</span><br><span class="line">srvctl config scan --SCAN的配置</span><br><span class="line">srvctl config database -d prod -a --数据库配置</span><br><span class="line">srvctl status listener --TNS监听器状态以及配置</span><br><span class="line"></span><br><span class="line">srvctl config nodeapps -a -g -s -l --节点应用程序配置(VIP、GSD、ONS、监听器)</span><br></pre></td></tr></table></figure>
 
-<h3 id="nohup"><a href="#nohup" class="headerlink" title="nohup"></a>nohup</h3><p>nohup 命令运行由 Command参数和任何相关的 Arg参数指定的命令，忽略所有挂断（SIGHUP）信号。在注销后使用 nohup 命令运行后台中的程序。要运行后台中的 nohup 命令，添加 &amp; （ 表示“and”的符号）到命令的尾部。</p>
-<p>nohup 是 no hang up 的缩写，就是不挂断的意思。</p>
-<p>nohup命令：如果你正在运行一个进程，而且你觉得在退出帐户时该进程还不会结束，那么可以使用nohup命令。该命令可以在你退出帐户&#x2F;关闭终端之后继续运行相应的进程。</p>
-<p>在缺省情况下该作业的所有输出都被重定向到一个名为nohup.out的文件中。</p>
-<hr>
-<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p> <code> nohup command &gt; myout.file 2&gt;&amp;1 &amp;   </code></p>
-<p>在上面的例子中，0 – stdin (standard input)，1 – stdout (standard output)，2 – stderr (standard error) ；<br>2&gt;&amp;1是将标准错误（2）重定向到标准输出（&amp;1），标准输出（&amp;1）再被重定向输入到myout.file文件中。<br> <code> 0 22 * * * /usr/bin/python /home/pu/download_pdf/download_dfcf_pdf_to_oss.py &gt; /home/pu/download_pdf/download_dfcf_pdf_to_oss.log 2&gt;&amp;1 </code></p>
-<p>这是放在crontab中的定时任务，晚上22点时候怕这个任务，启动这个python的脚本，并把日志写在download_dfcf_pdf_to_oss.log文件中</p>
-<hr>
-<h3 id="nohup和-amp-的区别"><a href="#nohup和-amp-的区别" class="headerlink" title="nohup和&amp;的区别"></a>nohup和&amp;的区别</h3><p>&amp; ： 指在后台运行</p>
-<p>nohup ： 不挂断的运行，注意并没有后台运行的功能，，就是指，用nohup运行命令可以使命令永久的执行下去，和用户终端没有关系，例如我们断开SSH连接都不会影响他的运行，注意了nohup没有后台运行的意思；&amp;才是后台运行</p>
-<p><code> &amp;是指在后台运行，但当用户推出(挂起)的时候，命令自动也跟着退出</code></p>
-<p>那么，我们可以巧妙的吧他们结合起来用就是<br><code>nohup COMMAND &amp;</code></p>
-<p>这样就能使命令永久的在后台执行<br>例如：<br><code>sh test.sh &amp; </code></p>
-<p>将sh test.sh任务放到后台 ，即使关闭xshell退出当前session依然继续运行，但标准输出和标准错误信息会丢失（缺少的日志的输出）</p>
-<p>将sh test.sh任务放到后台 ，关闭xshell，对应的任务也跟着停止。</p>
-<p><code>nohup sh test.sh</code></p>
-<p>将sh test.sh任务放到后台，关闭标准输入，终端不再能够接收任何输入（标准输入），重定向标准输出和标准错误到当前目录下的nohup.out文件，即使关闭xshell退出当前session依然继续运行</p>
-<p><code> nohup sh test.sh  &amp; </code></p>
-<p>将sh test.sh任务放到后台，但是依然可以使用标准输入，终端能够接收任何输入，重定向标准输出和标准错误到当前目录下的nohup.out文件，即使关闭xshell退出当前session依然继续运行。</p>
-<hr>
-<p> <code>ps -aux | grep &quot;hexo&quot; </code></p>
-<p>查询进程</p>
 
+<h2 id="2、启动和关闭相关服务的命令"><a href="#2、启动和关闭相关服务的命令" class="headerlink" title="2、启动和关闭相关服务的命令"></a>2、启动和关闭相关服务的命令</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># su - oracle$ crs_start-all --启动所有的crs服务</span><br><span class="line">$ crs_stop-all --停止所有的crs服务</span><br><span class="line">$ crsctl start crs --启动crs服务</span><br><span class="line">$ crsctl stop crs --停止crs服务</span><br><span class="line">$ srvctl start nodeapps -n rac1 (rac2) --启动某节点上所有的应用</span><br><span class="line">$ srvctl stop nodeapps -n rac1 (rac2) --停止某节点上所有的应用</span><br><span class="line">$ srvctl start listener -n rac1 (rac2) --启动某个节点的listener$ srvctl stop listener -n rac1 (rac2) --停止某个节点的listener$ srvctl start instance-d db-i rac1 (rac2) --启动某个instance$ srvctl stop instance-d db-i rac1 (rac2) --停止某个instance$ srvctl start database-d db --启动数据库</span><br><span class="line">$ srvctl stop database-d db --停止数据库</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="3、修改VIP"><a href="#3、修改VIP" class="headerlink" title="3、修改VIP"></a>3、修改VIP</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">srvctl modify nodeapps -n xxx1 -A 192.10.0.1/255.255.255.0</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="srvctl-命令"><a href="#srvctl-命令" class="headerlink" title="srvctl 命令"></a>srvctl 命令</h1><blockquote>
+<p>SRVCTL命令可以控制RAC数据库中的instance，listener以及services。<br>通常SRVCTL在ORACLE用户下执行。下面我们来介绍srvctl命令。</p>
+</blockquote>
+<h2 id="1、通过SRVCTL命令来start-x2F-stop-x2F-check所有的实例"><a href="#1、通过SRVCTL命令来start-x2F-stop-x2F-check所有的实例" class="headerlink" title="1、通过SRVCTL命令来start&#x2F;stop&#x2F;check所有的实例:"></a>1、通过SRVCTL命令来start&#x2F;stop&#x2F;check所有的实例:</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ srvctl start|stop|status database -d &lt;db_name&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="2、start-x2F-stop指定的实例："><a href="#2、start-x2F-stop指定的实例：" class="headerlink" title="2、start&#x2F;stop指定的实例："></a>2、start&#x2F;stop指定的实例：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ srvctl start|stop|status instance -d &lt;db_name&gt; -i &lt;instance_name&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="3、列出当前RAC下所有数据库"><a href="#3、列出当前RAC下所有数据库" class="headerlink" title="3、列出当前RAC下所有数据库"></a>3、列出当前RAC下所有数据库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ srvctl config database -d &lt;db_name&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="4、start-x2F-stop-x2F-check所有的nodeapps，"><a href="#4、start-x2F-stop-x2F-check所有的nodeapps，" class="headerlink" title="4、start&#x2F;stop&#x2F;check所有的nodeapps，"></a>4、start&#x2F;stop&#x2F;check所有的nodeapps，</h2><p>比如：VIP, GSD, listener, ONS：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ srvctl start|stop|status nodeapps -n &lt;node_name&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="5、如果你使用ASM，srvctl也可以start-x2F-stop-ASM实例："><a href="#5、如果你使用ASM，srvctl也可以start-x2F-stop-ASM实例：" class="headerlink" title="5、如果你使用ASM，srvctl也可以start&#x2F;stop ASM实例："></a>5、如果你使用ASM，srvctl也可以start&#x2F;stop ASM实例：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ srvctl start|stop asm -n &lt;node_name&gt; [-i &lt;asm_inst_name&gt;] [-o&lt;oracle_home&gt;]</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="6、可以获取所有的环境信息："><a href="#6、可以获取所有的环境信息：" class="headerlink" title="6、可以获取所有的环境信息："></a>6、可以获取所有的环境信息：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ srvctl getenv database -d &lt;db_name&gt; [-i &lt;instance_name&gt;]</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="7、设置全局环境和变量："><a href="#7、设置全局环境和变量：" class="headerlink" title="7、设置全局环境和变量："></a>7、设置全局环境和变量：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ srvctl setenv database -d &lt;db_name&gt; -t LANG=en</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="8、从OCR中删除已有的数据库："><a href="#8、从OCR中删除已有的数据库：" class="headerlink" title="8、从OCR中删除已有的数据库："></a>8、从OCR中删除已有的数据库：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ srvctl remove database -d &lt;db_name&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="9、向OCR中添加一个数据库："><a href="#9、向OCR中添加一个数据库：" class="headerlink" title="9、向OCR中添加一个数据库："></a>9、向OCR中添加一个数据库：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ srvctl add database -d &lt;db_name&gt; -o &lt;oracle_home&gt;[-m &lt;domain_name&gt;] [-p&lt;spfile&gt;] [-A &lt;name|ip&gt;/netmask] [-r &#123;PRIMARY | PHYSICAL_STANDBY |LOGICAL_STANDBY] [-s &lt;start_options&gt;]&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="10、向OCR中添加一个数据库的实例："><a href="#10、向OCR中添加一个数据库的实例：" class="headerlink" title="10、向OCR中添加一个数据库的实例："></a>10、向OCR中添加一个数据库的实例：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ srvctl add instance -d &lt;db_name&gt; -i &lt;instance_name&gt; -n &lt;node1&gt;$ srvctl add instance -d &lt;db_name&gt; -i &lt;instance_name&gt; -n &lt;node2&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="11、向OCR中添加一个ASM实例："><a href="#11、向OCR中添加一个ASM实例：" class="headerlink" title="11、向OCR中添加一个ASM实例："></a>11、向OCR中添加一个ASM实例：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ srvctl add asm -n &lt;node_name&gt; -i &lt;asm_inst_name&gt; -o &lt;oracle_home&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="12、添加一个service"><a href="#12、添加一个service" class="headerlink" title="12、添加一个service"></a>12、添加一个service</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ srvctl add service -d &lt;db_name&gt; -s &lt;service_name&gt; -r &lt;preferred_list&gt;[-a &lt;available_list&gt;] [-P &lt;TAF_policy&gt;] [-u]</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="13、修改在其他节点上的service"><a href="#13、修改在其他节点上的service" class="headerlink" title="13、修改在其他节点上的service"></a>13、修改在其他节点上的service</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ srvctl modify service -d &lt;db_name&gt; -s &lt;service_name&gt; -I &lt;orig_instance_name&gt; -t &lt;target_instance_name&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="14、relocate某个节点的service到其他节点"><a href="#14、relocate某个节点的service到其他节点" class="headerlink" title="14、relocate某个节点的service到其他节点"></a>14、relocate某个节点的service到其他节点</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">srvctl relocate service -d &lt;db_name&gt; -s &lt;service_name&gt; -I</span><br></pre></td></tr></table></figure>
         </div>
 
         
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：Linux中使用nohup详解</li>
+        <li>本文标题：rac相关操作知识</li>
         <li>本文作者：ドラゴンボールのLong</li>
-        <li>创建时间：2020-11-10 00:27:10</li>
+        <li>创建时间：2021-08-06 20:10:12</li>
         <li>
-            本文链接：https://zhongshenglong.xyz/2020/11/10/nohupxj/
+            本文链接：https://zhongshenglong.xyz/2021/08/06/rac相关操作知识/
         </li>
         <li>
             版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -311,15 +342,19 @@
             <ul class="post-tags-box">
                 
                     <li class="tag-item">
+                        <a href="/tags/%E6%8A%80%E6%9C%AF/">#技术</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
                         <a href="/tags/linux/">#linux</a>&nbsp;
                     </li>
                 
                     <li class="tag-item">
-                        <a href="/tags/%E8%BD%AF%E4%BB%B6/">#软件</a>&nbsp;
+                        <a href="/tags/oracle/">#oracle</a>&nbsp;
                     </li>
                 
                     <li class="tag-item">
-                        <a href="/tags/%E9%98%85%E8%AF%BB/">#阅读</a>&nbsp;
+                        <a href="/tags/%E5%BF%83%E5%BE%97/">#心得</a>&nbsp;
                     </li>
                 
             </ul>
@@ -331,13 +366,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/03/06/BI%E5%85%A5%E9%97%A8/"
+                           href="/2021/09/06/12c%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85%EF%BC%88%E6%97%A0%E7%95%8C%E9%9D%A2%EF%BC%89/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">关于BI</span>
+                                <span class="post-nav-title-item">12c静默安装（无界面）</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -347,10 +382,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2020/09/06/Oracle%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E7%9F%A5%E8%AF%86/"
+                           href="/2021/08/06/Mysql%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Oracle相关操作知识</span>
+                                <span class="post-nav-title-item">Mysql相关操作知识</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -616,7 +651,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#nohup"><span class="nav-number">1.</span> <span class="nav-text">nohup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nohup%E5%92%8C-amp-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">nohup和&amp;的区别</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CRS%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E7%9A%84%E6%BC%94%E7%A4%BA"><span class="nav-number">1.</span> <span class="nav-text">CRS及相关服务的常用命令的演示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E6%9F%A5%E7%9C%8B%E7%8A%B6%E6%80%81%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-number">1.1.</span> <span class="nav-text">1、查看状态的命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%90%AF%E5%8A%A8%E5%92%8C%E5%85%B3%E9%97%AD%E7%9B%B8%E5%85%B3%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-number">1.2.</span> <span class="nav-text">2、启动和关闭相关服务的命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E4%BF%AE%E6%94%B9VIP"><span class="nav-number">1.3.</span> <span class="nav-text">3、修改VIP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#srvctl-%E5%91%BD%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">srvctl 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E9%80%9A%E8%BF%87SRVCTL%E5%91%BD%E4%BB%A4%E6%9D%A5start-x2F-stop-x2F-check%E6%89%80%E6%9C%89%E7%9A%84%E5%AE%9E%E4%BE%8B"><span class="nav-number">2.1.</span> <span class="nav-text">1、通过SRVCTL命令来start&#x2F;stop&#x2F;check所有的实例:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81start-x2F-stop%E6%8C%87%E5%AE%9A%E7%9A%84%E5%AE%9E%E4%BE%8B%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">2、start&#x2F;stop指定的实例：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E5%88%97%E5%87%BA%E5%BD%93%E5%89%8DRAC%E4%B8%8B%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.3.</span> <span class="nav-text">3、列出当前RAC下所有数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81start-x2F-stop-x2F-check%E6%89%80%E6%9C%89%E7%9A%84nodeapps%EF%BC%8C"><span class="nav-number">2.4.</span> <span class="nav-text">4、start&#x2F;stop&#x2F;check所有的nodeapps，</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E5%A6%82%E6%9E%9C%E4%BD%A0%E4%BD%BF%E7%94%A8ASM%EF%BC%8Csrvctl%E4%B9%9F%E5%8F%AF%E4%BB%A5start-x2F-stop-ASM%E5%AE%9E%E4%BE%8B%EF%BC%9A"><span class="nav-number">2.5.</span> <span class="nav-text">5、如果你使用ASM，srvctl也可以start&#x2F;stop ASM实例：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81%E5%8F%AF%E4%BB%A5%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E7%9A%84%E7%8E%AF%E5%A2%83%E4%BF%A1%E6%81%AF%EF%BC%9A"><span class="nav-number">2.6.</span> <span class="nav-text">6、可以获取所有的环境信息：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81%E8%AE%BE%E7%BD%AE%E5%85%A8%E5%B1%80%E7%8E%AF%E5%A2%83%E5%92%8C%E5%8F%98%E9%87%8F%EF%BC%9A"><span class="nav-number">2.7.</span> <span class="nav-text">7、设置全局环境和变量：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8%E3%80%81%E4%BB%8EOCR%E4%B8%AD%E5%88%A0%E9%99%A4%E5%B7%B2%E6%9C%89%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%9A"><span class="nav-number">2.8.</span> <span class="nav-text">8、从OCR中删除已有的数据库：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9%E3%80%81%E5%90%91OCR%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%9A"><span class="nav-number">2.9.</span> <span class="nav-text">9、向OCR中添加一个数据库：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10%E3%80%81%E5%90%91OCR%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%AE%9E%E4%BE%8B%EF%BC%9A"><span class="nav-number">2.10.</span> <span class="nav-text">10、向OCR中添加一个数据库的实例：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11%E3%80%81%E5%90%91OCR%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AAASM%E5%AE%9E%E4%BE%8B%EF%BC%9A"><span class="nav-number">2.11.</span> <span class="nav-text">11、向OCR中添加一个ASM实例：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12%E3%80%81%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AAservice"><span class="nav-number">2.12.</span> <span class="nav-text">12、添加一个service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13%E3%80%81%E4%BF%AE%E6%94%B9%E5%9C%A8%E5%85%B6%E4%BB%96%E8%8A%82%E7%82%B9%E4%B8%8A%E7%9A%84service"><span class="nav-number">2.13.</span> <span class="nav-text">13、修改在其他节点上的service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14%E3%80%81relocate%E6%9F%90%E4%B8%AA%E8%8A%82%E7%82%B9%E7%9A%84service%E5%88%B0%E5%85%B6%E4%BB%96%E8%8A%82%E7%82%B9"><span class="nav-number">2.14.</span> <span class="nav-text">14、relocate某个节点的service到其他节点</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>

@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="每日一句">
+    <meta name="author" content="ドラゴンボールのLong">
+    
+    <title>
+        
+            Oracle相关操作知识 |
+        
+        ドラゴンボールのBlog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"https://cdn.jsdelivr.net/gh/longhz/cdn@1.0/img/custom/avatar1.jpg","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"黄色的森林分出两条路，我选择了人迹更少的那一条，从此决定我一生的道路。"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                ドラゴンボールのBlog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Oracle相关操作知识</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="https://cdn.jsdelivr.net/gh/longhz/cdn@1.0/img/custom/avatar1.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">ドラゴンボールのLong</span>
+                        
+                            <span class="author-label">Lv3</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-09-06 20:10:12</span>
+        <span class="mobile">2020-09-06 20:10</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%BF%83%E5%BE%97/">心得</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Oracle/">Oracle</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.9k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>12 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="ORACLE-基础"><a href="#ORACLE-基础" class="headerlink" title="ORACLE 基础"></a>ORACLE 基础</h2><h3 id="ORACLE-数据库具有以下特点："><a href="#ORACLE-数据库具有以下特点：" class="headerlink" title="ORACLE 数据库具有以下特点："></a>ORACLE 数据库具有以下特点：</h3><blockquote>
+<p>支持多用户、大事务量的事务处理<br>数据安全性和完整性控制<br>支持分布式数据处理<br>可移植性</p>
+</blockquote>
+<h3 id="ORACLE-体系结构"><a href="#ORACLE-体系结构" class="headerlink" title="ORACLE 体系结构"></a>ORACLE 体系结构</h3><ul>
+<li>数据库</li>
+<li>实例</li>
+<li>数据文件(dbf)</li>
+<li>表空间</li>
+<li>用户</li>
+</ul>
+<p>在这里插入图片描述<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220618150807.png"
+                     
+                ></p>
+<h3 id="创建表空间"><a href="#创建表空间" class="headerlink" title="创建表空间"></a>创建表空间</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">create tablespace waterboss</span><br><span class="line">datafile &#x27;+DATA/prod/datafile/spacse_name.dbf&#x27;</span><br><span class="line">size 100m</span><br><span class="line">autoextend on</span><br><span class="line">next 10m</span><br><span class="line"></span><br><span class="line">--waterboss 为表空间名称</span><br><span class="line">--datafile 用于设置物理文件名称</span><br><span class="line">--size 用于设置表空间的初始大小</span><br><span class="line">--autoextend on 用于设置自动增长，如果存储量超---过初始大小，则开始自动扩容</span><br><span class="line">--next 用于设置扩容的空间大小</span><br></pre></td></tr></table></figure>
+
+<h3 id="oracle迁移表空间数据文件"><a href="#oracle迁移表空间数据文件" class="headerlink" title="oracle迁移表空间数据文件"></a>oracle迁移表空间数据文件</h3><p>迁移非关键数据表空间数据文件方案：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alter tablespace BATRISKTS offline;</span><br><span class="line">--cp 原数据文件  新路径/数据文件</span><br><span class="line">alter tablespace BATRISKTS rename datafile &#x27;原数据文件&#x27; to &#x27;新数据文件&#x27;;</span><br><span class="line">alter tablespace BATRISKTS online;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="删除表空间："><a href="#删除表空间：" class="headerlink" title="删除表空间："></a>删除表空间：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Drop tablespace 表空间名 including contents and datafiles;(所有数据及文件)</span><br><span class="line">例子：Drop tablespace epoint including contents and datafiles;</span><br><span class="line">查询所有表空间：</span><br><span class="line">SELECT * FROM dba_tablespaces;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">create user wateruser</span><br><span class="line">identified by itcast</span><br><span class="line">default tablespace waterboss</span><br><span class="line"></span><br><span class="line">--wateruser 为创建的用户名</span><br><span class="line">--identified by 用于设置用户的密码</span><br><span class="line">--default tablesapce 用于指定默认表空间名称</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>默认系统账号：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SYS:拥有SYSDBA权限，可以关闭启动oracle，只能以SYSDBA或SYSPOPER登录</span><br><span class="line">SYSTEM:DBA权限，只能以Normal登录，管理数据库</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>oracle的别名需小心使用，因为有顺序，有时候无法引用。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">顺序：from  join  on  where group by  having  </span><br><span class="line">select  order by  limit</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="用户赋权"><a href="#用户赋权" class="headerlink" title="用户赋权"></a>用户赋权</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant dba to wateruser</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>用户与权限</strong>：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Oracle角色权限分类：</span><br><span class="line">Connect：只能登录，无法操作</span><br><span class="line">Resource：可以在自己的模式下操作对象</span><br><span class="line">DBA:拥有全部权限，只有DBA才可以创建数据库结构</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="表的创建、修改与删除"><a href="#表的创建、修改与删除" class="headerlink" title="表的创建、修改与删除"></a>表的创建、修改与删除</h3><blockquote>
+<p>Oracle创建表时，约束索引需要单独创建，不能和表一起创建。</p>
+</blockquote>
+<h4 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE 表名称(</span><br><span class="line">字段名 类型(长度) primary key,</span><br><span class="line">字段名 类型(长度),</span><br><span class="line">.......</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h4 id="数据类型："><a href="#数据类型：" class="headerlink" title="数据类型："></a>数据类型：</h4><ul>
+<li>字符型</li>
+</ul>
+<blockquote>
+<p><strong>CHAR</strong> : 固定长度的字符类型，最多存储 2000 个字节<br><strong>VARCHAR2</strong> :可变长度的字符类型，最多存储 4000 个字节<br><strong>LONG</strong> : 大文本类型。最大可以存储 2 个 G</p>
+</blockquote>
+<ul>
+<li>数值型</li>
+</ul>
+<blockquote>
+<p>NUMBER : 数值类型<br>例如：NUMBER(5) 最大可以存的数为 99999<br>NUMBER(5,2) 最大可以存的数为 999.99</p>
+</blockquote>
+<ul>
+<li>日期型</li>
+</ul>
+<blockquote>
+<p>DATE：日期时间型，精确到秒<br>TIMESTAMP：精确到秒的小数点后 9 位</p>
+</blockquote>
+<ul>
+<li>二进制型（大数据类型）</li>
+</ul>
+<blockquote>
+<p>CLOB : 存储字符,最大可以存 4 个 G<br>BLOB：存储图像、声音、视频等二进制数据,最多可以存 4 个 G</p>
+</blockquote>
+<h4 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h4><p>1.增加字段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名称 ADD(列名 1 类型 [DEFAULT 默认值]，列名 1 类型 [DEFAULT 默认值]…)</span><br></pre></td></tr></table></figure>
+
+
+<p>2.修改字段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名称 MODIFY(列名 1 类型 [DEFAULT 默认值]，列名 1 类型 [DEFAULT 默认值]…)</span><br></pre></td></tr></table></figure>
+
+
+<p>3.修改字段名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名称 RENAME COLUMN 原列名 TO 新列名</span><br></pre></td></tr></table></figure>
+
+
+<p>4.删除字段名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE T_OWNERS DROP COLUMN REMARK</span><br></pre></td></tr></table></figure>
+
+
+<p>5.删除表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop table 表名称</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="数据增删改"><a href="#数据增删改" class="headerlink" title="数据增删改"></a>数据增删改</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO 表名[(列名 1，列名 2，…)]VALUES(值 1，值2，…) ；</span><br><span class="line">UPDATE 表名 SET 列名 1=值 1，列名 2=值 2，…WHERE 修改条件；</span><br><span class="line">DELETE FROM 表名 WHERE 删除条件;</span><br><span class="line">TRUNCATE TABLE 表名称；---- 清空表数据</span><br></pre></td></tr></table></figure>
+
+<h4 id="比较-truncat-与-delete-实现数据删除？"><a href="#比较-truncat-与-delete-实现数据删除？" class="headerlink" title="比较 truncat 与 delete 实现数据删除？"></a>比较 truncat 与 delete 实现数据删除？</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">delete 删除的数据可以 rollback</span><br><span class="line">delete 删除可能产生碎片，并且不释放空间</span><br><span class="line">truncate 是先摧毁表结构，再重构表结构</span><br></pre></td></tr></table></figure>
+
+<h2 id="触发器："><a href="#触发器：" class="headerlink" title="触发器："></a>触发器：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">要素：</span><br><span class="line">1.事件类型(增删改) </span><br><span class="line">2.触发事件：事件类型前后(before,after)</span><br><span class="line">3.触发对象：表中的每一条记录(行),即整张表</span><br><span class="line">作用:保证数据一致，基于某个表的变动在其他表记录，计算列的值或更新时间戳</span><br></pre></td></tr></table></figure>
+
+<h3 id="语法-mysql"><a href="#语法-mysql" class="headerlink" title="语法(mysql):"></a>语法(mysql):</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Create trigger 触发器名 &#123;before|after &#123;insert|update|delete&#125; on 表名 for each row  begin  触发器执行的sql语句  end;&#125;</span><br><span class="line"></span><br><span class="line">触发器名称：64个字符(t或者tri开头)</span><br><span class="line">&#123;before|after&#125;：触发器执行的时间，事件发生前后</span><br><span class="line">&#123;insert|update|delete&#125;：触发的事件是什么</span><br><span class="line">表名：触发器属于那个表</span><br><span class="line">for each row：触发器的执行间隙，for each row子句通知触发器，每行执行一次动作</span><br><span class="line">Sql语句：事件触发时需要执行的sql语句</span><br><span class="line">New:表示将要或已经插入的数据或将要已经被修改的数据</span><br><span class="line">Old:被修改之前的数据或被删除之前的数据</span><br><span class="line">另外old是只读的，而new可以在触发器中使用set赋值且不会触发触发器，造成循环调用。</span><br></pre></td></tr></table></figure>
+<h3 id="插入操作：-插入的数据的行的字段改为大写"><a href="#插入操作：-插入的数据的行的字段改为大写" class="headerlink" title="插入操作：(插入的数据的行的字段改为大写)"></a>插入操作：(插入的数据的行的字段改为大写)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Create trigger tri_customer_state </span><br><span class="line">before </span><br><span class="line">insert on customers </span><br><span class="line">for each </span><br><span class="line">row beginSet new.cust.state=Upper(new.cust.state) </span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<h3 id="更新操作：-如果更新了，则记录在日志"><a href="#更新操作：-如果更新了，则记录在日志" class="headerlink" title="更新操作：(如果更新了，则记录在日志)"></a>更新操作：(如果更新了，则记录在日志)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Create trigger tri_custname_update</span><br><span class="line">after update on customers </span><br><span class="line">for each </span><br><span class="line">row beginIf new.cust_name != old.cust_name(数据修改了)  </span><br><span class="line">then  </span><br><span class="line">insert into cust_log  </span><br><span class="line">values(old.cust_name,new.cust_name,now());  </span><br><span class="line">end if;  </span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<h2 id="序列-oracle"><a href="#序列-oracle" class="headerlink" title="序列(oracle):"></a>序列(oracle):</h2><p>mysql实现自增：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table a(id int not null auto_increment,....primary key(id));</span><br></pre></td></tr></table></figure>
+
+<h3 id="oracle序列语法"><a href="#oracle序列语法" class="headerlink" title="oracle序列语法"></a>oracle序列语法</h3><p>Oracle提供sequence对象，由系统提供自增长的序列号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Create sequence 序列名 [increment by n] [start with n] [maxvalue/minvalue n|nomaxvalue][cycle | nocycle] [cache n | nocache];</span><br><span class="line"></span><br><span class="line">1.increment by :定义序列的步长,不写则为1，为负则递减</span><br><span class="line">2.start with：序列的初始值，默认1</span><br><span class="line">3.maxvalue/minvalue：定义序列能产生的最大最小值，默认nomaxvalue则无限制</span><br><span class="line">4.cycle | nocycle：表示序列生成到限制值是否循环，循环(cycle)则从最小序列开始</span><br><span class="line">5.cache n | nocache:定义存放序列的内存大小，默认20，nocache则不进行内存缓存，内存缓冲可以改善序列的性能</span><br></pre></td></tr></table></figure>
+<h3 id="创建序列："><a href="#创建序列：" class="headerlink" title="创建序列："></a>创建序列：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Create sequence seq_test increment by 1 minvalue 1 start with 1 maxvalue 9999 cache 50;</span><br><span class="line">获取序列当前值:select seq_test.currval from dual;(dual虚拟表)</span><br><span class="line">获取序列的下一个值:select seq_test.nextval from dual;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Oricle实现自增"><a href="#Oricle实现自增" class="headerlink" title="Oricle实现自增:"></a>Oricle实现自增:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">创建序列：</span><br><span class="line">CREATE SEQUENCE Tab_UserInfo_Sequence </span><br><span class="line">START WITH 1 MINVALUE 1 MAXVALUE 999999999 </span><br><span class="line">INCREMENT BY 1 cache 20;</span><br><span class="line"></span><br><span class="line">创建使用自增序列的表：</span><br><span class="line">CREATE TABLE UserInfo(id number(10) NOT NULL,username varchar2(15) NOT NULL,password varchar2(15) NOT NULL,CONSTRAINTS PF_UserInfo PRIMARY key(id));</span><br><span class="line"></span><br><span class="line">使用触发器对表实现自增：</span><br><span class="line">CREATE TRIGGER Tig_UserInfo_insert </span><br><span class="line">BEFORE INSERT ON UserInfo FOR EACH ROW </span><br><span class="line">when(NEW.id IS null)</span><br><span class="line">BEGIN   </span><br><span class="line">SELECT Tab_UserInfo_Sequence.nextval INTO:NEW.id FROM dual;</span><br><span class="line">END</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="关于事务"><a href="#关于事务" class="headerlink" title="关于事务"></a>关于事务</h2><blockquote>
+<p>事务：访问或更新数据库数据项的一个程序执行单元，关系型数据库中表现为一条或是一组SQL语句</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">特性：</span><br><span class="line">①要么什么都做，要么什么都不做；</span><br><span class="line">②一个事务的执行与其他事务互不影响</span><br><span class="line">③一旦事务提交数据就具有持久性，其他程序或是故障部队其产生任何影响</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="事务提交：commit"><a href="#事务提交：commit" class="headerlink" title="事务提交：commit"></a>事务提交：commit</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">commit;</span><br><span class="line">（表示程序全部完成不出现任何故障）</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="回滚数据：rollback"><a href="#回滚数据：rollback" class="headerlink" title="回滚数据：rollback"></a>回滚数据：rollback</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rollback; </span><br><span class="line">回滚在没commit之前可以回滚程序到初始保存状态</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="如何设置事务的保存点"><a href="#如何设置事务的保存点" class="headerlink" title="如何设置事务的保存点"></a>如何设置事务的保存点</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">savepoint(sp1);</span><br><span class="line">--保存点后面的所有数据在执行回滚后都将失效，而在它之前的都将保留</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何回滚到指定的保存点"><a href="#如何回滚到指定的保存点" class="headerlink" title="如何回滚到指定的保存点"></a>如何回滚到指定的保存点</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rollback to sp1;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="数据导出与导入"><a href="#数据导出与导入" class="headerlink" title="数据导出与导入"></a>数据导出与导入</h2><h3 id="整库导出与导入"><a href="#整库导出与导入" class="headerlink" title="整库导出与导入"></a>整库导出与导入</h3><h4 id="整库导出命令"><a href="#整库导出命令" class="headerlink" title="整库导出命令"></a>整库导出命令</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exp system/itcast full=y 或者 exp system/itcast file=文件名 full=y</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="整库导入命令"><a href="#整库导入命令" class="headerlink" title="整库导入命令"></a>整库导入命令</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imp system/itcast full=y or imp system/itcast full=y file=water.dmp</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="按用户导出与导入"><a href="#按用户导出与导入" class="headerlink" title="按用户导出与导入"></a>按用户导出与导入</h3><h4 id="按用户导出"><a href="#按用户导出" class="headerlink" title="按用户导出"></a>按用户导出</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exp system/itcast owner=wateruser file=wateruser.dmp</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="按用户导入"><a href="#按用户导入" class="headerlink" title="按用户导入"></a>按用户导入</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imp system/itcast file=wateruser.dmp fromuser=wateruser</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="按表导出与导入"><a href="#按表导出与导入" class="headerlink" title="按表导出与导入"></a>按表导出与导入</h3><h4 id="按表导出"><a href="#按表导出" class="headerlink" title="按表导出"></a>按表导出</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exp wateruser/itcast file=a.dmp tables=t_account,a_area</span><br></pre></td></tr></table></figure>
+
+<h4 id="按表导入"><a href="#按表导入" class="headerlink" title="按表导入"></a>按表导入</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imp wateruser/itcast file=a.dmp tables=t_account,a_are</span><br></pre></td></tr></table></figure>
+
+<h2 id="ORACLE-查询"><a href="#ORACLE-查询" class="headerlink" title="ORACLE 查询"></a>ORACLE 查询</h2><h3 id="单表查询"><a href="#单表查询" class="headerlink" title="单表查询"></a>单表查询</h3><h4 id="简单条件查询"><a href="#简单条件查询" class="headerlink" title="简单条件查询"></a>简单条件查询</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">精确查询 select * from T_OWNERS where watermeter=‘30408’</span><br><span class="line">模糊查询 select * from t_owners where name like ‘%刘%’</span><br><span class="line">and 运算符 select * from t_owners where name like ‘%刘%’ and housenumber like ‘%5%’</span><br><span class="line">or 运算符 select * from t_owners where name like ‘%刘%’ or housenumber like ‘%5%’</span><br><span class="line">and 与 or 运算符混合使用 select * from t_owners where (name like ‘%刘%’ or housenumber like ‘%5%’) and addressid=3</span><br><span class="line">范围查询 select * from T_ACCOUNT where usenum&gt;=10000 and usenum&lt;=20000</span><br><span class="line">空值查询 select * from T_PRICETABLE t where maxnum is null</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="去掉重复记录"><a href="#去掉重复记录" class="headerlink" title="去掉重复记录"></a>去掉重复记录</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select distinct addressid from T_OWNERS</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="排序查询"><a href="#排序查询" class="headerlink" title="排序查询"></a>排序查询</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">升序排序 select * from T_ACCOUNT order by usenum</span><br><span class="line">降序排序 select * from T_ACCOUNT order by usenum desc</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="基于伪列的查询"><a href="#基于伪列的查询" class="headerlink" title="基于伪列的查询"></a>基于伪列的查询</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ROWID 具体某一行数据的物理地址 select rowID,t.* from T_AREA t</span><br><span class="line">ROWNUM 每一行的行号,查询后才会标注 select rownum,t.* from T_OWNERTYPE t</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="聚合统计"><a href="#聚合统计" class="headerlink" title="聚合统计"></a>聚合统计</h4><p>聚合函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sum* select sum(usenum) from t_account where year=‘2012’</span><br><span class="line"></span><br><span class="line">avg* select avg(usenum) from T_ACCOUNT where year=‘2012’</span><br><span class="line"></span><br><span class="line">max* select max(usenum) from T_ACCOUNT where year=‘2012’</span><br><span class="line"></span><br><span class="line">select* min(usenum) from T_ACCOUNT where year=‘2012’</span><br><span class="line"></span><br><span class="line">count* select count(*) from T_OWNERS t where ownertypeid=1</span><br><span class="line"></span><br><span class="line">分组聚合 Group by* select areaid,sum(money) from t_account group by areaid</span><br><span class="line"></span><br><span class="line">分组后条件查询 having* select areaid,sum(money) from t_account group by areaid having sum(money)&gt;169000</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h3><h4 id="多表内连接查询"><a href="#多表内连接查询" class="headerlink" title="多表内连接查询"></a>多表内连接查询</h4><ul>
+<li>查询显示业主编号，业主名称，业主类型名称</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select o.id 业主编号,o.name 业主名称,ot.name 业主类型</span><br><span class="line">from T_OWNERS o,T_OWNERTYPE ot</span><br><span class="line">where o.ownertypeid=ot.id</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>查询显示业主编号，业主名称、地址和业主类型</li>
+</ul>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select o.id 业主编号,o.name 业主名称,ad.name 地址,</span><br><span class="line"> ot.name 业主类型</span><br><span class="line"> from T_OWNERS o,T_OWNERTYPE ot,T_ADDRESS ad</span><br><span class="line"> where o.ownertypeid=ot.id and o.addressid=ad.id</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询显示业主编号、业主名称、地址、所属区域、业主分类</li>
+</ul>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> select o.id 业主编号,o.name 业主名称,ar.name 区域, ad.name 地址, ot.name 业主类型</span><br><span class="line">  from T_OWNERS o ,T_OWNERTYPE ot,T_ADDRESS ad,T_AREA ar</span><br><span class="line">where o.ownertypeid=ot.id and o.addressid=ad.id and</span><br><span class="line"> ad.areaid=ar.id</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询显示业主编号、业主名称、地址、所属区域、收费员、业主分类</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select ow.id 业主编号,ow.name 业主名称,ad.name 地址,</span><br><span class="line">ar.name 所属区域,op.name 收费员, ot.name 业主类型</span><br><span class="line">from T_OWNERS ow,T_OWNERTYPE ot,T_ADDRESS ad ,</span><br><span class="line">T_AREA ar,T_OPERATOR op</span><br><span class="line">where ow.ownertypeid=ot.id and ow.addressid=ad.id</span><br><span class="line">and ad.areaid=ar.id and ad.operatorid=op.id</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="左外连接查询"><a href="#左外连接查询" class="headerlink" title="左外连接查询"></a>左外连接查询</h4><ul>
+<li>查询业主的账务记录，显示业主编号、名称、年、月、金额。如果此业主没有账务记录也要列出姓名 SQL1999标准:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT ow.id,ow.name,ac.year ,ac.month,ac.money</span><br><span class="line">FROM T_OWNERS ow left join T_ACCOUNT ac</span><br><span class="line">on ow.id=ac.owneruuid</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="视图的创建与查询："><a href="#视图的创建与查询：" class="headerlink" title="视图的创建与查询："></a>视图的创建与查询：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Create view view_user as select id,name,age from user;(创建视图)</span><br><span class="line">Select * from view_user;(查询视图)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Oracle数据类型："><a href="#Oracle数据类型：" class="headerlink" title="Oracle数据类型："></a>Oracle数据类型：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Number(p,s):1-22字节，p表示有效数字的位数(38)，s表示精度，正则约束小数位数，负则约束整数小数点左边几位位数四舍五入。都不指定，则都取最大值。p默认为38，如果只指定p那s默认为0。</span><br><span class="line">Integer:1-22字节，存储整数(有小数则四舍五入)</span><br><span class="line">Char(n): 固定长度，0-2000字节(字符串类型)</span><br><span class="line">Varchar2(N):可变长，0-4000字节</span><br><span class="line">Date:7字节(日期类型)，可精确到秒</span><br><span class="line">Timestasmp：7字节,可精确到纳秒(9位)</span><br><span class="line">Blob：(大字段类型)，最大32TB,存储非结构化二进制数据</span><br><span class="line">Clob：4GB,存储大文本数据</span><br></pre></td></tr></table></figure>
+
+<h2 id="JDBC-连接-ORACLE"><a href="#JDBC-连接-ORACLE" class="headerlink" title="JDBC 连接 ORACLE"></a>JDBC 连接 ORACLE</h2><p>&#x2F;&#x2F;加载驱动</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">static&#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        Class.forName(&quot;oracle.jdbc.driver.OracleDriver&quot;);    Class.forName(&quot;oracle.jdbc.driver.OracleDriver&quot;);</span><br><span class="line">     catch (ClassNotFoundException e) &#123;</span><br><span class="line">        e.printStackTrace();    e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 获取数据库连接</span><br><span class="line">public static java.sql.Connection getConnection() throwsSQLException&#123;</span><br><span class="line">    return java.sql.DriverManager.getConnection(&quot;jdbc:oracle:thin:@192.168.80.10:1521:orcl&quot;,&quot;wateruser&quot;, &quot;itcast&quot;);</span><br><span class="line">&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="JDBC-驱动为："><a href="#JDBC-驱动为：" class="headerlink" title="JDBC 驱动为："></a>JDBC 驱动为：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">oracle.jdbc.OracleDriver</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="连接字符串-瘦连接-："><a href="#连接字符串-瘦连接-：" class="headerlink" title="连接字符串( 瘦连接 )："></a>连接字符串( 瘦连接 )：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jdbc:oracle:thin:@服务器的 IP:1521:orcl</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：Oracle相关操作知识</li>
+        <li>本文作者：ドラゴンボールのLong</li>
+        <li>创建时间：2020-09-06 20:10:12</li>
+        <li>
+            本文链接：https://zhongshenglong.xyz/2020/09/06/Oracle相关操作知识/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%8A%80%E6%9C%AF/">#技术</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%BF%83%E5%BE%97/">#心得</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/Oracle/">#Oracle</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/11/10/nohupxj/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Linux中使用nohup详解</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/06/06/%E5%85%B3%E4%BA%8Ehexo/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">hexo介绍</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;评论</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: '2TGCOmDNikdxOnVmQJEFhTOK-gzGzoHsz',
+                    appKey: 'lU21jvewvcy043UjfpHRXfvA',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'zh-CN'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'ドラゴンボールのLong';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+		year - 作为date对象的年份，为4位年份值
+		month - 0-11之间的整数，做为date对象的月份
+		day - 1-31之间的整数，做为date对象的天数
+		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+		minutes - 0-59之间的整数，做为date对象的分钟数
+		seconds - 0-59之间的整数，做为date对象的秒数
+		microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+		var t1 = Date.UTC(2019,04,09,21,47,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML="❤亲爱的旅客,我已与你/妳相遇❤❤❤"+" 第 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒❤";
+	}/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+	siteTime();
+</script>
+
+<footer class="footer">
+    <div class="info-container">
+        
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2019</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">ドラゴンボールのLong</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <!-- 
+        <div class="theme-info info-item">
+            <!-- %- __('powered_by', '<a target="_blank" href="https://hexo.io">Hexo</a>') &nbsp;|&nbsp;<!-- %- __('theme') 
+            &nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v<!-- %= theme.version </a>
+        </div>
+        -->
+        
+            <div class="icp-info info-item"><a target="_blank" rel="nofollow" href="https://beian.miit.gov.cn">苏ICP备20001538号-1</a></div>
+        
+        
+        <p id="sitetime" target="_blank"></p>
+        <!-- 页面点击小红心 -->
+        <script type="text/javascript" src="/js/love.js"></script>
+
+    </div>
+    
+
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ORACLE-%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">ORACLE 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ORACLE-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%85%B7%E6%9C%89%E4%BB%A5%E4%B8%8B%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">ORACLE 数据库具有以下特点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ORACLE-%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">ORACLE 体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="nav-number">1.3.</span> <span class="nav-text">创建表空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#oracle%E8%BF%81%E7%A7%BB%E8%A1%A8%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">oracle迁移表空间数据文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%A1%A8%E7%A9%BA%E9%97%B4%EF%BC%9A"><span class="nav-number">1.5.</span> <span class="nav-text">删除表空间：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7"><span class="nav-number">1.6.</span> <span class="nav-text">创建用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E8%B5%8B%E6%9D%83"><span class="nav-number">1.7.</span> <span class="nav-text">用户赋权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA%E3%80%81%E4%BF%AE%E6%94%B9%E4%B8%8E%E5%88%A0%E9%99%A4"><span class="nav-number">1.8.</span> <span class="nav-text">表的创建、修改与删除</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%A1%A8"><span class="nav-number">1.8.1.</span> <span class="nav-text">创建表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="nav-number">1.8.2.</span> <span class="nav-text">数据类型：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%A1%A8"><span class="nav-number">1.8.3.</span> <span class="nav-text">修改表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%88%A0%E6%94%B9"><span class="nav-number">1.8.4.</span> <span class="nav-text">数据增删改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%94%E8%BE%83-truncat-%E4%B8%8E-delete-%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%88%A0%E9%99%A4%EF%BC%9F"><span class="nav-number">1.8.5.</span> <span class="nav-text">比较 truncat 与 delete 实现数据删除？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">触发器：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-mysql"><span class="nav-number">2.1.</span> <span class="nav-text">语法(mysql):</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C%EF%BC%9A-%E6%8F%92%E5%85%A5%E7%9A%84%E6%95%B0%E6%8D%AE%E7%9A%84%E8%A1%8C%E7%9A%84%E5%AD%97%E6%AE%B5%E6%94%B9%E4%B8%BA%E5%A4%A7%E5%86%99"><span class="nav-number">2.2.</span> <span class="nav-text">插入操作：(插入的数据的行的字段改为大写)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%93%8D%E4%BD%9C%EF%BC%9A-%E5%A6%82%E6%9E%9C%E6%9B%B4%E6%96%B0%E4%BA%86%EF%BC%8C%E5%88%99%E8%AE%B0%E5%BD%95%E5%9C%A8%E6%97%A5%E5%BF%97"><span class="nav-number">2.3.</span> <span class="nav-text">更新操作：(如果更新了，则记录在日志)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%8F%E5%88%97-oracle"><span class="nav-number">3.</span> <span class="nav-text">序列(oracle):</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#oracle%E5%BA%8F%E5%88%97%E8%AF%AD%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">oracle序列语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%BA%8F%E5%88%97%EF%BC%9A"><span class="nav-number">3.2.</span> <span class="nav-text">创建序列：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Oricle%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%A2%9E"><span class="nav-number">3.3.</span> <span class="nav-text">Oricle实现自增:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1"><span class="nav-number">4.</span> <span class="nav-text">关于事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E6%8F%90%E4%BA%A4%EF%BC%9Acommit"><span class="nav-number">4.1.</span> <span class="nav-text">事务提交：commit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E6%BB%9A%E6%95%B0%E6%8D%AE%EF%BC%9Arollback"><span class="nav-number">4.2.</span> <span class="nav-text">回滚数据：rollback</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%BF%9D%E5%AD%98%E7%82%B9"><span class="nav-number">4.3.</span> <span class="nav-text">如何设置事务的保存点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9B%9E%E6%BB%9A%E5%88%B0%E6%8C%87%E5%AE%9A%E7%9A%84%E4%BF%9D%E5%AD%98%E7%82%B9"><span class="nav-number">4.4.</span> <span class="nav-text">如何回滚到指定的保存点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA%E4%B8%8E%E5%AF%BC%E5%85%A5"><span class="nav-number">5.</span> <span class="nav-text">数据导出与导入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E5%BA%93%E5%AF%BC%E5%87%BA%E4%B8%8E%E5%AF%BC%E5%85%A5"><span class="nav-number">5.1.</span> <span class="nav-text">整库导出与导入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B4%E5%BA%93%E5%AF%BC%E5%87%BA%E5%91%BD%E4%BB%A4"><span class="nav-number">5.1.1.</span> <span class="nav-text">整库导出命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B4%E5%BA%93%E5%AF%BC%E5%85%A5%E5%91%BD%E4%BB%A4"><span class="nav-number">5.1.2.</span> <span class="nav-text">整库导入命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E7%94%A8%E6%88%B7%E5%AF%BC%E5%87%BA%E4%B8%8E%E5%AF%BC%E5%85%A5"><span class="nav-number">5.2.</span> <span class="nav-text">按用户导出与导入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E7%94%A8%E6%88%B7%E5%AF%BC%E5%87%BA"><span class="nav-number">5.2.1.</span> <span class="nav-text">按用户导出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E7%94%A8%E6%88%B7%E5%AF%BC%E5%85%A5"><span class="nav-number">5.2.2.</span> <span class="nav-text">按用户导入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E8%A1%A8%E5%AF%BC%E5%87%BA%E4%B8%8E%E5%AF%BC%E5%85%A5"><span class="nav-number">5.3.</span> <span class="nav-text">按表导出与导入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E8%A1%A8%E5%AF%BC%E5%87%BA"><span class="nav-number">5.3.1.</span> <span class="nav-text">按表导出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E8%A1%A8%E5%AF%BC%E5%85%A5"><span class="nav-number">5.3.2.</span> <span class="nav-text">按表导入</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ORACLE-%E6%9F%A5%E8%AF%A2"><span class="nav-number">6.</span> <span class="nav-text">ORACLE 查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="nav-number">6.1.</span> <span class="nav-text">单表查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2"><span class="nav-number">6.1.1.</span> <span class="nav-text">简单条件查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%BB%E6%8E%89%E9%87%8D%E5%A4%8D%E8%AE%B0%E5%BD%95"><span class="nav-number">6.1.2.</span> <span class="nav-text">去掉重复记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E6%9F%A5%E8%AF%A2"><span class="nav-number">6.1.3.</span> <span class="nav-text">排序查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E4%BC%AA%E5%88%97%E7%9A%84%E6%9F%A5%E8%AF%A2"><span class="nav-number">6.1.4.</span> <span class="nav-text">基于伪列的查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E7%BB%9F%E8%AE%A1"><span class="nav-number">6.1.5.</span> <span class="nav-text">聚合统计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-number">6.2.</span> <span class="nav-text">连接查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E8%A1%A8%E5%86%85%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-number">6.2.1.</span> <span class="nav-text">多表内连接查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B7%A6%E5%A4%96%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-number">6.2.2.</span> <span class="nav-text">左外连接查询</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%9F%A5%E8%AF%A2%EF%BC%9A"><span class="nav-number">7.</span> <span class="nav-text">视图的创建与查询：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Oracle%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="nav-number">8.</span> <span class="nav-text">Oracle数据类型：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDBC-%E8%BF%9E%E6%8E%A5-ORACLE"><span class="nav-number">9.</span> <span class="nav-text">JDBC 连接 ORACLE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JDBC-%E9%A9%B1%E5%8A%A8%E4%B8%BA%EF%BC%9A"><span class="nav-number">9.1.</span> <span class="nav-text">JDBC 驱动为：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2-%E7%98%A6%E8%BF%9E%E6%8E%A5-%EF%BC%9A"><span class="nav-number">9.2.</span> <span class="nav-text">连接字符串( 瘦连接 )：</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<style>
+  .aplayer .aplayer-lrc {
+    height: 35px;
+  }
+  .aplayer .aplayer-lrc p{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px !important;
+  }
+  .aplayer .aplayer-lrc p.aplayer-lrc-current{
+    color: #FF1493;
+  }
+  .aplayer.aplayer-narrow .aplayer-body{
+    left: -66px !important;
+  }
+  .aplayer.aplayer-fixed .aplayer-lrc {
+    display: none;
+  }
+  .aplayer .aplayer-lrc.aplayer-lrc-hide {
+      display:none !important;
+  }
+  .aplayer.aplayer-fixed .lrc-show {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+  }
+</style>
+<meting-js
+
+    id="4900925608"
+
+    server="netease"
+
+    type="playlist"
+
+    fixed="true"
+
+    autoplay="true"
+
+    loop="all"
+
+    order="random"
+
+    preload="auto"
+
+    volume="0.7"
+
+    mutex="true"
+
+</meting-js>
+<script>
+  $(function(){
+    $('body').on('click', '.aplayer', function(){
+      if($('.aplayer-button').hasClass('aplayer-play')) {
+        $('.aplayer-lrc').removeClass('lrc-show');
+      } else {
+        $('.aplayer-lrc').addClass('lrc-show');
+      }
+    })
+  });
+</script>
+</body>
+</html>
