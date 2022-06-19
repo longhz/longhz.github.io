@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="Hexo Theme Keep">
-    <meta name="description" content="Linux(Deepin)系统 apt-get 命令的使用：安装、更新、卸载软件包">
+    <meta name="description" content="每日一句">
     <meta name="author" content="ドラゴンボールのLong">
     
     <title>
         
-            Linux_Deepin使用命令 |
+            关于Oracle归档模式 |
         
         ドラゴンボールのBlog
     </title>
@@ -181,7 +181,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Linux_Deepin使用命令</span>
+            <span class="title-hover-animation">关于Oracle归档模式</span>
         </div>
 
         
@@ -200,8 +200,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2020-02-17 22:10:12</span>
-        <span class="mobile">2020-02-17 22:10</span>
+        <span class="pc">2021-10-06 20:10:12</span>
+        <span class="mobile">2021-10-06 20:10</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -209,7 +209,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/%E8%BD%AF%E4%BB%B6%E6%95%99%E7%A8%8B/">软件教程</a>&nbsp;
+                        <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;
                     </li>
                 
             </ul>
@@ -221,15 +221,19 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/linux/">linux</a>&nbsp;
+                        <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;
                     </li>
                 
                     <li>
-                        | <a href="/tags/%E8%BD%AF%E4%BB%B6/">软件</a>&nbsp;
+                        | <a href="/tags/linux/">linux</a>&nbsp;
                     </li>
                 
                     <li>
-                        | <a href="/tags/%E9%98%85%E8%AF%BB/">阅读</a>&nbsp;
+                        | <a href="/tags/oracle/">oracle</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%BF%83%E5%BE%97/">心得</a>&nbsp;
                     </li>
                 
             </ul>
@@ -239,7 +243,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>502 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>653 字</span>
         </span>
     
     
@@ -260,54 +264,64 @@
         
 
         <div class="article-content markdown-body">
-            <h6 id="Linux-Deepin-系统-apt-get-命令的使用：安装、更新、卸载软件包"><a href="#Linux-Deepin-系统-apt-get-命令的使用：安装、更新、卸载软件包" class="headerlink" title="Linux(Deepin)系统 apt-get 命令的使用：安装、更新、卸载软件包"></a>Linux(Deepin)系统 apt-get 命令的使用：安装、更新、卸载软件包</h6><span id="more"></span>
+            <h1 id="oracle11g查看开启归档-oracle11g-开启归档模式"><a href="#oracle11g查看开启归档-oracle11g-开启归档模式" class="headerlink" title="oracle11g查看开启归档,oracle11g 开启归档模式"></a>oracle11g查看开启归档,oracle11g 开启归档模式</h1><p><strong>请按顺序进行</strong></p>
+<h2 id="1、查看是不是归档方式"><a href="#1、查看是不是归档方式" class="headerlink" title="1、查看是不是归档方式"></a>1、查看是不是归档方式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">archive log list;</span><br></pre></td></tr></table></figure>
 
-<p>apt-get 命令适用于 deb 包管理式的 Linux 操作系统（Debian、Ubuntu等），主要用于自动从互联网软件仓库中搜索、下载、安装、升级、卸载软件或操作系统。</p>
-<p>Ubuntu 软件包查找: <a class="link"   target="_blank" rel="noopener" href="https://packages.ubuntu.com/" >https://packages.ubuntu.com/<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="1-安装-软件包"><a href="#1-安装-软件包" class="headerlink" title="1. 安装 软件包"></a>1. 安装 软件包</h3><blockquote>
-<ul>
-<li>apt-get install PackageName &#x2F;&#x2F; 普通安装</li>
-<li>apt-get install PackageName&#x3D;VersionName &#x2F;&#x2F; 安装指定包的指定版</li>
-<li>apt-get –reinstall install PackageName &#x2F;&#x2F; 重新安装</li>
-<li>apt-get build-dep PackageName &#x2F;&#x2F; 安装源码包所需要的编译环境</li>
-<li>apt-get -f install &#x2F;&#x2F; 修复依赖关系</li>
-<li>apt-get source PackageName &#x2F;&#x2F; 下载软件包的源码</li>
-</ul>
+
+<h2 id="2、设置归档路径"><a href="#2、设置归档路径" class="headerlink" title="2、设置归档路径"></a>2、设置归档路径</h2><p><strong>路径中的目录需要提前用mkdir命令创建</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">alter system set log_archive_dest=&quot;/oracle/oradata/arch&quot; scope=spfile;     </span><br><span class="line">--或者</span><br><span class="line"></span><br><span class="line">alter system set log_archive_dest_1=&quot;location=/oracle/oradata/arch1&quot; scope=spfile;</span><br><span class="line"></span><br><span class="line">alter system set log_archive_dest_2=&quot;location=/oracle/oradata/arch2&quot; scope=spfile;</span><br><span class="line">#如果归档到两个位置，则可以通过这个方法实现</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、设置归档日记款式"><a href="#3、设置归档日记款式" class="headerlink" title="3、设置归档日记款式"></a>3、设置归档日记款式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter system set log_archive_format=&quot;arch_%d_%t_%r_%s.log&quot; scope=spfile;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、归档进程数"><a href="#4、归档进程数" class="headerlink" title="4、归档进程数"></a>4、归档进程数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter system set log_archive_max_processes = 5;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、关闭数据库"><a href="#5、关闭数据库" class="headerlink" title="5、关闭数据库"></a>5、关闭数据库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown immediate;</span><br></pre></td></tr></table></figure>
+<h2 id="6、打开控制文件"><a href="#6、打开控制文件" class="headerlink" title="6、打开控制文件"></a>6、打开控制文件</h2><p><strong>这里不打开数据文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">startup mount;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7、将数据库切换为归档模式"><a href="#7、将数据库切换为归档模式" class="headerlink" title="7、将数据库切换为归档模式"></a>7、将数据库切换为归档模式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter database archivelog;</span><br></pre></td></tr></table></figure>
+
+<h2 id="8、将数据文件打开"><a href="#8、将数据文件打开" class="headerlink" title="8、将数据文件打开"></a>8、将数据文件打开</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter database open;</span><br></pre></td></tr></table></figure>
+
+<h2 id="9、查看此时是否处于归档模式"><a href="#9、查看此时是否处于归档模式" class="headerlink" title="9、查看此时是否处于归档模式"></a>9、查看此时是否处于归档模式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">archive log list;</span><br></pre></td></tr></table></figure>
+
+<h2 id="10、可选项，可以防止数据库密码180失效"><a href="#10、可选项，可以防止数据库密码180失效" class="headerlink" title="10、可选项，可以防止数据库密码180失效"></a>10、可选项，可以防止数据库密码180失效</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter profile default limit password_life_time unlimited;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>配置完归档模式以后我们可以立即执行归档重做日志：</p>
 </blockquote>
-<h3 id="2-卸载-软件包"><a href="#2-卸载-软件包" class="headerlink" title="2. 卸载 软件包"></a>2. 卸载 软件包</h3><blockquote>
-<ul>
-<li>apt-get remove PackageName &#x2F;&#x2F; 删除软件包, 保留配置文件</li>
-<li>apt-get –purge remove PackageName &#x2F;&#x2F; 删除软件包, 同时删除配置文件</li>
-<li>apt-get purge PackageName &#x2F;&#x2F; 删除软件包, 同时删除配置文件</li>
-<li>apt-get autoremove PackageName &#x2F;&#x2F; 删除软件包, 同时删除为满足依赖<br>&#x2F;&#x2F; 而自动安装且不再使用的软件包</li>
-<li>apt-get –purge autoremove PackageName &#x2F;&#x2F; 删除软件包, 删除配置文件,<br>&#x2F;&#x2F; 删除不再使用的依赖包</li>
-<li>apt-get clean &amp;&amp; apt-get autoclean &#x2F;&#x2F; 清除 已下载的软件包 和 旧软件包</li>
-</ul>
+<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a><strong>注意</strong>：</h2><blockquote>
+<p>1、如果没有重启数据库，归档日志的文件格式仍然会是默认的格式.dbf。</p>
+<p>2、alter system switch logfile 是强制日志切换，不一定就归档当前的重做日志文件(若自动归档打开，就归档前的重做日志，若自动归档没有打开，就不归档当前重做日志。</p>
+<p>3、alter system archive log current 是归档当前的重做日志文件，不管自动归档有没有打都归档。 主要的区别在于：alter system switch logfile 对单实例数据库或RAC中的当前实例执行日志切换；</p>
 </blockquote>
-<h3 id="3-更新-软件包"><a href="#3-更新-软件包" class="headerlink" title="3. 更新 软件包"></a>3. 更新 软件包</h3><blockquote>
-<ul>
-<li>apt-get update &#x2F;&#x2F; 更新安装源（Source）</li>
-<li>apt-get upgrade &#x2F;&#x2F; 更新已安装的软件包</li>
-<li>apt-get dist-upgrade &#x2F;&#x2F;更新已安装的软件包（识别并处理依赖关系的改变）</li>
-</ul>
-</blockquote>
-<h3 id="4-查询-软件包"><a href="#4-查询-软件包" class="headerlink" title="4. 查询 软件包"></a>4. 查询 软件包</h3><blockquote>
-<ul>
-<li>dpkg -l &#x2F;&#x2F; 列出已安装的所有软件包</li>
-<li>apt-cache search PackageName &#x2F;&#x2F; 搜索软件包</li>
-<li>apt-cache show PackageName &#x2F;&#x2F; 获取软件包的相关信息, 如说明、大小、版本等</li>
-<li>apt-cache depends PackageName &#x2F;&#x2F; 查看该软件包需要哪些依赖</li>
-<li>apt-cache rdepends PackageName &#x2F;&#x2F; 查看该软件包被哪些包依</li>
-<li>apt-get check &#x2F;&#x2F; 检查是否有损坏的依赖</li>
-</ul>
-</blockquote>
-<h3 id="5-apt-get-–help"><a href="#5-apt-get-–help" class="headerlink" title="5. apt-get –help"></a>5. apt-get –help</h3><p>执行命令: apt-get –help，输出:</p>
-<p><img  
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter system archive log current </span><br><span class="line">--会对数据库中的所有实例执行日志切换。</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此时我们到刚才的 &#x2F;archive 路径下面去查看是否已经生成了归档日志：<br><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/wzyy/apt-get-help.jpg"
-                      alt="apt-get --help"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220619172729.png"
+                     
                 ></p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>修改完所有参数后执行<br>shutdown immediate;<br>然后再<br>startup;<br>就可以投入生产了</strong></p>
+</blockquote>
+<h1 id="切换为非归档模式"><a href="#切换为非归档模式" class="headerlink" title="切换为非归档模式"></a>切换为非归档模式</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1、sql&gt; archive log list;  #查看是否是归档方式</span><br><span class="line"></span><br><span class="line">2、sql&gt; alter system set log_archive_start=false scope=spfile; #禁用自动归档</span><br><span class="line"></span><br><span class="line">3、sql&gt; shutdown immediate;</span><br><span class="line"></span><br><span class="line">4、sql&gt; startup mount;    #打开控制文件，不打开数据文件</span><br><span class="line"></span><br><span class="line">5、sql&gt; alter database noarchivelog; #将数据库切换为非归档模式</span><br><span class="line"></span><br><span class="line">6、sql&gt; alter database open;  #将数据文件打开</span><br><span class="line"></span><br><span class="line">7、sql&gt; archive log list;  #查看此时便处于非归档模式</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>归档相关命令</p>
+<p>archive log stop;</p>
+<p>archive log start;</p>
+<p>archive log list;</p>
+<p>show parameters;</p>
+<p>show parameters log_archive_start;</p>
+<p>show parameters log_archive_max_process; #归档进程数</p>
+<p>alter system set log_archive_max_process&#x3D;5; #将归档进程数改为5</p>
+<p>select * from v$bgprocess;    #检察后台进程</p>
+</blockquote>
 
         </div>
 
@@ -315,11 +329,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：Linux_Deepin使用命令</li>
+        <li>本文标题：关于Oracle归档模式</li>
         <li>本文作者：ドラゴンボールのLong</li>
-        <li>创建时间：2020-02-17 22:10:12</li>
+        <li>创建时间：2021-10-06 20:10:12</li>
         <li>
-            本文链接：https://zhongshenglong.xyz/2020/02/17/linuxCZ/
+            本文链接：https://zhongshenglong.xyz/2021/10/06/关于Oracle归档模式/
         </li>
         <li>
             版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -334,15 +348,19 @@
             <ul class="post-tags-box">
                 
                     <li class="tag-item">
+                        <a href="/tags/%E6%8A%80%E6%9C%AF/">#技术</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
                         <a href="/tags/linux/">#linux</a>&nbsp;
                     </li>
                 
                     <li class="tag-item">
-                        <a href="/tags/%E8%BD%AF%E4%BB%B6/">#软件</a>&nbsp;
+                        <a href="/tags/oracle/">#oracle</a>&nbsp;
                     </li>
                 
                     <li class="tag-item">
-                        <a href="/tags/%E9%98%85%E8%AF%BB/">#阅读</a>&nbsp;
+                        <a href="/tags/%E5%BF%83%E5%BE%97/">#心得</a>&nbsp;
                     </li>
                 
             </ul>
@@ -354,13 +372,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2020/03/06/%E5%85%B3%E4%BA%8EOracle%E5%8F%8A%E6%97%A5%E5%B8%B8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"
+                           href="/2021/11/02/Centos%E5%AE%89%E8%A3%85mysql5.7/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">关于Oracle及日常注意事项</span>
+                                <span class="post-nav-title-item">Centos7安装mysql5.7</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -370,10 +388,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2020/02/03/tuchuang/"
+                           href="/2021/09/06/12c%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85%EF%BC%88%E6%97%A0%E7%95%8C%E9%9D%A2%EF%BC%89/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">搭建个人博客图床</span>
+                                <span class="post-nav-title-item">12c静默安装（无界面）</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -639,7 +657,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#Linux-Deepin-%E7%B3%BB%E7%BB%9F-apt-get-%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%9A%E5%AE%89%E8%A3%85%E3%80%81%E6%9B%B4%E6%96%B0%E3%80%81%E5%8D%B8%E8%BD%BD%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="nav-number">1.</span> <span class="nav-text">Linux(Deepin)系统 apt-get 命令的使用：安装、更新、卸载软件包</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85-%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="nav-number"></span> <span class="nav-text">1. 安装 软件包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%8D%B8%E8%BD%BD-%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="nav-number"></span> <span class="nav-text">2. 卸载 软件包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%9B%B4%E6%96%B0-%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="nav-number"></span> <span class="nav-text">3. 更新 软件包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%9F%A5%E8%AF%A2-%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="nav-number"></span> <span class="nav-text">4. 查询 软件包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-apt-get-%E2%80%93help"><span class="nav-number"></span> <span class="nav-text">5. apt-get –help</span></a>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#oracle11g%E6%9F%A5%E7%9C%8B%E5%BC%80%E5%90%AF%E5%BD%92%E6%A1%A3-oracle11g-%E5%BC%80%E5%90%AF%E5%BD%92%E6%A1%A3%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">oracle11g查看开启归档,oracle11g 开启归档模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E6%9F%A5%E7%9C%8B%E6%98%AF%E4%B8%8D%E6%98%AF%E5%BD%92%E6%A1%A3%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">1、查看是不是归档方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E8%AE%BE%E7%BD%AE%E5%BD%92%E6%A1%A3%E8%B7%AF%E5%BE%84"><span class="nav-number">1.2.</span> <span class="nav-text">2、设置归档路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E8%AE%BE%E7%BD%AE%E5%BD%92%E6%A1%A3%E6%97%A5%E8%AE%B0%E6%AC%BE%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">3、设置归档日记款式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E5%BD%92%E6%A1%A3%E8%BF%9B%E7%A8%8B%E6%95%B0"><span class="nav-number">1.4.</span> <span class="nav-text">4、归档进程数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E5%85%B3%E9%97%AD%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.5.</span> <span class="nav-text">5、关闭数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81%E6%89%93%E5%BC%80%E6%8E%A7%E5%88%B6%E6%96%87%E4%BB%B6"><span class="nav-number">1.6.</span> <span class="nav-text">6、打开控制文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81%E5%B0%86%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%87%E6%8D%A2%E4%B8%BA%E5%BD%92%E6%A1%A3%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.7.</span> <span class="nav-text">7、将数据库切换为归档模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8%E3%80%81%E5%B0%86%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E6%89%93%E5%BC%80"><span class="nav-number">1.8.</span> <span class="nav-text">8、将数据文件打开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9%E3%80%81%E6%9F%A5%E7%9C%8B%E6%AD%A4%E6%97%B6%E6%98%AF%E5%90%A6%E5%A4%84%E4%BA%8E%E5%BD%92%E6%A1%A3%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.9.</span> <span class="nav-text">9、查看此时是否处于归档模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10%E3%80%81%E5%8F%AF%E9%80%89%E9%A1%B9%EF%BC%8C%E5%8F%AF%E4%BB%A5%E9%98%B2%E6%AD%A2%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AF%86%E7%A0%81180%E5%A4%B1%E6%95%88"><span class="nav-number">1.10.</span> <span class="nav-text">10、可选项，可以防止数据库密码180失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%9A"><span class="nav-number">1.11.</span> <span class="nav-text">注意：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E4%B8%BA%E9%9D%9E%E5%BD%92%E6%A1%A3%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">切换为非归档模式</span></a></li></ol>
     </div>
 </div>
         </aside>
