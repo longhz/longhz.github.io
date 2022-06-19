@@ -9,7 +9,7 @@
     
     <title>
         
-            上传项目到GitHub |
+            Oracle Rman 自动备份与恢复 |
         
         ドラゴンボールのBlog
     </title>
@@ -181,7 +181,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">上传项目到GitHub</span>
+            <span class="title-hover-animation">Oracle Rman 自动备份与恢复</span>
         </div>
 
         
@@ -200,8 +200,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-03-06 20:10:12</span>
-        <span class="mobile">2022-03-06 20:10</span>
+        <span class="pc">2021-11-06 20:10:12</span>
+        <span class="mobile">2021-11-06 20:10</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -229,7 +229,11 @@
                     </li>
                 
                     <li>
-                        | <a href="/tags/GitHub/">GitHub</a>&nbsp;
+                        | <a href="/tags/oracle/">oracle</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%BF%83%E5%BE%97/">心得</a>&nbsp;
                     </li>
                 
             </ul>
@@ -239,7 +243,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.2k 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>977 字</span>
         </span>
     
     
@@ -260,143 +264,94 @@
         
 
         <div class="article-content markdown-body">
-            <h2 id="linux上传项目到github，及一些git命令"><a href="#linux上传项目到github，及一些git命令" class="headerlink" title="linux上传项目到github，及一些git命令"></a>linux上传项目到github，及一些git命令</h2><span id="more"></span>
-
-
-<blockquote>
-<p>打开github，找到头像-&gt;setting-&gt;SSH and GPG keys-&gt;new SSH key<br>创建一个新项目(名字和本地项目相同)，</p>
+            <h1 id="Oracle环境：Oracle-11gR2"><a href="#Oracle环境：Oracle-11gR2" class="headerlink" title="Oracle环境：Oracle 11gR2"></a>Oracle环境：Oracle 11gR2</h1><p><strong>配置步骤：</strong></p>
+<h2 id="一、配置rman自动备份："><a href="#一、配置rman自动备份：" class="headerlink" title="一、配置rman自动备份："></a>一、配置rman自动备份：</h2><h3 id="1、打开归档模式并修改归档路径："><a href="#1、打开归档模式并修改归档路径：" class="headerlink" title="1、打开归档模式并修改归档路径："></a>1、打开归档模式并修改归档路径：</h3><blockquote>
+<p><strong>具体步骤参考以下链接：</strong><br><a class="link"   target="_blank" rel="noopener" href="https://zhongshenglong.xyz/2021/10/06/%E5%85%B3%E4%BA%8EOracle%E5%BD%92%E6%A1%A3%E6%A8%A1%E5%BC%8F/" >关于Oracle归档模式<i class="fas fa-external-link-alt"></i></a><br></br></p>
 </blockquote>
-<h2 id="１．在github创建空仓库-如gitcode-．"><a href="#１．在github创建空仓库-如gitcode-．" class="headerlink" title="１．在github创建空仓库(如gitcode)．"></a>１．在github创建空仓库(如gitcode)．</h2><blockquote>
-<p>步骤一：首先在用户右侧的‘+’下选择新储存库新建项目。如图一：</p>
-</blockquote>
+<p><strong>归档模式配置结果如下：</strong><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220619225807.png"
+                     
+                ></p>
+<h3 id="2、创建本地rman备份存储目录："><a href="#2、创建本地rman备份存储目录：" class="headerlink" title="2、创建本地rman备份存储目录："></a>2、创建本地rman备份存储目录：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mkdir /rmanbak</span><br><span class="line">cd /rmanbak</span><br><span class="line">mkdir datafile</span><br><span class="line">mkdir controlfile</span><br><span class="line">mkdir log</span><br><span class="line">chown -R oracle:oinstall datafile</span><br><span class="line">chown -R oracle:oinstall controlfile</span><br><span class="line">chown -R oracle:oinstall log</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、配置rman备份参数："><a href="#3、配置rman备份参数：" class="headerlink" title="3、配置rman备份参数："></a>3、配置rman备份参数：</h3><h4 id="rman配置"><a href="#rman配置" class="headerlink" title="rman配置"></a>rman配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[oracle@ora11g]$ rman target/</span><br><span class="line"></span><br><span class="line">RMAN&gt; show all;</span><br><span class="line">--如果配置不对，输入以下命令变更状态</span><br><span class="line">CONFIGURE CONTROLFILE AUTOBACKUP ON;</span><br><span class="line">CONFIGURE CONTROLFILE AUTOBACKUP FORMAT FOR DEVICE TYPE DISK TO &#x27;/rmanbak/controlfile/%F&#x27;;</span><br></pre></td></tr></table></figure>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607120234.png"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220619230353.png"
                      
                 ></p>
-<blockquote>
-<p>然后自定义新项目的名称和对新项目的描述，并确定新建该项目。如图二：</p>
-</blockquote>
+<h4 id="备份数据文件"><a href="#备份数据文件" class="headerlink" title="备份数据文件"></a>备份数据文件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RMAN&gt; backup database format &#x27;/rmanbak/datafile/data_%U.dbf&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="备份控制文件"><a href="#备份控制文件" class="headerlink" title="备份控制文件"></a>备份控制文件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RMAN&gt; backup current controlfile format &#x27;/rmanbak/datafile/control_%f.dbf&#x27;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>完备脚本(待调整)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">export ORACLE_SID=ora11g</span><br><span class="line">export ORACLE_BASE=/oracle/app/oracle</span><br><span class="line">export ORACLE_HOME=/oracle/app/oracle/product/11.2.0/db_1</span><br><span class="line"></span><br><span class="line">$ORACLE_HOME/bin/rman target / &lt;&lt; EOF</span><br><span class="line">run&#123;</span><br><span class="line">allocate channel c1 type disk;</span><br><span class="line">allocate channel c2 type disk;</span><br><span class="line">allocate channel c3 type disk;</span><br><span class="line">allocate channel c4 type disk;</span><br><span class="line">allocate channel c5 type disk;</span><br><span class="line">crosscheck archivelog all;</span><br><span class="line"></span><br><span class="line">backup as compressed backupset database format &#x27;/rmanbak/datafile/full_dbbackup_%T_%d_%U&#x27;;</span><br><span class="line"></span><br><span class="line">sql &#x27;alter system archive log current&#x27;;</span><br><span class="line">backup as compressed backupset filesperset 10 format &#x27;/rmanbak/datafile/Arch_%d_%T_%s.bak&#x27; archivelog all;</span><br><span class="line"></span><br><span class="line">delete noprompt obsolete;</span><br><span class="line">release channel c1;</span><br><span class="line">release channel c2;</span><br><span class="line">release channel c3;</span><br><span class="line">release channel c4;</span><br><span class="line">release channel c5;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="备份参数文件（数据迁移到新服务器中）"><a href="#备份参数文件（数据迁移到新服务器中）" class="headerlink" title="备份参数文件（数据迁移到新服务器中）"></a>备份参数文件（数据迁移到新服务器中）</h4><h5 id="源库查看参数文件路径"><a href="#源库查看参数文件路径" class="headerlink" title="源库查看参数文件路径"></a>源库查看参数文件路径</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; show parameter spfile;</span><br><span class="line">--查看可得到路径：/oracle/app/oracle/product/11.2.0/db_1/dbs/spfileora11g.ora</span><br></pre></td></tr></table></figure>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607120244.png"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220619232409.png"
                      
                 ></p>
-<p>步骤二：点击图三蓝色圈圈里的图标进行复制链接，并在Linux上执行git clone+链接（用shift+insert进行拷贝）。</p>
+<h5 id="确认目标库是否有源库参数文件的路径，没有则需创建"><a href="#确认目标库是否有源库参数文件的路径，没有则需创建" class="headerlink" title="确认目标库是否有源库参数文件的路径，没有则需创建"></a>确认目标库是否有源库参数文件的路径，没有则需创建</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /oracle/app/oracle/product/11.2.0/db_1/dbs</span><br><span class="line"></span><br><span class="line">#关闭目标库</span><br><span class="line">sqlplus / as sysdba</span><br><span class="line">SQL&gt; shutdown immediate</span><br></pre></td></tr></table></figure>
+<h5 id="关于参数文件"><a href="#关于参数文件" class="headerlink" title="关于参数文件"></a>关于参数文件</h5><blockquote>
+<p>init.ora （只要这个参数文件在，下面两个就在，这三个文件是一致的）<br>spfileora11g.ora （二进制，需要用命令修改）<br>pfile.ora （文本，直接修改）</p>
+</blockquote>
+<p><strong>如果要数据库迁移到另一个服务器上的数据库中，需要目标库中删除<br>init.ora 和 spfileora11g.ora 这俩参数文件<br>然后cp 源库中的这俩文件到目标库中</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--删除目标库中的参数文件</span><br><span class="line">rm init.ora spfileora11g.ora</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--拷贝源库参数文件到目标库中</span><br><span class="line">scp /oracle/app/oracle/product/11.2.0/db_1/dbs/init.ora 目标ip://oracle/app/oracle/product/11.2.0/db_1/dbs</span><br><span class="line"></span><br><span class="line">scp /oracle/app/oracle/product/11.2.0/db_1/dbs/spfileora11g.ora 目标ip://oracle/app/oracle/product/11.2.0/db_1/dbs</span><br></pre></td></tr></table></figure>
+
+<p>查看下目标库中有没有cat spfileora11g.ora里这三个参数目录，<br>如果没有查询到，需要在目标库中新建</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">--审计目录</span><br><span class="line">*.audit_file_dest=&#x27;/oracle/app/oracle/admin/ora11g/adump&#x27;</span><br><span class="line">--控制文件目录</span><br><span class="line">*.control_files=&#x27;/oradata/ora11g/coCC&quot;)&quot;ntrol01.ctl&#x27;,&#x27;/oradata/ora11g/control02.ctl&#x27;</span><br><span class="line">--安装文件目录</span><br><span class="line">*.diagnostic_dest=&#x27;/oracle/app/oracle&#x27;</span><br><span class="line">--删除目标库中的数据文件及目录</span><br><span class="line">cd $ORACLE_BASE</span><br><span class="line">类似于这个文件目录 /oradata/ora11g</span><br></pre></td></tr></table></figure>
+
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607120259.png"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220619234212.png"
                      
                 ></p>
-<h2 id="２．在linux上安装git："><a href="#２．在linux上安装git：" class="headerlink" title="２．在linux上安装git："></a>２．在linux上安装git：</h2><p>安装git：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install git</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="３．linux配置GitHub："><a href="#３．linux配置GitHub：" class="headerlink" title="３．linux配置GitHub："></a>３．linux配置GitHub：</h2><p> 绑定GitHub用户：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;XXX&quot;</span><br><span class="line">git config --global user.email &quot;xxx@xxx.com&quot;</span><br></pre></td></tr></table></figure>
-
-<p>查看git配置：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list</span><br></pre></td></tr></table></figure>
-<p>为GitHub账户设置SSH key</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">（1）检查是否有SSH key：cd ~/.ssh</span><br><span class="line">（2）生成SSH key：ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/home/you/.ssh/id_rsa): 默认回车</span><br><span class="line">Enter passphrase (empty for no passphrase):默认回车</span><br><span class="line">Enter same passphrase again: 默认回车</span><br><span class="line">Your identification has been saved in /home/XXX/.ssh/id_rsa. </span><br><span class="line">Your public key has been saved in /home/XXX/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is: XXX</span><br></pre></td></tr></table></figure>
-<p>（3）添加SSH公钥到GitHub：<br>在GitHub设置内找到添加SSH，将id_rsa.pub内容复制到key中【复制时注意空格】<br><img  
+<p>修改目标库的 .bash_profile 文件和源库的一致<br><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607122137.png"
-                     
-                ><br>（4）测试是否连接成功ssh -T <a class="link"   href="mailto:&#x67;&#105;&#116;&#x40;&#103;&#x69;&#x74;&#104;&#117;&#x62;&#x2e;&#x63;&#x6f;&#109;" >&#x67;&#105;&#116;&#x40;&#103;&#x69;&#x74;&#104;&#117;&#x62;&#x2e;&#x63;&#x6f;&#109;<i class="fas fa-external-link-alt"></i></a><br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607122157.png"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220620000332.png"
                      
                 ></p>
-<h2 id="４．在linux创建和仓库同名的文件夹并初始化："><a href="#４．在linux创建和仓库同名的文件夹并初始化：" class="headerlink" title="４．在linux创建和仓库同名的文件夹并初始化："></a>４．在linux创建和仓库同名的文件夹并初始化：</h2><p>进入你想要上传的目录，然后把这个目录变成git可以管理的仓库 git init</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /gitcode</span><br><span class="line">cd /gitcode</span><br><span class="line">git init</span><br></pre></td></tr></table></figure>
-<p>Git仓库和本地仓库进行关联</p>
-<p>在本地仓库的命令行输入：</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> git remote add origin https://github.com/fgguo/gitcode.git</span><br><span class="line">origin后面为git项目的地址。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">archive log list; 查看归档目录</span><br><span class="line">--删除目标库中的归档文件</span><br><span class="line">然后从源库的归档目录中 复制 到目标库的归档目录中</span><br><span class="line"></span><br><span class="line">cd rmanback/datafile</span><br><span class="line">复制到目标库中</span><br></pre></td></tr></table></figure>
 
-<h2 id="５．添加文件"><a href="#５．添加文件" class="headerlink" title="５．添加文件"></a>５．添加文件</h2>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add fdw_adapter src</span><br><span class="line">（如果是所有项目就是git add .）</span><br></pre></td></tr></table></figure>
-<p>  将文件添加到仓库并查看当前工作区（相当于缓存区）的状态<br>添加文件：<code>git add XXX</code><br>查看缓存区的内容：<code>git status</code></p>
+<h5 id="备份恢复"><a href="#备份恢复" class="headerlink" title="备份恢复"></a>备份恢复</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sqlplus / as sysdba</span><br><span class="line">启动到nomount状态，确认参数文件里目录是否都存在</span><br><span class="line">startup nomount;</span><br><span class="line"></span><br><span class="line">--RMAN恢复控制文件</span><br><span class="line">oracle$ rman target/</span><br><span class="line">RMAN&gt; restore controlfiles from &#x27;/rmanback/datafile/要恢复的控制文件.dbf&#x27;</span><br><span class="line"></span><br><span class="line">--rman中启动数据库状态到mount状态</span><br><span class="line">RMAN&gt; sql &#x27;alter database mount&#x27;;</span><br><span class="line">RMAN&gt; restore database;</span><br></pre></td></tr></table></figure>
+<p>查看下快速恢复区&#x2F;审计目录&#x2F;数据文件目录，这三个目录有没有，没有一定要创建下<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220620002228.png"
+                     
+                ></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RMAN&gt; crosscheck archivelog all; --校验检查控制文件和实际物理文件的区别</span><br></pre></td></tr></table></figure>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607122904.png"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220620002738.png"
                      
                 ></p>
-<h2 id="６．提交备注"><a href="#６．提交备注" class="headerlink" title="６．提交备注"></a>６．提交备注</h2>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &#x27;first commit&#x27;</span><br><span class="line">这里提交备注</span><br></pre></td></tr></table></figure>
-<h2 id="７．推送本地项目到github"><a href="#７．推送本地项目到github" class="headerlink" title="７．推送本地项目到github"></a>７．推送本地项目到github</h2><p><code>  git push -u origin master</code></p>
-<blockquote>
-<p>由于新建的远程仓库是空的，所以要加上-u这个参数，等远程仓库里面有了内容之后，下次再从本地库上传内容的时候只需下面这样就可以了。<br>上传项目的过程可能需要等一段时间.</p>
-</blockquote>
-<p>这里可能踩坑</p>
-<ol>
-<li><p>超时<br><img  
+<p>如果归档文件校验有问题，将有问题的文件注册下<br><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607121350.png"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220620003019.png"
                      
-                ><br><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/w5688414/article/details/99816109" >处理方法<i class="fas fa-external-link-alt"></i></a></p>
-</li>
-<li><p>输入git密码不行，需要自己去生成token<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607121419.png"
-                     
-                ><br><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41010198/article/details/119698015" >处理方法<i class="fas fa-external-link-alt"></i></a></p>
-</li>
-</ol>
-<p>这时候你再重新刷新你的Github页面进入刚才新建的那个仓库里面就会发现项目已经成功上传了：</p>
-<h2 id="８．查看以前的commit"><a href="#８．查看以前的commit" class="headerlink" title="８．查看以前的commit"></a>８．查看以前的commit</h2>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --oneline</span><br></pre></td></tr></table></figure>
-<h2 id="９．添加tag"><a href="#９．添加tag" class="headerlink" title="９．添加tag"></a>９．添加tag</h2> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag -a v1.０.1 8a5cbc2</span><br><span class="line"> (commit的标识代码)</span><br></pre></td></tr></table></figure>
-<h2 id="１０．查看tag"><a href="#１０．查看tag" class="headerlink" title="１０．查看tag"></a>１０．查看tag</h2><p><code>  git tag</code></p>
-<h2 id="11．push-到github"><a href="#11．push-到github" class="headerlink" title="11．push 到github"></a>11．push 到github</h2>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin tag名</span><br></pre></td></tr></table></figure>
-<h2 id="12．本地创建并切换分支"><a href="#12．本地创建并切换分支" class="headerlink" title="12．本地创建并切换分支"></a>12．本地创建并切换分支</h2>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b 本地分支</span><br></pre></td></tr></table></figure>
-<h2 id="13．push到远端与原来不同的新分支"><a href="#13．push到远端与原来不同的新分支" class="headerlink" title="13．push到远端与原来不同的新分支"></a>13．push到远端与原来不同的新分支</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git push origin 本地分支:远端的分支</span><br><span class="line">如果是同名，则</span><br><span class="line">git push -u origin &lt;本地分支名&gt;</span><br></pre></td></tr></table></figure>
-
-<p>到目前为止，你已经把你想上传的文件放到本地仓库上了，也已经把本地仓库和远程仓库连起来了，现在需要把文件从本地仓库push到远程仓库<code>git push origin master</code></p>
+                ><br>如果报错，那么要手动的将截止日期作为结束点，需要手动下操作就行，归档就结束了</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607122454.png"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220620003121.png"
                      
                 ></p>
-<blockquote>
-<p>Tips1：通常在Linux上init后主分支是master，而GitHub上新建的仓库，默认主分支是main，所以直接push过去，会默认在GitHub远程仓库创建master分支<br>解决办法：<br>将本地的master分支改名为main分支；<br>或 push的时候指明git push origin master:main<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607122535.png"
-                     
-                ></p>
-</blockquote>
-<blockquote>
-<p>Tips2：查看目前已经关联的远程仓库：git remote<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607122615.png"
-                     
-                ></p>
-</blockquote>
-<blockquote>
-<p>Tips3：通常在GitHub端创建好仓库后会有license和readme文件，这时如果直接将本地仓库push到远程仓库就会出问题，因为远程已经有东西了，而这个东西你本地还没有，所以你需要先把远程仓库先pull到本地，然后再一块push过去<br>git pull origin main<br>git push origin main<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220607122719.png"
-                     
-                ></p>
-</blockquote>
-<h2 id="14．有大文件时，通过提示，先物理删除，然后git-rm-在仓库删除，然后在git-commit"><a href="#14．有大文件时，通过提示，先物理删除，然后git-rm-在仓库删除，然后在git-commit" class="headerlink" title="14．有大文件时，通过提示，先物理删除，然后git rm 在仓库删除，然后在git commit"></a>14．有大文件时，通过提示，先物理删除，然后git rm 在仓库删除，然后在git commit</h2><h2 id="15．拉取远端代码："><a href="#15．拉取远端代码：" class="headerlink" title="15．拉取远端代码："></a>15．拉取远端代码：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">git  pull     </span><br><span class="line">从远程拉取最新版本 到本地  自动合并 merge            </span><br><span class="line">git pull origin master</span><br><span class="line"></span><br><span class="line">git  fetch   </span><br><span class="line">从远程获取最新版本 到本地   不会自动合并 merge    </span><br><span class="line">git fetch  origin master       </span><br><span class="line">git log  -p master ../origin/master     </span><br><span class="line">git merge orgin/master</span><br><span class="line"></span><br><span class="line">实际使用中  使用git fetch 更安全    </span><br><span class="line">在merge之前可以看清楚 更新情况  再决定是否合并</span><br></pre></td></tr></table></figure>
-
-
-<blockquote>
-<p>上述都是基本操作，如果你需要更高级的操作或者对命令理解的更为透彻，建议看git教程<br>参考：<br><a class="link"   target="_blank" rel="noopener" href="https://www.yiibai.com/git/git_remote.html" >https://www.yiibai.com/git/git_remote.html<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/hxf0663/article/details/79527453" >https://blog.csdn.net/hxf0663/article/details/79527453<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://www.jianshu.com/p/ad148fda5860" >https://www.jianshu.com/p/ad148fda5860<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33755557/article/details/86217211ickoak/article/details/115579689" >https://blog.csdn.net/weixin_33755557/article/details/86217211ickoak/article/details/115579689<i class="fas fa-external-link-alt"></i></a></p>
-</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ORACLE开库</span><br><span class="line">RMAN&gt; sql &#x27;alter database open RESETLOGS&#x27;</span><br><span class="line"></span><br><span class="line">恢复后再确认下</span><br><span class="line"></span><br><span class="line">select status from v$instance;</span><br><span class="line"></span><br><span class="line">select table_name from user_tables;</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -404,11 +359,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：上传项目到GitHub</li>
+        <li>本文标题：Oracle Rman 自动备份与恢复</li>
         <li>本文作者：ドラゴンボールのLong</li>
-        <li>创建时间：2022-03-06 20:10:12</li>
+        <li>创建时间：2021-11-06 20:10:12</li>
         <li>
-            本文链接：https://zhongshenglong.xyz/2022/03/06/上传项目到GitHub/
+            本文链接：https://zhongshenglong.xyz/2021/11/06/Oracle-Rman-自动备份与恢复/
         </li>
         <li>
             版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -431,7 +386,11 @@
                     </li>
                 
                     <li class="tag-item">
-                        <a href="/tags/GitHub/">#GitHub</a>&nbsp;
+                        <a href="/tags/oracle/">#oracle</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%BF%83%E5%BE%97/">#心得</a>&nbsp;
                     </li>
                 
             </ul>
@@ -443,13 +402,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2022/03/06/Mysql%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E5%A4%87%E4%BB%BD%E5%92%8C%E8%BF%98%E5%8E%9F%E6%95%B0%E6%8D%AE%E5%BA%93/"
+                           href="/2022/01/06/%E6%95%B0%E4%BB%93%E5%88%86%E5%B1%82%E6%80%9D%E6%83%B3%E5%92%8C%E4%BD%9C%E7%94%A8/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Mysql使用命令备份和还原数据库</span>
+                                <span class="post-nav-title-item">数仓分层思想和作用</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -459,10 +418,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/01/06/%E6%95%B0%E4%BB%93%E5%88%86%E5%B1%82%E6%80%9D%E6%83%B3%E5%92%8C%E4%BD%9C%E7%94%A8/"
+                           href="/2021/11/02/Centos%E5%AE%89%E8%A3%85mysql5.7/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">数仓分层思想和作用</span>
+                                <span class="post-nav-title-item">Centos7安装mysql5.7</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -728,7 +687,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#linux%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AE%E5%88%B0github%EF%BC%8C%E5%8F%8A%E4%B8%80%E4%BA%9Bgit%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">linux上传项目到github，及一些git命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%91%EF%BC%8E%E5%9C%A8github%E5%88%9B%E5%BB%BA%E7%A9%BA%E4%BB%93%E5%BA%93-%E5%A6%82gitcode-%EF%BC%8E"><span class="nav-number">2.</span> <span class="nav-text">１．在github创建空仓库(如gitcode)．</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%92%EF%BC%8E%E5%9C%A8linux%E4%B8%8A%E5%AE%89%E8%A3%85git%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">２．在linux上安装git：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%93%EF%BC%8Elinux%E9%85%8D%E7%BD%AEGitHub%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">３．linux配置GitHub：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%94%EF%BC%8E%E5%9C%A8linux%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BB%93%E5%BA%93%E5%90%8C%E5%90%8D%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%B9%B6%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">４．在linux创建和仓库同名的文件夹并初始化：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%95%EF%BC%8E%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">５．添加文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%96%EF%BC%8E%E6%8F%90%E4%BA%A4%E5%A4%87%E6%B3%A8"><span class="nav-number">7.</span> <span class="nav-text">６．提交备注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%97%EF%BC%8E%E6%8E%A8%E9%80%81%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E5%88%B0github"><span class="nav-number">8.</span> <span class="nav-text">７．推送本地项目到github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%98%EF%BC%8E%E6%9F%A5%E7%9C%8B%E4%BB%A5%E5%89%8D%E7%9A%84commit"><span class="nav-number">9.</span> <span class="nav-text">８．查看以前的commit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%99%EF%BC%8E%E6%B7%BB%E5%8A%A0tag"><span class="nav-number">10.</span> <span class="nav-text">９．添加tag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%91%EF%BC%90%EF%BC%8E%E6%9F%A5%E7%9C%8Btag"><span class="nav-number">11.</span> <span class="nav-text">１０．查看tag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11%EF%BC%8Epush-%E5%88%B0github"><span class="nav-number">12.</span> <span class="nav-text">11．push 到github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12%EF%BC%8E%E6%9C%AC%E5%9C%B0%E5%88%9B%E5%BB%BA%E5%B9%B6%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF"><span class="nav-number">13.</span> <span class="nav-text">12．本地创建并切换分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13%EF%BC%8Epush%E5%88%B0%E8%BF%9C%E7%AB%AF%E4%B8%8E%E5%8E%9F%E6%9D%A5%E4%B8%8D%E5%90%8C%E7%9A%84%E6%96%B0%E5%88%86%E6%94%AF"><span class="nav-number">14.</span> <span class="nav-text">13．push到远端与原来不同的新分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14%EF%BC%8E%E6%9C%89%E5%A4%A7%E6%96%87%E4%BB%B6%E6%97%B6%EF%BC%8C%E9%80%9A%E8%BF%87%E6%8F%90%E7%A4%BA%EF%BC%8C%E5%85%88%E7%89%A9%E7%90%86%E5%88%A0%E9%99%A4%EF%BC%8C%E7%84%B6%E5%90%8Egit-rm-%E5%9C%A8%E4%BB%93%E5%BA%93%E5%88%A0%E9%99%A4%EF%BC%8C%E7%84%B6%E5%90%8E%E5%9C%A8git-commit"><span class="nav-number">15.</span> <span class="nav-text">14．有大文件时，通过提示，先物理删除，然后git rm 在仓库删除，然后在git commit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15%EF%BC%8E%E6%8B%89%E5%8F%96%E8%BF%9C%E7%AB%AF%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="nav-number">16.</span> <span class="nav-text">15．拉取远端代码：</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Oracle%E7%8E%AF%E5%A2%83%EF%BC%9AOracle-11gR2"><span class="nav-number">1.</span> <span class="nav-text">Oracle环境：Oracle 11gR2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%85%8D%E7%BD%AErman%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">一、配置rman自动备份：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E6%89%93%E5%BC%80%E5%BD%92%E6%A1%A3%E6%A8%A1%E5%BC%8F%E5%B9%B6%E4%BF%AE%E6%94%B9%E5%BD%92%E6%A1%A3%E8%B7%AF%E5%BE%84%EF%BC%9A"><span class="nav-number">1.1.1.</span> <span class="nav-text">1、打开归档模式并修改归档路径：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%88%9B%E5%BB%BA%E6%9C%AC%E5%9C%B0rman%E5%A4%87%E4%BB%BD%E5%AD%98%E5%82%A8%E7%9B%AE%E5%BD%95%EF%BC%9A"><span class="nav-number">1.1.2.</span> <span class="nav-text">2、创建本地rman备份存储目录：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E9%85%8D%E7%BD%AErman%E5%A4%87%E4%BB%BD%E5%8F%82%E6%95%B0%EF%BC%9A"><span class="nav-number">1.1.3.</span> <span class="nav-text">3、配置rman备份参数：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#rman%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">rman配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">备份数据文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD%E6%8E%A7%E5%88%B6%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">备份控制文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD%E5%8F%82%E6%95%B0%E6%96%87%E4%BB%B6%EF%BC%88%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E5%88%B0%E6%96%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%AD%EF%BC%89"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">备份参数文件（数据迁移到新服务器中）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%BA%90%E5%BA%93%E6%9F%A5%E7%9C%8B%E5%8F%82%E6%95%B0%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84"><span class="nav-number">1.1.3.4.1.</span> <span class="nav-text">源库查看参数文件路径</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A1%AE%E8%AE%A4%E7%9B%AE%E6%A0%87%E5%BA%93%E6%98%AF%E5%90%A6%E6%9C%89%E6%BA%90%E5%BA%93%E5%8F%82%E6%95%B0%E6%96%87%E4%BB%B6%E7%9A%84%E8%B7%AF%E5%BE%84%EF%BC%8C%E6%B2%A1%E6%9C%89%E5%88%99%E9%9C%80%E5%88%9B%E5%BB%BA"><span class="nav-number">1.1.3.4.2.</span> <span class="nav-text">确认目标库是否有源库参数文件的路径，没有则需创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%8F%82%E6%95%B0%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.3.4.3.</span> <span class="nav-text">关于参数文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D"><span class="nav-number">1.1.3.4.4.</span> <span class="nav-text">备份恢复</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
     </div>
 </div>
         </aside>
