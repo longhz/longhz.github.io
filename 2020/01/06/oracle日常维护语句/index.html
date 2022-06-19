@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="每日一句">
+    <meta name="author" content="ドラゴンボールのLong">
+    
+    <title>
+        
+            Oracle日常维护语句 |
+        
+        ドラゴンボールのBlog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"https://cdn.jsdelivr.net/gh/longhz/cdn@1.0/img/custom/avatar1.jpg","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"黄色的森林分出两条路，我选择了人迹更少的那一条，从此决定我一生的道路。"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                ドラゴンボールのBlog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Oracle日常维护语句</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="https://cdn.jsdelivr.net/gh/longhz/cdn@1.0/img/custom/avatar1.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">ドラゴンボールのLong</span>
+                        
+                            <span class="author-label">Lv3</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-01-06 21:10:12</span>
+        <span class="mobile">2020-01-06 21:10</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/oracle/">oracle</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%BF%83%E5%BE%97/">心得</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>4.6k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>22 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="常用语句"><a href="#常用语句" class="headerlink" title="常用语句"></a>常用语句</h1><h2 id="数据库启停"><a href="#数据库启停" class="headerlink" title="数据库启停"></a>数据库启停</h2><h3 id="监听启停"><a href="#监听启停" class="headerlink" title="监听启停"></a>监听启停</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">su - oracle</span><br><span class="line"></span><br><span class="line">--查看监听器命令</span><br><span class="line">lsnrctl status</span><br><span class="line"></span><br><span class="line">--监听器启动</span><br><span class="line">lsnrctl start </span><br><span class="line"></span><br><span class="line">--监听器停⽌</span><br><span class="line">lsnrctl stop  </span><br></pre></td></tr></table></figure>
+
+
+<h3 id="库启停"><a href="#库启停" class="headerlink" title="库启停"></a>库启停</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sqlplus / as sysdba</span><br><span class="line">#启动库</span><br><span class="line">SQL&gt;startup</span><br><span class="line">#关闭库</span><br><span class="line">SQL&gt;shutdown immediate</span><br></pre></td></tr></table></figure>
+
+<h3 id="oracle查看实例名"><a href="#oracle查看实例名" class="headerlink" title="oracle查看实例名"></a>oracle查看实例名</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select name,dbid from v$database;</span><br><span class="line">--或者</span><br><span class="line">show parameter db_name;</span><br><span class="line">--查看 pfile 文件位置</span><br><span class="line">show parameter pfile;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看-oracle版本"><a href="#查看-oracle版本" class="headerlink" title="查看 oracle版本"></a>查看 oracle版本</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select * from v$version;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询内存分配情况"><a href="#查询内存分配情况" class="headerlink" title="查询内存分配情况"></a>查询内存分配情况</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select * from v$sga;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看并发连接数"><a href="#查看并发连接数" class="headerlink" title="查看并发连接数"></a>查看并发连接数</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select count(*) from v$session where status=&#x27;ACTIVE&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="日志文件"><a href="#日志文件" class="headerlink" title="日志文件"></a>日志文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select * from v$logfile;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="查看控制文件"><a href="#查看控制文件" class="headerlink" title="查看控制文件"></a>查看控制文件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select name from v$controlfile;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="查看、管理-ORACLE-表"><a href="#查看、管理-ORACLE-表" class="headerlink" title="查看、管理 ORACLE 表"></a>查看、管理 ORACLE 表</h2><h3 id="查看所有-segment-的大小"><a href="#查看所有-segment-的大小" class="headerlink" title="查看所有 segment 的大小"></a>查看所有 segment 的大小</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Select Segment_Name,Sum(bytes)/1024/1024 From User_Extents Group By Segment_Name;</span><br></pre></td></tr></table></figure>
+<h3 id="查看某个表属于哪个表空间"><a href="#查看某个表属于哪个表空间" class="headerlink" title="查看某个表属于哪个表空间"></a>查看某个表属于哪个表空间</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select tablespace_name from all_tables where table_name=&#x27;SYS_EXPORT_FULL_01&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建表时指定表空间"><a href="#创建表时指定表空间" class="headerlink" title="创建表时指定表空间"></a>创建表时指定表空间</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt;create table a (name varchar(10)) tablespace test;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看数据库表结构"><a href="#查看数据库表结构" class="headerlink" title="查看数据库表结构"></a>查看数据库表结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; desc 表名;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看表的索引"><a href="#查看表的索引" class="headerlink" title="查看表的索引"></a>查看表的索引</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt;select index_name,index_type,table_name from user_indexes where table_name=&#x27;表名&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看用户序列"><a href="#查看用户序列" class="headerlink" title="查看用户序列"></a>查看用户序列</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select sequence_name from USER_SEQUENCES;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看用户触发器"><a href="#查看用户触发器" class="headerlink" title="查看用户触发器"></a>查看用户触发器</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select * from user_triggers where table_name = upper(&#x27;job&#x27;);</span><br><span class="line"></span><br><span class="line">--通过group by 语句使用rollup运算符汇总ID列</span><br><span class="line"></span><br><span class="line">SQL&gt; select ID,avg(age),sum(age),max(age),count(*)</span><br><span class="line">2 from job group by rollup(ID);</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改表的列名"><a href="#修改表的列名" class="headerlink" title="修改表的列名"></a>修改表的列名</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter table 表名 rename column 列名 to 新列名;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改表的列的字符大小"><a href="#修改表的列的字符大小" class="headerlink" title="修改表的列的字符大小"></a>修改表的列的字符大小</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter table student modify class varchar2(10);</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建主键"><a href="#创建主键" class="headerlink" title="创建主键"></a>创建主键</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter table 表名 add constraint 主键名 primary key(列名);</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="查询表空间使用情况"><a href="#查询表空间使用情况" class="headerlink" title="查询表空间使用情况"></a>查询表空间使用情况</h2><h3 id="表空间总体情况"><a href="#表空间总体情况" class="headerlink" title="表空间总体情况"></a>表空间总体情况</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">SELECT UPPER(F.TABLESPACE_NAME) &quot;表空间名&quot;,</span><br><span class="line">　　D.TOT_GROOTTE_MB &quot;表空间大小(G)&quot;,</span><br><span class="line">　　D.TOT_GROOTTE_MB - F.TOTAL_BYTES &quot;已使用空间(G)&quot;,</span><br><span class="line">　　--TO_CHAR(ROUND((D.TOT_GROOTTE_MB - F.TOTAL_BYTES) / D.TOT_GROOTTE_MB * 100,2),&#x27;990.99&#x27;) || &#x27;%&#x27; &quot;使用比&quot;,</span><br><span class="line">    TO_CHAR(ROUND((D.TOT_GROOTTE_MB - F.TOTAL_BYTES) / D.TOT_GROOTTE_MB * 100,2)) || &#x27;%&#x27; &quot;使用比&quot;,</span><br><span class="line">　　F.TOTAL_BYTES &quot;空闲空间(G)&quot;,</span><br><span class="line">　　F.MAX_BYTES &quot;最大块(G)&quot;</span><br><span class="line">    --,E.file_name &quot;存储位置&quot;</span><br><span class="line">　　FROM (SELECT TABLESPACE_NAME,</span><br><span class="line">　　ROUND(SUM(BYTES) / (1024 * 1024 * 1024), 2) TOTAL_BYTES,</span><br><span class="line">　　ROUND(MAX(BYTES) / (1024 * 1024 * 1024), 2) MAX_BYTES</span><br><span class="line">　　FROM SYS.DBA_FREE_SPACE</span><br><span class="line">　　GROUP BY TABLESPACE_NAME) F,</span><br><span class="line">　　(SELECT DD.TABLESPACE_NAME,</span><br><span class="line">　　 ROUND(SUM(DD.BYTES) / (1024 * 1024 * 1024), 2) TOT_GROOTTE_MB</span><br><span class="line">　　FROM SYS.DBA_DATA_FILES DD</span><br><span class="line">　　GROUP BY DD.TABLESPACE_NAME) D,</span><br><span class="line">    SYS.DBA_DATA_FILES E</span><br><span class="line">　　WHERE D.TABLESPACE_NAME = F.TABLESPACE_NAME</span><br><span class="line">　　ORDER BY 1;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询表空间的总容量"><a href="#查询表空间的总容量" class="headerlink" title="查询表空间的总容量"></a>查询表空间的总容量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select tablespace_name, sum(bytes) / 1024 / 1024 /1024 as &quot;大小（GB）&quot;</span><br><span class="line">　　from dba_data_files</span><br><span class="line">　　group by tablespace_name;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询表空间使用率"><a href="#查询表空间使用率" class="headerlink" title="查询表空间使用率"></a>查询表空间使用率</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">select total.tablespace_name,</span><br><span class="line">　　round(total.MB, 2) as Total_MB,</span><br><span class="line">　　round(total.MB - free.MB, 2) as Used_MB,</span><br><span class="line">　　round((1 - free.MB / total.MB) * 100, 2) || &#x27;%&#x27; as Used_Pct</span><br><span class="line">　　from (select tablespace_name, sum(bytes) / 1024 / 1024 as MB</span><br><span class="line">　　from dba_free_space</span><br><span class="line">　　group by tablespace_name) free,</span><br><span class="line">　　(select tablespace_name, sum(bytes) / 1024 / 1024 as MB</span><br><span class="line">　　from dba_data_files</span><br><span class="line">　　group by tablespace_name) total</span><br><span class="line">　　where free.tablespace_name = total.tablespace_name;</span><br></pre></td></tr></table></figure>
+
+<h2 id="监控当前数据库谁在运行什么SQL语句"><a href="#监控当前数据库谁在运行什么SQL语句" class="headerlink" title="监控当前数据库谁在运行什么SQL语句"></a>监控当前数据库谁在运行什么SQL语句</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select osuser, username, sql_text  </span><br><span class="line">from  v$session a, v$sqltext b </span><br><span class="line">where  a.sql_address =b.address order by address, piece;</span><br></pre></td></tr></table></figure>
+
+<h2 id="找使用CPU多的用户session"><a href="#找使用CPU多的用户session" class="headerlink" title="找使用CPU多的用户session"></a>找使用CPU多的用户session</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select a.sid,spid,status,substr(a.program,1,40) prog, a.terminal,osuser,value/60/100 value </span><br><span class="line">from  v$session a,v$process b,v$sesstat c </span><br><span class="line">where  c.statistic#=12 and  </span><br><span class="line">       c.sid=a.sid and  </span><br><span class="line">       a.paddr=b.addr  </span><br><span class="line">       order by value desc;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="等待最多的用户"><a href="#等待最多的用户" class="headerlink" title="等待最多的用户"></a>等待最多的用户</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT   s.SID, s.username, SUM (a.wait_time + a.time_waited) total_wait_time</span><br><span class="line">    FROM v$active_session_history a, v$session s</span><br><span class="line">   WHERE a.sample_time BETWEEN SYSDATE - 30 / 2880 </span><br><span class="line">   AND SYSDATE</span><br><span class="line">GROUP BY s.SID, s.username</span><br><span class="line">ORDER BY total_wait_time DESC;</span><br></pre></td></tr></table></figure>
+
+<h2 id="等待最多的SQL"><a href="#等待最多的SQL" class="headerlink" title="等待最多的SQL"></a>等待最多的SQL</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT   a.program, a.session_id, a.user_id, d.username, s.sql_text,</span><br><span class="line">         SUM (a.wait_time + a.time_waited) total_wait_time</span><br><span class="line">    FROM v$active_session_history a, v$sqlarea s, dba_users d</span><br><span class="line">   WHERE a.sample_time BETWEEN SYSDATE - 30 / 2880 AND SYSDATE</span><br><span class="line">     AND a.sql_id = s.sql_id</span><br><span class="line">     AND a.user_id = d.user_id</span><br><span class="line">GROUP BY a.program, a.session_id, a.user_id, s.sql_text, d.username;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看消耗资源最多的SQL"><a href="#查看消耗资源最多的SQL" class="headerlink" title="查看消耗资源最多的SQL"></a>查看消耗资源最多的SQL</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT hash_value, executions, buffer_gets, disk_reads, parse_calls</span><br><span class="line">FROM V$SQLAREA</span><br><span class="line">WHERE buffer_gets &gt; 10000000 OR disk_reads &gt; 1000000</span><br><span class="line">ORDER BY buffer_gets + 100 * disk_reads DESC;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看某条SQL语句的资源消耗"><a href="#查看某条SQL语句的资源消耗" class="headerlink" title="查看某条SQL语句的资源消耗"></a>查看某条SQL语句的资源消耗</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">查看某条SQL语句的资源消耗</span><br><span class="line">SELECT hash_value, buffer_gets, disk_reads, executions, parse_calls</span><br><span class="line">FROM V$SQLAREA</span><br><span class="line">WHERE hash_Value = 228801498 AND address = hextoraw(&#x27;CBD8E4B0&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询会话执行的实际SQL"><a href="#查询会话执行的实际SQL" class="headerlink" title="查询会话执行的实际SQL"></a>查询会话执行的实际SQL</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT   a.SID, a.username, s.sql_text</span><br><span class="line">    FROM v$session a, v$sqltext s</span><br><span class="line">   WHERE a.sql_address = s.address</span><br><span class="line">     AND a.sql_hash_value = s.hash_value</span><br><span class="line">     AND a.status = &#x27;ACTIVE&#x27;</span><br><span class="line">ORDER BY a.username, a.SID, s.piece;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看死锁信息"><a href="#查看死锁信息" class="headerlink" title="查看死锁信息"></a>查看死锁信息</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SELECT (SELECT username</span><br><span class="line">          FROM v$session</span><br><span class="line">         WHERE SID = a.SID) blocker, a.SID, &#x27;is blocking&#x27;,</span><br><span class="line">       (SELECT username</span><br><span class="line">          FROM v$session</span><br><span class="line">         WHERE SID = b.SID) blockee, b.SID</span><br><span class="line">  FROM v$lock a, v$lock b</span><br><span class="line"> WHERE a.BLOCK = 1 AND b.request &gt; 0 AND a.id1 = b.id1 AND a.id2 = b.id2;</span><br></pre></td></tr></table></figure>
+
+<h2 id="显示正在等待锁的所有会话"><a href="#显示正在等待锁的所有会话" class="headerlink" title="显示正在等待锁的所有会话"></a>显示正在等待锁的所有会话</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM DBA_WAITERS;</span><br></pre></td></tr></table></figure>
+
+<h2 id="oracle配置查询"><a href="#oracle配置查询" class="headerlink" title="oracle配置查询"></a>oracle配置查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;TERMINAL&#x27;) terminal, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;LANGUAGE&#x27;) language, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;SESSIONID&#x27;) sessionid, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;INSTANCE&#x27;) instance, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;ENTRYID&#x27;) entryid, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;ISDBA&#x27;) isdba, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;NLS_TERRITORY&#x27;) nls_territory, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;NLS_CURRENCY&#x27;) nls_currency, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;NLS_CALENDAR&#x27;) nls_calendar, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;NLS_DATE_FORMAT&#x27;) nls_date_format, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;NLS_DATE_LANGUAGE&#x27;) nls_date_language, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;NLS_SORT&#x27;) nls_sort, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;CURRENT_USER&#x27;) current_user, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;CURRENT_USERID&#x27;) current_userid, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;SESSION_USER&#x27;) session_user, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;SESSION_USERID&#x27;) session_userid, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;PROXY_USER&#x27;) proxy_user, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;PROXY_USERID&#x27;) proxy_userid, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;DB_DOMAIN&#x27;) db_domain, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;DB_NAME&#x27;) db_name, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;HOST&#x27;) host, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;OS_USER&#x27;) os_user, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;EXTERNAL_NAME&#x27;) external_name, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;IP_ADDRESS&#x27;) ip_address, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;NETWORK_PROTOCOL&#x27;) network_protocol, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;BG_JOB_ID&#x27;) bg_job_id, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;FG_JOB_ID&#x27;) fg_job_id, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;AUTHENTICATION_TYPE&#x27;) authentication_type, </span><br><span class="line">SYS_CONTEXT(&#x27;USERENV&#x27;,&#x27;AUTHENTICATION_DATA&#x27;) authentication_data </span><br><span class="line">from dual;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="切换字符集"><a href="#切换字符集" class="headerlink" title="切换字符集"></a>切换字符集</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#查看oracle数据库的字符集</span><br><span class="line">SQL&gt; select userenv(&#x27;language&#x27;) from dual;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看oracle数据库的编码"><a href="#查看oracle数据库的编码" class="headerlink" title="查看oracle数据库的编码"></a>查看oracle数据库的编码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select * from nls_database_parameters where parameter =&#x27;NLS_CHARACTERSET&#x27;;</span><br><span class="line">[oracledb@ ~]$ set NLS_LANG=AMERICAN_AMERICA.AL32UTF8     #windows_os</span><br><span class="line">[oracledb@ ~]$ export NLS_LANG=AMERICAN_AMERICA.AL32UTF8  #linux_os</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="查询当前oracle的并发连接数"><a href="#查询当前oracle的并发连接数" class="headerlink" title="查询当前oracle的并发连接数"></a>查询当前oracle的并发连接数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select count(*) from v$session where status=&#x27;ACTIVE&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看不同用户的连接数："><a href="#查看不同用户的连接数：" class="headerlink" title="查看不同用户的连接数："></a>查看不同用户的连接数：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select username,count(username) from v$session where username is not null group by username;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看所有用户："><a href="#查看所有用户：" class="headerlink" title="查看所有用户："></a>查看所有用户：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from all_users;</span><br></pre></td></tr></table></figure>
+
+<h3 id="当前的连接数"><a href="#当前的连接数" class="headerlink" title="当前的连接数"></a>当前的连接数</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select count(*) from v$process;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询当前连接会话数"><a href="#查询当前连接会话数" class="headerlink" title="查询当前连接会话数"></a>查询当前连接会话数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select s.value,s.sid,a.username</span><br><span class="line">from </span><br><span class="line">v$sesstat S,v$statname N,v$session A</span><br><span class="line">where </span><br><span class="line">n.statistic#=s.statistic# and</span><br><span class="line">name=&#x27;session pga memory&#x27;</span><br><span class="line">and s.sid=a.sid</span><br><span class="line">order by s.value;</span><br></pre></td></tr></table></figure>
+
+<h3 id="清除用户下连接进程"><a href="#清除用户下连接进程" class="headerlink" title="清除用户下连接进程"></a>清除用户下连接进程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter system kill session &#x27;204,4609&#x27;;</span><br><span class="line"></span><br><span class="line">SQL&gt; alter system kill session &#x27;399,5841&#x27;;</span><br><span class="line"></span><br><span class="line">SQL&gt; alter system kill session &#x27;590,6041&#x27;;</span><br><span class="line"></span><br><span class="line">修改processes和sessions值</span><br><span class="line">　　SQL&gt; alter system set processes=300 scope=spfile;</span><br><span class="line">　　系统已更改。</span><br><span class="line">　　SQL&gt; alter system set sessions=335 scope=spfile;</span><br><span class="line">　　系统已更改。</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>修改processes和sessions值必须重启oracle服务器才能生效<br>ORACLE的连接数(sessions)与其参数文件中的进程数(process)有关，它们的关系如下：<br>　　sessions&#x3D;(1.1*process+5)
+　　</p>
+</blockquote>
+<h3 id="数据库允许的最大连接数"><a href="#数据库允许的最大连接数" class="headerlink" title="数据库允许的最大连接数"></a>数据库允许的最大连接数</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select value from v$parameter where name = &#x27;processes&#x27;;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="查看数据库现有模式、是否归档"><a href="#查看数据库现有模式、是否归档" class="headerlink" title="查看数据库现有模式、是否归档"></a>查看数据库现有模式、是否归档</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQl&gt;select name,log_mode from v$database;</span><br></pre></td></tr></table></figure>
+
+
+<p>也可以用下面的语句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">archive log list；--(该方法需要as sysdba)</span><br></pre></td></tr></table></figure>
+
+
+<p>查看数据库的创建日期和归档方式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; Select Created, Log_Mode, Log_Mode From V$Database;</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置用户密码过期时间"><a href="#配置用户密码过期时间" class="headerlink" title="配置用户密码过期时间"></a>配置用户密码过期时间</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter profile &quot;default&quot; limit password_life_time unlimited; --配置用户密码永不过期</span><br><span class="line">alter profile &quot;default&quot; limit password_life_time 100; --配置用户密码100天过期</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="expdp与impdp"><a href="#expdp与impdp" class="headerlink" title="expdp与impdp"></a>expdp与impdp</h2><h4 id="整库导出命令"><a href="#整库导出命令" class="headerlink" title="整库导出命令"></a>整库导出命令</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exp system/itcast full=y 或者 exp system/itcast file=文件名 full=y</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="整库导入命令"><a href="#整库导入命令" class="headerlink" title="整库导入命令"></a>整库导入命令</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imp system/itcast full=y or imp system/itcast full=y file=water.dmp</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="按用户导出与导入"><a href="#按用户导出与导入" class="headerlink" title="按用户导出与导入"></a>按用户导出与导入</h3><h4 id="按用户导出"><a href="#按用户导出" class="headerlink" title="按用户导出"></a>按用户导出</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exp system/itcast owner=wateruser file=wateruser.dmp</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="按用户导入"><a href="#按用户导入" class="headerlink" title="按用户导入"></a>按用户导入</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imp system/itcast file=wateruser.dmp fromuser=wateruser</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="按表导出与导入"><a href="#按表导出与导入" class="headerlink" title="按表导出与导入"></a>按表导出与导入</h3><h4 id="按表导出"><a href="#按表导出" class="headerlink" title="按表导出"></a>按表导出</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exp wateruser/itcast file=a.dmp tables=t_account,a_area</span><br></pre></td></tr></table></figure>
+
+<h4 id="按表导入"><a href="#按表导入" class="headerlink" title="按表导入"></a>按表导入</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imp wateruser/itcast file=a.dmp tables=t_account,a_are</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="如何正确终止expdp与impdp任务，操作步骤如下："><a href="#如何正确终止expdp与impdp任务，操作步骤如下：" class="headerlink" title="如何正确终止expdp与impdp任务，操作步骤如下："></a>如何正确终止expdp与impdp任务，操作步骤如下：</h3><h4 id="步骤1"><a href="#步骤1" class="headerlink" title="步骤1"></a>步骤1</h4><p>查看视图dba_datapump_jobs</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select job_name,state from dba_datapump_jobs;</span><br></pre></td></tr></table></figure>
+
+<h4 id="步骤2"><a href="#步骤2" class="headerlink" title="步骤2"></a>步骤2</h4><p>正确停止expdp导出任务使用stop_job</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expdp USERNAME/USERPASSWORD@SIDNAME attach=SYS_EXPORT_SCHEMA_02</span><br></pre></td></tr></table></figure>
+
+<h4 id="步骤3"><a href="#步骤3" class="headerlink" title="步骤3"></a>步骤3</h4><p>停止任务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Export&gt; stop_job=immediate </span><br><span class="line">Are you sure you wish to stop this job ([yes]/no): yes</span><br></pre></td></tr></table></figure>
+
+<h4 id="步骤4"><a href="#步骤4" class="headerlink" title="步骤4"></a>步骤4</h4><p>查看系统中的备份job状态</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select owner_name,job_name ,state from dba_datapump_jobs;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#扩展：下列命令在交互模式下有效：</span><br><span class="line">HELP： 总结交互命令。</span><br><span class="line">KILL_JOB： 分离和删除作业。</span><br><span class="line">PARALLEL： 更改当前作业的活动 worker 的数目。</span><br><span class="line">PARALLEL=.2</span><br><span class="line">START_JOB： 启动/恢复当前作业。</span><br><span class="line">START_JOB=SKIP_CURRENT 在开始作业之前将跳过作业停止时执行的任意操作。</span><br><span class="line">STATUS ：在默认值（0）将显示可用时的新状态的情况下，要监视的频率（以秒计）作业状态。</span><br><span class="line">STATUS[=interval]</span><br><span class="line">STOP_JOB： 顺序关闭执行的作业并退出客户机。</span><br><span class="line">STOP_JOB=IMMEDIATE 将立即关闭数据泵作业。</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建、管理-Oracle-表空间"><a href="#创建、管理-Oracle-表空间" class="headerlink" title="创建、管理 Oracle 表空间"></a>创建、管理 Oracle 表空间</h2><h3 id="先查询空闲空间"><a href="#先查询空闲空间" class="headerlink" title="先查询空闲空间"></a>先查询空闲空间</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select tablespace_name,file_id,block_id,bytes,blocks from dba_free_space;</span><br></pre></td></tr></table></figure>
+
+<h3 id="增加-Oracle-表空间"><a href="#增加-Oracle-表空间" class="headerlink" title="增加 Oracle 表空间"></a>增加 Oracle 表空间</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">--先查询数据文件名称、大小和路径的信息，语句如下：</span><br><span class="line">select tablespace_name,file_id,bytes,file_name from dba_data_files;</span><br><span class="line"></span><br><span class="line">--修改文件大小语句如下</span><br><span class="line">alter database datafile</span><br><span class="line">&#x27;需要增加的数据文件路径，即上面查询出来的路径</span><br><span class="line">&#x27;resize 800M;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="创建-Oracle-表空间"><a href="#创建-Oracle-表空间" class="headerlink" title="创建 Oracle 表空间"></a>创建 Oracle 表空间</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">create tablespace test</span><br><span class="line">datafile &#x27;/home/app/oracle/oradata/oracle8i/test01.dbf&#x27; size 8M</span><br><span class="line">autoextend on</span><br><span class="line">next 5M</span><br><span class="line">maxsize 10M;</span><br><span class="line"></span><br><span class="line">create tablespace sales</span><br><span class="line">datafile &#x27;/home/app/oracle/oradata/oracle8i/sales01.dbf&#x27; size 800M</span><br><span class="line">autoextend on</span><br><span class="line">next 50M</span><br><span class="line">maxsize unlimited</span><br><span class="line">maxsize unlimited 是大小不受限制</span><br><span class="line"></span><br><span class="line">create tablespace sales</span><br><span class="line">datafile &#x27;/home/app/oracle/oradata/oracle8i/sales01.dbf&#x27; size 800M</span><br><span class="line">autoextend on</span><br><span class="line">next 50M</span><br><span class="line">maxsize 1000M</span><br><span class="line">extent management local uniform;</span><br><span class="line">unform表示区的大小相同，默认为1M</span><br><span class="line"></span><br><span class="line">create tablespace sales</span><br><span class="line">datafile &#x27;/home/app/oracle/oradata/oracle8i/sales01.dbf&#x27; size 800M</span><br><span class="line">autoextend on</span><br><span class="line">next 50M</span><br><span class="line">maxsize 1000M</span><br><span class="line">extent management local uniform size 500K;</span><br><span class="line">unform size 500K表示区的大小相同，为500K</span><br><span class="line"></span><br><span class="line">create tablespace sales</span><br><span class="line">datafile &#x27;/home/app/oracle/oradata/oracle8i/sales01.dbf&#x27; size 800M</span><br><span class="line">autoextend on</span><br><span class="line">next 50M</span><br><span class="line">maxsize 1000M</span><br><span class="line">extent management local autoallocate;</span><br><span class="line">--autoallocate表示区的大小由随表的大小自动动态改变，大表使用大区小表使用小区</span><br><span class="line"></span><br><span class="line">create tablespace sales</span><br><span class="line">datafile &#x27;/home/app/oracle/oradata/oracle8i/sales01.dbf&#x27; size 800M</span><br><span class="line">autoextend on</span><br><span class="line">next 50M</span><br><span class="line">maxsize 1000M</span><br><span class="line">temporary;</span><br><span class="line">--temporary创建字典管理临时表空间 ，要创建本地管理临时表空间要加temporary tablespace关键字</span><br><span class="line"></span><br><span class="line">create temporary tablespace sales</span><br><span class="line">tempfile &#x27;/home/app/oracle/oradata/oracle8i/sales01.dbf&#x27; size 800M</span><br><span class="line">autoextend on</span><br><span class="line">next 50M</span><br><span class="line">maxsize 1000M</span><br><span class="line">--创建本地管理临时表空间，如果是临时表空间，所有语句中的datafile都换为tempfile ，所有语句中的datafile都换为tempfile8i</span><br><span class="line"></span><br><span class="line">--为表空间增加数据文件：</span><br><span class="line">alter tablespace sales add</span><br><span class="line">datafile &#x27;/home/app/oracle/oradata/oracle8i/sales02.dbf&#x27; size 800M</span><br><span class="line">autoextend on next 50M</span><br><span class="line">maxsize 1000M; </span><br></pre></td></tr></table></figure>
+
+<h3 id="查看表空间是否自动扩展"><a href="#查看表空间是否自动扩展" class="headerlink" title="查看表空间是否自动扩展"></a>查看表空间是否自动扩展</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select file_id,file_name,tablespace_name,autoextensible,increment_by from dba_data_files order by file_id desc;</span><br></pre></td></tr></table></figure>
+
+<h3 id="更改自动扩展属性："><a href="#更改自动扩展属性：" class="headerlink" title="更改自动扩展属性："></a>更改自动扩展属性：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">alter database datafile</span><br><span class="line">&#x27;/home/app/oracle/oradata/oracle8i/sales01.dbf&#x27;,</span><br><span class="line">&#x27;/home/app/oracle/oradata/oracle8i/sales02.dbf&#x27;</span><br><span class="line">&#x27;/home/app/oracle/oradata/oracle8i/sales01.dbf</span><br><span class="line">autoextend off</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="表空间的查看与修改"><a href="#表空间的查看与修改" class="headerlink" title="表空间的查看与修改"></a>表空间的查看与修改</h2><h3 id="查看用户默认表空间"><a href="#查看用户默认表空间" class="headerlink" title="查看用户默认表空间"></a>查看用户默认表空间</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select username,default_tablespace from dba_users;查看所有用户的默认表空间</span><br><span class="line"></span><br><span class="line">SQL&gt; select username,default_tablespace from user_users;查看某个用户的默认表空间，前提需要connect该用户。</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select USERNAME,DEFAULT_TABLESPACE,TEMPORARY_TABLESPACE from dba_users where username = &#x27;hr&#x27;; 查看用户对应的默认表空间</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="修改用户默认表空间"><a href="#修改用户默认表空间" class="headerlink" title="修改用户默认表空间"></a>修改用户默认表空间</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter user zhanghr default tablespace test;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="设置数据库的默认临时表空间"><a href="#设置数据库的默认临时表空间" class="headerlink" title="设置数据库的默认临时表空间"></a>设置数据库的默认临时表空间</h3><p>SQL&gt;Alter database default temporary tablespace temp_tbs_name;</p>
+<h3 id="查看用户和默认表空间的关系"><a href="#查看用户和默认表空间的关系" class="headerlink" title="查看用户和默认表空间的关系"></a>查看用户和默认表空间的关系</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt;select username,default_tablespace from dba_users;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="查看临时表空间"><a href="#查看临时表空间" class="headerlink" title="查看临时表空间"></a>查看临时表空间</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select file_name,file_id,blocks,user_blocks from dba_temp_files；</span><br><span class="line"></span><br><span class="line">SQL&gt; select tablespace_name,current_users,total_blocks,used_blocks,free_blocks from v$sort_segment;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="查看-undo-表空间"><a href="#查看-undo-表空间" class="headerlink" title="查看 undo 表空间"></a>查看 undo 表空间</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; show parameter undo;</span><br><span class="line"></span><br><span class="line">NAME TYPE VALUE</span><br><span class="line">------------------------------------ ----------- ------------------------------</span><br><span class="line">undo_management string AUTO</span><br><span class="line">undo_retention integer 900</span><br><span class="line">undo_tablespace string UNDOTBS1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="查看-undo-表空间大小"><a href="#查看-undo-表空间大小" class="headerlink" title="查看 undo 表空间大小"></a>查看 undo 表空间大小</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select sum(bytes)/1024/1024 &quot;current undo size(M)&quot; from dba_data_files where tablespace_name=&#x27;UNDOTBS1&#x27;;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="通过增加数据文件来改变-undo-表空间大小"><a href="#通过增加数据文件来改变-undo-表空间大小" class="headerlink" title="通过增加数据文件来改变 undo 表空间大小"></a>通过增加数据文件来改变 undo 表空间大小</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter tablespace undotbs1</span><br><span class="line">add datafile &#x27;/oracle/oradata/orc6/undo02.dbf&#x27; size 10M;</span><br><span class="line">复制代码</span><br><span class="line">2.6.10 通过 resize 更改数据文件大小</span><br><span class="line">SQL&gt; alter database datafile &#x27;/oracle/oradata/orc6/undo02.dbf&#x27; resize 100M;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="查看某个表空间的数据文件"><a href="#查看某个表空间的数据文件" class="headerlink" title="查看某个表空间的数据文件"></a>查看某个表空间的数据文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select file_name,tablespace_name,bytes/1024/1024 &quot;bytes MB&quot;,maxbytes/1024/1024 &quot;maxbytes MB&quot; from dba_data_files where tablespace_name=&#x27;ORA1TBS&#x27;;指定表空间名要大写</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="查看所有表空间大小"><a href="#查看所有表空间大小" class="headerlink" title="查看所有表空间大小"></a>查看所有表空间大小</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select tablespace_name,sum(bytes)/1024/1024 from dba_data_files</span><br><span class="line">group by tablespace_name;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="查看已使用的表空间大小"><a href="#查看已使用的表空间大小" class="headerlink" title="查看已使用的表空间大小"></a>查看已使用的表空间大小</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select tablespace_name,sum(bytes)/1024/1024 from dba_free_space</span><br><span class="line">group by tablespace_name;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="清理（还原时出错，清用户表空间）"><a href="#清理（还原时出错，清用户表空间）" class="headerlink" title="清理（还原时出错，清用户表空间）"></a>清理（还原时出错，清用户表空间）</h2><h3 id="1、删除数据表空间："><a href="#1、删除数据表空间：" class="headerlink" title="1、删除数据表空间："></a>1、删除数据表空间：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#执行语句：</span><br><span class="line">[oracledb@ ~]$ sqlplus / as sysdbaSQL&gt; drop tablespace mepro_data including contents and datafiles cascade constraint;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、删除临时表空间："><a href="#2、删除临时表空间：" class="headerlink" title="2、删除临时表空间："></a>2、删除临时表空间：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#执行语句：</span><br><span class="line"></span><br><span class="line">SQL&gt; drop tablespace mepro_temp including contents and datafiles cascade constraints;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、删除用户："><a href="#3、删除用户：" class="headerlink" title="3、删除用户："></a>3、删除用户：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#执行语句：</span><br><span class="line">SQL&gt; drop user srmhdld cascade;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、报用户正在连接，无法删除的解决方法"><a href="#4、报用户正在连接，无法删除的解决方法" class="headerlink" title="4、报用户正在连接，无法删除的解决方法"></a>4、报用户正在连接，无法删除的解决方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">---方法1：重启并迅速执行drop user语句（个人推荐）</span><br><span class="line">SQL&gt; shutdown immediate;</span><br><span class="line">SQL&gt; startup</span><br><span class="line"></span><br><span class="line">--方法2：删除正在连接的session（连接的session连接着很多时，清理耗时，没有方法1快速）</span><br><span class="line"></span><br><span class="line">#查询用户会话</span><br><span class="line">SQL&gt; select username,serial#,sid,program,machine,status from v$session where username=&#x27;USERNAME&#x27; AND STATUS=&#x27;ACTIVE&#x27;;</span><br><span class="line">SQL&gt; select saddr,sid,serial#,paddr,username,status from v$session where username is not null;</span><br><span class="line"></span><br><span class="line">---删除相关用户会话</span><br><span class="line">SQL&gt; alter system kill session &#x27;serial#, sid&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看、管理-ORACLE-数据文件"><a href="#查看、管理-ORACLE-数据文件" class="headerlink" title="查看、管理 ORACLE 数据文件"></a>查看、管理 ORACLE 数据文件</h2><h3 id="查看数据文件"><a href="#查看数据文件" class="headerlink" title="查看数据文件"></a>查看数据文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select name from v$datafile;</span><br></pre></td></tr></table></figure>
+
+<h3 id="更改数据文件大小"><a href="#更改数据文件大小" class="headerlink" title="更改数据文件大小"></a>更改数据文件大小</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter database datafile &#x27;/oradata2/hisvhfs/undotbs01.dbf&#x27; resize 30G;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="查看用户所有表空间及对应的数据文件和数据文件大小"><a href="#查看用户所有表空间及对应的数据文件和数据文件大小" class="headerlink" title="查看用户所有表空间及对应的数据文件和数据文件大小"></a>查看用户所有表空间及对应的数据文件和数据文件大小</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select tablespace_name, file_id, file_name, round(bytes/(1024*1024),0) total_space from dba_data_files order by tablespace_name;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="查看数据文件状态及大小"><a href="#查看数据文件状态及大小" class="headerlink" title="查看数据文件状态及大小"></a>查看数据文件状态及大小</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select name,BYTES,STATUS ,FILE# from v$datafile;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="创建、配置新用户及查看用户属性"><a href="#创建、配置新用户及查看用户属性" class="headerlink" title="创建、配置新用户及查看用户属性"></a>创建、配置新用户及查看用户属性</h2><h3 id="解锁新用户："><a href="#解锁新用户：" class="headerlink" title="解锁新用户："></a>解锁新用户：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter user scott account unlock；</span><br><span class="line">SQL&gt; alter user scott identified by tiger;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="删除oracle用户："><a href="#删除oracle用户：" class="headerlink" title="删除oracle用户："></a>删除oracle用户：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt;drop user username cascade; (删除与用户相关的所有对象)</span><br></pre></td></tr></table></figure>
+
+
+<p>这样该用户包括该用户下的表，试图，同义词，过程，索引，及相关的一切就删除了。</p>
+<p>创建用户并赋权限以及设置默认表空间。</p>
+<p>以sysdba用户登陆进行以下设置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-- Create the user</span><br><span class="line">create user VHFSM</span><br><span class="line">identified by vhnj1fsm</span><br><span class="line">default tablespace MGRVHFSTBSDEF 此处是设置默认表空间。</span><br><span class="line">temporary tablespace TEMP</span><br><span class="line">profile DEFAULT</span><br><span class="line">quota unlimited on mgrvhfstbs2010 此处是设置可操作的其他表空间</span><br><span class="line">quota unlimited on mgrvhfstbsdef;</span><br><span class="line">-- Grant/Revoke role privileges</span><br><span class="line">grant connect to VHFSM;</span><br><span class="line">grant dba to VHFSM;</span><br><span class="line">-- Grant/Revoke system privileges</span><br><span class="line">grant unlimited tablespace to VHFSM;</span><br></pre></td></tr></table></figure>
+
+
+<p>查看用户及角色权限</p>
+<h3 id="1-查看所有用户："><a href="#1-查看所有用户：" class="headerlink" title="1.查看所有用户："></a>1.查看所有用户：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select * from dba_users;</span><br><span class="line">select * from all_users;</span><br><span class="line">select * from user_users;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="2-查看用户或角色系统权限-直接赋值给用户或角色的系统权限-："><a href="#2-查看用户或角色系统权限-直接赋值给用户或角色的系统权限-：" class="headerlink" title="2.查看用户或角色系统权限(直接赋值给用户或角色的系统权限)："></a>2.查看用户或角色系统权限(直接赋值给用户或角色的系统权限)：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from dba_sys_privs;</span><br><span class="line">select * from user_sys_privs;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="3-查看角色-只能查看登陆用户拥有的角色-所包含的权限"><a href="#3-查看角色-只能查看登陆用户拥有的角色-所包含的权限" class="headerlink" title="3.查看角色(只能查看登陆用户拥有的角色)所包含的权限"></a>3.查看角色(只能查看登陆用户拥有的角色)所包含的权限</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sql&gt;select * from role_sys_privs;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="4-查看用户对象权限："><a href="#4-查看用户对象权限：" class="headerlink" title="4.查看用户对象权限："></a>4.查看用户对象权限：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select * from dba_tab_privs;</span><br><span class="line">select * from all_tab_privs;</span><br><span class="line">select * from user_tab_privs;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="5-查看所有角色："><a href="#5-查看所有角色：" class="headerlink" title="5.查看所有角色："></a>5.查看所有角色：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from dba_roles;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="6-查看用户或角色所拥有的角色："><a href="#6-查看用户或角色所拥有的角色：" class="headerlink" title="6.查看用户或角色所拥有的角色："></a>6.查看用户或角色所拥有的角色：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from dba_role_privs;</span><br><span class="line">select * from user_role_privs;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="7-查看哪些用户有sysdba或sysoper系统权限-查询时需要相应权限"><a href="#7-查看哪些用户有sysdba或sysoper系统权限-查询时需要相应权限" class="headerlink" title="7.查看哪些用户有sysdba或sysoper系统权限(查询时需要相应权限)"></a>7.查看哪些用户有sysdba或sysoper系统权限(查询时需要相应权限)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">select * from V$PWFILE_USERS</span><br><span class="line"></span><br><span class="line">--注意：</span><br><span class="line">--1、以下语句可以查看Oracle提供的系统权限</span><br><span class="line"></span><br><span class="line">select name from sys.system_privilege_map</span><br><span class="line"></span><br><span class="line">--2、查看一个用户的所有系统权限(包含角色的系统权限)</span><br><span class="line"></span><br><span class="line">SELECT privilege</span><br><span class="line">FROM dba_sys_privs</span><br><span class="line">WHERE grantee = &#x27;DATAUSER&#x27;</span><br><span class="line">UNION</span><br><span class="line">SELECT privilege</span><br><span class="line">FROM dba_sys_privs</span><br><span class="line">WHERE grantee IN (SELECT granted_role FROM dba_role_privs WHERE grantee = &#x27;DATAUSER&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据库游标设置"><a href="#数据库游标设置" class="headerlink" title="数据库游标设置"></a>数据库游标设置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; show parameter open_cursors; 查看游标参数</span><br><span class="line">SQL&gt; select count(*) from v$open_cursor; 查看打开的游标</span><br><span class="line">SQL&gt; select name,value from v$sysstat where name =&#x27;opened cursors current&#x27;;查看当前打开的游标</span><br><span class="line">SQL&gt; alter system set open_cursors=3000 scope=both; 修改默认游标数</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="查看、配置-ORACLE-重做日志"><a href="#查看、配置-ORACLE-重做日志" class="headerlink" title="查看、配置 ORACLE 重做日志"></a>查看、配置 ORACLE 重做日志</h2><h3 id="创建日志文件组"><a href="#创建日志文件组" class="headerlink" title="创建日志文件组"></a>创建日志文件组</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter database add logfile group 4</span><br><span class="line">(</span><br><span class="line">&#x27;/oracle/oradata/orc6/redo04.log&#x27;</span><br><span class="line">)</span><br><span class="line">size 10M;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看日志文件组"><a href="#查看日志文件组" class="headerlink" title="查看日志文件组"></a>查看日志文件组</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select group#,status,member from v$logfile;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="为日志文件组增加日志文件"><a href="#为日志文件组增加日志文件" class="headerlink" title="为日志文件组增加日志文件"></a>为日志文件组增加日志文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter database add logfile member &#x27;/oracle/oradata/orc6/redo05.log&#x27; to group 3;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="查看日志文件大小"><a href="#查看日志文件大小" class="headerlink" title="查看日志文件大小"></a>查看日志文件大小</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select GROUP#,BYTES,BLOCKSIZE,MEMBERS from v$log;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="desc-的常用查询"><a href="#desc-的常用查询" class="headerlink" title="desc 的常用查询"></a>desc 的常用查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; desc dba_temp_files; 查询临时表空间</span><br><span class="line">SQL&gt; desc v$database; 查看数据库</span><br><span class="line">SQL&gt; desc dba_data_files; 查看数据文件</span><br><span class="line">SQL&gt; desc user_segments; 查看oracle segment（段）</span><br><span class="line">SQL&gt; desc dba_segments; 查看ORACLE segment</span><br><span class="line">SQL&gt; desc dba_tables; 查看表</span><br><span class="line">SQL&gt; desc dba_objects 查看对象</span><br><span class="line">SQL&gt; desc dba_users; 查看用户</span><br><span class="line">SQL&gt; desc dba_tablespaces; 查看表空间</span><br><span class="line">SQL&gt; desc user_segments; 查看数据段</span><br><span class="line">SQL&gt; desc dba_jobs； 查看job</span><br><span class="line">SQL&gt; desc dba_role_privs； 查看角色权限</span><br><span class="line">SQL&gt; desc dba_constraints 查看约束</span><br><span class="line">SQL&gt; desc dba_cons_columns 查看列约束</span><br><span class="line">SQL&gt; show parameter log_archive_dest; 查看archive log所在位置</span><br><span class="line">SQL&gt; archive log list; 查看归档目录以及log sequence</span><br><span class="line">SQL&gt; select * from V$FLASH_RECOVERY_AREA_USAGE; 查看flash_recovery_area 使用情况。</span><br><span class="line">SQL&gt; select sum(percent_space_used)*3/100 from v$flash_recovery_area_usage; 计算flash_recovery_area已经占用的空间。</span><br><span class="line">SQL&gt; show parameter recover; 查找recovery目录</span><br><span class="line">SQL&gt; desc v$process 通过v$process视图，我们获的是当前系统中所有进程信息，包括“后台进程”，也包括“服务器进程”。</span><br><span class="line">SQL&gt; select addr, program from v$process;</span><br><span class="line">SQL&gt; desc v$bgprocess 通过v$bgprocess视图,我们获得当前系统中启动的Oracle“后台进程”信息</span><br><span class="line">SQL&gt; select paddr, name from v$bgprocess where paddr&lt;&gt;&#x27;00&#x27;;</span><br><span class="line">通过v$bgprocess.paddr与v$process.addr关联起来的，关联后查询结果显而易见只会有Oracle“后台进程”的信息</span><br><span class="line">SQL&gt; select a.paddr, a.name, a.description from v$bgprocess a, v$process b where a.paddr=b.addr;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看-ASM-磁盘组信息"><a href="#查看-ASM-磁盘组信息" class="headerlink" title="查看 ASM 磁盘组信息"></a>查看 ASM 磁盘组信息</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; desc v$asm_disk；</span><br><span class="line"></span><br><span class="line">SQL&gt; desc v$asm_diskgroup;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="1）扩展1："><a href="#1）扩展1：" class="headerlink" title="1）扩展1："></a>1）扩展1：</h3><p>情况1、高版本往低版本导出还原时，如12往11还原时，在12c执行导出时，添加低版本的版本号version&#x3D;11.1.0.2.0</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#格式：</span><br><span class="line"></span><br><span class="line">[oracledb@ ~]$ expdp USERNAME/USERPASSWORD@SIDNAME schemas=SCHEMASNAME dumpfile=XXX.dmp DIRECTORY=dir_dump version=11.1.0.2.0</span><br></pre></td></tr></table></figure>
+
+<p>情况2、低版本往高版本还原时，高版本一般兼容低版本，目前个人运维工作中11往12还原没遇到什么问题。</p>
+<h3 id="2）扩展2："><a href="#2）扩展2：" class="headerlink" title="2）扩展2："></a>2）扩展2：</h3><p>（1）、按指定大小备份，如每份5G大小（parallel是多线程处理，线程数要小于生成文件个数，线程要小于 cpu 线程数）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#备份格式</span><br><span class="line"></span><br><span class="line">[oracledb@ ~]$ expdp USERNAME/USERPASSWORD@SIDNAME schemas=SCHEMASNAME DIRECTORY=dir_dump dumpfile=XXX_%U.dmp logfile=expdpXXX.log filesize=5G parallel=16</span><br></pre></td></tr></table></figure>
+
+<p>（2）、多个备份文件还原：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#还原格式</span><br><span class="line"></span><br><span class="line">[oracledb@ ~]$ impdp USERNAME/USERPASSWORD@SIDNAME schemas=SCHEMASNAME DIRECTORY=dir_dump dumpfile=XXX_%U.dmp logfile=impdpXXX.log parallel=16</span><br></pre></td></tr></table></figure>
+
+<h3 id="3）扩展3导出过滤不导出某张表："><a href="#3）扩展3导出过滤不导出某张表：" class="headerlink" title="3）扩展3导出过滤不导出某张表："></a>3）扩展3导出过滤不导出某张表：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#格式</span><br><span class="line"></span><br><span class="line">[oracledb@ ~]$ expdp USERNAME/USERPASSWORD@SIDNAME schemas=SCHEMASNAME DIRECTORY=dir_dump dumpfile=XXX.dmp  exclude=TABLE:\&quot;IN \&#x27;TABLENAME\&#x27;\&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4）扩展4不同库还原时不改变数据结构使用truncate参数："><a href="#4）扩展4不同库还原时不改变数据结构使用truncate参数：" class="headerlink" title="4）扩展4不同库还原时不改变数据结构使用truncate参数："></a>4）扩展4不同库还原时不改变数据结构使用truncate参数：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#格式</span><br><span class="line">[oracledb@ ~]$ impdp USERNAME/USERPASSWORD@SIDNAME schemas=SCHEMASNAME DIRECTORY=dir_dump dumpfile=XXX.dmp remap_schema=源SCHEMASNAME:目标SCHEMASNAME remap_tablespace=源_data:目标_data TABLE_EXISTS_ACTION=truncate</span><br></pre></td></tr></table></figure>
+
+<h3 id="5）扩展5导出备份时保留表，清除表数据-query参数-："><a href="#5）扩展5导出备份时保留表，清除表数据-query参数-：" class="headerlink" title="5）扩展5导出备份时保留表，清除表数据(query参数)："></a>5）扩展5导出备份时保留表，清除表数据(query参数)：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#格式</span><br><span class="line">[oracledb@ ~]$ expdp USERNAME/USERPASSWORD@SIDNAME schemas=SCHEMASNAME DIRECTORY=dir_dump dumpfile=XXX.dmp logfile=expdpXXX.log  query=TABLENAME1:&#x27;&quot; where 1=2&quot;&#x27;,TABLENAME2:&#x27;&quot; where 1=2&quot;&#x27;,........</span><br></pre></td></tr></table></figure>
+
+<h3 id="6）扩展6导出备份时保留表，清除表数据，同时过滤某两张表"><a href="#6）扩展6导出备份时保留表，清除表数据，同时过滤某两张表" class="headerlink" title="6）扩展6导出备份时保留表，清除表数据，同时过滤某两张表"></a>6）扩展6导出备份时保留表，清除表数据，同时过滤某两张表</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#格式</span><br><span class="line">[oracledb@ ~]$ expdp USERNAME/USERPASSWORD@SIDNAME schemas=SCHEMASNAME DIRECTORY=dir_dump dumpfile=XXX.dmp logfile=expdpXXX.log  query=TABLENAME1:&#x27;&quot; where 1=2&quot;&#x27;,TABLENAME2:&#x27;&quot; where 1=2&quot;&#x27; exclude=TABLE:\&quot;IN \&#x27;TABLENAME1\&#x27;\&#x27;TABLENAME2\&#x27;\&quot;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="7）扩展7仅统计数据库各表数据，但不导出，参数estimate-only-x3D-y"><a href="#7）扩展7仅统计数据库各表数据，但不导出，参数estimate-only-x3D-y" class="headerlink" title="7）扩展7仅统计数据库各表数据，但不导出，参数estimate_only&#x3D;y"></a>7）扩展7仅统计数据库各表数据，但不导出，参数estimate_only&#x3D;y</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#格式</span><br><span class="line">[oracledb@ ~]$ expdp USERNAME/USERPASSWORD@SIDNAME schemas=SCHEMASNAME DIRECTORY=dir_dump estimate_only=y</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：Oracle日常维护语句</li>
+        <li>本文作者：ドラゴンボールのLong</li>
+        <li>创建时间：2020-01-06 21:10:12</li>
+        <li>
+            本文链接：https://zhongshenglong.xyz/2020/01/06/oracle日常维护语句/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%8A%80%E6%9C%AF/">#技术</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/oracle/">#oracle</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%BF%83%E5%BE%97/">#心得</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/02/03/tuchuang/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">搭建个人博客图床</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2019/07/19/sdjx/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">比起不停地获取大量的讯息，更重要的是学会屏蔽。</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;评论</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: '2TGCOmDNikdxOnVmQJEFhTOK-gzGzoHsz',
+                    appKey: 'lU21jvewvcy043UjfpHRXfvA',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'zh-CN'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'ドラゴンボールのLong';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+		year - 作为date对象的年份，为4位年份值
+		month - 0-11之间的整数，做为date对象的月份
+		day - 1-31之间的整数，做为date对象的天数
+		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+		minutes - 0-59之间的整数，做为date对象的分钟数
+		seconds - 0-59之间的整数，做为date对象的秒数
+		microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+		var t1 = Date.UTC(2019,04,09,21,47,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML="❤亲爱的旅客,我已与你/妳相遇❤❤❤"+" 第 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒❤";
+	}/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+	siteTime();
+</script>
+
+<footer class="footer">
+    <div class="info-container">
+        
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2019</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">ドラゴンボールのLong</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <!-- 
+        <div class="theme-info info-item">
+            <!-- %- __('powered_by', '<a target="_blank" href="https://hexo.io">Hexo</a>') &nbsp;|&nbsp;<!-- %- __('theme') 
+            &nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v<!-- %= theme.version </a>
+        </div>
+        -->
+        
+            <div class="icp-info info-item"><a target="_blank" rel="nofollow" href="https://beian.miit.gov.cn">苏ICP备20001538号-1</a></div>
+        
+        
+        <p id="sitetime" target="_blank"></p>
+        <!-- 页面点击小红心 -->
+        <script type="text/javascript" src="/js/love.js"></script>
+
+    </div>
+    
+
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.</span> <span class="nav-text">常用语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%AF%E5%81%9C"><span class="nav-number">1.1.</span> <span class="nav-text">数据库启停</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E5%90%AF%E5%81%9C"><span class="nav-number">1.1.1.</span> <span class="nav-text">监听启停</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%93%E5%90%AF%E5%81%9C"><span class="nav-number">1.1.2.</span> <span class="nav-text">库启停</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#oracle%E6%9F%A5%E7%9C%8B%E5%AE%9E%E4%BE%8B%E5%90%8D"><span class="nav-number">1.1.3.</span> <span class="nav-text">oracle查看实例名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B-oracle%E7%89%88%E6%9C%AC"><span class="nav-number">1.1.4.</span> <span class="nav-text">查看 oracle版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%83%85%E5%86%B5"><span class="nav-number">1.1.5.</span> <span class="nav-text">查询内存分配情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%B9%B6%E5%8F%91%E8%BF%9E%E6%8E%A5%E6%95%B0"><span class="nav-number">1.1.6.</span> <span class="nav-text">查看并发连接数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.7.</span> <span class="nav-text">日志文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%8E%A7%E5%88%B6%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">查看控制文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E3%80%81%E7%AE%A1%E7%90%86-ORACLE-%E8%A1%A8"><span class="nav-number">1.3.</span> <span class="nav-text">查看、管理 ORACLE 表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89-segment-%E7%9A%84%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">查看所有 segment 的大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%9F%90%E4%B8%AA%E8%A1%A8%E5%B1%9E%E4%BA%8E%E5%93%AA%E4%B8%AA%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="nav-number">1.3.2.</span> <span class="nav-text">查看某个表属于哪个表空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%A1%A8%E6%97%B6%E6%8C%87%E5%AE%9A%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="nav-number">1.3.3.</span> <span class="nav-text">创建表时指定表空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.3.4.</span> <span class="nav-text">查看数据库表结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%A1%A8%E7%9A%84%E7%B4%A2%E5%BC%95"><span class="nav-number">1.3.5.</span> <span class="nav-text">查看表的索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%94%A8%E6%88%B7%E5%BA%8F%E5%88%97"><span class="nav-number">1.3.6.</span> <span class="nav-text">查看用户序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%94%A8%E6%88%B7%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">1.3.7.</span> <span class="nav-text">查看用户触发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%A1%A8%E7%9A%84%E5%88%97%E5%90%8D"><span class="nav-number">1.3.8.</span> <span class="nav-text">修改表的列名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%A1%A8%E7%9A%84%E5%88%97%E7%9A%84%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.3.9.</span> <span class="nav-text">修改表的列的字符大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%BB%E9%94%AE"><span class="nav-number">1.3.10.</span> <span class="nav-text">创建主键</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E8%A1%A8%E7%A9%BA%E9%97%B4%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5"><span class="nav-number">1.4.</span> <span class="nav-text">查询表空间使用情况</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E7%A9%BA%E9%97%B4%E6%80%BB%E4%BD%93%E6%83%85%E5%86%B5"><span class="nav-number">1.4.1.</span> <span class="nav-text">表空间总体情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%9A%84%E6%80%BB%E5%AE%B9%E9%87%8F"><span class="nav-number">1.4.2.</span> <span class="nav-text">查询表空间的总容量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E8%A1%A8%E7%A9%BA%E9%97%B4%E4%BD%BF%E7%94%A8%E7%8E%87"><span class="nav-number">1.4.3.</span> <span class="nav-text">查询表空间使用率</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%91%E6%8E%A7%E5%BD%93%E5%89%8D%E6%95%B0%E6%8D%AE%E5%BA%93%E8%B0%81%E5%9C%A8%E8%BF%90%E8%A1%8C%E4%BB%80%E4%B9%88SQL%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.5.</span> <span class="nav-text">监控当前数据库谁在运行什么SQL语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%BE%E4%BD%BF%E7%94%A8CPU%E5%A4%9A%E7%9A%84%E7%94%A8%E6%88%B7session"><span class="nav-number">1.6.</span> <span class="nav-text">找使用CPU多的用户session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AD%89%E5%BE%85%E6%9C%80%E5%A4%9A%E7%9A%84%E7%94%A8%E6%88%B7"><span class="nav-number">1.7.</span> <span class="nav-text">等待最多的用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AD%89%E5%BE%85%E6%9C%80%E5%A4%9A%E7%9A%84SQL"><span class="nav-number">1.8.</span> <span class="nav-text">等待最多的SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%B6%88%E8%80%97%E8%B5%84%E6%BA%90%E6%9C%80%E5%A4%9A%E7%9A%84SQL"><span class="nav-number">1.9.</span> <span class="nav-text">查看消耗资源最多的SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%9F%90%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E7%9A%84%E8%B5%84%E6%BA%90%E6%B6%88%E8%80%97"><span class="nav-number">1.10.</span> <span class="nav-text">查看某条SQL语句的资源消耗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E4%BC%9A%E8%AF%9D%E6%89%A7%E8%A1%8C%E7%9A%84%E5%AE%9E%E9%99%85SQL"><span class="nav-number">1.11.</span> <span class="nav-text">查询会话执行的实际SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%AD%BB%E9%94%81%E4%BF%A1%E6%81%AF"><span class="nav-number">1.12.</span> <span class="nav-text">查看死锁信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E6%AD%A3%E5%9C%A8%E7%AD%89%E5%BE%85%E9%94%81%E7%9A%84%E6%89%80%E6%9C%89%E4%BC%9A%E8%AF%9D"><span class="nav-number">1.13.</span> <span class="nav-text">显示正在等待锁的所有会话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#oracle%E9%85%8D%E7%BD%AE%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.14.</span> <span class="nav-text">oracle配置查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="nav-number">1.15.</span> <span class="nav-text">切换字符集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Boracle%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%BC%96%E7%A0%81"><span class="nav-number">1.15.1.</span> <span class="nav-text">查看oracle数据库的编码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%BD%93%E5%89%8Doracle%E7%9A%84%E5%B9%B6%E5%8F%91%E8%BF%9E%E6%8E%A5%E6%95%B0"><span class="nav-number">1.16.</span> <span class="nav-text">查询当前oracle的并发连接数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E4%B8%8D%E5%90%8C%E7%94%A8%E6%88%B7%E7%9A%84%E8%BF%9E%E6%8E%A5%E6%95%B0%EF%BC%9A"><span class="nav-number">1.16.1.</span> <span class="nav-text">查看不同用户的连接数：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E7%94%A8%E6%88%B7%EF%BC%9A"><span class="nav-number">1.16.2.</span> <span class="nav-text">查看所有用户：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%93%E5%89%8D%E7%9A%84%E8%BF%9E%E6%8E%A5%E6%95%B0"><span class="nav-number">1.16.3.</span> <span class="nav-text">当前的连接数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%BD%93%E5%89%8D%E8%BF%9E%E6%8E%A5%E4%BC%9A%E8%AF%9D%E6%95%B0"><span class="nav-number">1.17.</span> <span class="nav-text">查询当前连接会话数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%85%E9%99%A4%E7%94%A8%E6%88%B7%E4%B8%8B%E8%BF%9E%E6%8E%A5%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.17.1.</span> <span class="nav-text">清除用户下连接进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%85%81%E8%AE%B8%E7%9A%84%E6%9C%80%E5%A4%A7%E8%BF%9E%E6%8E%A5%E6%95%B0"><span class="nav-number">1.17.2.</span> <span class="nav-text">数据库允许的最大连接数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E7%8E%B0%E6%9C%89%E6%A8%A1%E5%BC%8F%E3%80%81%E6%98%AF%E5%90%A6%E5%BD%92%E6%A1%A3"><span class="nav-number">1.18.</span> <span class="nav-text">查看数据库现有模式、是否归档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E8%BF%87%E6%9C%9F%E6%97%B6%E9%97%B4"><span class="nav-number">1.19.</span> <span class="nav-text">配置用户密码过期时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#expdp%E4%B8%8Eimpdp"><span class="nav-number">1.20.</span> <span class="nav-text">expdp与impdp</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B4%E5%BA%93%E5%AF%BC%E5%87%BA%E5%91%BD%E4%BB%A4"><span class="nav-number">1.20.0.1.</span> <span class="nav-text">整库导出命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B4%E5%BA%93%E5%AF%BC%E5%85%A5%E5%91%BD%E4%BB%A4"><span class="nav-number">1.20.0.2.</span> <span class="nav-text">整库导入命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E7%94%A8%E6%88%B7%E5%AF%BC%E5%87%BA%E4%B8%8E%E5%AF%BC%E5%85%A5"><span class="nav-number">1.20.1.</span> <span class="nav-text">按用户导出与导入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E7%94%A8%E6%88%B7%E5%AF%BC%E5%87%BA"><span class="nav-number">1.20.1.1.</span> <span class="nav-text">按用户导出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E7%94%A8%E6%88%B7%E5%AF%BC%E5%85%A5"><span class="nav-number">1.20.1.2.</span> <span class="nav-text">按用户导入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E8%A1%A8%E5%AF%BC%E5%87%BA%E4%B8%8E%E5%AF%BC%E5%85%A5"><span class="nav-number">1.20.2.</span> <span class="nav-text">按表导出与导入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E8%A1%A8%E5%AF%BC%E5%87%BA"><span class="nav-number">1.20.2.1.</span> <span class="nav-text">按表导出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E8%A1%A8%E5%AF%BC%E5%85%A5"><span class="nav-number">1.20.2.2.</span> <span class="nav-text">按表导入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E7%BB%88%E6%AD%A2expdp%E4%B8%8Eimpdp%E4%BB%BB%E5%8A%A1%EF%BC%8C%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="nav-number">1.20.3.</span> <span class="nav-text">如何正确终止expdp与impdp任务，操作步骤如下：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A41"><span class="nav-number">1.20.3.1.</span> <span class="nav-text">步骤1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A42"><span class="nav-number">1.20.3.2.</span> <span class="nav-text">步骤2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A43"><span class="nav-number">1.20.3.3.</span> <span class="nav-text">步骤3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A44"><span class="nav-number">1.20.3.4.</span> <span class="nav-text">步骤4</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E3%80%81%E7%AE%A1%E7%90%86-Oracle-%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="nav-number">1.21.</span> <span class="nav-text">创建、管理 Oracle 表空间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E6%9F%A5%E8%AF%A2%E7%A9%BA%E9%97%B2%E7%A9%BA%E9%97%B4"><span class="nav-number">1.21.1.</span> <span class="nav-text">先查询空闲空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0-Oracle-%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="nav-number">1.21.2.</span> <span class="nav-text">增加 Oracle 表空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-Oracle-%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="nav-number">1.21.3.</span> <span class="nav-text">创建 Oracle 表空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%A1%A8%E7%A9%BA%E9%97%B4%E6%98%AF%E5%90%A6%E8%87%AA%E5%8A%A8%E6%89%A9%E5%B1%95"><span class="nav-number">1.21.4.</span> <span class="nav-text">查看表空间是否自动扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9%E8%87%AA%E5%8A%A8%E6%89%A9%E5%B1%95%E5%B1%9E%E6%80%A7%EF%BC%9A"><span class="nav-number">1.21.5.</span> <span class="nav-text">更改自动扩展属性：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%9A%84%E6%9F%A5%E7%9C%8B%E4%B8%8E%E4%BF%AE%E6%94%B9"><span class="nav-number">1.22.</span> <span class="nav-text">表空间的查看与修改</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%94%A8%E6%88%B7%E9%BB%98%E8%AE%A4%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="nav-number">1.22.1.</span> <span class="nav-text">查看用户默认表空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%E9%BB%98%E8%AE%A4%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="nav-number">1.22.2.</span> <span class="nav-text">修改用户默认表空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E9%BB%98%E8%AE%A4%E4%B8%B4%E6%97%B6%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="nav-number">1.22.3.</span> <span class="nav-text">设置数据库的默认临时表空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%94%A8%E6%88%B7%E5%92%8C%E9%BB%98%E8%AE%A4%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">1.22.4.</span> <span class="nav-text">查看用户和默认表空间的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E4%B8%B4%E6%97%B6%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="nav-number">1.22.5.</span> <span class="nav-text">查看临时表空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B-undo-%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="nav-number">1.22.6.</span> <span class="nav-text">查看 undo 表空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B-undo-%E8%A1%A8%E7%A9%BA%E9%97%B4%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.22.7.</span> <span class="nav-text">查看 undo 表空间大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%A2%9E%E5%8A%A0%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E6%9D%A5%E6%94%B9%E5%8F%98-undo-%E8%A1%A8%E7%A9%BA%E9%97%B4%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.22.8.</span> <span class="nav-text">通过增加数据文件来改变 undo 表空间大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%9F%90%E4%B8%AA%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%9A%84%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.22.9.</span> <span class="nav-text">查看某个表空间的数据文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E8%A1%A8%E7%A9%BA%E9%97%B4%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.22.10.</span> <span class="nav-text">查看所有表空间大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%B7%B2%E4%BD%BF%E7%94%A8%E7%9A%84%E8%A1%A8%E7%A9%BA%E9%97%B4%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.22.11.</span> <span class="nav-text">查看已使用的表空间大小</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%85%E7%90%86%EF%BC%88%E8%BF%98%E5%8E%9F%E6%97%B6%E5%87%BA%E9%94%99%EF%BC%8C%E6%B8%85%E7%94%A8%E6%88%B7%E8%A1%A8%E7%A9%BA%E9%97%B4%EF%BC%89"><span class="nav-number">1.23.</span> <span class="nav-text">清理（还原时出错，清用户表空间）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A9%BA%E9%97%B4%EF%BC%9A"><span class="nav-number">1.23.1.</span> <span class="nav-text">1、删除数据表空间：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%88%A0%E9%99%A4%E4%B8%B4%E6%97%B6%E8%A1%A8%E7%A9%BA%E9%97%B4%EF%BC%9A"><span class="nav-number">1.23.2.</span> <span class="nav-text">2、删除临时表空间：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7%EF%BC%9A"><span class="nav-number">1.23.3.</span> <span class="nav-text">3、删除用户：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E6%8A%A5%E7%94%A8%E6%88%B7%E6%AD%A3%E5%9C%A8%E8%BF%9E%E6%8E%A5%EF%BC%8C%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">1.23.4.</span> <span class="nav-text">4、报用户正在连接，无法删除的解决方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E3%80%81%E7%AE%A1%E7%90%86-ORACLE-%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.24.</span> <span class="nav-text">查看、管理 ORACLE 数据文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.24.1.</span> <span class="nav-text">查看数据文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.24.2.</span> <span class="nav-text">更改数据文件大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%94%A8%E6%88%B7%E6%89%80%E6%9C%89%E8%A1%A8%E7%A9%BA%E9%97%B4%E5%8F%8A%E5%AF%B9%E5%BA%94%E7%9A%84%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E5%92%8C%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.24.3.</span> <span class="nav-text">查看用户所有表空间及对应的数据文件和数据文件大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81%E5%8F%8A%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.24.4.</span> <span class="nav-text">查看数据文件状态及大小</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E3%80%81%E9%85%8D%E7%BD%AE%E6%96%B0%E7%94%A8%E6%88%B7%E5%8F%8A%E6%9F%A5%E7%9C%8B%E7%94%A8%E6%88%B7%E5%B1%9E%E6%80%A7"><span class="nav-number">1.25.</span> <span class="nav-text">创建、配置新用户及查看用户属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E9%94%81%E6%96%B0%E7%94%A8%E6%88%B7%EF%BC%9A"><span class="nav-number">1.25.1.</span> <span class="nav-text">解锁新用户：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4oracle%E7%94%A8%E6%88%B7%EF%BC%9A"><span class="nav-number">1.25.2.</span> <span class="nav-text">删除oracle用户：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E7%94%A8%E6%88%B7%EF%BC%9A"><span class="nav-number">1.25.3.</span> <span class="nav-text">1.查看所有用户：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%9F%A5%E7%9C%8B%E7%94%A8%E6%88%B7%E6%88%96%E8%A7%92%E8%89%B2%E7%B3%BB%E7%BB%9F%E6%9D%83%E9%99%90-%E7%9B%B4%E6%8E%A5%E8%B5%8B%E5%80%BC%E7%BB%99%E7%94%A8%E6%88%B7%E6%88%96%E8%A7%92%E8%89%B2%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%9D%83%E9%99%90-%EF%BC%9A"><span class="nav-number">1.25.4.</span> <span class="nav-text">2.查看用户或角色系统权限(直接赋值给用户或角色的系统权限)：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%9F%A5%E7%9C%8B%E8%A7%92%E8%89%B2-%E5%8F%AA%E8%83%BD%E6%9F%A5%E7%9C%8B%E7%99%BB%E9%99%86%E7%94%A8%E6%88%B7%E6%8B%A5%E6%9C%89%E7%9A%84%E8%A7%92%E8%89%B2-%E6%89%80%E5%8C%85%E5%90%AB%E7%9A%84%E6%9D%83%E9%99%90"><span class="nav-number">1.25.5.</span> <span class="nav-text">3.查看角色(只能查看登陆用户拥有的角色)所包含的权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%9F%A5%E7%9C%8B%E7%94%A8%E6%88%B7%E5%AF%B9%E8%B1%A1%E6%9D%83%E9%99%90%EF%BC%9A"><span class="nav-number">1.25.6.</span> <span class="nav-text">4.查看用户对象权限：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E8%A7%92%E8%89%B2%EF%BC%9A"><span class="nav-number">1.25.7.</span> <span class="nav-text">5.查看所有角色：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E6%9F%A5%E7%9C%8B%E7%94%A8%E6%88%B7%E6%88%96%E8%A7%92%E8%89%B2%E6%89%80%E6%8B%A5%E6%9C%89%E7%9A%84%E8%A7%92%E8%89%B2%EF%BC%9A"><span class="nav-number">1.25.8.</span> <span class="nav-text">6.查看用户或角色所拥有的角色：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E6%9F%A5%E7%9C%8B%E5%93%AA%E4%BA%9B%E7%94%A8%E6%88%B7%E6%9C%89sysdba%E6%88%96sysoper%E7%B3%BB%E7%BB%9F%E6%9D%83%E9%99%90-%E6%9F%A5%E8%AF%A2%E6%97%B6%E9%9C%80%E8%A6%81%E7%9B%B8%E5%BA%94%E6%9D%83%E9%99%90"><span class="nav-number">1.25.9.</span> <span class="nav-text">7.查看哪些用户有sysdba或sysoper系统权限(查询时需要相应权限)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B8%B8%E6%A0%87%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.26.</span> <span class="nav-text">数据库游标设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E3%80%81%E9%85%8D%E7%BD%AE-ORACLE-%E9%87%8D%E5%81%9A%E6%97%A5%E5%BF%97"><span class="nav-number">1.27.</span> <span class="nav-text">查看、配置 ORACLE 重做日志</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E7%BB%84"><span class="nav-number">1.27.1.</span> <span class="nav-text">创建日志文件组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E7%BB%84"><span class="nav-number">1.27.2.</span> <span class="nav-text">查看日志文件组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E7%BB%84%E5%A2%9E%E5%8A%A0%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6"><span class="nav-number">1.27.3.</span> <span class="nav-text">为日志文件组增加日志文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.27.4.</span> <span class="nav-text">查看日志文件大小</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#desc-%E7%9A%84%E5%B8%B8%E7%94%A8%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.28.</span> <span class="nav-text">desc 的常用查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B-ASM-%E7%A3%81%E7%9B%98%E7%BB%84%E4%BF%A1%E6%81%AF"><span class="nav-number">1.29.</span> <span class="nav-text">查看 ASM 磁盘组信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E7%9F%A5%E8%AF%86"><span class="nav-number">1.30.</span> <span class="nav-text">扩展知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%BC%89%E6%89%A9%E5%B1%951%EF%BC%9A"><span class="nav-number">1.30.1.</span> <span class="nav-text">1）扩展1：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%BC%89%E6%89%A9%E5%B1%952%EF%BC%9A"><span class="nav-number">1.30.2.</span> <span class="nav-text">2）扩展2：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%EF%BC%89%E6%89%A9%E5%B1%953%E5%AF%BC%E5%87%BA%E8%BF%87%E6%BB%A4%E4%B8%8D%E5%AF%BC%E5%87%BA%E6%9F%90%E5%BC%A0%E8%A1%A8%EF%BC%9A"><span class="nav-number">1.30.3.</span> <span class="nav-text">3）扩展3导出过滤不导出某张表：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%EF%BC%89%E6%89%A9%E5%B1%954%E4%B8%8D%E5%90%8C%E5%BA%93%E8%BF%98%E5%8E%9F%E6%97%B6%E4%B8%8D%E6%94%B9%E5%8F%98%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BD%BF%E7%94%A8truncate%E5%8F%82%E6%95%B0%EF%BC%9A"><span class="nav-number">1.30.4.</span> <span class="nav-text">4）扩展4不同库还原时不改变数据结构使用truncate参数：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%EF%BC%89%E6%89%A9%E5%B1%955%E5%AF%BC%E5%87%BA%E5%A4%87%E4%BB%BD%E6%97%B6%E4%BF%9D%E7%95%99%E8%A1%A8%EF%BC%8C%E6%B8%85%E9%99%A4%E8%A1%A8%E6%95%B0%E6%8D%AE-query%E5%8F%82%E6%95%B0-%EF%BC%9A"><span class="nav-number">1.30.5.</span> <span class="nav-text">5）扩展5导出备份时保留表，清除表数据(query参数)：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%EF%BC%89%E6%89%A9%E5%B1%956%E5%AF%BC%E5%87%BA%E5%A4%87%E4%BB%BD%E6%97%B6%E4%BF%9D%E7%95%99%E8%A1%A8%EF%BC%8C%E6%B8%85%E9%99%A4%E8%A1%A8%E6%95%B0%E6%8D%AE%EF%BC%8C%E5%90%8C%E6%97%B6%E8%BF%87%E6%BB%A4%E6%9F%90%E4%B8%A4%E5%BC%A0%E8%A1%A8"><span class="nav-number">1.30.6.</span> <span class="nav-text">6）扩展6导出备份时保留表，清除表数据，同时过滤某两张表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%EF%BC%89%E6%89%A9%E5%B1%957%E4%BB%85%E7%BB%9F%E8%AE%A1%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%84%E8%A1%A8%E6%95%B0%E6%8D%AE%EF%BC%8C%E4%BD%86%E4%B8%8D%E5%AF%BC%E5%87%BA%EF%BC%8C%E5%8F%82%E6%95%B0estimate-only-x3D-y"><span class="nav-number">1.30.7.</span> <span class="nav-text">7）扩展7仅统计数据库各表数据，但不导出，参数estimate_only&#x3D;y</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<style>
+  .aplayer .aplayer-lrc {
+    height: 35px;
+  }
+  .aplayer .aplayer-lrc p{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px !important;
+  }
+  .aplayer .aplayer-lrc p.aplayer-lrc-current{
+    color: #FF1493;
+  }
+  .aplayer.aplayer-narrow .aplayer-body{
+    left: -66px !important;
+  }
+  .aplayer.aplayer-fixed .aplayer-lrc {
+    display: none;
+  }
+  .aplayer .aplayer-lrc.aplayer-lrc-hide {
+      display:none !important;
+  }
+  .aplayer.aplayer-fixed .lrc-show {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+  }
+</style>
+<meting-js
+
+    id="4900925608"
+
+    server="netease"
+
+    type="playlist"
+
+    fixed="true"
+
+    autoplay="true"
+
+    loop="all"
+
+    order="random"
+
+    preload="auto"
+
+    volume="0.7"
+
+    mutex="true"
+
+</meting-js>
+<script>
+  $(function(){
+    $('body').on('click', '.aplayer', function(){
+      if($('.aplayer-button').hasClass('aplayer-play')) {
+        $('.aplayer-lrc').removeClass('lrc-show');
+      } else {
+        $('.aplayer-lrc').addClass('lrc-show');
+      }
+    })
+  });
+</script>
+</body>
+</html>
