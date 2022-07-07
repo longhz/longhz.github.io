@@ -239,7 +239,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.1k 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.2k 字</span>
         </span>
     
     
@@ -379,7 +379,10 @@
                      data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220512-1057.png"
                      
                 ></p>
-<p>检查安装条件没问题后，直接点安装<br><img  
+<p>检查安装条件没问题后，直接点安装<br>如果提示swap size检查失败，那么增加swap分区大小即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">1.使用root用户，在/tmp（随意），下执行下面语句</span><br><span class="line">dd if=/dev/zero of=swapfree bs=32k count=65515</span><br><span class="line">(增加swap大小为bs*count，bs为block，count为数量)</span><br><span class="line"></span><br><span class="line">2.将创建的文件用做交换分区</span><br><span class="line">执行语句： </span><br><span class="line">          mkswap swapfree</span><br><span class="line"></span><br><span class="line">3、开启这个交换空间</span><br><span class="line">执行语句：swapon swapfree</span><br><span class="line"></span><br><span class="line">4、通过free命令查看，交换空间在原来交换空间的基础上增加了2G</span><br><span class="line"></span><br><span class="line">5、在/etc/fstab中加入下面语句，设置此交换分区开机启动</span><br><span class="line">/tmp/swapfree swap swap defaults 0 0</span><br></pre></td></tr></table></figure>
+
+<p><img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220512-1056.png"
