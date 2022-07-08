@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="每日一句">
+    <meta name="author" content="ドラゴンボールのLong">
+    
+    <title>
+        
+            Oracle12c跨平台迁移之linux至windows |
+        
+        ドラゴンボールのBlog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"https://cdn.jsdelivr.net/gh/longhz/cdn@1.0/img/custom/avatar1.jpg","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"黄色的森林分出两条路，我选择了人迹更少的那一条，从此决定我一生的道路。"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                ドラゴンボールのBlog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Oracle12c跨平台迁移之linux至windows</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="https://cdn.jsdelivr.net/gh/longhz/cdn@1.0/img/custom/avatar1.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">ドラゴンボールのLong</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-09-06 20:10:12</span>
+        <span class="mobile">2021-09-06 20:10</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%BF%83%E5%BE%97/">心得</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.9k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>10 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <blockquote>
+<p>需求为迁移centos 7.2 linux的oracle12.2数据库至windows server 2016操作系统上，并做好数据备份。虽然个人不建议数据库跑在windows下，但由于业主方懂linux系统的人员有限，故此整理文档如下，供后期参考。</p>
+</blockquote>
+<h2 id="1-环境检查及准备"><a href="#1-环境检查及准备" class="headerlink" title="1.环境检查及准备"></a>1.环境检查及准备</h2><blockquote>
+<p>检查linux系统的使用空间</p>
+<p>准备等量的windows系统环境</p>
+<p>书写rman下的0级备份脚本</p>
+<p>制定迁移计划和停机时间</p>
+</blockquote>
+<p>由于linux系统空间已接近使用完毕且无法新增硬盘，考虑不影响正式环境的情况下，采用挂载windows共享目录的方式进行存储原有oracle数据库的相关备份文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#挂载共享目录脚本</span><br><span class="line">mount -t cifs -o \</span><br><span class="line">username=administrator,\</span><br><span class="line">password=password,rw,uid=500,gid=501,\</span><br><span class="line">dir_mode=0777,file_mode=0777 //windows的IP地址/共享目录 /mnt/backup/</span><br><span class="line">#uid和gid分别为oracle用户的用户ID和所属组的ID号。</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-全备linux上的oracle数据库"><a href="#2-全备linux上的oracle数据库" class="headerlink" title="2.全备linux上的oracle数据库"></a>2.全备linux上的oracle数据库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#rman全量0备份脚本</span><br><span class="line">rman log=&#x27;/mnt/backup/rman/db_rman0.log&#x27; append &lt;&lt;EOF</span><br><span class="line">connect target /;</span><br><span class="line">run&#123;</span><br><span class="line">allocate channel ch1  device type disk;</span><br><span class="line">allocate channel ch2  device type disk;</span><br><span class="line">allocate channel ch3  device type disk;</span><br><span class="line">sql &#x27;alter system checkpoint&#x27;;</span><br><span class="line">sql &#x27;alter system switch logfile&#x27;;</span><br><span class="line">sql &#x27;alter system archive log current&#x27; ;</span><br><span class="line">CONFIGURE SNAPSHOT CONTROLFILE NAME TO &#x27;/mnt/backup/rman/ctl_bakup.ctl&#x27;;</span><br><span class="line">backup incremental level 0 filesperset 10 tag &#x27;db0&#x27; format &#x27;/mnt/backup/rman/db0_%d_%T_%s&#x27; database </span><br><span class="line">include current controlfile plus archivelog filesperset 10 format &#x27;/mnt/backup/rman/arc0_%d_%T_%s&#x27;;</span><br><span class="line">backup format &#x27;/mnt/backup/rman/ctl_%U.%T&#x27; current controlfile;</span><br><span class="line">backup spfile format &#x27;/mnt/backup/rman/spfile_%d_%s_%T&#x27;;</span><br><span class="line">crosscheck backup of database;      </span><br><span class="line">crosscheck archivelog all;</span><br><span class="line">crosscheck backup of controlfile;</span><br><span class="line">release channel ch1;</span><br><span class="line">release channel ch2;</span><br><span class="line">release channel ch3;</span><br><span class="line">&#125;</span><br><span class="line">EXIT;</span><br><span class="line">EOF</span><br><span class="line">#分别备份oracle数据库的控制文件、数据文件、归档日志和参数文件。</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-迁移相关备份文件至目标服务器"><a href="#3-迁移相关备份文件至目标服务器" class="headerlink" title="3.迁移相关备份文件至目标服务器"></a>3.迁移相关备份文件至目标服务器</h2><blockquote>
+<p>压缩传输、直接拷贝、网络传输备份文件至目标服务器。<br>目标服务器安装JDK环境并下载oracle12c安装文件。</p>
+</blockquote>
+<ul>
+<li>Jdk8u231下载路径：<a class="link"   target="_blank" rel="noopener" href="https://img.9j6.cn/software/jdk/jdk-8u231-windows-x64.exe" >点击链接下载jdk8u231软件<i class="fas fa-external-link-alt"></i></a></li>
+<li>Oracle12c下载路径：<a class="link"   target="_blank" rel="noopener" href="https://img.9j6.cn/software/oracle/winx64_12201_database.zip" >点击链接下载Oracle12c软件<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h2 id="4-目标服务器安装oracle软件"><a href="#4-目标服务器安装oracle软件" class="headerlink" title="4.目标服务器安装oracle软件"></a>4.目标服务器安装oracle软件</h2><p>这里需要先安装数据库软件和配置监听，不需要建库。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20200405232937158610057789491.jpg"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220708172905.png"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220708172922.png"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220708172939.png"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220708172957.png"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220708173013.png"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220708173028.png"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220708173046.png"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220708173059.png"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220708173116.png"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220708173133.png"
+                     
+                ></p>
+<h2 id="5-目标服务器创建相关目录"><a href="#5-目标服务器创建相关目录" class="headerlink" title="5.目标服务器创建相关目录"></a>5.目标服务器创建相关目录</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#新建目录</span><br><span class="line"></span><br><span class="line">md D:\u01\app\oracle\</span><br><span class="line"></span><br><span class="line">cd D:\u01\app\oracle\</span><br><span class="line"></span><br><span class="line">md admin\alov2 oradata\alov2 archivelog </span><br><span class="line"></span><br><span class="line">cd D:\u01\app\oracle\admin\alov2</span><br><span class="line"></span><br><span class="line">md adump bdump cdump dpdump udump pfile</span><br><span class="line"></span><br><span class="line">#新建密码文件</span><br><span class="line">orapwd file=D:\app\admin\virtual\product\12.2.0\dbhome_1\dbs\orapwalov2 password=’Shbus12#$’</span><br><span class="line"></span><br><span class="line">#新建监听sid</span><br><span class="line">oradim -new -sid alov2</span><br></pre></td></tr></table></figure>
+
+<h3 id="注册表新增sid字符串值"><a href="#注册表新增sid字符串值" class="headerlink" title="注册表新增sid字符串值"></a>注册表新增sid字符串值</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220708173239.png"
+                     
+                ></p>
+<h2 id="6-修改参数文件并启动数据库"><a href="#6-修改参数文件并启动数据库" class="headerlink" title="6.修改参数文件并启动数据库"></a>6.修改参数文件并启动数据库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">#参数文件信息D:\test.ora</span><br><span class="line">alov2.__data_transfer_cache_size=0</span><br><span class="line">alov2.__db_cache_size=8858370048</span><br><span class="line">alov2.__inmemory_ext_roarea=0</span><br><span class="line">alov2.__inmemory_ext_rwarea=0</span><br><span class="line">alov2.__java_pool_size=268435456</span><br><span class="line">alov2.__large_pool_size=1409286144</span><br><span class="line">alov2.__oracle_base=&#x27;D:\app\admin\virtual&#x27;#ORACLE_BASE set from environment</span><br><span class="line">alov2.__pga_aggregate_target=4429185024</span><br><span class="line">alov2.__sga_target=21474836480</span><br><span class="line">alov2.__shared_io_pool_size=536870912</span><br><span class="line">alov2.__shared_pool_size=8053063680</span><br><span class="line">alov2.__streams_pool_size=134217728</span><br><span class="line">*._bloom_filter_enabled=TRUE</span><br><span class="line">*._datafile_open_errors_crash_instance=FALSE</span><br><span class="line">*._datafile_write_errors_crash_instance=FALSE</span><br><span class="line">*._drop_stat_segment=1</span><br><span class="line">*._enable_NUMA_optimization=FALSE</span><br><span class="line">*._ges_direct_free_res_type=&#x27;CTARAHDXBB&#x27;</span><br><span class="line">*._index_partition_large_extents=&#x27;FALSE&#x27;</span><br><span class="line">*._keep_remote_column_size=TRUE</span><br><span class="line">*._optimizer_adaptive_cursor_sharing=FALSE</span><br><span class="line">*._optimizer_ads_use_result_cache=FALSE</span><br><span class="line">*._optimizer_aggr_groupby_elim=FALSE</span><br><span class="line">*._optimizer_dsdir_usage_control=0</span><br><span class="line">*._optimizer_extended_cursor_sharing=&#x27;NONE&#x27;</span><br><span class="line">*._optimizer_extended_cursor_sharing_rel=&#x27;NONE&#x27;</span><br><span class="line">*._optimizer_null_aware_antijoin=TRUE</span><br><span class="line">*._optimizer_reduce_groupby_key=FALSE</span><br><span class="line">*._optimizer_unnest_scalar_sq=FALSE</span><br><span class="line">*._optimizer_use_feedback=FALSE</span><br><span class="line">*._partition_large_extents=&#x27;FALSE&#x27;</span><br><span class="line">*._PX_use_large_pool=TRUE</span><br><span class="line">*._report_capture_cycle_time=0</span><br><span class="line">*._sql_plan_directive_mgmt_control=0</span><br><span class="line">*._undo_autotune=FALSE</span><br><span class="line">*._upgrade_capture_noops=FALSE</span><br><span class="line">*._upgrade_optim=FALSE</span><br><span class="line">*._use_adaptive_log_file_sync=&#x27;FALSE&#x27;</span><br><span class="line">*.audit_file_dest=&#x27;D:\u01\app\oracle\admin\alov2\adump&#x27;</span><br><span class="line">*.audit_trail=&#x27;NONE&#x27;</span><br><span class="line">*.compatible=&#x27;12.2.0&#x27;</span><br><span class="line">*.control_files=&#x27;D:\u01\app\oracle\oradata\alov2\control01.ctl&#x27;,&#x27;D:\u01\app\oracle\oradata\alov2\control02.ctl&#x27;,&#x27;D:\u01\app\oracle\oradata\alov2\control03.ctl&#x27;</span><br><span class="line">*.db_block_size=8192</span><br><span class="line">*.db_name=&#x27;alov2&#x27;</span><br><span class="line">*.deferred_segment_creation=FALSE</span><br><span class="line">*.diagnostic_dest=&#x27;D:\app\admin\virtual&#x27;</span><br><span class="line">*.disk_asynch_io=TRUE</span><br><span class="line">*.dispatchers=&#x27;(PROTOCOL=TCP) (SERVICE=alov2XDB)&#x27;</span><br><span class="line">*.event=&#x27;28401 trace name context forever,level 1&#x27;,&#x27;10949 trace name context forever,level 1&#x27;</span><br><span class="line">*.filesystemio_options=&#x27;SETALL&#x27;</span><br><span class="line">*.inmemory_size=2147483648</span><br><span class="line">*.log_archive_dest_1=&#x27;LOCATION=D:\u01\app\oracle\archivelog\&#x27;</span><br><span class="line">*.nls_language=&#x27;AMERICAN&#x27;</span><br><span class="line">*.nls_territory=&#x27;AMERICA&#x27;</span><br><span class="line">*.open_cursors=300</span><br><span class="line">*.parallel_force_local=TRUE</span><br><span class="line">*.pga_aggregate_limit=0</span><br><span class="line">*.pga_aggregate_target=4164m</span><br><span class="line">*.processes=3200</span><br><span class="line">*.remote_login_passwordfile=&#x27;EXCLUSIVE&#x27;</span><br><span class="line">*.resource_limit=TRUE</span><br><span class="line">*.resource_manager_plan=&#x27;force:&#x27;</span><br><span class="line">*.sga_max_size=21474836480</span><br><span class="line">*.sga_target=21474836480</span><br><span class="line">*.undo_tablespace=&#x27;UNDOTBS1&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="还原备份的控制文件并以mount的方式启动数据库"><a href="#还原备份的控制文件并以mount的方式启动数据库" class="headerlink" title="还原备份的控制文件并以mount的方式启动数据库"></a>还原备份的控制文件并以mount的方式启动数据库</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#配置恢复监听文件并在sql窗口下执行</span><br><span class="line">startup nomount pfile=&#x27;D:\test.ora&#x27;;</span><br><span class="line">#rman窗口下执行配置数据库的DBID</span><br><span class="line">set DBID=原DBID;</span><br><span class="line">#rman恢复控制文件，也可通过备份的控制文件直接拷贝恢复。</span><br><span class="line">restore controlfile from &#x27;D:\share\rman\ctl_ALOV2_5876_20191028_1&#x27;;</span><br><span class="line">alter database mount;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-恢复数据库并重新定义文件目录"><a href="#7-恢复数据库并重新定义文件目录" class="headerlink" title="7.恢复数据库并重新定义文件目录"></a>7.恢复数据库并重新定义文件目录</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#rman窗口下执行</span><br><span class="line">catalog start with &#x27;D:\share\rman&#x27;;</span><br><span class="line">list backupset;</span><br><span class="line">run&#123;</span><br><span class="line">allocate channel c1 type disk;</span><br><span class="line">allocate channel c2 type disk;</span><br><span class="line">allocate channel c3 type disk;</span><br><span class="line">set newname for datafile 1 to &#x27;D:\u01\app\oracle\oradata\alov2\system01.dbf&#x27;;</span><br><span class="line">set newname for datafile 2 to &#x27;D:\u01\app\oracle\oradata\alov2\undotbs01.dbf&#x27;;</span><br><span class="line">set newname for datafile 3 to &#x27;D:\u01\app\oracle\oradata\alov2\sysaux01.dbf&#x27;;</span><br><span class="line">set newname for datafile 4 to &#x27;D:\u01\app\oracle\oradata\alov2\users01.dbf&#x27;;</span><br><span class="line">set newname for datafile 5 to &#x27;D:\u01\app\oracle\oradata\alov2\TANG01.dbf&#x27;;</span><br><span class="line">set newname for datafile 6 to &#x27;D:\u01\app\oracle\oradata\alov2\TANG02.dbf&#x27;;</span><br><span class="line">set newname for datafile 7 to &#x27;D:\u01\app\oracle\oradata\alov2\ALODB_DATA01.dbf&#x27;;</span><br><span class="line">set newname for datafile 8 to &#x27;D:\u01\app\oracle\oradata\alov2\FOLLOWUP01.dbf&#x27;;</span><br><span class="line">set newname for datafile 9 to &#x27;D:\u01\app\oracle\oradata\alov2\FOLLOWUP02.dbf&#x27;;</span><br><span class="line">set newname for datafile 10 to &#x27;D:\u01\app\oracle\oradata\alov2\ALODB_DATA02.dbf&#x27;;</span><br><span class="line">set newname for datafile 11 to &#x27;D:\u01\app\oracle\oradata\alov2\ALODB_DATA03.dbf&#x27;;</span><br><span class="line">restore database;</span><br><span class="line">switch datafile all;</span><br><span class="line">release channel c1;</span><br><span class="line">release channel c2;</span><br><span class="line">release channel c3;</span><br><span class="line">&#125;</span><br><span class="line">recover database preview;</span><br><span class="line">list backup;</span><br><span class="line">recover database until scn scnid;</span><br><span class="line">alter database open resetlogs;</span><br><span class="line">#sql窗口下执行创建spfile参数文件</span><br><span class="line">create spfile from pfile=’D:\test.ora’;</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-配置windows下的oracle开机自启"><a href="#8-配置windows下的oracle开机自启" class="headerlink" title="8.配置windows下的oracle开机自启"></a>8.配置windows下的oracle开机自启</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220708173406.png"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220708173417.png"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220708173428.png"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220708173442.png"
+                     
+                ></p>
+<h2 id="9-配置windows下的oracle数据库的自动备份"><a href="#9-配置windows下的oracle数据库的自动备份" class="headerlink" title="9.配置windows下的oracle数据库的自动备份"></a>9.配置windows下的oracle数据库的自动备份</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#修复归档日志路径之清理无用备份信息：</span><br><span class="line">execute sys.dbms_backup_restore.resetCfileSection(11);</span><br><span class="line"></span><br><span class="line">#重新指定归档日志的存储路径：</span><br><span class="line">catalog start with &#x27;D:\u01\app\oracle\archivelog&#x27;;</span><br><span class="line"></span><br><span class="line">#制定备份计划：周三和周日全备其余增备</span><br></pre></td></tr></table></figure>
+
+<h3 id="0级全量备份脚本rmanbaklevel0-bat"><a href="#0级全量备份脚本rmanbaklevel0-bat" class="headerlink" title="0级全量备份脚本rmanbaklevel0.bat"></a>0级全量备份脚本rmanbaklevel0.bat</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">rem ******Oracle backup start******</span><br><span class="line">@echo off</span><br><span class="line"></span><br><span class="line">::设置时间变量</span><br><span class="line">set &quot;Ymd=%date:~0,4%%date:~5,2%%date:~8,2%%time:~0,2%%time:~3,2%%time:~6,2%&quot;</span><br><span class="line"></span><br><span class="line">::删除一周前的备份数据</span><br><span class="line">forfiles /p &quot;E:\backup\rmandb&quot; /m db0* -d -7 /c &quot;cmd /c del /f @path&quot;</span><br><span class="line">forfiles /p &quot;E:\backup\rmanlog&quot; /m arc0* -d -7 /c &quot;cmd /c del /f @path&quot;</span><br><span class="line"></span><br><span class="line">::执行备份操作</span><br><span class="line">rman target / CMDFILE &#x27;D:\app\admin\virtual\cmdfile\rmanbaklevel0.txt&#x27; LOG &#x27;E:\backup\baklogs\rman_baklevel0_%Ymd%.log&#x27;</span><br><span class="line"></span><br><span class="line">@echo on</span><br><span class="line">rem ******Oracle backup end******</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="0级全量备份文件rmanbaklevel0-txt"><a href="#0级全量备份文件rmanbaklevel0-txt" class="headerlink" title="0级全量备份文件rmanbaklevel0.txt"></a>0级全量备份文件rmanbaklevel0.txt</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">run&#123;</span><br><span class="line">allocate channel ch1  device type disk;</span><br><span class="line">allocate channel ch2  device type disk;</span><br><span class="line">allocate channel ch3  device type disk;</span><br><span class="line">crosscheck archivelog all;</span><br><span class="line">delete expired archivelog all;</span><br><span class="line">sql &#x27;alter system checkpoint&#x27;;</span><br><span class="line">sql &#x27;alter system switch logfile&#x27;;</span><br><span class="line">sql &#x27;alter system archive log current&#x27; ;</span><br><span class="line">backup incremental level 0 filesperset 10 tag &#x27;db0&#x27; format &#x27;E:\backup\rmandb\db0_%d_%T_%s&#x27; database </span><br><span class="line">include current controlfile plus archivelog filesperset 10 format &#x27;E:\backup\rmanlog\arc0_%d_%T_%s&#x27;;</span><br><span class="line">backup format &#x27;E:\backup\rmanbak\ctl_%U.%T&#x27; current controlfile;</span><br><span class="line">backup spfile format &#x27;E:\backup\rmanbak\spfile_%d_%s_%T&#x27;;</span><br><span class="line">crosscheck backup of database;      </span><br><span class="line">crosscheck archivelog all;</span><br><span class="line">crosscheck backup of controlfile;</span><br><span class="line">delete force noprompt archivelog all completed before &#x27;sysdate-7&#x27;;</span><br><span class="line">release channel ch1;</span><br><span class="line">release channel ch2;</span><br><span class="line">release channel ch3;</span><br><span class="line">&#125;</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="1级增量备份脚本rmanbaklevel1-bat"><a href="#1级增量备份脚本rmanbaklevel1-bat" class="headerlink" title="1级增量备份脚本rmanbaklevel1.bat"></a>1级增量备份脚本rmanbaklevel1.bat</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">rem ******Oracle backup start******</span><br><span class="line">@echo off</span><br><span class="line"></span><br><span class="line">::设置时间变量</span><br><span class="line">set &quot;Ymd=%date:~0,4%%date:~5,2%%date:~8,2%%time:~0,2%%time:~3,2%%time:~6,2%&quot;</span><br><span class="line"></span><br><span class="line">::删除一周前的备份数据</span><br><span class="line">forfiles /p &quot;E:\backup\rmandb&quot; /m db1* -d -7 /c &quot;cmd /c del /f @path&quot;</span><br><span class="line">forfiles /p &quot;E:\backup\rmanlog&quot; /m arc1* -d -7 /c &quot;cmd /c del /f @path&quot;</span><br><span class="line"></span><br><span class="line">::执行备份操作</span><br><span class="line">rman target / CMDFILE &#x27;D:\app\admin\virtual\cmdfile\rmanbaklevel1.txt&#x27; LOG &#x27;E:\backup\baklogs\rman_baklevel1_%Ymd%.log&#x27;</span><br><span class="line"></span><br><span class="line">@echo on</span><br><span class="line">rem ******Oracle backup end******</span><br></pre></td></tr></table></figure>
+
+<h3 id="1级增量备份文件rmanbaklevel1-txt"><a href="#1级增量备份文件rmanbaklevel1-txt" class="headerlink" title="1级增量备份文件rmanbaklevel1.txt"></a>1级增量备份文件rmanbaklevel1.txt</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">run&#123;</span><br><span class="line">allocate channel ch1  device type disk;</span><br><span class="line">allocate channel ch2  device type disk;</span><br><span class="line">allocate channel ch3  device type disk;</span><br><span class="line">crosscheck archivelog all;</span><br><span class="line">delete expired archivelog all;</span><br><span class="line">sql &#x27;alter system checkpoint&#x27;;</span><br><span class="line">sql &#x27;alter system switch logfile&#x27;;</span><br><span class="line">sql &#x27;alter system archive log current&#x27; ;</span><br><span class="line">backup incremental level 1 filesperset 3 tag &#x27;db1&#x27; format &#x27;E:\backup\rmandb\db1_%d_%T_%s&#x27; database </span><br><span class="line">include current controlfile plus archivelog filesperset 3 format &#x27;E:\backup\rmanlog\arc1_%d_%T_%s&#x27;;</span><br><span class="line">backup format &#x27;E:\backup\rmanbak\ctl_%U.%T&#x27; current controlfile;</span><br><span class="line">backup spfile format &#x27;E:\backup\rmanbak\spfile_%d_%s_%T&#x27;;</span><br><span class="line">crosscheck backup of database;      </span><br><span class="line">crosscheck archivelog all;</span><br><span class="line">crosscheck backup of controlfile;</span><br><span class="line">delete force noprompt archivelog all completed before &#x27;sysdate-7&#x27;;</span><br><span class="line">release channel ch1;</span><br><span class="line">release channel ch2;</span><br><span class="line">release channel ch3;</span><br><span class="line">&#125;</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
+<p>综上，整个迁移过程执行完毕，稍微有点复杂，建议多试验几次即可。当然还有其它的迁移方式，个人认为此种方案相对较为便捷。</p>
+</blockquote>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：Oracle12c跨平台迁移之linux至windows</li>
+        <li>本文作者：ドラゴンボールのLong</li>
+        <li>创建时间：2021-09-06 20:10:12</li>
+        <li>
+            本文链接：https://zhongshenglong.xyz/2021/09/06/Oracle12c跨平台迁移之linux至windows/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%8A%80%E6%9C%AF/">#技术</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%BF%83%E5%BE%97/">#心得</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/10/06/%E5%85%B3%E4%BA%8EOracle%E5%BD%92%E6%A1%A3%E6%A8%A1%E5%BC%8F/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">关于Oracle归档模式</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/09/06/12c%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85%EF%BC%88%E6%97%A0%E7%95%8C%E9%9D%A2%EF%BC%89/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">12c静默安装（无界面）</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;评论</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: '2TGCOmDNikdxOnVmQJEFhTOK-gzGzoHsz',
+                    appKey: 'lU21jvewvcy043UjfpHRXfvA',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'zh-CN'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'ドラゴンボールのLong';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+		year - 作为date对象的年份，为4位年份值
+		month - 0-11之间的整数，做为date对象的月份
+		day - 1-31之间的整数，做为date对象的天数
+		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+		minutes - 0-59之间的整数，做为date对象的分钟数
+		seconds - 0-59之间的整数，做为date对象的秒数
+		microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+		var t1 = Date.UTC(2019,04,09,21,47,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML="❤亲爱的旅客,我已与你/妳相遇❤❤❤"+" 第 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒❤";
+	}/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+	siteTime();
+</script>
+
+<footer class="footer">
+    <div class="info-container">
+        
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2019</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">ドラゴンボールのLong</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <!-- 
+        <div class="theme-info info-item">
+            <!-- %- __('powered_by', '<a target="_blank" href="https://hexo.io">Hexo</a>') &nbsp;|&nbsp;<!-- %- __('theme') 
+            &nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v<!-- %= theme.version </a>
+        </div>
+        -->
+        
+            <div class="icp-info info-item"><a target="_blank" rel="nofollow" href="https://beian.miit.gov.cn">苏ICP备20001538号-1</a></div>
+        
+        
+        <p id="sitetime" target="_blank"></p>
+        <!-- 页面点击小红心 -->
+        <script type="text/javascript" src="/js/love.js"></script>
+
+    </div>
+    
+
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%8E%AF%E5%A2%83%E6%A3%80%E6%9F%A5%E5%8F%8A%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">1.环境检查及准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%85%A8%E5%A4%87linux%E4%B8%8A%E7%9A%84oracle%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.</span> <span class="nav-text">2.全备linux上的oracle数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%BF%81%E7%A7%BB%E7%9B%B8%E5%85%B3%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6%E8%87%B3%E7%9B%AE%E6%A0%87%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">3.迁移相关备份文件至目标服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%9B%AE%E6%A0%87%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85oracle%E8%BD%AF%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">4.目标服务器安装oracle软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E7%9B%AE%E6%A0%87%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9B%E5%BB%BA%E7%9B%B8%E5%85%B3%E7%9B%AE%E5%BD%95"><span class="nav-number">5.</span> <span class="nav-text">5.目标服务器创建相关目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E8%A1%A8%E6%96%B0%E5%A2%9Esid%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%80%BC"><span class="nav-number">5.1.</span> <span class="nav-text">注册表新增sid字符串值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E4%BF%AE%E6%94%B9%E5%8F%82%E6%95%B0%E6%96%87%E4%BB%B6%E5%B9%B6%E5%90%AF%E5%8A%A8%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">6.</span> <span class="nav-text">6.修改参数文件并启动数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%98%E5%8E%9F%E5%A4%87%E4%BB%BD%E7%9A%84%E6%8E%A7%E5%88%B6%E6%96%87%E4%BB%B6%E5%B9%B6%E4%BB%A5mount%E7%9A%84%E6%96%B9%E5%BC%8F%E5%90%AF%E5%8A%A8%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">6.1.</span> <span class="nav-text">还原备份的控制文件并以mount的方式启动数据库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E6%81%A2%E5%A4%8D%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B6%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="nav-number">7.</span> <span class="nav-text">7.恢复数据库并重新定义文件目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E9%85%8D%E7%BD%AEwindows%E4%B8%8B%E7%9A%84oracle%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF"><span class="nav-number">8.</span> <span class="nav-text">8.配置windows下的oracle开机自启</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E9%85%8D%E7%BD%AEwindows%E4%B8%8B%E7%9A%84oracle%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD"><span class="nav-number">9.</span> <span class="nav-text">9.配置windows下的oracle数据库的自动备份</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0%E7%BA%A7%E5%85%A8%E9%87%8F%E5%A4%87%E4%BB%BD%E8%84%9A%E6%9C%ACrmanbaklevel0-bat"><span class="nav-number">9.1.</span> <span class="nav-text">0级全量备份脚本rmanbaklevel0.bat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0%E7%BA%A7%E5%85%A8%E9%87%8F%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6rmanbaklevel0-txt"><span class="nav-number">9.2.</span> <span class="nav-text">0级全量备份文件rmanbaklevel0.txt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E7%BA%A7%E5%A2%9E%E9%87%8F%E5%A4%87%E4%BB%BD%E8%84%9A%E6%9C%ACrmanbaklevel1-bat"><span class="nav-number">9.3.</span> <span class="nav-text">1级增量备份脚本rmanbaklevel1.bat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E7%BA%A7%E5%A2%9E%E9%87%8F%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6rmanbaklevel1-txt"><span class="nav-number">9.4.</span> <span class="nav-text">1级增量备份文件rmanbaklevel1.txt</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">10.</span> <span class="nav-text">总结</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<style>
+  .aplayer .aplayer-lrc {
+    height: 35px;
+  }
+  .aplayer .aplayer-lrc p{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px !important;
+  }
+  .aplayer .aplayer-lrc p.aplayer-lrc-current{
+    color: #FF1493;
+  }
+  .aplayer.aplayer-narrow .aplayer-body{
+    left: -66px !important;
+  }
+  .aplayer.aplayer-fixed .aplayer-lrc {
+    display: none;
+  }
+  .aplayer .aplayer-lrc.aplayer-lrc-hide {
+      display:none !important;
+  }
+  .aplayer.aplayer-fixed .lrc-show {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+  }
+</style>
+<meting-js
+
+    id="4900925608"
+
+    server="netease"
+
+    type="playlist"
+
+    fixed="true"
+
+    autoplay="true"
+
+    loop="all"
+
+    order="random"
+
+    preload="auto"
+
+    volume="0.7"
+
+    mutex="true"
+
+</meting-js>
+<script>
+  $(function(){
+    $('body').on('click', '.aplayer', function(){
+      if($('.aplayer-button').hasClass('aplayer-play')) {
+        $('.aplayer-lrc').removeClass('lrc-show');
+      } else {
+        $('.aplayer-lrc').addClass('lrc-show');
+      }
+    })
+  });
+</script>
+</body>
+</html>
