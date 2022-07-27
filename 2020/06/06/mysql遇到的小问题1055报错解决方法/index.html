@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="Hexo Theme Keep">
-    <meta name="description" content="每次都前进了一步,也许会倒退一点儿,可绝不会完全退回原处。">
+    <meta name="description" content="每日一句">
     <meta name="author" content="ドラゴンボールのLong">
     
     <title>
         
-            Linux中使用nohup详解 |
+            mysql遇到的小问题1055报错解决方法 |
         
         ドラゴンボールのBlog
     </title>
@@ -429,7 +429,7 @@ $logo-image-box-width = 46px;
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Linux中使用nohup详解</span>
+            <span class="title-hover-animation">mysql遇到的小问题1055报错解决方法</span>
         </div>
 
         
@@ -511,31 +511,23 @@ $logo-image-box-width = 46px;
         
 
         <div class="article-content markdown-body">
-            <span id="more"></span>
+            <h1 id="MySQL发生-Err-1055的解决方案"><a href="#MySQL发生-Err-1055的解决方案" class="headerlink" title="MySQL发生[Err] 1055的解决方案"></a>MySQL发生[Err] 1055的解决方案</h1><p>在mysql库中进行insert into,执行结束后，总是会跳出报错</p>
+<blockquote>
+<p>[Err] 1055 - Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column ‘information_schema.PROFILING.SEQ’ which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode&#x3D;only_full_group_b</p>
+</blockquote>
+<p>第一次遇到这样的错误，貌似是由于MySQL的版本问题,发现自己用的是MySQL 8版本</p>
+<h2 id="此时有两种解决方案"><a href="#此时有两种解决方案" class="headerlink" title="此时有两种解决方案"></a>此时有两种解决方案</h2><p>方案一：临时修改（服务器重启后会失效）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 通过该语句查询这个值 --</span><br><span class="line">select @@sql_mode;	</span><br></pre></td></tr></table></figure>
+<p>会得到如下结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION</span><br></pre></td></tr></table></figure>
+<p>再执行下述语句，引号里的内容是上述结果剔除ONLY_FULL_GROUP_BY后余下的内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set @@sql_mode= &quot;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION&quot;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="nohup"><a href="#nohup" class="headerlink" title="nohup"></a>nohup</h3><p>nohup 命令运行由 Command参数和任何相关的 Arg参数指定的命令，忽略所有挂断（SIGHUP）信号。在注销后使用 nohup 命令运行后台中的程序。要运行后台中的 nohup 命令，添加 &amp; （ 表示“and”的符号）到命令的尾部。</p>
-<p>nohup 是 no hang up 的缩写，就是不挂断的意思。</p>
-<p>nohup命令：如果你正在运行一个进程，而且你觉得在退出帐户时该进程还不会结束，那么可以使用nohup命令。该命令可以在你退出帐户&#x2F;关闭终端之后继续运行相应的进程。</p>
-<p>在缺省情况下该作业的所有输出都被重定向到一个名为nohup.out的文件中。</p>
-<hr>
-<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p> <code> nohup command &gt; myout.file 2&gt;&amp;1 &amp;   </code></p>
-<p>在上面的例子中，0 – stdin (standard input)，1 – stdout (standard output)，2 – stderr (standard error) ；<br>2&gt;&amp;1是将标准错误（2）重定向到标准输出（&amp;1），标准输出（&amp;1）再被重定向输入到myout.file文件中。<br> <code> 0 22 * * * /usr/bin/python /home/pu/download_pdf/download_dfcf_pdf_to_oss.py &gt; /home/pu/download_pdf/download_dfcf_pdf_to_oss.log 2&gt;&amp;1 </code></p>
-<p>这是放在crontab中的定时任务，晚上22点时候怕这个任务，启动这个python的脚本，并把日志写在download_dfcf_pdf_to_oss.log文件中</p>
-<hr>
-<h3 id="nohup和-amp-的区别"><a href="#nohup和-amp-的区别" class="headerlink" title="nohup和&amp;的区别"></a>nohup和&amp;的区别</h3><p>&amp; ： 指在后台运行</p>
-<p>nohup ： 不挂断的运行，注意并没有后台运行的功能，，就是指，用nohup运行命令可以使命令永久的执行下去，和用户终端没有关系，例如我们断开SSH连接都不会影响他的运行，注意了nohup没有后台运行的意思；&amp;才是后台运行</p>
-<p><code> &amp;是指在后台运行，但当用户推出(挂起)的时候，命令自动也跟着退出</code></p>
-<p>那么，我们可以巧妙的吧他们结合起来用就是<br><code>nohup COMMAND &amp;</code></p>
-<p>这样就能使命令永久的在后台执行<br>例如：<br><code>sh test.sh &amp; </code></p>
-<p>将sh test.sh任务放到后台 ，即使关闭xshell退出当前session依然继续运行，但标准输出和标准错误信息会丢失（缺少的日志的输出）</p>
-<p>将sh test.sh任务放到后台 ，关闭xshell，对应的任务也跟着停止。</p>
-<p><code>nohup sh test.sh</code></p>
-<p>将sh test.sh任务放到后台，关闭标准输入，终端不再能够接收任何输入（标准输入），重定向标准输出和标准错误到当前目录下的nohup.out文件，即使关闭xshell退出当前session依然继续运行</p>
-<p><code> nohup sh test.sh  &amp; </code></p>
-<p>将sh test.sh任务放到后台，但是依然可以使用标准输入，终端能够接收任何输入，重定向标准输出和标准错误到当前目录下的nohup.out文件，即使关闭xshell退出当前session依然继续运行。</p>
-<hr>
-<p> <code>ps -aux | grep &quot;hexo&quot; </code></p>
-<p>查询进程</p>
+<h2 id="方案二：修改mysql配置文件（服务器重启后生效）"><a href="#方案二：修改mysql配置文件（服务器重启后生效）" class="headerlink" title="方案二：修改mysql配置文件（服务器重启后生效）"></a>方案二：修改mysql配置文件（服务器重启后生效）</h2><p>在my.cnf文件中的[mysqld]的下面加上下列语句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION</span><br></pre></td></tr></table></figure>
+<p>一般不建议将ONLY_FULL_GROUP_BY关闭，因为这个符合SQL标准,也可以使用MySQL中的一个函数 any_value(field)，括号中是一个字段，可以使得括号中的字段既能被查询出来又可以不出现在group by语句中</p>
+<h2 id="docker中配置调整"><a href="#docker中配置调整" class="headerlink" title="docker中配置调整"></a>docker中配置调整</h2><p>如果你用的是docker容器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#查询出mysql的容器名称</span><br><span class="line">docker ps</span><br><span class="line"></span><br><span class="line">#进入docker环境，下面的mysql1是我的容器名称</span><br><span class="line">docker exec -it mysql1 /bin/bash</span><br><span class="line"></span><br><span class="line">#查看配置文件</span><br><span class="line">cat /etc/mysql/my.cnf</span><br><span class="line"></span><br><span class="line">#如果要修改，先安装下vim编辑器</span><br><span class="line">apt-get update</span><br><span class="line">apt-get install vim</span><br><span class="line"></span><br><span class="line">#修改mysql配置文件</span><br><span class="line">vim /etc/mysql/my.cnf</span><br><span class="line"></span><br><span class="line">#在mysqld最下面加入</span><br><span class="line">sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -589,15 +581,15 @@ $logo-image-box-width = 46px;
             <ul class="post-tags-box">
                 
                     <li class="tag-item">
-                        <a href="/tags/linux/">#linux</a>&nbsp;
+                        <a href="/tags/%E6%8A%80%E6%9C%AF/">#技术</a>&nbsp;
                     </li>
                 
                     <li class="tag-item">
-                        <a href="/tags/%E8%BD%AF%E4%BB%B6/">#软件</a>&nbsp;
+                        <a href="/tags/%E5%BF%83%E5%BE%97/">#心得</a>&nbsp;
                     </li>
                 
                     <li class="tag-item">
-                        <a href="/tags/%E9%98%85%E8%AF%BB/">#阅读</a>&nbsp;
+                        <a href="/tags/mysql/">#mysql</a>&nbsp;
                     </li>
                 
             </ul>
@@ -609,13 +601,13 @@ $logo-image-box-width = 46px;
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/01/06/oracle%E2%80%94DG%E6%90%AD%E5%BB%BA/"
+                           href="/2020/06/06/ORACLE-11G-EM-%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E5%8F%8A%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">关于oracle下的DG搭建</span>
+                                <span class="post-nav-title-item">ORACLE-11G-EM-配置命令及问题处理</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -625,10 +617,10 @@ $logo-image-box-width = 46px;
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2020/09/06/Oracle%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E7%9F%A5%E8%AF%86/"
+                           href="/2020/06/06/%E5%85%B3%E4%BA%8Ehexo/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Oracle相关操作知识</span>
+                                <span class="post-nav-title-item">hexo介绍</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
