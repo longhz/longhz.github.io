@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.hexo_config = {"hostname":"zhongshenglong.xyz","root":"/","language":"zh-CN","path":"search.json"};
     KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"https://cdn.jsdelivr.net/gh/longhz/cdn@1.0/img/custom/avatar1.jpg","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"黄色的森林分出两条路，我选择了人迹更少的那一条，从此决定我一生的道路。"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
   </script>
@@ -323,7 +323,7 @@
 <p>将老库的pfile(因为里面有指向裸设备的spfile链接)，tnsnames.ora，listener.ora，密码文件传到新库的对应位置。将存储切至新机，或者用文件拷贝或dd的方式复制数据文件，启动数据库。</p>
 </blockquote>
 <p>优缺点：优点是该迁移方式非常简单，主要的工作是主机工程师的工作，dba只需配合即可，停机时间为停库、切存储、起库的时间；缺点是要求新老库都是同一平台，是相同的数据库版本。</p>
-<h2 id="三、利用data-guard迁移："><a href="#三、利用data-guard迁移：" class="headerlink" title="三、利用data guard迁移："></a>三、利用data guard迁移：</h2><p>用dg我们不仅可以用来做容灾，物理的dg我们还可以作为迁移的方式。<br>关于DG的操作方式，详情点击 &#x3D;&gt; <a class="link"   target="_blank" rel="noopener" href="https://zhongshenglong.xyz/2021/01/06/oracle%E2%80%94DG%E6%90%AD%E5%BB%BA/" >DG搭建<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="三、利用data-guard迁移："><a href="#三、利用data-guard迁移：" class="headerlink" title="三、利用data guard迁移："></a>三、利用data guard迁移：</h2><p>用dg我们不仅可以用来做容灾，物理的dg我们还可以作为迁移的方式。<br>关于DG的操作方式，详情点击 &#x3D;&gt; <a href="https://zhongshenglong.xyz/2021/01/06/oracle%E2%80%94DG%E6%90%AD%E5%BB%BA/">DG搭建</a></p>
 
         </div>
 
