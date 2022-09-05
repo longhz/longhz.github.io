@@ -9,7 +9,7 @@
     
     <title>
         
-            Docker修改容器配置导致启动失败的解决方法 |
+            AI艺术家-第二期-动画生成-Deforum-Stable-Diffusion，Google云端使用教程 |
         
         ドラゴンボールのBlog
     </title>
@@ -185,7 +185,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Docker修改容器配置导致启动失败的解决方法</span>
+            <span class="title-hover-animation">AI艺术家-第二期-动画生成-Deforum-Stable-Diffusion，Google云端使用教程</span>
         </div>
 
         
@@ -204,8 +204,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-08-06 20:10:12</span>
-        <span class="mobile">2022-08-06 20:10</span>
+        <span class="pc">2022-09-06 00:10:12</span>
+        <span class="mobile">2022-09-06 00:10</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -233,7 +233,7 @@
                     </li>
                 
                     <li>
-                        | <a href="/tags/docker/">docker</a>&nbsp;
+                        | <a href="/tags/AI%E7%BB%98%E7%94%BB/">AI绘画</a>&nbsp;
                     </li>
                 
             </ul>
@@ -243,12 +243,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>331 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>802 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>1 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>2 分钟</span>
         </span>
     
     
@@ -264,16 +264,102 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="Docker修改容器配置导致启动失败的解决方法"><a href="#Docker修改容器配置导致启动失败的解决方法" class="headerlink" title="Docker修改容器配置导致启动失败的解决方法"></a>Docker修改容器配置导致启动失败的解决方法</h1><p>我们通常会遇到修改容器内的配置问题，改的是容易。但改完之后容器起不来了，那就可难受了。当然我们也可以重新构建容器，一切都重新来一遍。但这真的是得不偿失，一个小小的配置，弄这么大的动静。还有一种就是把修改容器的配置，然后重启容器。当然之前的配置导致容器是起不来的，我们没有办法进入到容器中去。所以我们就直接将容器内的配置复制到我们的本地，在本地完成修改后再复制到容器，最后重启容器使容器能够正常的运行</p>
-<h2 id="1-查看容器的错误日志"><a href="#1-查看容器的错误日志" class="headerlink" title="1.查看容器的错误日志"></a>1.查看容器的错误日志</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs ca8df11e264b -f</span><br></pre></td></tr></table></figure>
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><blockquote>
+<p>最近一直在实验Stable_Diffusion的AI绘画功能，虽说摸索出点门路来，但还是感觉缺点什么，无意中看到了Deforum_Stable_Diffusion的相关说明，可以将绘画的图制作成视频，于是点燃了我的好奇心。</p>
+</blockquote>
+<h3 id="相关教程"><a href="#相关教程" class="headerlink" title="相关教程"></a>相关教程</h3><blockquote>
+<p>打开网址，这里会验证GitHub授权：<a class="link"   target="_blank" rel="noopener" href="https://colab.research.google.com/github/deforum/stable-diffusion/blob/main/Deforum_Stable_Diffusion.ipynb" >https://colab.research.google.com/github/deforum/stable-diffusion/blob/main/Deforum_Stable_Diffusion.ipynb<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p><strong>点击右上角的连接</strong><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog1/202209051823491.png"
+                     
+                ></p>
+<p><strong>等连接上后我们运行脚本，点击NVIDIA GPU运行，就是查看当前使用的机器。一般是从 K80、T4、P100、V100 中随机分配一个。</strong><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog1/202209051758406.png"
+                     
+                ></p>
+<p><strong>填写模型路径，默认即可，会提示访问你的Google云盘</strong><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog1/202209051825723.png"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog1/202209051824553.png"
+                     
+                ></p>
+<p>这里需要提前将权重下载好，上传至Google硬盘的&#x2F;drive&#x2F;MyDrive&#x2F;AI&#x2F;models&#x2F;目录下：<a class="link"   target="_blank" rel="noopener" href="https://huggingface.co/CompVis/stable-diffusion-v-1-4-original/blob/main/sd-v1-4.ckpt" >https://huggingface.co/CompVis/stable-diffusion-v-1-4-original/blob/main/sd-v1-4.ckpt<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>运行安装环境，第二行可选可不选</strong><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog1/202209051825507.png"
+                     
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog1/202209051826387.png"
+                     
+                ></p>
+<p><strong>选择权重模型，默认v1-4，就是上面让你上传的文件，选择环境cpu还是GPU运行,cpu速度慢，默认GPU-cuda即可</strong><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog1/202209051827162.png"
+                     
+                ></p>
+<p><strong>Setting</strong><br><strong>这里可以根据需要选择是生成2D还是3D的图形</strong><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog1/202209051830118.png"
+                     
+                ><br><strong>全局菜单根据需要来进行调整，这里需要注意max_frames，关乎视频生成的时间长短</strong><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog1/202209051829058.png"
+                     
+                ></p>
+<p><strong>设置完动画参数后，接下来是设置prompt语句。</strong><br><strong>假设你打算设置两个关键帧，可以先把两个关键帧的prompts语句放在第一部分，然后绘制三张静态图看看效果。接下来将两个关键帧语句放在animation_prompts处，即完成动画prompts的设置。</strong><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog1/202209051833736.png"
+                     
+                ></p>
+<p><strong>下方运行前还要对单帧绘制的图像进行设置，这部分和静态图绘制参数一致。</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog1/202209051836488.png"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog1/202209052012494.png"
+                     
+                ></p>
+<p><strong>最后在动画生成部分，取消跳过视频的选项，在所有图片绘制完成后会自动生成视频，<br>这里1000张图片，每张生成大概为4秒，总共花了大概一个小时多点，根据自己的实际需要来调整frame</strong><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog1/202209052013902.png"
+                     
+                ></p>
+<h3 id="生成的视频"><a href="#生成的视频" class="headerlink" title="生成的视频"></a>生成的视频</h3><video width="768" height="384" controls>
+<source src="https://kdy.zhongshenglong.xyz:163/?explorer/index/fileDownload&path=%2Fwww%2Fwwwroot%2Fkdy.zhongshenglong.xyz%2Flongz_blog%2Fsource%2F_posts%2F20220905121112.mp4&accessToken=6fc7pToGwYKMC2bH4t5Oip9eusZLwwxTTHhUmFUMI8PNAym6DDD9ABUAm8QQP0lkHNkTdOXgk37bn_wNXw&modifyTime=1662385986&size=39916000&download=1">AI合成的视频
+</video>
 
-<p>容器无法正常启动时，我们是无法直接进入容器的，我们不能确定配置文件的绝对位置，有日志的话我们可以查到配置文件的具体位置</p>
-<h2 id="2-复制配置文件到本地"><a href="#2-复制配置文件到本地" class="headerlink" title="2.复制配置文件到本地"></a>2.复制配置文件到本地</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container cp ca8df11e264b:/etc/mysql/my.cnf /volume1/docker/mysql/</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-在本地修改配置"><a href="#3-在本地修改配置" class="headerlink" title="3. 在本地修改配置"></a>3. 在本地修改配置</h2><h2 id="4-将配置再复制到容器"><a href="#4-将配置再复制到容器" class="headerlink" title="4. 将配置再复制到容器"></a>4. 将配置再复制到容器</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp /volume1/docker/mysql/my.cnf ca8df11e264b:/etc/mysql/my.cnf</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-重启容器"><a href="#5-重启容器" class="headerlink" title="5. 重启容器"></a>5. 重启容器</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart ca8df11e264b</span><br></pre></td></tr></table></figure>
-
+<h3 id="后言"><a href="#后言" class="headerlink" title="后言"></a>后言</h3><blockquote>
+<p>需要说明的是，很多人可能对DiscoDiffusion的痛苦经历记忆尤深，当时免费用户使用Google Colab单张图片十分钟，一个200帧的动画就得花费十多个小时，还经常遇到和服务器断掉的情况，导致很难有决心去尝试做动画。</p>
+</blockquote>
+<blockquote>
+<p>但StableDiffusion在这方面有很大改进，以默认的512x512大小渲染动画，steps设为60左右，单张图片平均绘制时间在7-10秒左右，一段300帧的动画大概在一个小时左右。当然如果你将步数steps调高到150，单张时间也在1分钟左右，还是完全可以接受的。所以以前对DiscoDiffusion做动画望而生畏的朋友，还是可以尝试一下使用StableDiffusion做动画。</p>
+</blockquote>
+<blockquote>
+<p>不过对于免费用户来说，由于分配的服务器性能不会太好，所以尽可能做默认分辨率的动画，等熟悉整个动画流程以后可以成为购买Colab Pro会员，用更高性能的服务器来生成高质量动画。</p>
+</blockquote>
 
         </div>
 
@@ -281,11 +367,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：Docker修改容器配置导致启动失败的解决方法</li>
+        <li>本文标题：AI艺术家-第二期-动画生成-Deforum-Stable-Diffusion，Google云端使用教程</li>
         <li>本文作者：ドラゴンボールのLong</li>
-        <li>创建时间：2022-08-06 20:10:12</li>
+        <li>创建时间：2022-09-06 00:10:12</li>
         <li>
-            本文链接：https://zhongshenglong.xyz/2022/08/06/Docker修改容器配置导致启动失败的解决方法/
+            本文链接：https://zhongshenglong.xyz/2022/09/06/AI艺术家-第二期-动画生成-Deforum-Stable-Diffusion云端使用教程/
         </li>
         <li>
             版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -308,7 +394,7 @@
                     </li>
                 
                     <li class="tag-item">
-                        <a href="/tags/docker/">#docker</a>&nbsp;
+                        <a href="/tags/AI%E7%BB%98%E7%94%BB/">#AI绘画</a>&nbsp;
                     </li>
                 
             </ul>
@@ -317,29 +403,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2022/09/05/AI%E8%89%BA%E6%9C%AF%E5%AE%B6-%E7%AC%AC%E4%B8%80%E6%9C%9F-%E5%A4%A9%E9%A9%AC%E8%A1%8C%E7%A9%BA%E7%9A%84%E7%BB%98%E7%94%BB-stable-diffusion%E4%BA%91%E7%AB%AF%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">AI艺术家-第一期-天马行空的绘画-stable-diffusion云端使用教程</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/07/06/EMOJI%E8%A1%A8%E6%83%85%E6%8F%92%E5%85%A5MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%82%E5%B8%B8%E8%AE%B0%E5%BD%95%E6%8A%A5%E9%94%99%E4%BB%A5%E5%8F%8A%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F/"
+                           href="/2022/09/05/AI%E8%89%BA%E6%9C%AF%E5%AE%B6-%E7%AC%AC%E4%B8%80%E6%9C%9F-%E5%A4%A9%E9%A9%AC%E8%A1%8C%E7%A9%BA%E7%9A%84%E7%BB%98%E7%94%BB-stable-diffusion%E4%BA%91%E7%AB%AF%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">EMOJI表情插入MYSQL数据库异常记录报错以及处理方式</span>
+                                <span class="post-nav-title-item">AI艺术家-第一期-天马行空的绘画-stable-diffusion云端使用教程</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -609,7 +680,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker%E4%BF%AE%E6%94%B9%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE%E5%AF%BC%E8%87%B4%E5%90%AF%E5%8A%A8%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">Docker修改容器配置导致启动失败的解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E7%9A%84%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97"><span class="nav-number">1.1.</span> <span class="nav-text">1.查看容器的错误日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%A4%8D%E5%88%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="nav-number">1.2.</span> <span class="nav-text">2.复制配置文件到本地</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%9C%A8%E6%9C%AC%E5%9C%B0%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE"><span class="nav-number">1.3.</span> <span class="nav-text">3. 在本地修改配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%B0%86%E9%85%8D%E7%BD%AE%E5%86%8D%E5%A4%8D%E5%88%B6%E5%88%B0%E5%AE%B9%E5%99%A8"><span class="nav-number">1.4.</span> <span class="nav-text">4. 将配置再复制到容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%87%8D%E5%90%AF%E5%AE%B9%E5%99%A8"><span class="nav-number">1.5.</span> <span class="nav-text">5. 重启容器</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E6%95%99%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">相关教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E7%9A%84%E8%A7%86%E9%A2%91"><span class="nav-number">3.</span> <span class="nav-text">生成的视频</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E8%A8%80"><span class="nav-number">4.</span> <span class="nav-text">后言</span></a></li></ol>
     </div>
 </div>
         </aside>
