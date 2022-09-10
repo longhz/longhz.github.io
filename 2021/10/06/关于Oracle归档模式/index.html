@@ -109,6 +109,14 @@
                     
                         <li class="menu-item">
                             <a class=""
+                               href="/gallery"
+                            >
+                                相册
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
                                href="/about"
                             >
                                 关于
@@ -159,6 +167,11 @@
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/gallery">相册</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
@@ -711,7 +724,7 @@
 
 
 
-<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/weather.js"></script>
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/weather.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/jquery-3.2.1.min.js"></script>
 
 
     <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
@@ -765,10 +778,331 @@
 
 
 
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<meta name="referrer" content="never">
+
+<script>
+
+</script>
+<script>
+
+        var Ajax = function() {
+            $.getJSON("/json/sj_photos.json", function(data) {
+                sj_displayData(data) //传入一个函数
+            });
+            $.getJSON("/json/pc_photos.json", function(data) {
+                pc_displayData(data) //传入一个函数
+            });
+        }();
+
+        //此方法只能在内部访问数据
+
+        var sj_displayData = function(json) {
+            // console.log(data);
+            var nowPage = 0, //当前页
+            count = 1, //每页显示多少条消息
+            pageAll = 0; //总页数
+        var title = []; //标题
+        var aliyun_url = [];
+        var testDataList = []; //创建一个存放数据的数组
+        var testDataList2 = []; //创建一个存放数据的数组
+        var testDataList3 = []; //创建一个存放数据的数组
+        var testDataList4 = []; //创建一个存放数据的数组
+        var testDataList5 = []; //创建一个存放数据的数组
+        var testDataList6 = []; //创建一个存放数据的数组
+        var testDataList7 = []; //创建一个存放数据的数组
+        var testDataList8 = []; //创建一个存放数据的数组
+        var testDataList9 = []; //创建一个存放数据的数组
+        for (var i = 0; i < json.length; i++) {
+            title.push(json[i].title);
+            aliyun_url.push(`原图前往阿里云盘下载：<a id="aliyunpan" href="`+ json[i].aliyun_url +`" target="_blank">`+ json[i].aliyun_url +`</a>`);
+            testDataList.push(json[i].image_url[0]);
+            testDataList2.push(json[i].image_url[1]);
+            testDataList3.push(json[i].image_url[2]);
+            testDataList4.push(json[i].image_url[3]);
+            testDataList5.push(json[i].image_url[4]);
+            testDataList6.push(json[i].image_url[5]);
+            testDataList7.push(json[i].image_url[6]);
+            testDataList8.push(json[i].image_url[7]);
+            testDataList9.push(json[i].image_url[8]);
+            // }
+        }
+        // console.log(testDataList);
+        pageAll = (testDataList.length) / 1; //计算总页数
+        var setTable = function() { //数据渲染表格
+            var onePageData = []; //用来存放一页的数据
+            var onePageData2 = []; //用来存放一页的数据
+            var onePageData3 = []; //用来存放一页的数据
+            var onePageData4 = []; //用来存放一页的数据
+            var onePageData5 = []; //用来存放一页的数据
+            var onePageData6 = []; //用来存放一页的数据
+            var onePageData7 = []; //用来存放一页的数据
+            var onePageData8 = []; //用来存放一页的数据
+            var onePageData9 = []; //用来存放一页的数据
+            for (var i = 0;
+                (i + nowPage * count < (nowPage + 1) * count) && i + nowPage * count < testDataList.length; i++) { //满足当前数据小于没到当前页的最后一条数据 ，并且当前数据没到最后一条数据
+                {
+                    onePageData.push(testDataList[i + nowPage * count]); // 这个循环会循环1次  把1条数据放到列表里
+                    onePageData2.push(testDataList2[i + nowPage * count]); // 这个循环会循环1次  把1条数据放到列表里
+                    onePageData3.push(testDataList3[i + nowPage * count]); // 这个循环会循环1次  把1条数据放到列表里
+                    onePageData4.push(testDataList4[i + nowPage * count]); // 这个循环会循环1次  把1条数据放到列表里
+                    onePageData5.push(testDataList5[i + nowPage * count]); // 这个循环会循环1次  把1条数据放到列表里
+                    onePageData6.push(testDataList6[i + nowPage * count]); // 这个循环会循环1次  把1条数据放到列表里
+                    onePageData7.push(testDataList7[i + nowPage * count]); // 这个循环会循环1次  把1条数据放到列表里
+                    onePageData8.push(testDataList8[i + nowPage * count]); // 这个循环会循环1次  把1条数据放到列表里
+                    onePageData9.push(testDataList9[i + nowPage * count]); // 这个循环会循环1次  把1条数据放到列表里
+                }
+            }
+            // document.getElementById("outBoxTab1").innerHTML = onePageData.join(''); //渲染当前页数据
+            document.getElementById("img1").src = onePageData.join(''); //渲染当前页数据
+            document.getElementById("img2").src = onePageData2.join(''); //渲染当前页数据
+            document.getElementById("img3").src = onePageData3.join(''); //渲染当前页数据
+            document.getElementById("img4").src = onePageData4.join(''); //渲染当前页数据
+            document.getElementById("img5").src = onePageData5.join(''); //渲染当前页数据
+            document.getElementById("img6").src = onePageData6.join(''); //渲染当前页数据
+            document.getElementById("img7").src = onePageData7.join(''); //渲染当前页数据
+            document.getElementById("img8").src = onePageData8.join(''); //渲染当前页数据
+            document.getElementById("img9").src = onePageData9.join(''); //渲染当前页数据
+        }
+        setTable();
+        npg = nowPage;
+        nowP = npg+1
+        document.getElementById("aliyunpan").innerHTML = aliyun_url[npg]
+        document.getElementById("title").innerHTML = title[npg]
+        document.getElementById("goPage1").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+        document.getElementById("goPage").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+        
+        start1.onclick = function() { //首页
+            nowPage = 0;
+            setTable();
+            npg = nowPage;
+            nowP = npg+1
+            document.getElementById("aliyunpan").innerHTML = aliyun_url[npg]
+            document.getElementById("title").innerHTML = title[npg]
+            document.getElementById("goPage1").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+            document.getElementById("goPage").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+        }
+        up1.onclick = function() { //上一页
+            if (nowPage == 0) //当前页数是第一页则返回
+                return
+            nowPage--;
+            setTable();
+            npg = nowPage;
+            nowP = npg+1
+            console.log(title[npg]);
+            document.getElementById("aliyunpan").innerHTML = aliyun_url[npg]
+            document.getElementById("title").innerHTML = title[npg]
+            document.getElementById("goPage1").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+            document.getElementById("goPage").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+        }
+        down1.onclick = function() { //下一页
+            if (nowPage >= pageAll - 1) //当前页数是最后一页则返回  这么写是因为总页数不一定是整数
+                return
+            nowPage++;
+            setTable();
+            npg = nowPage;
+            nowP = npg+1
+            console.log(title[npg]);
+            document.getElementById("aliyunpan").innerHTML = aliyun_url[npg]
+            document.getElementById("title").innerHTML = title[npg]
+            document.getElementById("goPage1").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+            document.getElementById("goPage").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+                // debugger //调试
+        }
+        start.onclick = function() { //首页
+            nowPage = 0;
+            setTable();
+            npg = nowPage;
+            nowP = npg+1
+            document.getElementById("aliyunpan").innerHTML = aliyun_url[npg]
+            document.getElementById("title").innerHTML = title[npg]
+            document.getElementById("goPage1").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+            document.getElementById("goPage").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+            
+        }
+        up.onclick = function() { //上一页
+            if (nowPage == 0) //当前页数是第一页则返回
+                return
+            nowPage--;
+            setTable();
+            npg = nowPage;
+            nowP = npg+1
+            console.log(title[npg]);
+            document.getElementById("aliyunpan").innerHTML = aliyun_url[npg]
+            document.getElementById("title").innerHTML = title[npg]
+            document.getElementById("goPage1").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+            document.getElementById("goPage").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+        }
+        down.onclick = function() { //下一页
+            if (nowPage >= pageAll - 1) //当前页数是最后一页则返回  这么写是因为总页数不一定是整数
+                return
+            nowPage++;
+            setTable();
+            npg = nowPage;
+            nowP = npg+1
+            console.log(title[npg]);
+            document.getElementById("aliyunpan").innerHTML = aliyun_url[npg]
+            document.getElementById("title").innerHTML = title[npg]
+            document.getElementById("goPage1").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+            document.getElementById("goPage").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+                // debugger //调试
+        }
+        }
+        
+        var pc_displayData = function(json) {
+            // console.log(data);
+            var nowPage = 0, //当前页
+            count = 1, //每页显示多少条消息
+            pageAll = 0; //总页数
+        var title = []; //标题
+        var aliyun_url = [];
+        var testDataList = []; //创建一个存放数据的数组
+        var testDataList2 = []; //创建一个存放数据的数组
+        var testDataList3 = []; //创建一个存放数据的数组
+        var testDataList4 = []; //创建一个存放数据的数组
+        var testDataList5 = []; //创建一个存放数据的数组
+        var testDataList6 = []; //创建一个存放数据的数组
+        var testDataList7 = []; //创建一个存放数据的数组
+        var testDataList8 = []; //创建一个存放数据的数组
+        var testDataList9 = []; //创建一个存放数据的数组
+        for (var i = 0; i < json.length; i++) {
+            title.push(json[i].title);
+            aliyun_url.push(`原图前往阿里云盘下载：<a id="aliyunpan" href="`+ json[i].aliyun_url +`" target="_blank">`+ json[i].aliyun_url +`</a>`);
+            testDataList.push(json[i].image_url[0]);
+            testDataList2.push(json[i].image_url[1]);
+            testDataList3.push(json[i].image_url[2]);
+            testDataList4.push(json[i].image_url[3]);
+            testDataList5.push(json[i].image_url[4]);
+            testDataList6.push(json[i].image_url[5]);
+            testDataList7.push(json[i].image_url[6]);
+            testDataList8.push(json[i].image_url[7]);
+            testDataList9.push(json[i].image_url[8]);
+            // }
+        }
+        // console.log(testDataList);
+        pageAll = (testDataList.length) / 1; //计算总页数
+        var setTable = function() { //数据渲染表格
+            var onePageData = []; //用来存放一页的数据
+            var onePageData2 = []; //用来存放一页的数据
+            var onePageData3 = []; //用来存放一页的数据
+            var onePageData4 = []; //用来存放一页的数据
+            var onePageData5 = []; //用来存放一页的数据
+            var onePageData6 = []; //用来存放一页的数据
+            var onePageData7 = []; //用来存放一页的数据
+            var onePageData8 = []; //用来存放一页的数据
+            var onePageData9 = []; //用来存放一页的数据
+            for (var i = 0;
+                (i + nowPage * count < (nowPage + 1) * count) && i + nowPage * count < testDataList.length; i++) { //满足当前数据小于没到当前页的最后一条数据 ，并且当前数据没到最后一条数据
+                {
+                    onePageData.push(testDataList[i + nowPage * count]); // 这个循环会循环1次  把1条数据放到列表里
+                    onePageData2.push(testDataList2[i + nowPage * count]); // 这个循环会循环1次  把1条数据放到列表里
+                    onePageData3.push(testDataList3[i + nowPage * count]); // 这个循环会循环1次  把1条数据放到列表里
+                    onePageData4.push(testDataList4[i + nowPage * count]); // 这个循环会循环1次  把1条数据放到列表里
+                    onePageData5.push(testDataList5[i + nowPage * count]); // 这个循环会循环1次  把1条数据放到列表里
+                    onePageData6.push(testDataList6[i + nowPage * count]); // 这个循环会循环1次  把1条数据放到列表里
+                    onePageData7.push(testDataList7[i + nowPage * count]); // 这个循环会循环1次  把1条数据放到列表里
+                    onePageData8.push(testDataList8[i + nowPage * count]); // 这个循环会循环1次  把1条数据放到列表里
+                    onePageData9.push(testDataList9[i + nowPage * count]); // 这个循环会循环1次  把1条数据放到列表里
+                }
+            }
+            // document.getElementById("outBoxTab1").innerHTML = onePageData.join(''); //渲染当前页数据
+            document.getElementById("pc-img1").src = onePageData.join(''); //渲染当前页数据
+            document.getElementById("pc-img2").src = onePageData2.join(''); //渲染当前页数据
+            document.getElementById("pc-img3").src = onePageData3.join(''); //渲染当前页数据
+            document.getElementById("pc-img4").src = onePageData4.join(''); //渲染当前页数据
+            document.getElementById("pc-img5").src = onePageData5.join(''); //渲染当前页数据
+            document.getElementById("pc-img6").src = onePageData6.join(''); //渲染当前页数据
+            document.getElementById("pc-img7").src = onePageData7.join(''); //渲染当前页数据
+            document.getElementById("pc-img8").src = onePageData8.join(''); //渲染当前页数据
+            document.getElementById("pc-img9").src = onePageData9.join(''); //渲染当前页数据
+        }
+        setTable();
+        npg = nowPage;
+        nowP = npg+1
+        document.getElementById("pc-aliyunpan").innerHTML = aliyun_url[npg]
+        document.getElementById("pc-title").innerHTML = title[npg]
+        document.getElementById("pc-goPage1").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+        document.getElementById("pc-goPage").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+        
+        pcstart1.onclick = function() { //首页
+            nowPage = 0;
+            setTable();
+            npg = nowPage;
+            nowP = npg+1
+            document.getElementById("pc-aliyunpan").innerHTML = aliyun_url[npg]
+            document.getElementById("pc-title").innerHTML = title[npg]
+            document.getElementById("pc-goPage1").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+            document.getElementById("pc-goPage").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+        }
+        pcup1.onclick = function() { //上一页
+            if (nowPage == 0) //当前页数是第一页则返回
+                return
+            nowPage--;
+            setTable();
+            npg = nowPage;
+            nowP = npg+1
+            document.getElementById("pc-aliyunpan").innerHTML = aliyun_url[npg]
+            document.getElementById("pc-title").innerHTML = title[npg]
+            document.getElementById("pc-goPage1").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+            document.getElementById("pc-goPage").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+        }
+        pcdown1.onclick = function() { //下一页
+            if (nowPage >= pageAll - 1) //当前页数是最后一页则返回  这么写是因为总页数不一定是整数
+                return
+            nowPage++;
+            setTable();
+            npg = nowPage;
+            nowP = npg+1
+            document.getElementById("pc-aliyunpan").innerHTML = aliyun_url[npg]
+            document.getElementById("pc-title").innerHTML = title[npg]
+            document.getElementById("pc-goPage1").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+            document.getElementById("pc-goPage").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+                // debugger //调试
+        }
+        pcstart.onclick = function() { //首页
+            nowPage = 0;
+            setTable();
+            npg = nowPage;
+            nowP = npg+1
+            document.getElementById("pc-aliyunpan").innerHTML = aliyun_url[npg]
+            document.getElementById("pc-title").innerHTML = title[npg]
+            document.getElementById("pc-goPage1").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+            document.getElementById("pc-goPage").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+        }
+        pcup.onclick = function() { //上一页
+            if (nowPage == 0) //当前页数是第一页则返回
+                return
+            nowPage--;
+            setTable();
+            npg = nowPage;
+            nowP = npg+1
+            document.getElementById("pc-aliyunpan").innerHTML = aliyun_url[npg]
+            document.getElementById("pc-title").innerHTML = title[npg]
+            document.getElementById("pc-goPage1").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+            document.getElementById("pc-goPage").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+        }
+        pcdown.onclick = function() { //下一页
+            if (nowPage >= pageAll - 1) //当前页数是最后一页则返回  这么写是因为总页数不一定是整数
+                return
+            nowPage++;
+            setTable();
+            npg = nowPage;
+            nowP = npg+1
+            document.getElementById("pc-aliyunpan").innerHTML = aliyun_url[npg]
+            document.getElementById("pc-title").innerHTML = title[npg]
+            document.getElementById("pc-goPage1").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+            document.getElementById("pc-goPage").innerHTML = "当前第" + nowP + "页" + " 共计：" + pageAll + "页"
+                // debugger //调试
+        }
+        }
+        
+    </script>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
 <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
 <!-- require MetingJS -->
 <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
 <style>
   .aplayer .aplayer-lrc {
     height: 35px;
@@ -805,7 +1139,7 @@
 
     fixed="true"
 
-    autoplay="true"
+    autoplay="false"
 
     loop="all"
 
@@ -829,5 +1163,6 @@
     })
   });
 </script>
+
 </body>
 </html>
