@@ -29,11 +29,13 @@
 <p>将<code>username</code>替换为你的GitHub用户名即可。</p>
 <h3 id="Self-host"><a href="#Self-host" class="headerlink" title="Self-host"></a>Self-host</h3><p>你也可以直接把这些文件放到服务器上，而不是通过CDN加载。</p>
 <ul>
-<li>如果你可以通过ssh访问你的主机，请把整个项目克隆到服务器上。执行：<pre><code class="bash">cd /path/to/your/webroot
+<li>如果你可以通过ssh访问你的主机，请把整个项目克隆到服务器上。执行：</li>
+</ul>
+<pre><code class="bash">cd /path/to/your/webroot
 # Clone this repository
 git clone https://github.com/longz/live2d-widget.git
 </code></pre>
-</li>
+<ul>
 <li>如果你的主机无法用ssh连接（例如一般的虚拟主机），请选择<code>Download ZIP</code>，然后通过ftp上传到主机上，再解压到网站的目录下。</li>
 <li>如果你是通过Hexo等工具部署的静态博客，请选择<code>Download ZIP</code>，然后解压到本地的博客目录下，例如<code>source</code>下与<code>_posts</code>同级的目录。重新部署博客时，相关文件就会自动上传到对应的目录。（还需要在Hexo主题相关的swig或ejs模版中正确配置路径，才可以加载）</li>
 </ul>
