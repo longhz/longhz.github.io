@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="每日一句">
+    <meta name="author" content="ドラゴンボールのLong">
+    
+    <title>
+        
+            虚拟机环境下安装CentOs7系统 |
+        
+        ドラゴンボールのBlog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/brands.min.css">
+    
+        
+            
+        
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"zhongshenglong.xyz","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"ドラゴンボールのBlog","author":"ドラゴンボールのLong","avatar":"https://cdn.jsdelivr.net/gh/longhz/cdn@1.0/img/custom/avatar1.jpg","logo":"/images/favicon.ico","favicon":"/images/favicon.ico"},"menu":{"home":"/ || fa-solid fa-home","归档":{"icon":"fa-solid fa-book","children":[{"archives":"/archives || fa-solid fa-layer-group"},{"tags":"/tags || fa-solid fa-tags"}]},"links":"/links|| fa-solid fa-link","about":{"icon":"fa-solid fa-user-secret","children":[{"gallery":"/gallery || fa-solid fa-image"},{"about":"/about || fa-solid fa-user-graduate"}]}},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"黄色的森林分出两条路 || 我选择人迹更少的那一条，从此决定我一生的道路。","hitokoto":true},"social_contact":{"enable":false,"links":{"github":"https://github.com/longhz","weixin":null,"qq":"https://wpa.qq.com/msgrd?v=3&uin=1084045717&site=qq&menu=yes","weibo":null,"bilibili":"https://space.bilibili.com/9317816/bangumi","wangyiyun":"https://music.163.com/user/home?id=1348254961","zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":{"custom_license":"Long License","custom_link":"https://zhongshenglong.xyz"},"share":true,"reward":{"enable":true,"img_link":"/images/reward.jpg","text":"请作者喝咖啡","icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"obsidian"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":true,"use":"valine","valine":{"appid":"2TGCOmDNikdxOnVmQJEFhTOK-gzGzoHsz","appkey":"lU21jvewvcy043UjfpHRXfvA","server_urls":null,"placeholder":"😜 尽情吐槽吧~"},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.36"},"waline":{"server_url":null,"reaction":false,"version":"3.2.1"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2019,"word_count":true,"site_deploy":{"enable":true,"provider":"aliyun","url":null},"record":{"enable":true,"list":[{"code":"苏ICP备20001538号-1","link":"https://beian.miit.gov.cn"}]}},"inject":{"enable":true,"css":[null],"js":[null,"/js/love.js"]},"aplayer":{"id":4900925608,"server":"netease","type":"playlist","fixed":true,"autoplay":false,"loop":"all","order":"random","preload":"auto","volume":0.7,"mutex":true},"live2d":{"enable":true,"scriptFrom":"local","pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"use":"live2d-widget-model-liveuu"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}},"root":"","source_data":{"links":[{"name":"IT诗人","link":"https://xpoet.cn/","description":"所有命运的馈赠，早已在暗中标好价格。","avatar":"https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/common-use/avatar.jpg"},{"name":"不知名艺术家","link":"https://jinzhanqi.com/","description":"love artist, love code.","avatar":"https://s3.ax1x.com/2020/11/17/DVvkB4.jpg"},{"name":"阮一峰","link":"http://www.ruanyifeng.com/blog/archives.html","description":"阮一峰的网络日志","avatar":"https://www.ruanyifeng.com/blog/images/person2_s.jpg"},{"name":"墨","link":"https://www.kura.ren/","description":"清水1024","avatar":"https://www.kura.ren/upload/2020/05/up-up-man-4d2d7e917c9d476b86373b0aa17fcafe.png"},{"name":"爱·绮梦","link":"https://x.iqimeng.com/","description":"学而时习之 不亦说乎","avatar":"https://x.iqimeng.com/images/avatar.jpg"},{"name":"Keep learning","link":"https://blog.gooday.press/","description":"爱好学习，不断提升自我","avatar":"https://cdn.jsdelivr.net/gh/cemonliu/blogpic@main/avatar.svg"},{"name":"CitingNutria","link":"https://citingnutria.github.io/","description":"まだ夢がある","avatar":"https://cdn.jsdelivr.net/gh/CitingNutria/image_hosting@master/avatar.jpg"},{"name":"小龙的跋涉","link":"https://www.eduorg.ltd/","description":"但行好事，莫问前程","avatar":"https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/blog/favicon.42reb4izcgs0.png"},{"name":"Eveneko","link":"https://eveneko.com/","description":"我们这一生，能做一个优秀的普通人已经足够厉害了！","avatar":"https://cdn.jsdelivr.net/gh/Eveneko/Image-Hosting@master/PicX/A1644732-0330-47D7-A2A1-4EBA8B3C2855.3gp6q5zr8180.jpeg"},{"name":"Nico","link":"https://www.lzp.zone/","description":"蝉歌星夜，月影婆娑","avatar":"https://tva1.sinaimg.cn/large/008i3skNly1gwpe11i8adj301s01smwx.jpg"},{"name":"KAI’S NOTE","link":"https://kainote.top/","description":"三天打鱼(⊙ˍ⊙)两天晒网","avatar":"https://s2.loli.net/2022/01/09/UtbhxHv2IA8jqwZ.jpg"},{"name":"April的记录小屋","link":"https://april-tong.com/","description":"热爱可抵岁月漫长。","avatar":"https://raw.githubusercontent.com/AprilTong/image/master/img/photo.jpeg"},{"name":"ZhengXi","link":"https://zhengxi.io/","description":"你的时间有限，不要为了别人而活","avatar":"https://vip2.loli.io/2022/01/28/8bTLXSIoDckrjfz.png"},{"name":"PMP项目管理","link":"https://pmp.saiita.cn/","description":"学习PMP项目管理的笔记.","avatar":"https://cdn.saiita.com.cn/picgo/P3260015.JPG"},{"name":"开心驿站","link":"https://www.kxyz.eu.org/","description":"steam游戏交流中心","avatar":"https://www.kxyz.eu.org/wp-content/uploads/logo.png"},{"name":"免费公益v2ray节点订阅","link":"https://www.v2rayfree.eu.org/","description":"免费公益v2ray节点订阅","avatar":"https://www.v2rayfree.eu.org/images/avatar.png"},{"name":"ZXC's Blog","link":"https://www.v2rayfree.eu.org/","description":"生命不息，代码不止","avatar":"https://cdn.jsdelivr.net/gh/XavierJiezou/picx-image-hosting@main/about/avatar.jpg"},{"name":"FallenGemini的博客","link":"https://paraderno.github.io/Blog.github.io/","description":"愿地狱的终点是天堂","avatar":"https://raw.githubusercontent.com/Paraderno/image-hosting/master/avatar.3co1ubx6en80.png"},{"name":"AomanHao的博客","link":"https://www.aomanhao.top/","description":"热爱图像处理，优化彩色世界","avatar":"https://www.aomanhao.top/images/Avatar.jpg"},{"name":"༺ཌ༈君☠纤༈ད༻的博客","link":"https://www.cnblogs.com/asio/","description":"欲买桂花同载酒，荒泷天下第一斗。","avatar":"https://pic.cnblogs.com/avatar/1924746/20200215183155.png"},{"name":"clash免费节点","link":"https://clashfree.eu.org/","description":"ssr/v2ray/clash免费节点分享","avatar":"https://clashfree.eu.org/wp-content/uploads/avatar.png"}]},"version":"4.2.3"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="❦༺  LONGZ ༻❦" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/favicon.ico">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               ドラゴンボールのBlog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box has-sub-menu">
+                            <a class="menu-text-color border-box" href="javascript:void(0);">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-book"></i>
+                                
+                                归档
+                                
+                                    <i class="menu-text-color collapse-icon fa-solid fa-angle-down"></i>
+                                
+                            </a>
+                            
+                                <ul class="sub-menu-list border-box">
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/archives">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-layer-group"></i>
+                                                
+                                                归档
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/tags">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-tags"></i>
+                                                
+                                                标签
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/links">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-link"></i>
+                                
+                                友链
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box has-sub-menu">
+                            <a class="menu-text-color border-box" href="javascript:void(0);">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-secret"></i>
+                                
+                                关于
+                                
+                                    <i class="menu-text-color collapse-icon fa-solid fa-angle-down"></i>
+                                
+                            </a>
+                            
+                                <ul class="sub-menu-list border-box">
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/gallery">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-image"></i>
+                                                
+                                                GALLERY
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/about">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-user-graduate"></i>
+                                                
+                                                关于
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box has-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="javascript:void(0);">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-book"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                            <i class="right-side collapse-icon fa-solid fa-angle-left"></i>
+                        
+                    </label>
+                    
+                        <ul class="drawer-sub-menu-list border-box">
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/archives">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-layer-group"></i>
+                                            </span>
+                                        
+                                        归档
+                                    </a>
+                                </li>
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/tags">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-tags"></i>
+                                            </span>
+                                        
+                                        标签
+                                    </a>
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/links">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-link"></i>
+                                </span>
+                            
+                            友链
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box has-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="javascript:void(0);">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-secret"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                            <i class="right-side collapse-icon fa-solid fa-angle-left"></i>
+                        
+                    </label>
+                    
+                        <ul class="drawer-sub-menu-list border-box">
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/gallery">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-image"></i>
+                                            </span>
+                                        
+                                        GALLERY
+                                    </a>
+                                </li>
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/about">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-user-graduate"></i>
+                                            </span>
+                                        
+                                        关于
+                                    </a>
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        虚拟机环境下安装CentOs7系统
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="http://cdns.zhongshenglong.xyz/cdn-photos/img/custom/avatar1.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">岁月如梦</span>
+                                
+                                    <span class="author-badge">Lv4</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2021-06-11 08:10:12</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Fri Jun 10 2022 12:56:31 GMT+0800">2022-06-10 12:56:31</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E8%BD%AF%E4%BB%B6%E6%95%99%E7%A8%8B/">软件教程</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E5%BF%83%E5%BE%97/">心得</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>1.2k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>4 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h2 id="1-创建虚拟机环境"><a href="#1-创建虚拟机环境" class="headerlink" title="1.创建虚拟机环境"></a>1.创建虚拟机环境</h2><h3 id="1-1-虚拟机选择新建，选择（自定义）高级"><a href="#1-1-虚拟机选择新建，选择（自定义）高级" class="headerlink" title="1.1 虚拟机选择新建，选择（自定义）高级"></a>1.1 虚拟机选择新建，选择（自定义）高级</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610112613.png"
+                       
+                 ></p>
+<h3 id="1-2-虚拟机硬解选择默认即可"><a href="#1-2-虚拟机硬解选择默认即可" class="headerlink" title="1.2 虚拟机硬解选择默认即可"></a>1.2 虚拟机硬解选择默认即可</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610112803.png"
+                       
+                 ></p>
+<h3 id="1-3-虚拟机系统选择稍后安装"><a href="#1-3-虚拟机系统选择稍后安装" class="headerlink" title="1.3 虚拟机系统选择稍后安装"></a>1.3 虚拟机系统选择稍后安装</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610112914.png"
+                       
+                 ></p>
+<h3 id="1-4-根据你要安装的系统镜像来选择对应的系统版本"><a href="#1-4-根据你要安装的系统镜像来选择对应的系统版本" class="headerlink" title="1.4 根据你要安装的系统镜像来选择对应的系统版本"></a>1.4 根据你要安装的系统镜像来选择对应的系统版本</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610113035.png"
+                       
+                 ></p>
+<h3 id="1-5-选择安装位置和安装文件夹名称"><a href="#1-5-选择安装位置和安装文件夹名称" class="headerlink" title="1.5 选择安装位置和安装文件夹名称"></a>1.5 选择安装位置和安装文件夹名称</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610113137.png"
+                       
+                 ></p>
+<h3 id="1-6-选择系统内核，给两个就行"><a href="#1-6-选择系统内核，给两个就行" class="headerlink" title="1.6 选择系统内核，给两个就行"></a>1.6 选择系统内核，给两个就行</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610113226.png"
+                       
+                 ></p>
+<h3 id="1-7-内存大小，这里我给了4个G"><a href="#1-7-内存大小，这里我给了4个G" class="headerlink" title="1.7 内存大小，这里我给了4个G"></a>1.7 内存大小，这里我给了4个G</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610113312.png"
+                       
+                 ></p>
+<h3 id="1-7-网络环境根据需要选择，如果仅仅是内网，仅主机就行，要连外网选择net，如果不知道配置又需要外网，选择桥接就行（桥接的ip会和本机ip一致）"><a href="#1-7-网络环境根据需要选择，如果仅仅是内网，仅主机就行，要连外网选择net，如果不知道配置又需要外网，选择桥接就行（桥接的ip会和本机ip一致）" class="headerlink" title="1.7 网络环境根据需要选择，如果仅仅是内网，仅主机就行，要连外网选择net，如果不知道配置又需要外网，选择桥接就行（桥接的ip会和本机ip一致）"></a>1.7 网络环境根据需要选择，如果仅仅是内网，仅主机就行，要连外网选择net，如果不知道配置又需要外网，选择桥接就行（桥接的ip会和本机ip一致）</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610113358.png"
+                       
+                 ></p>
+<h3 id="1-8-控制器默认选择推荐的"><a href="#1-8-控制器默认选择推荐的" class="headerlink" title="1.8 控制器默认选择推荐的"></a>1.8 控制器默认选择推荐的</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610113636.png"
+                       
+                 ></p>
+<h3 id="1-9-磁盘类型选择SCSI"><a href="#1-9-磁盘类型选择SCSI" class="headerlink" title="1.9 磁盘类型选择SCSI"></a>1.9 磁盘类型选择SCSI</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610113701.png"
+                       
+                 ></p>
+<h3 id="1-10-创建新的虚拟磁盘"><a href="#1-10-创建新的虚拟磁盘" class="headerlink" title="1.10 创建新的虚拟磁盘"></a>1.10 创建新的虚拟磁盘</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610113802.png"
+                       
+                 ></p>
+<h3 id="1-11-磁盘容量看着给，如果需要性能则选择单文件存储"><a href="#1-11-磁盘容量看着给，如果需要性能则选择单文件存储" class="headerlink" title="1.11 磁盘容量看着给，如果需要性能则选择单文件存储"></a>1.11 磁盘容量看着给，如果需要性能则选择单文件存储</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610113851.png"
+                       
+                 ></p>
+<h3 id="1-12-编辑虚拟机设置，选择要安装的ISO镜像"><a href="#1-12-编辑虚拟机设置，选择要安装的ISO镜像" class="headerlink" title="1.12 编辑虚拟机设置，选择要安装的ISO镜像"></a>1.12 编辑虚拟机设置，选择要安装的ISO镜像</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610114054.png"
+                       
+                 ></p>
+<h2 id="2-安装Linux-Centos系统"><a href="#2-安装Linux-Centos系统" class="headerlink" title="2. 安装Linux_Centos系统"></a>2. 安装Linux_Centos系统</h2><h3 id="2-1-开机后，选择语言"><a href="#2-1-开机后，选择语言" class="headerlink" title="2.1 开机后，选择语言"></a>2.1 开机后，选择语言</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610114805.png"
+                       
+                 ></p>
+<h3 id="2-2-选择安装位置"><a href="#2-2-选择安装位置" class="headerlink" title="2.2 选择安装位置"></a>2.2 选择安装位置</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610114922.png"
+                       
+                 ></p>
+<h3 id="2-3-选择本地磁盘，选择我要配置分区，点完成"><a href="#2-3-选择本地磁盘，选择我要配置分区，点完成" class="headerlink" title="2.3 选择本地磁盘，选择我要配置分区，点完成"></a>2.3 选择本地磁盘，选择我要配置分区，点完成</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610115152.png"
+                       
+                 ></p>
+<h3 id="2-4-根据自己的要求来分配存储空间，swap空间给2G，多余的都给根目录"><a href="#2-4-根据自己的要求来分配存储空间，swap空间给2G，多余的都给根目录" class="headerlink" title="2.4 根据自己的要求来分配存储空间，swap空间给2G，多余的都给根目录"></a>2.4 根据自己的要求来分配存储空间，swap空间给2G，多余的都给根目录</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610115652.png"
+                       
+                 ></p>
+<h4 id="2-4-1-Linux-swap分区及作用详解"><a href="#2-4-1-Linux-swap分区及作用详解" class="headerlink" title="2.4.1 Linux swap分区及作用详解"></a>2.4.1 Linux swap分区及作用详解</h4><blockquote>
+<p>我们在安装系统的时候已经建立了 swap 分区。swap 分区通常被称为交换分区，这是一块特殊的硬盘空间，即当实际内存不够用的时候，操作系统会从内存中取出一部分暂时不用的数据，放在交换分区中，从而为当前运行的程序腾出足够的内存空间。<br>也就是说，当内存不够用时，我们使用 swap 分区来临时顶替。这种“拆东墙，补西墙”的方式应用于几乎所有的操作系统中。</p>
+</blockquote>
+<p>使用 swap 交换分区，显著的优点是，通过操作系统的调度，应用程序实际可以使用的内存空间将远远超过系统的物理内存。由于硬盘空间的价格远比 RAM 要低，因此这种方式无疑是经济实惠的。当然，频繁地读写硬盘，会显著降低操作系统的运行速率，这也是使用 swap 交换分区最大的限制。</p>
+<blockquote>
+<p>相比较而言，Windows 不会为 swap 单独划分一个分区，而是使用分页文件实现相同的功能，在概念上，Windows 称其为虚拟内存，从某种意义上将，这个叫法更容易理解。因此，初学者将 swap 交换分区理解为虚拟内存是没有任何问题的。</p>
+</blockquote>
+<p>具体使用多大的 swap 分区，取决于物理内存大小和硬盘的容量。一般来讲，swap 分区容量应大于物理内存大小，建议是内存的两倍，但不超过 2GB。但是，有时服务器的访问量确实很大，有可能出现 swap 分区不够用的情况，所以我们需要学习 swap 分区的构建方法。</p>
+<h3 id="2-5-在软件选择的地方点修改最小安装设置，选择带桌面的环境"><a href="#2-5-在软件选择的地方点修改最小安装设置，选择带桌面的环境" class="headerlink" title="2.5 在软件选择的地方点修改最小安装设置，选择带桌面的环境"></a>2.5 在软件选择的地方点修改最小安装设置，选择带桌面的环境</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610115849.png"
+                       
+                 ></p>
+<h3 id="2-6-确认选择无误后，点开始安装"><a href="#2-6-确认选择无误后，点开始安装" class="headerlink" title="2.6 确认选择无误后，点开始安装"></a>2.6 确认选择无误后，点开始安装</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610120031.png"
+                       
+                 ></p>
+<h3 id="2-7-设置root密码"><a href="#2-7-设置root密码" class="headerlink" title="2.7 设置root密码"></a>2.7 设置root密码</h3><blockquote>
+<p>在安装过程中可以点设置root密码，设置好后，等待系统安装完成，点重新启动</p>
+</blockquote>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610120138.png"
+                       
+                 ></p>
+<h3 id="2-8-重启好后，选择接受协议，然后点完成配置"><a href="#2-8-重启好后，选择接受协议，然后点完成配置" class="headerlink" title="2.8 重启好后，选择接受协议，然后点完成配置"></a>2.8 重启好后，选择接受协议，然后点完成配置</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610121152.png"
+                       
+                 ></p>
+<h2 id="3-linux相关设置"><a href="#3-linux相关设置" class="headerlink" title="3. linux相关设置"></a>3. linux相关设置</h2><h3 id="3-1-开始页面选择语言，点前进"><a href="#3-1-开始页面选择语言，点前进" class="headerlink" title="3.1 开始页面选择语言，点前进"></a>3.1 开始页面选择语言，点前进</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610121306.png"
+                       
+                 ></p>
+<h3 id="3-2-选择键盘布局和输入方式，默认即可，选择前进"><a href="#3-2-选择键盘布局和输入方式，默认即可，选择前进" class="headerlink" title="3.2 选择键盘布局和输入方式，默认即可，选择前进"></a>3.2 选择键盘布局和输入方式，默认即可，选择前进</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610121426.png"
+                       
+                 ></p>
+<h3 id="3-3-隐私，默认开启，推荐关闭，选择前进"><a href="#3-3-隐私，默认开启，推荐关闭，选择前进" class="headerlink" title="3.3 隐私，默认开启，推荐关闭，选择前进"></a>3.3 隐私，默认开启，推荐关闭，选择前进</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610121510.png"
+                       
+                 ></p>
+<h3 id="3-4-时区，输入shanghai，选择前进"><a href="#3-4-时区，输入shanghai，选择前进" class="headerlink" title="3.4 时区，输入shanghai，选择前进"></a>3.4 时区，输入shanghai，选择前进</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610121557.png"
+                       
+                 ></p>
+<h3 id="3-5-在线账号，选择跳过"><a href="#3-5-在线账号，选择跳过" class="headerlink" title="3.5 在线账号，选择跳过"></a>3.5 在线账号，选择跳过</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610121640.png"
+                       
+                 ></p>
+<h3 id="3-6-这里用户名称根据自己需要来填写，我这里主要用于mysql，选择前进"><a href="#3-6-这里用户名称根据自己需要来填写，我这里主要用于mysql，选择前进" class="headerlink" title="3.6 这里用户名称根据自己需要来填写，我这里主要用于mysql，选择前进"></a>3.6 这里用户名称根据自己需要来填写，我这里主要用于mysql，选择前进</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610121834.png"
+                       
+                 ></p>
+<h3 id="3-7-设置刚刚用户的密码"><a href="#3-7-设置刚刚用户的密码" class="headerlink" title="3.7 设置刚刚用户的密码"></a>3.7 设置刚刚用户的密码</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610121919.png"
+                       
+                 ></p>
+<h3 id="3-8-配置完成，正式进入桌面"><a href="#3-8-配置完成，正式进入桌面" class="headerlink" title="3.8 配置完成，正式进入桌面"></a>3.8 配置完成，正式进入桌面</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610122131.png"
+                       
+                 ></p>
+<h3 id="3-9-配置网络"><a href="#3-9-配置网络" class="headerlink" title="3.9 配置网络"></a>3.9 配置网络</h3><blockquote>
+<p>进入桌面后，比如我们想看下能不能连上外网，发现无法ping通</p>
+</blockquote>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610122535.png"
+                       
+                 ></p>
+<blockquote>
+<p>输入以下命令查看网络配置，这时候是系统自动配置的网络，我们可以不用管它，可以直接清空</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/sysconfig/network-scripts/ifcfg-ens33</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610122801.png"
+                       
+                 ></p>
+<blockquote>
+<p>查看虚拟机网络，发现net网络的ip地址范围为192.168.217.3~254是我们可以使用的<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610123151.png"
+                       
+                 ></p>
+</blockquote>
+<p>查看虚拟机的net网络的mac地址<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610123928.png"
+                       
+                 ></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano /etc/sysconfig/network-scripts/ifcfg-ens33</span><br></pre></td></tr></table></figure>
+<p>修改网络配置文件 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">DEVICE=ens33</span><br><span class="line">HWADDR=00:0C:29:A0:FA:EB</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">UUID=82a26540-5b06-4ad2-b833-ad4ade0def20</span><br><span class="line">ONBOOT=yes</span><br><span class="line">NM_CONTROLLED=yes</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">IPADDR=192.168.217.133</span><br><span class="line">NETMARK=255.255.255.0</span><br><span class="line">GATEWAY=192.168.217.2</span><br><span class="line">DNS1=192.168.217.2</span><br></pre></td></tr></table></figure>
+<p>然后重启网络设置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service network restart</span><br></pre></td></tr></table></figure>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610124059.png"
+                       
+                 ></p>
+<p>查看网络信息 <code>ifconfig</code><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610124158.png"
+                       
+                 ><br>试试ping下网络，发现正常<br><code>ping www.baidu.com</code><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220610124344.png"
+                       
+                 ></p>
+</br>
+# 
+至此，Centos的系统安装到此结束，谢谢观看！
+
+<blockquote>
+<p><strong>如果小伙伴们有相关疑问，可以评论栏中留言提出。</strong></p>
+</blockquote>
+
+                    
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                虚拟机环境下安装CentOs7系统
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                2021/06/11/CentOs系统安装/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">ドラゴンボールのLong</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2021-06-11 08:10</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="">
+                    <a href="https://zhongshenglong.xyz" target="_blank">
+                        
+                            Long License
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/linux/">linux</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E5%BF%83%E5%BE%97/">心得</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+                    
+
+<div class="reward-author-container border-box flex-center">
+    <div class="reward-btn border-box flex-center tooltip tooltip-img"
+            data-tooltip-img-url="/images/reward.jpg"
+            data-tooltip-img-trigger="click"
+            data-tooltip-img-style="top: -6px;"
+    >
+        <i class="fa-solid fa-gift"></i>&nbsp;请作者喝咖啡
+    </div>
+</div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2021/07/06/mysql%E6%8A%A5%E9%94%99-1130/"
+                                   title="Mysql报错-1130"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Mysql报错-1130</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2021/06/08/RHEL6%E4%B8%8AOracle11gR2-grid%E5%AE%89%E8%A3%85%E5%90%8E%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8%E7%9A%84%E8%A7%A3%E5%86%B3/"
+                                   title="RHEL6上Oracle11gR2 grid安装后无法启动的解决"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">RHEL6上Oracle11gR2 grid安装后无法启动的解决</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+    <div class="comments-container border-box">
+        <div id="comments-anchor" class="comment-area-title border-box">
+            <i class="fas fa-comments"></i>&nbsp;评论
+        </div>
+        <div class="comment-plugin-fail border-box">
+    <span class="fail-tip">评论插件加载失败</span>
+    <button class="reload keep-button">点击重新加载</button>
+</div>
+<div class="comment-plugin-loading flex-center border-box">
+    <i class="loading-icon fa-solid fa-spinner fa-spin"></i>
+    <span class="load-tip">正在加载评论插件</span>
+</div>
+<script data-pjax>
+  window.KeepCommentPlugin = {}
+  window.KeepCommentPlugin.hideLoading = () => {
+    const cplDom = document.querySelector('.comments-container .comment-plugin-loading')
+    cplDom.style.display = 'none'
+  }
+  window.KeepCommentPlugin.loadFailHandle = () => {
+    window.KeepCommentPlugin.hideLoading()
+    const cpfDom = document.querySelector('.comments-container .comment-plugin-fail')
+    cpfDom.style.display = 'flex'
+    cpfDom.querySelector('.reload').addEventListener('click', () => {
+      window.location.reload()
+    })
+  }
+</script>
+
+        
+            
+
+    <div class="valine-container">
+        <div id="vcomments"></div>
+        <script 
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        ></script>
+        <script 
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        >
+          window.KeepCommentPlugin.initValine = () => {
+            const config = {
+              el: '#vcomments',
+              appId: '2TGCOmDNikdxOnVmQJEFhTOK-gzGzoHsz',
+              appKey: 'lU21jvewvcy043UjfpHRXfvA',
+              meta: ['nick', 'mail', 'link'],
+              avatar: 'wavatar',
+              enableQQ: true,
+              placeholder: '😜 尽情吐槽吧~',
+              lang: 'zh-CN'.toLowerCase()
+            }
+
+            if ('') {
+              config.serverURLs = ''
+            }
+
+            if (window?.Valine) {
+              new Valine(config)
+              window.KeepCommentPlugin.hideLoading()
+            } else {
+              setTimeout(() => {
+                window.KeepCommentPlugin.initValine()
+              }, 1000)
+            }
+          }
+
+          if ('false' === 'true') {
+            setTimeout(() => {
+              window.KeepCommentPlugin.initValine()
+            }, 1200)
+          } else {
+            window.addEventListener('DOMContentLoaded', window.KeepCommentPlugin.initValine)
+          }
+        </script>
+    </div>
+
+
+        
+    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">1.创建虚拟机环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%80%89%E6%8B%A9%E6%96%B0%E5%BB%BA%EF%BC%8C%E9%80%89%E6%8B%A9%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E9%AB%98%E7%BA%A7"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 虚拟机选择新建，选择（自定义）高级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A1%AC%E8%A7%A3%E9%80%89%E6%8B%A9%E9%BB%98%E8%AE%A4%E5%8D%B3%E5%8F%AF"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 虚拟机硬解选择默认即可</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%B3%BB%E7%BB%9F%E9%80%89%E6%8B%A9%E7%A8%8D%E5%90%8E%E5%AE%89%E8%A3%85"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 虚拟机系统选择稍后安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E6%A0%B9%E6%8D%AE%E4%BD%A0%E8%A6%81%E5%AE%89%E8%A3%85%E7%9A%84%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F%E6%9D%A5%E9%80%89%E6%8B%A9%E5%AF%B9%E5%BA%94%E7%9A%84%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 根据你要安装的系统镜像来选择对应的系统版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-%E9%80%89%E6%8B%A9%E5%AE%89%E8%A3%85%E4%BD%8D%E7%BD%AE%E5%92%8C%E5%AE%89%E8%A3%85%E6%96%87%E4%BB%B6%E5%A4%B9%E5%90%8D%E7%A7%B0"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 选择安装位置和安装文件夹名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-%E9%80%89%E6%8B%A9%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8%EF%BC%8C%E7%BB%99%E4%B8%A4%E4%B8%AA%E5%B0%B1%E8%A1%8C"><span class="nav-number">1.6.</span> <span class="nav-text">1.6 选择系统内核，给两个就行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-%E5%86%85%E5%AD%98%E5%A4%A7%E5%B0%8F%EF%BC%8C%E8%BF%99%E9%87%8C%E6%88%91%E7%BB%99%E4%BA%864%E4%B8%AAG"><span class="nav-number">1.7.</span> <span class="nav-text">1.7 内存大小，这里我给了4个G</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-%E7%BD%91%E7%BB%9C%E7%8E%AF%E5%A2%83%E6%A0%B9%E6%8D%AE%E9%9C%80%E8%A6%81%E9%80%89%E6%8B%A9%EF%BC%8C%E5%A6%82%E6%9E%9C%E4%BB%85%E4%BB%85%E6%98%AF%E5%86%85%E7%BD%91%EF%BC%8C%E4%BB%85%E4%B8%BB%E6%9C%BA%E5%B0%B1%E8%A1%8C%EF%BC%8C%E8%A6%81%E8%BF%9E%E5%A4%96%E7%BD%91%E9%80%89%E6%8B%A9net%EF%BC%8C%E5%A6%82%E6%9E%9C%E4%B8%8D%E7%9F%A5%E9%81%93%E9%85%8D%E7%BD%AE%E5%8F%88%E9%9C%80%E8%A6%81%E5%A4%96%E7%BD%91%EF%BC%8C%E9%80%89%E6%8B%A9%E6%A1%A5%E6%8E%A5%E5%B0%B1%E8%A1%8C%EF%BC%88%E6%A1%A5%E6%8E%A5%E7%9A%84ip%E4%BC%9A%E5%92%8C%E6%9C%AC%E6%9C%BAip%E4%B8%80%E8%87%B4%EF%BC%89"><span class="nav-number">1.8.</span> <span class="nav-text">1.7 网络环境根据需要选择，如果仅仅是内网，仅主机就行，要连外网选择net，如果不知道配置又需要外网，选择桥接就行（桥接的ip会和本机ip一致）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-%E6%8E%A7%E5%88%B6%E5%99%A8%E9%BB%98%E8%AE%A4%E9%80%89%E6%8B%A9%E6%8E%A8%E8%8D%90%E7%9A%84"><span class="nav-number">1.9.</span> <span class="nav-text">1.8 控制器默认选择推荐的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9-%E7%A3%81%E7%9B%98%E7%B1%BB%E5%9E%8B%E9%80%89%E6%8B%A9SCSI"><span class="nav-number">1.10.</span> <span class="nav-text">1.9 磁盘类型选择SCSI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-10-%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84%E8%99%9A%E6%8B%9F%E7%A3%81%E7%9B%98"><span class="nav-number">1.11.</span> <span class="nav-text">1.10 创建新的虚拟磁盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-11-%E7%A3%81%E7%9B%98%E5%AE%B9%E9%87%8F%E7%9C%8B%E7%9D%80%E7%BB%99%EF%BC%8C%E5%A6%82%E6%9E%9C%E9%9C%80%E8%A6%81%E6%80%A7%E8%83%BD%E5%88%99%E9%80%89%E6%8B%A9%E5%8D%95%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8"><span class="nav-number">1.12.</span> <span class="nav-text">1.11 磁盘容量看着给，如果需要性能则选择单文件存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-12-%E7%BC%96%E8%BE%91%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%AE%BE%E7%BD%AE%EF%BC%8C%E9%80%89%E6%8B%A9%E8%A6%81%E5%AE%89%E8%A3%85%E7%9A%84ISO%E9%95%9C%E5%83%8F"><span class="nav-number">1.13.</span> <span class="nav-text">1.12 编辑虚拟机设置，选择要安装的ISO镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85Linux-Centos%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">2. 安装Linux_Centos系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%BC%80%E6%9C%BA%E5%90%8E%EF%BC%8C%E9%80%89%E6%8B%A9%E8%AF%AD%E8%A8%80"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 开机后，选择语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E9%80%89%E6%8B%A9%E5%AE%89%E8%A3%85%E4%BD%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 选择安装位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E9%80%89%E6%8B%A9%E6%9C%AC%E5%9C%B0%E7%A3%81%E7%9B%98%EF%BC%8C%E9%80%89%E6%8B%A9%E6%88%91%E8%A6%81%E9%85%8D%E7%BD%AE%E5%88%86%E5%8C%BA%EF%BC%8C%E7%82%B9%E5%AE%8C%E6%88%90"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 选择本地磁盘，选择我要配置分区，点完成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%B7%B1%E7%9A%84%E8%A6%81%E6%B1%82%E6%9D%A5%E5%88%86%E9%85%8D%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%EF%BC%8Cswap%E7%A9%BA%E9%97%B4%E7%BB%992G%EF%BC%8C%E5%A4%9A%E4%BD%99%E7%9A%84%E9%83%BD%E7%BB%99%E6%A0%B9%E7%9B%AE%E5%BD%95"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 根据自己的要求来分配存储空间，swap空间给2G，多余的都给根目录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-1-Linux-swap%E5%88%86%E5%8C%BA%E5%8F%8A%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.4.1.</span> <span class="nav-text">2.4.1 Linux swap分区及作用详解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E5%9C%A8%E8%BD%AF%E4%BB%B6%E9%80%89%E6%8B%A9%E7%9A%84%E5%9C%B0%E6%96%B9%E7%82%B9%E4%BF%AE%E6%94%B9%E6%9C%80%E5%B0%8F%E5%AE%89%E8%A3%85%E8%AE%BE%E7%BD%AE%EF%BC%8C%E9%80%89%E6%8B%A9%E5%B8%A6%E6%A1%8C%E9%9D%A2%E7%9A%84%E7%8E%AF%E5%A2%83"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 在软件选择的地方点修改最小安装设置，选择带桌面的环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E7%A1%AE%E8%AE%A4%E9%80%89%E6%8B%A9%E6%97%A0%E8%AF%AF%E5%90%8E%EF%BC%8C%E7%82%B9%E5%BC%80%E5%A7%8B%E5%AE%89%E8%A3%85"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 确认选择无误后，点开始安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-%E8%AE%BE%E7%BD%AEroot%E5%AF%86%E7%A0%81"><span class="nav-number">2.7.</span> <span class="nav-text">2.7 设置root密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8-%E9%87%8D%E5%90%AF%E5%A5%BD%E5%90%8E%EF%BC%8C%E9%80%89%E6%8B%A9%E6%8E%A5%E5%8F%97%E5%8D%8F%E8%AE%AE%EF%BC%8C%E7%84%B6%E5%90%8E%E7%82%B9%E5%AE%8C%E6%88%90%E9%85%8D%E7%BD%AE"><span class="nav-number">2.8.</span> <span class="nav-text">2.8 重启好后，选择接受协议，然后点完成配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-linux%E7%9B%B8%E5%85%B3%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">3. linux相关设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%BC%80%E5%A7%8B%E9%A1%B5%E9%9D%A2%E9%80%89%E6%8B%A9%E8%AF%AD%E8%A8%80%EF%BC%8C%E7%82%B9%E5%89%8D%E8%BF%9B"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 开始页面选择语言，点前进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E9%80%89%E6%8B%A9%E9%94%AE%E7%9B%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%BE%93%E5%85%A5%E6%96%B9%E5%BC%8F%EF%BC%8C%E9%BB%98%E8%AE%A4%E5%8D%B3%E5%8F%AF%EF%BC%8C%E9%80%89%E6%8B%A9%E5%89%8D%E8%BF%9B"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 选择键盘布局和输入方式，默认即可，选择前进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E9%9A%90%E7%A7%81%EF%BC%8C%E9%BB%98%E8%AE%A4%E5%BC%80%E5%90%AF%EF%BC%8C%E6%8E%A8%E8%8D%90%E5%85%B3%E9%97%AD%EF%BC%8C%E9%80%89%E6%8B%A9%E5%89%8D%E8%BF%9B"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 隐私，默认开启，推荐关闭，选择前进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E6%97%B6%E5%8C%BA%EF%BC%8C%E8%BE%93%E5%85%A5shanghai%EF%BC%8C%E9%80%89%E6%8B%A9%E5%89%8D%E8%BF%9B"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 时区，输入shanghai，选择前进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E5%9C%A8%E7%BA%BF%E8%B4%A6%E5%8F%B7%EF%BC%8C%E9%80%89%E6%8B%A9%E8%B7%B3%E8%BF%87"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 在线账号，选择跳过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-%E8%BF%99%E9%87%8C%E7%94%A8%E6%88%B7%E5%90%8D%E7%A7%B0%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%B7%B1%E9%9C%80%E8%A6%81%E6%9D%A5%E5%A1%AB%E5%86%99%EF%BC%8C%E6%88%91%E8%BF%99%E9%87%8C%E4%B8%BB%E8%A6%81%E7%94%A8%E4%BA%8Emysql%EF%BC%8C%E9%80%89%E6%8B%A9%E5%89%8D%E8%BF%9B"><span class="nav-number">3.6.</span> <span class="nav-text">3.6 这里用户名称根据自己需要来填写，我这里主要用于mysql，选择前进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-%E8%AE%BE%E7%BD%AE%E5%88%9A%E5%88%9A%E7%94%A8%E6%88%B7%E7%9A%84%E5%AF%86%E7%A0%81"><span class="nav-number">3.7.</span> <span class="nav-text">3.7 设置刚刚用户的密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-8-%E9%85%8D%E7%BD%AE%E5%AE%8C%E6%88%90%EF%BC%8C%E6%AD%A3%E5%BC%8F%E8%BF%9B%E5%85%A5%E6%A1%8C%E9%9D%A2"><span class="nav-number">3.8.</span> <span class="nav-text">3.8 配置完成，正式进入桌面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-9-%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C"><span class="nav-number">3.9.</span> <span class="nav-text">3.9 配置网络</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+		year - 作为date对象的年份，为4位年份值
+		month - 0-11之间的整数，做为date对象的月份
+		day - 1-31之间的整数，做为date对象的天数
+		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+		minutes - 0-59之间的整数，做为date对象的分钟数
+		seconds - 0-59之间的整数，做为date对象的秒数
+		microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+		var t1 = Date.UTC(2019,04,09,21,47,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML="❤亲爱的旅客,我已与你/妳相遇❤❤❤"+" 第 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒❤";
+	}/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+	siteTime();
+</script>
+
+<footer class="footer border-box">
+		
+	<a href="https://www.foreverblog.cn/" target="_blank" > <img src="https://img.foreverblog.cn/logo_en_default.png" alt="" style="width:auto;height:16px;"> </a>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            本站由 <span class="tooltip" data-tooltip-content="阿里云"><img src="/images/brands/aliyun.png"></span> 提供部署服务
+            
+        </div>
+    
+
+    
+        <div class="record-info info-item">
+		ICP备案号：【&nbsp;
+            
+                
+                    <div class="record-item border-box">
+                        <a class=""
+                           target="_blank"
+                           href="https://beian.miit.gov.cn"
+                        >
+                            苏ICP备20001538号-1
+                        </a>
+                    </div>
+                
+            
+		&nbsp;】&nbsp;
+        </div>
+    
+	
+    <div class="copyright-info info-item">
+        &copy;&nbsp;<span>2019</span>&nbsp;-&nbsp;2024
+        
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">ドラゴンボールのLong</a>
+        
+		&nbsp;&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        <div class="count-info info-item">
+            
+                <span class="count-item border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">125.5k</span>
+                </span>
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+	
+	<!--自定义了时间-->
+    <p id="sitetime" target="_blank"></p>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+            <li class="tools-item go-to-comments-tablet flex-center">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">1.创建虚拟机环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%80%89%E6%8B%A9%E6%96%B0%E5%BB%BA%EF%BC%8C%E9%80%89%E6%8B%A9%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E9%AB%98%E7%BA%A7"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 虚拟机选择新建，选择（自定义）高级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A1%AC%E8%A7%A3%E9%80%89%E6%8B%A9%E9%BB%98%E8%AE%A4%E5%8D%B3%E5%8F%AF"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 虚拟机硬解选择默认即可</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%B3%BB%E7%BB%9F%E9%80%89%E6%8B%A9%E7%A8%8D%E5%90%8E%E5%AE%89%E8%A3%85"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 虚拟机系统选择稍后安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E6%A0%B9%E6%8D%AE%E4%BD%A0%E8%A6%81%E5%AE%89%E8%A3%85%E7%9A%84%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F%E6%9D%A5%E9%80%89%E6%8B%A9%E5%AF%B9%E5%BA%94%E7%9A%84%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 根据你要安装的系统镜像来选择对应的系统版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-%E9%80%89%E6%8B%A9%E5%AE%89%E8%A3%85%E4%BD%8D%E7%BD%AE%E5%92%8C%E5%AE%89%E8%A3%85%E6%96%87%E4%BB%B6%E5%A4%B9%E5%90%8D%E7%A7%B0"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 选择安装位置和安装文件夹名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-%E9%80%89%E6%8B%A9%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8%EF%BC%8C%E7%BB%99%E4%B8%A4%E4%B8%AA%E5%B0%B1%E8%A1%8C"><span class="nav-number">1.6.</span> <span class="nav-text">1.6 选择系统内核，给两个就行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-%E5%86%85%E5%AD%98%E5%A4%A7%E5%B0%8F%EF%BC%8C%E8%BF%99%E9%87%8C%E6%88%91%E7%BB%99%E4%BA%864%E4%B8%AAG"><span class="nav-number">1.7.</span> <span class="nav-text">1.7 内存大小，这里我给了4个G</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-%E7%BD%91%E7%BB%9C%E7%8E%AF%E5%A2%83%E6%A0%B9%E6%8D%AE%E9%9C%80%E8%A6%81%E9%80%89%E6%8B%A9%EF%BC%8C%E5%A6%82%E6%9E%9C%E4%BB%85%E4%BB%85%E6%98%AF%E5%86%85%E7%BD%91%EF%BC%8C%E4%BB%85%E4%B8%BB%E6%9C%BA%E5%B0%B1%E8%A1%8C%EF%BC%8C%E8%A6%81%E8%BF%9E%E5%A4%96%E7%BD%91%E9%80%89%E6%8B%A9net%EF%BC%8C%E5%A6%82%E6%9E%9C%E4%B8%8D%E7%9F%A5%E9%81%93%E9%85%8D%E7%BD%AE%E5%8F%88%E9%9C%80%E8%A6%81%E5%A4%96%E7%BD%91%EF%BC%8C%E9%80%89%E6%8B%A9%E6%A1%A5%E6%8E%A5%E5%B0%B1%E8%A1%8C%EF%BC%88%E6%A1%A5%E6%8E%A5%E7%9A%84ip%E4%BC%9A%E5%92%8C%E6%9C%AC%E6%9C%BAip%E4%B8%80%E8%87%B4%EF%BC%89"><span class="nav-number">1.8.</span> <span class="nav-text">1.7 网络环境根据需要选择，如果仅仅是内网，仅主机就行，要连外网选择net，如果不知道配置又需要外网，选择桥接就行（桥接的ip会和本机ip一致）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-%E6%8E%A7%E5%88%B6%E5%99%A8%E9%BB%98%E8%AE%A4%E9%80%89%E6%8B%A9%E6%8E%A8%E8%8D%90%E7%9A%84"><span class="nav-number">1.9.</span> <span class="nav-text">1.8 控制器默认选择推荐的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9-%E7%A3%81%E7%9B%98%E7%B1%BB%E5%9E%8B%E9%80%89%E6%8B%A9SCSI"><span class="nav-number">1.10.</span> <span class="nav-text">1.9 磁盘类型选择SCSI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-10-%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84%E8%99%9A%E6%8B%9F%E7%A3%81%E7%9B%98"><span class="nav-number">1.11.</span> <span class="nav-text">1.10 创建新的虚拟磁盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-11-%E7%A3%81%E7%9B%98%E5%AE%B9%E9%87%8F%E7%9C%8B%E7%9D%80%E7%BB%99%EF%BC%8C%E5%A6%82%E6%9E%9C%E9%9C%80%E8%A6%81%E6%80%A7%E8%83%BD%E5%88%99%E9%80%89%E6%8B%A9%E5%8D%95%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8"><span class="nav-number">1.12.</span> <span class="nav-text">1.11 磁盘容量看着给，如果需要性能则选择单文件存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-12-%E7%BC%96%E8%BE%91%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%AE%BE%E7%BD%AE%EF%BC%8C%E9%80%89%E6%8B%A9%E8%A6%81%E5%AE%89%E8%A3%85%E7%9A%84ISO%E9%95%9C%E5%83%8F"><span class="nav-number">1.13.</span> <span class="nav-text">1.12 编辑虚拟机设置，选择要安装的ISO镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85Linux-Centos%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">2. 安装Linux_Centos系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%BC%80%E6%9C%BA%E5%90%8E%EF%BC%8C%E9%80%89%E6%8B%A9%E8%AF%AD%E8%A8%80"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 开机后，选择语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E9%80%89%E6%8B%A9%E5%AE%89%E8%A3%85%E4%BD%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 选择安装位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E9%80%89%E6%8B%A9%E6%9C%AC%E5%9C%B0%E7%A3%81%E7%9B%98%EF%BC%8C%E9%80%89%E6%8B%A9%E6%88%91%E8%A6%81%E9%85%8D%E7%BD%AE%E5%88%86%E5%8C%BA%EF%BC%8C%E7%82%B9%E5%AE%8C%E6%88%90"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 选择本地磁盘，选择我要配置分区，点完成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%B7%B1%E7%9A%84%E8%A6%81%E6%B1%82%E6%9D%A5%E5%88%86%E9%85%8D%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%EF%BC%8Cswap%E7%A9%BA%E9%97%B4%E7%BB%992G%EF%BC%8C%E5%A4%9A%E4%BD%99%E7%9A%84%E9%83%BD%E7%BB%99%E6%A0%B9%E7%9B%AE%E5%BD%95"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 根据自己的要求来分配存储空间，swap空间给2G，多余的都给根目录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-1-Linux-swap%E5%88%86%E5%8C%BA%E5%8F%8A%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.4.1.</span> <span class="nav-text">2.4.1 Linux swap分区及作用详解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E5%9C%A8%E8%BD%AF%E4%BB%B6%E9%80%89%E6%8B%A9%E7%9A%84%E5%9C%B0%E6%96%B9%E7%82%B9%E4%BF%AE%E6%94%B9%E6%9C%80%E5%B0%8F%E5%AE%89%E8%A3%85%E8%AE%BE%E7%BD%AE%EF%BC%8C%E9%80%89%E6%8B%A9%E5%B8%A6%E6%A1%8C%E9%9D%A2%E7%9A%84%E7%8E%AF%E5%A2%83"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 在软件选择的地方点修改最小安装设置，选择带桌面的环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E7%A1%AE%E8%AE%A4%E9%80%89%E6%8B%A9%E6%97%A0%E8%AF%AF%E5%90%8E%EF%BC%8C%E7%82%B9%E5%BC%80%E5%A7%8B%E5%AE%89%E8%A3%85"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 确认选择无误后，点开始安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-%E8%AE%BE%E7%BD%AEroot%E5%AF%86%E7%A0%81"><span class="nav-number">2.7.</span> <span class="nav-text">2.7 设置root密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8-%E9%87%8D%E5%90%AF%E5%A5%BD%E5%90%8E%EF%BC%8C%E9%80%89%E6%8B%A9%E6%8E%A5%E5%8F%97%E5%8D%8F%E8%AE%AE%EF%BC%8C%E7%84%B6%E5%90%8E%E7%82%B9%E5%AE%8C%E6%88%90%E9%85%8D%E7%BD%AE"><span class="nav-number">2.8.</span> <span class="nav-text">2.8 重启好后，选择接受协议，然后点完成配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-linux%E7%9B%B8%E5%85%B3%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">3. linux相关设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%BC%80%E5%A7%8B%E9%A1%B5%E9%9D%A2%E9%80%89%E6%8B%A9%E8%AF%AD%E8%A8%80%EF%BC%8C%E7%82%B9%E5%89%8D%E8%BF%9B"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 开始页面选择语言，点前进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E9%80%89%E6%8B%A9%E9%94%AE%E7%9B%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%BE%93%E5%85%A5%E6%96%B9%E5%BC%8F%EF%BC%8C%E9%BB%98%E8%AE%A4%E5%8D%B3%E5%8F%AF%EF%BC%8C%E9%80%89%E6%8B%A9%E5%89%8D%E8%BF%9B"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 选择键盘布局和输入方式，默认即可，选择前进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E9%9A%90%E7%A7%81%EF%BC%8C%E9%BB%98%E8%AE%A4%E5%BC%80%E5%90%AF%EF%BC%8C%E6%8E%A8%E8%8D%90%E5%85%B3%E9%97%AD%EF%BC%8C%E9%80%89%E6%8B%A9%E5%89%8D%E8%BF%9B"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 隐私，默认开启，推荐关闭，选择前进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E6%97%B6%E5%8C%BA%EF%BC%8C%E8%BE%93%E5%85%A5shanghai%EF%BC%8C%E9%80%89%E6%8B%A9%E5%89%8D%E8%BF%9B"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 时区，输入shanghai，选择前进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E5%9C%A8%E7%BA%BF%E8%B4%A6%E5%8F%B7%EF%BC%8C%E9%80%89%E6%8B%A9%E8%B7%B3%E8%BF%87"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 在线账号，选择跳过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-%E8%BF%99%E9%87%8C%E7%94%A8%E6%88%B7%E5%90%8D%E7%A7%B0%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%B7%B1%E9%9C%80%E8%A6%81%E6%9D%A5%E5%A1%AB%E5%86%99%EF%BC%8C%E6%88%91%E8%BF%99%E9%87%8C%E4%B8%BB%E8%A6%81%E7%94%A8%E4%BA%8Emysql%EF%BC%8C%E9%80%89%E6%8B%A9%E5%89%8D%E8%BF%9B"><span class="nav-number">3.6.</span> <span class="nav-text">3.6 这里用户名称根据自己需要来填写，我这里主要用于mysql，选择前进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-%E8%AE%BE%E7%BD%AE%E5%88%9A%E5%88%9A%E7%94%A8%E6%88%B7%E7%9A%84%E5%AF%86%E7%A0%81"><span class="nav-number">3.7.</span> <span class="nav-text">3.7 设置刚刚用户的密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-8-%E9%85%8D%E7%BD%AE%E5%AE%8C%E6%88%90%EF%BC%8C%E6%AD%A3%E5%BC%8F%E8%BF%9B%E5%85%A5%E6%A1%8C%E9%9D%A2"><span class="nav-number">3.8.</span> <span class="nav-text">3.8 配置完成，正式进入桌面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-9-%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C"><span class="nav-number">3.9.</span> <span class="nav-text">3.9 配置网络</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/lazyload.min.js"></script>
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+    
+        
+    
+        
+            
+<script class="custom-inject-js" src="/js/love.js" data-pjax></script>
+
+        
+    
+
+</body>
+</html>

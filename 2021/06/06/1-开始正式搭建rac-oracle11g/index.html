@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="每日一句">
+    <meta name="author" content="ドラゴンボールのLong">
+    
+    <title>
+        
+            1. 开始正式搭建rac-oracle11g |
+        
+        ドラゴンボールのBlog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/brands.min.css">
+    
+        
+            
+        
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"zhongshenglong.xyz","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"ドラゴンボールのBlog","author":"ドラゴンボールのLong","avatar":"https://cdn.jsdelivr.net/gh/longhz/cdn@1.0/img/custom/avatar1.jpg","logo":"/images/favicon.ico","favicon":"/images/favicon.ico"},"menu":{"home":"/ || fa-solid fa-home","归档":{"icon":"fa-solid fa-book","children":[{"archives":"/archives || fa-solid fa-layer-group"},{"tags":"/tags || fa-solid fa-tags"}]},"links":"/links|| fa-solid fa-link","about":{"icon":"fa-solid fa-user-secret","children":[{"gallery":"/gallery || fa-solid fa-image"},{"about":"/about || fa-solid fa-user-graduate"}]}},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"黄色的森林分出两条路 || 我选择人迹更少的那一条，从此决定我一生的道路。","hitokoto":true},"social_contact":{"enable":false,"links":{"github":"https://github.com/longhz","weixin":null,"qq":"https://wpa.qq.com/msgrd?v=3&uin=1084045717&site=qq&menu=yes","weibo":null,"bilibili":"https://space.bilibili.com/9317816/bangumi","wangyiyun":"https://music.163.com/user/home?id=1348254961","zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":{"custom_license":"Long License","custom_link":"https://zhongshenglong.xyz"},"share":true,"reward":{"enable":true,"img_link":"/images/reward.jpg","text":"请作者喝咖啡","icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"obsidian"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":true,"use":"valine","valine":{"appid":"2TGCOmDNikdxOnVmQJEFhTOK-gzGzoHsz","appkey":"lU21jvewvcy043UjfpHRXfvA","server_urls":null,"placeholder":"😜 尽情吐槽吧~"},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.36"},"waline":{"server_url":null,"reaction":false,"version":"3.2.1"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2019,"word_count":true,"site_deploy":{"enable":true,"provider":"aliyun","url":null},"record":{"enable":true,"list":[{"code":"苏ICP备20001538号-1","link":"https://beian.miit.gov.cn"}]}},"inject":{"enable":true,"css":[null],"js":[null,"/js/love.js"]},"aplayer":{"id":4900925608,"server":"netease","type":"playlist","fixed":true,"autoplay":false,"loop":"all","order":"random","preload":"auto","volume":0.7,"mutex":true},"live2d":{"enable":true,"scriptFrom":"local","pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"use":"live2d-widget-model-liveuu"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}},"root":"","source_data":{"links":[{"name":"IT诗人","link":"https://xpoet.cn/","description":"所有命运的馈赠，早已在暗中标好价格。","avatar":"https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/common-use/avatar.jpg"},{"name":"不知名艺术家","link":"https://jinzhanqi.com/","description":"love artist, love code.","avatar":"https://s3.ax1x.com/2020/11/17/DVvkB4.jpg"},{"name":"阮一峰","link":"http://www.ruanyifeng.com/blog/archives.html","description":"阮一峰的网络日志","avatar":"https://www.ruanyifeng.com/blog/images/person2_s.jpg"},{"name":"墨","link":"https://www.kura.ren/","description":"清水1024","avatar":"https://www.kura.ren/upload/2020/05/up-up-man-4d2d7e917c9d476b86373b0aa17fcafe.png"},{"name":"爱·绮梦","link":"https://x.iqimeng.com/","description":"学而时习之 不亦说乎","avatar":"https://x.iqimeng.com/images/avatar.jpg"},{"name":"Keep learning","link":"https://blog.gooday.press/","description":"爱好学习，不断提升自我","avatar":"https://cdn.jsdelivr.net/gh/cemonliu/blogpic@main/avatar.svg"},{"name":"CitingNutria","link":"https://citingnutria.github.io/","description":"まだ夢がある","avatar":"https://cdn.jsdelivr.net/gh/CitingNutria/image_hosting@master/avatar.jpg"},{"name":"小龙的跋涉","link":"https://www.eduorg.ltd/","description":"但行好事，莫问前程","avatar":"https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/blog/favicon.42reb4izcgs0.png"},{"name":"Eveneko","link":"https://eveneko.com/","description":"我们这一生，能做一个优秀的普通人已经足够厉害了！","avatar":"https://cdn.jsdelivr.net/gh/Eveneko/Image-Hosting@master/PicX/A1644732-0330-47D7-A2A1-4EBA8B3C2855.3gp6q5zr8180.jpeg"},{"name":"Nico","link":"https://www.lzp.zone/","description":"蝉歌星夜，月影婆娑","avatar":"https://tva1.sinaimg.cn/large/008i3skNly1gwpe11i8adj301s01smwx.jpg"},{"name":"KAI’S NOTE","link":"https://kainote.top/","description":"三天打鱼(⊙ˍ⊙)两天晒网","avatar":"https://s2.loli.net/2022/01/09/UtbhxHv2IA8jqwZ.jpg"},{"name":"April的记录小屋","link":"https://april-tong.com/","description":"热爱可抵岁月漫长。","avatar":"https://raw.githubusercontent.com/AprilTong/image/master/img/photo.jpeg"},{"name":"ZhengXi","link":"https://zhengxi.io/","description":"你的时间有限，不要为了别人而活","avatar":"https://vip2.loli.io/2022/01/28/8bTLXSIoDckrjfz.png"},{"name":"PMP项目管理","link":"https://pmp.saiita.cn/","description":"学习PMP项目管理的笔记.","avatar":"https://cdn.saiita.com.cn/picgo/P3260015.JPG"},{"name":"开心驿站","link":"https://www.kxyz.eu.org/","description":"steam游戏交流中心","avatar":"https://www.kxyz.eu.org/wp-content/uploads/logo.png"},{"name":"免费公益v2ray节点订阅","link":"https://www.v2rayfree.eu.org/","description":"免费公益v2ray节点订阅","avatar":"https://www.v2rayfree.eu.org/images/avatar.png"},{"name":"ZXC's Blog","link":"https://www.v2rayfree.eu.org/","description":"生命不息，代码不止","avatar":"https://cdn.jsdelivr.net/gh/XavierJiezou/picx-image-hosting@main/about/avatar.jpg"},{"name":"FallenGemini的博客","link":"https://paraderno.github.io/Blog.github.io/","description":"愿地狱的终点是天堂","avatar":"https://raw.githubusercontent.com/Paraderno/image-hosting/master/avatar.3co1ubx6en80.png"},{"name":"AomanHao的博客","link":"https://www.aomanhao.top/","description":"热爱图像处理，优化彩色世界","avatar":"https://www.aomanhao.top/images/Avatar.jpg"},{"name":"༺ཌ༈君☠纤༈ད༻的博客","link":"https://www.cnblogs.com/asio/","description":"欲买桂花同载酒，荒泷天下第一斗。","avatar":"https://pic.cnblogs.com/avatar/1924746/20200215183155.png"},{"name":"clash免费节点","link":"https://clashfree.eu.org/","description":"ssr/v2ray/clash免费节点分享","avatar":"https://clashfree.eu.org/wp-content/uploads/avatar.png"}]},"version":"4.2.3"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="❦༺  LONGZ ༻❦" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/favicon.ico">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               ドラゴンボールのBlog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box has-sub-menu">
+                            <a class="menu-text-color border-box" href="javascript:void(0);">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-book"></i>
+                                
+                                归档
+                                
+                                    <i class="menu-text-color collapse-icon fa-solid fa-angle-down"></i>
+                                
+                            </a>
+                            
+                                <ul class="sub-menu-list border-box">
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/archives">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-layer-group"></i>
+                                                
+                                                归档
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/tags">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-tags"></i>
+                                                
+                                                标签
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/links">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-link"></i>
+                                
+                                友链
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box has-sub-menu">
+                            <a class="menu-text-color border-box" href="javascript:void(0);">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-secret"></i>
+                                
+                                关于
+                                
+                                    <i class="menu-text-color collapse-icon fa-solid fa-angle-down"></i>
+                                
+                            </a>
+                            
+                                <ul class="sub-menu-list border-box">
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/gallery">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-image"></i>
+                                                
+                                                GALLERY
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/about">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-user-graduate"></i>
+                                                
+                                                关于
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box has-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="javascript:void(0);">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-book"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                            <i class="right-side collapse-icon fa-solid fa-angle-left"></i>
+                        
+                    </label>
+                    
+                        <ul class="drawer-sub-menu-list border-box">
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/archives">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-layer-group"></i>
+                                            </span>
+                                        
+                                        归档
+                                    </a>
+                                </li>
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/tags">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-tags"></i>
+                                            </span>
+                                        
+                                        标签
+                                    </a>
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/links">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-link"></i>
+                                </span>
+                            
+                            友链
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box has-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="javascript:void(0);">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-secret"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                            <i class="right-side collapse-icon fa-solid fa-angle-left"></i>
+                        
+                    </label>
+                    
+                        <ul class="drawer-sub-menu-list border-box">
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/gallery">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-image"></i>
+                                            </span>
+                                        
+                                        GALLERY
+                                    </a>
+                                </li>
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/about">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-user-graduate"></i>
+                                            </span>
+                                        
+                                        关于
+                                    </a>
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        1. 开始正式搭建rac-oracle11g
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="http://cdns.zhongshenglong.xyz/cdn-photos/img/custom/avatar1.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">岁月如梦</span>
+                                
+                                    <span class="author-badge">Lv4</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2021-06-06 20:10:12</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Fri Jun 10 2022 13:14:53 GMT+0800">2022-06-10 13:14:53</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/oracle/">oracle</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E5%BF%83%E5%BE%97/">心得</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>1.3k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>7 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h1 id="oracle11g搭建"><a href="#oracle11g搭建" class="headerlink" title="oracle11g搭建"></a>oracle11g搭建</h1><h3 id="1-创建oinstall和dba组，创建oracle用户"><a href="#1-创建oinstall和dba组，创建oracle用户" class="headerlink" title="1 创建oinstall和dba组，创建oracle用户"></a>1 创建oinstall和dba组，创建oracle用户</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">groupadd dba</span><br><span class="line">groupadd oinstall</span><br><span class="line">groupadd oper</span><br><span class="line">groupadd asmadmin</span><br><span class="line">groupadd asmdba</span><br><span class="line">groupadd asmoper</span><br><span class="line"></span><br><span class="line">添加grid 用户</span><br><span class="line">useradd -g oinstall -G dba,asmdba,asmadmin,asmoper grid</span><br><span class="line"></span><br><span class="line">添加oracle 用户</span><br><span class="line">useradd -g oinstall -G dba,oper,asmdba oracle</span><br><span class="line"></span><br><span class="line">修改密码</span><br><span class="line">echo -n oracle|passwd --stdin grid</span><br><span class="line">echo -n oracle|passwd --stdin oracle</span><br><span class="line"></span><br><span class="line">mkdir -p /u01/app/11.2.0/grid</span><br><span class="line">mkdir -p /u01/app/grid</span><br><span class="line">mkdir -p /u01/app/oracle</span><br><span class="line">chown grid:oinstall /u01/app/11.2.0/grid</span><br><span class="line">chown grid:oinstall /u01/app/grid</span><br><span class="line">chown -R oracle:oinstall /u01/app/oracle</span><br><span class="line">chmod -R 775 /u01/</span><br><span class="line">chown -R grid:oinstall /u01</span><br></pre></td></tr></table></figure>
+<h2 id="2-修改内核参数"><a href="#2-修改内核参数" class="headerlink" title="2. 修改内核参数"></a>2. 修改内核参数</h2><p>vi &#x2F;etc&#x2F;sysctl.conf 在文件新增如下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s/kernel.shmmax/#kernel.shmmax/g&#x27; /etc/sysctl.conf</span><br><span class="line">sed -i &#x27;s/kernel.shmall/#kernel.shmall/g&#x27; /etc/sysctl.conf</span><br><span class="line">#添加内核配置文件信息</span><br><span class="line">cat &gt;&gt; /etc/sysctl.conf &lt;&lt; EOF</span><br><span class="line">fs.aio-max-nr=1048576</span><br><span class="line">fs.file-max=6815744</span><br><span class="line">kernel.shmall=2097152</span><br><span class="line">kernel.shmmax=1073741824</span><br><span class="line">kernel.shmmni=4096</span><br><span class="line">kernel.sem=250 32000 100 128</span><br><span class="line">net.ipv4.ip_local_port_range=9000 65500</span><br><span class="line">net.core.rmem_default=262144</span><br><span class="line">net.core.rmem_max=4194304</span><br><span class="line">net.core.wmem_default=262144</span><br><span class="line">net.core.wmem_max=1048576</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sysctl -p #提交内核参数</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-两节点资源限制"><a href="#3-两节点资源限制" class="headerlink" title="3.两节点资源限制"></a>3.两节点资源限制</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;&gt; /etc/security/limits.conf &lt;&lt; EOF</span><br><span class="line">oracle soft nproc 2047</span><br><span class="line">oracle hard nproc 16384</span><br><span class="line">oracle soft nofile 1024</span><br><span class="line">oracle hard nofile 65536</span><br><span class="line">oracle soft stack 10240</span><br><span class="line">grid soft nproc 2047</span><br><span class="line">grid hard nproc 16384</span><br><span class="line">grid soft nofile 1024</span><br><span class="line">grid hard nofile 65536</span><br><span class="line">grid soft stack 10240</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">sysctl -p #提交内核参数</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="4-etc-profile-root用户的参数文件配置"><a href="#4-etc-profile-root用户的参数文件配置" class="headerlink" title="4.&#x2F;etc&#x2F;profile #root用户的参数文件配置"></a>4.&#x2F;etc&#x2F;profile #root用户的参数文件配置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">cat &gt;&gt; /etc/profile &lt;&lt; EOF</span><br><span class="line">if [ \$USER = &quot;ORACLE&quot; ]||[ \$USER = &quot;grid&quot; ]; then</span><br><span class="line">if [ \$SHELL = &quot;/bin/ksh&quot; ]; then</span><br><span class="line">ulimit -p 16384</span><br><span class="line">ulimit -p 65536</span><br><span class="line">else</span><br><span class="line">ulimit -u 16384 -n 65536</span><br><span class="line">fi</span><br><span class="line">umask 022</span><br><span class="line">fi</span><br><span class="line">###############################################</span><br><span class="line">export PATH=\$PATH:/u01/app/11.2.0/grid/bin</span><br><span class="line">#color of grep</span><br><span class="line">alias grep=&#x27;grep --color=auto&#x27;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-配置用户环境变量（对应用户下执行）"><a href="#5-配置用户环境变量（对应用户下执行）" class="headerlink" title="5.配置用户环境变量（对应用户下执行）"></a>5.配置用户环境变量（对应用户下执行）</h2><h3 id="5-1-grid-用户"><a href="#5-1-grid-用户" class="headerlink" title="5.1 grid 用户"></a>5.1 grid 用户</h3><p>节点1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;&gt; /home/grid/.bash_profile &lt;&lt; EOF</span><br><span class="line">export TMP=/tmp;</span><br><span class="line">export TMPDIR=\$TMP;</span><br><span class="line">export ORACLE_HOSTNAME=rac1;</span><br><span class="line">export ORACLE_SID=+ASM1;</span><br><span class="line">export ORACLE_BASE=/u01/app/grid;</span><br><span class="line">export ORACLE_HOME=/u01/app/11.2.0/grid;</span><br><span class="line">export NLS_DATE_FORMA=&quot;yy-mm-dd HH24:MI:SS&quot;;</span><br><span class="line">export PATH=\$ORACLE_HOME/bin:\$PATH;</span><br><span class="line">export NLS_LANG=AMERICAN_AMERICA.ZHS16GBK;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<p>执行变更 source .bash_profile<br>查看变更 env | grep ORA<br>节点2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;&gt; /home/grid/.bash_profile &lt;&lt; EOF</span><br><span class="line">export TMP=/tmp;</span><br><span class="line">export TMPDIR=\$TMP;</span><br><span class="line">export ORACLE_HOSTNAME=rac2;</span><br><span class="line">export ORACLE_SID=+ASM2;</span><br><span class="line">export ORACLE_BASE=/u01/app/grid;</span><br><span class="line">export ORACLE_HOME=/u01/app/11.2.0/grid;</span><br><span class="line">export NLS_DATE_FORMA=&quot;yy-mm-dd HH24:MI:SS&quot;;</span><br><span class="line">export PATH=\$ORACLE_HOME/bin:\$PATH;</span><br><span class="line">export NLS_LANG=AMERICAN_AMERICA.ZHS16GBK;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<p>执行变更 source .bash_profile<br>查看变更 env | grep ORA</p>
+<h3 id="5-2-Oracle用户"><a href="#5-2-Oracle用户" class="headerlink" title="5.2 Oracle用户"></a>5.2 Oracle用户</h3><p>节点1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;&gt; /home/oracle/.bash_profile &lt;&lt; EOF</span><br><span class="line">export TMP=/tmp;</span><br><span class="line">export TMPDIR=\$TMP;</span><br><span class="line">export ORACLE_HOSTNAME=rac1;</span><br><span class="line">export ORACLE_BASE=/u01/app/oracle;</span><br><span class="line">export ORACLE_HOME=\$ORACLE_BASE/product/11.2.0/db_1;</span><br><span class="line">export ORACLE_UNQNAME=prod;</span><br><span class="line">export ORACLE_SID=prod1;</span><br><span class="line">export ORACLE_TERM=xterm;</span><br><span class="line">export PATH=/usr/sbin:\$PATH;</span><br><span class="line">export PATH=\$ORACLE_HOME/bin:\$PATH;</span><br><span class="line">export LD_LIBRARY_PATH=\$ORACLE_HOME/lib:/lib:usr/lib;</span><br><span class="line">export CLASSPATH=\$ORACLE_HOME/JRE:\$ORACLE_HOME/jlib:\$ORACLE_HOME/rdbms/jlib;</span><br><span class="line">export NLS_DATE_FORMA=&quot;yy-mm-dd HH24:MI:SS&quot;;</span><br><span class="line">export NLS_LANG=AMERICAN_AMERICA.ZHS16GBK;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<p>执行变更 source .bash_profile<br>查看变更 env | grep ORA</p>
+<p>节点2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;&gt; /home/oracle/.bash_profile &lt;&lt; EOF</span><br><span class="line">export TMP=/tmp;</span><br><span class="line">export TMPDIR=\$TMP;</span><br><span class="line">export ORACLE_HOSTNAME=rac2;</span><br><span class="line">export ORACLE_BASE=/u01/app/oracle;</span><br><span class="line">export ORACLE_HOME=\$ORACLE_BASE/product/11.2.0/db_1;</span><br><span class="line">export ORACLE_UNQNAME=prod;</span><br><span class="line">export ORACLE_SID=prod2;</span><br><span class="line">export ORACLE_TERM=xterm;</span><br><span class="line">export PATH=/usr/sbin:\$PATH;</span><br><span class="line">export PATH=\$ORACLE_HOME/bin:\$PATH;</span><br><span class="line">export LD_LIBRARY_PATH=\$ORACLE_HOME/lib:/lib:usr/lib;</span><br><span class="line">export CLASSPATH=\$ORACLE_HOME/JRE:\$ORACLE_HOME/jlib:\$ORACLE_HOME/rdbms/jlib;</span><br><span class="line">export NLS_DATE_FORMA=&quot;yy-mm-dd HH24:MI:SS&quot;;</span><br><span class="line">export NLS_LANG=AMERICAN_AMERICA.ZHS16GBK;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<p>执行变更 source .bash_profile<br>查看变更 env | grep ORA</p>
+<p>..bash_profile 或者 source .bash_profile<br>#环境变量设置生效</p>
+<h2 id="6-配置用户等效性（对应用户执行）"><a href="#6-配置用户等效性（对应用户执行）" class="headerlink" title="6 配置用户等效性（对应用户执行）"></a>6 配置用户等效性（对应用户执行）</h2><p>Oracle 11g r2 ssh 可以在安装过程中进行配置</p>
+<h3 id="6-1-grid-配置用户等效性"><a href="#6-1-grid-配置用户等效性" class="headerlink" title="6.1 grid 配置用户等效性"></a>6.1 grid 配置用户等效性</h3><p>mkdir ~&#x2F;.ssh<br>chmod 755 ~&#x2F;.ssh</p>
+<p>rac1<br>ssh-keygen -t rsa<br>ssh-keygen -t dsa<br>ssh-copy-id -i ~&#x2F;.ssh&#x2F;id_rsa.pub rac2<br>ssh-copy-id -i ~&#x2F;.ssh&#x2F;id_dsa.pub rac2<br>rac2<br>ssh-keygen -t rsa<br>ssh-keygen -t dsa<br>ssh-copy-id -i ~&#x2F;.ssh&#x2F;id_rsa.pub rac1<br>ssh-copy-id -i ~&#x2F;.ssh&#x2F;id_dsa.pub rac1<br>#以上用默认配置，一路回车即可<br>#创建认证文件并将密钥内容填入</p>
+<hr>
+<p>touch ~&#x2F;.ssh&#x2F;authorized_keys<br>chmod 644 ~&#x2F;.ssh&#x2F;authorized_keys</p>
+<p>rac1<br>cat ~&#x2F;.ssh&#x2F;<em>.pub &gt;&gt; ~&#x2F;.ssh&#x2F;authorized_keys<br>rac2<br>cat ~&#x2F;.ssh&#x2F;</em>.pub &gt;&gt; ~&#x2F;.ssh&#x2F;authorized_keys</p>
+<p>rac1<br>ssh grid@rac2 cat ~&#x2F;.ssh&#x2F;authorized_keys<br>rac2<br>ssh grid@rac1 cat ~&#x2F;.ssh&#x2F;authorized_keys</p>
+<p>#建立等效性<br>rac1,rac2 双节点执行<br>ssh rac1 date<br>ssh rac1-priv date<br>ssh rac2 date<br>ssh rac2-priv date</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220530-1950.png"
+                        alt="20220530-1950.png"
+                 ></p>
+<h3 id="6-2-oracle-配置用户等效性"><a href="#6-2-oracle-配置用户等效性" class="headerlink" title="6.2 oracle 配置用户等效性"></a>6.2 oracle 配置用户等效性</h3><p>rac1<br>ssh-keygen -t rsa<br>ssh-keygen -t dsa<br>ssh-copy-id -i ~&#x2F;.ssh&#x2F;id_rsa.pub rac2<br>ssh-copy-id -i ~&#x2F;.ssh&#x2F;id_dsa.pub rac2<br>rac2<br>ssh-keygen -t rsa<br>ssh-keygen -t dsa<br>ssh-copy-id -i ~&#x2F;.ssh&#x2F;id_rsa.pub rac1<br>ssh-copy-id -i ~&#x2F;.ssh&#x2F;id_dsa.pub rac1<br>#以上用默认配置，一路回车即可</p>
+<p>touch ~&#x2F;.ssh&#x2F;authorized_keys<br>chmod 644 ~&#x2F;.ssh&#x2F;authorized_keys</p>
+<p>rac1<br>cat ~&#x2F;.ssh&#x2F;<em>.pub &gt;&gt; ~&#x2F;.ssh&#x2F;authorized_keys<br>ssh oracle@rac2 cat ~&#x2F;.ssh&#x2F;authorized_keys<br>rac2<br>cat ~&#x2F;.ssh&#x2F;</em>.pub &gt;&gt; ~&#x2F;.ssh&#x2F;authorized_keys<br>ssh oracle@rac1 cat ~&#x2F;.ssh&#x2F;authorized_keys</p>
+<p>#建立等效性<br>rac1,rac2 双节点执行<br>ssh rac1 date<br>ssh rac1-priv date<br>ssh rac2 date<br>ssh rac2-priv date</p>
+<h2 id="ASM磁盘管理安装rpm包"><a href="#ASM磁盘管理安装rpm包" class="headerlink" title="ASM磁盘管理安装rpm包"></a>ASM磁盘管理安装rpm包</h2><p>先用uname -r 或者 uname -a 查看当前的系统环境<br>比如我目前的系统是redhat6.6，需要安装对应版本的包<br>下载链接：<a class="link"   target="_blank" rel="noopener" href="https://kdy.zhongshenglong.xyz:163/#s/8MP4bqcA" >https://kdy.zhongshenglong.xyz:163/#s/8MP4bqcA<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh kmod-oracleasm-2.0.8-4.el6_6.x86_64</span><br><span class="line">rpm -ivh oracleasm-support-2.1.8-1.el6.x86_64</span><br><span class="line">rpm -ivh oracleasmlib-2.0.4-1.el6.x86_64</span><br></pre></td></tr></table></figure>
+<h2 id="配置-ASM磁盘"><a href="#配置-ASM磁盘" class="headerlink" title="配置 ASM磁盘"></a>配置 ASM磁盘</h2><h3 id="1-初始化（2个节点都要执行）"><a href="#1-初始化（2个节点都要执行）" class="headerlink" title="1. 初始化（2个节点都要执行）"></a>1. 初始化（2个节点都要执行）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">oracleasm configure -i</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Configuring the Oracle ASM library driver.</p>
+<p>This will configure the on-boot properties of the Oracle ASM library<br>driver.  The following questions will determine whether the driver is<br>loaded on boot and what permissions it will have.  The current values<br>will be shown in brackets (‘[]’).  Hitting <ENTER> without typing an<br>answer will keep that current value.  Ctrl-C will abort.</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Default user to own the driver interface []: grid</span><br><span class="line">Default group to own the driver interface []: oinstall</span><br><span class="line">Start Oracle ASM library driver on boot (y/n) [n]: y</span><br><span class="line">Scan for Oracle ASM disks on boot (y/n) [y]: y</span><br><span class="line">Writing Oracle ASM library driver configuration: done</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">初始化</span><br><span class="line">oracleasm init</span><br></pre></td></tr></table></figure>
+<h3 id="磁盘分区（节点1执行即可，2不要执行）"><a href="#磁盘分区（节点1执行即可，2不要执行）" class="headerlink" title="磁盘分区（节点1执行即可，2不要执行）"></a>磁盘分区（节点1执行即可，2不要执行）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br><span class="line">ll /dev/sd*</span><br><span class="line">可查看到之前挂载的3个盘</span><br><span class="line">然后执行格式化盘符</span><br><span class="line">fdisk /dev/sdb</span><br><span class="line">fdisk /dev/sdc</span><br><span class="line">fdisk /dev/sdd</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="创建磁盘（节点1执行）"><a href="#创建磁盘（节点1执行）" class="headerlink" title="创建磁盘（节点1执行）"></a>创建磁盘（节点1执行）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ocr裸盘</span><br><span class="line">oracleasm createdisk OCR_VOTE /dev/sdb1</span><br><span class="line">数据</span><br><span class="line">oracleasm createdisk DATA /dev/sdc1</span><br><span class="line">归档</span><br><span class="line">oracleasm createdisk FRA /dev/sdd1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="变更查看-rac1和rac2两个节点都要执行"><a href="#变更查看-rac1和rac2两个节点都要执行" class="headerlink" title="变更查看 (rac1和rac2两个节点都要执行)"></a>变更查看 (rac1和rac2两个节点都要执行)</h4><p>oracleasm scandisks<br>查看<br>oracleasm listdisks</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220530-1854.png"
+                        alt="20220530-1854.pn"
+                 ><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220530-1853.png"
+                        alt="20220530-1853.png"
+                 ></p>
+
+                    
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                1. 开始正式搭建rac-oracle11g
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                2021/06/06/1-开始正式搭建rac-oracle11g/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">ドラゴンボールのLong</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2021-06-06 20:10</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="">
+                    <a href="https://zhongshenglong.xyz" target="_blank">
+                        
+                            Long License
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/linux/">linux</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/oracle/">oracle</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E5%BF%83%E5%BE%97/">心得</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+                    
+
+<div class="reward-author-container border-box flex-center">
+    <div class="reward-btn border-box flex-center tooltip tooltip-img"
+            data-tooltip-img-url="/images/reward.jpg"
+            data-tooltip-img-trigger="click"
+            data-tooltip-img-style="top: -6px;"
+    >
+        <i class="fa-solid fa-gift"></i>&nbsp;请作者喝咖啡
+    </div>
+</div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2021/06/07/%E5%8D%B8%E8%BD%BDrac%E9%87%8D%E6%96%B0%E5%AE%89%E8%A3%85/"
+                                   title="卸载rac重新安装"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">卸载rac重新安装</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2021/06/06/2-%E5%AE%89%E8%A3%85grid%E9%9B%86%E7%BE%A4/"
+                                   title="2.安装grid集群"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">2.安装grid集群</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+    <div class="comments-container border-box">
+        <div id="comments-anchor" class="comment-area-title border-box">
+            <i class="fas fa-comments"></i>&nbsp;评论
+        </div>
+        <div class="comment-plugin-fail border-box">
+    <span class="fail-tip">评论插件加载失败</span>
+    <button class="reload keep-button">点击重新加载</button>
+</div>
+<div class="comment-plugin-loading flex-center border-box">
+    <i class="loading-icon fa-solid fa-spinner fa-spin"></i>
+    <span class="load-tip">正在加载评论插件</span>
+</div>
+<script data-pjax>
+  window.KeepCommentPlugin = {}
+  window.KeepCommentPlugin.hideLoading = () => {
+    const cplDom = document.querySelector('.comments-container .comment-plugin-loading')
+    cplDom.style.display = 'none'
+  }
+  window.KeepCommentPlugin.loadFailHandle = () => {
+    window.KeepCommentPlugin.hideLoading()
+    const cpfDom = document.querySelector('.comments-container .comment-plugin-fail')
+    cpfDom.style.display = 'flex'
+    cpfDom.querySelector('.reload').addEventListener('click', () => {
+      window.location.reload()
+    })
+  }
+</script>
+
+        
+            
+
+    <div class="valine-container">
+        <div id="vcomments"></div>
+        <script 
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        ></script>
+        <script 
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        >
+          window.KeepCommentPlugin.initValine = () => {
+            const config = {
+              el: '#vcomments',
+              appId: '2TGCOmDNikdxOnVmQJEFhTOK-gzGzoHsz',
+              appKey: 'lU21jvewvcy043UjfpHRXfvA',
+              meta: ['nick', 'mail', 'link'],
+              avatar: 'wavatar',
+              enableQQ: true,
+              placeholder: '😜 尽情吐槽吧~',
+              lang: 'zh-CN'.toLowerCase()
+            }
+
+            if ('') {
+              config.serverURLs = ''
+            }
+
+            if (window?.Valine) {
+              new Valine(config)
+              window.KeepCommentPlugin.hideLoading()
+            } else {
+              setTimeout(() => {
+                window.KeepCommentPlugin.initValine()
+              }, 1000)
+            }
+          }
+
+          if ('false' === 'true') {
+            setTimeout(() => {
+              window.KeepCommentPlugin.initValine()
+            }, 1200)
+          } else {
+            window.addEventListener('DOMContentLoaded', window.KeepCommentPlugin.initValine)
+          }
+        </script>
+    </div>
+
+
+        
+    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#oracle11g%E6%90%AD%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">oracle11g搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BAoinstall%E5%92%8Cdba%E7%BB%84%EF%BC%8C%E5%88%9B%E5%BB%BAoracle%E7%94%A8%E6%88%B7"><span class="nav-number">1.0.1.</span> <span class="nav-text">1 创建oinstall和dba组，创建oracle用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%BF%AE%E6%94%B9%E5%86%85%E6%A0%B8%E5%8F%82%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">2. 修改内核参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%B8%A4%E8%8A%82%E7%82%B9%E8%B5%84%E6%BA%90%E9%99%90%E5%88%B6"><span class="nav-number">1.2.</span> <span class="nav-text">3.两节点资源限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-etc-profile-root%E7%94%A8%E6%88%B7%E7%9A%84%E5%8F%82%E6%95%B0%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="nav-number">1.3.</span> <span class="nav-text">4.&#x2F;etc&#x2F;profile #root用户的参数文件配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%EF%BC%88%E5%AF%B9%E5%BA%94%E7%94%A8%E6%88%B7%E4%B8%8B%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">5.配置用户环境变量（对应用户下执行）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-grid-%E7%94%A8%E6%88%B7"><span class="nav-number">1.4.1.</span> <span class="nav-text">5.1 grid 用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-Oracle%E7%94%A8%E6%88%B7"><span class="nav-number">1.4.2.</span> <span class="nav-text">5.2 Oracle用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E7%AD%89%E6%95%88%E6%80%A7%EF%BC%88%E5%AF%B9%E5%BA%94%E7%94%A8%E6%88%B7%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-number">1.5.</span> <span class="nav-text">6 配置用户等效性（对应用户执行）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-grid-%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E7%AD%89%E6%95%88%E6%80%A7"><span class="nav-number">1.5.1.</span> <span class="nav-text">6.1 grid 配置用户等效性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-oracle-%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E7%AD%89%E6%95%88%E6%80%A7"><span class="nav-number">1.5.2.</span> <span class="nav-text">6.2 oracle 配置用户等效性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ASM%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E5%AE%89%E8%A3%85rpm%E5%8C%85"><span class="nav-number">1.6.</span> <span class="nav-text">ASM磁盘管理安装rpm包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-ASM%E7%A3%81%E7%9B%98"><span class="nav-number">1.7.</span> <span class="nav-text">配置 ASM磁盘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%882%E4%B8%AA%E8%8A%82%E7%82%B9%E9%83%BD%E8%A6%81%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-number">1.7.1.</span> <span class="nav-text">1. 初始化（2个节点都要执行）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%EF%BC%88%E8%8A%82%E7%82%B91%E6%89%A7%E8%A1%8C%E5%8D%B3%E5%8F%AF%EF%BC%8C2%E4%B8%8D%E8%A6%81%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-number">1.7.2.</span> <span class="nav-text">磁盘分区（节点1执行即可，2不要执行）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%A3%81%E7%9B%98%EF%BC%88%E8%8A%82%E7%82%B91%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-number">1.7.3.</span> <span class="nav-text">创建磁盘（节点1执行）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%98%E6%9B%B4%E6%9F%A5%E7%9C%8B-rac1%E5%92%8Crac2%E4%B8%A4%E4%B8%AA%E8%8A%82%E7%82%B9%E9%83%BD%E8%A6%81%E6%89%A7%E8%A1%8C"><span class="nav-number">1.7.3.1.</span> <span class="nav-text">变更查看 (rac1和rac2两个节点都要执行)</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+		year - 作为date对象的年份，为4位年份值
+		month - 0-11之间的整数，做为date对象的月份
+		day - 1-31之间的整数，做为date对象的天数
+		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+		minutes - 0-59之间的整数，做为date对象的分钟数
+		seconds - 0-59之间的整数，做为date对象的秒数
+		microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+		var t1 = Date.UTC(2019,04,09,21,47,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML="❤亲爱的旅客,我已与你/妳相遇❤❤❤"+" 第 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒❤";
+	}/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+	siteTime();
+</script>
+
+<footer class="footer border-box">
+		
+	<a href="https://www.foreverblog.cn/" target="_blank" > <img src="https://img.foreverblog.cn/logo_en_default.png" alt="" style="width:auto;height:16px;"> </a>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            本站由 <span class="tooltip" data-tooltip-content="阿里云"><img src="/images/brands/aliyun.png"></span> 提供部署服务
+            
+        </div>
+    
+
+    
+        <div class="record-info info-item">
+		ICP备案号：【&nbsp;
+            
+                
+                    <div class="record-item border-box">
+                        <a class=""
+                           target="_blank"
+                           href="https://beian.miit.gov.cn"
+                        >
+                            苏ICP备20001538号-1
+                        </a>
+                    </div>
+                
+            
+		&nbsp;】&nbsp;
+        </div>
+    
+	
+    <div class="copyright-info info-item">
+        &copy;&nbsp;<span>2019</span>&nbsp;-&nbsp;2024
+        
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">ドラゴンボールのLong</a>
+        
+		&nbsp;&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        <div class="count-info info-item">
+            
+                <span class="count-item border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">125.5k</span>
+                </span>
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+	
+	<!--自定义了时间-->
+    <p id="sitetime" target="_blank"></p>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+            <li class="tools-item go-to-comments-tablet flex-center">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#oracle11g%E6%90%AD%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">oracle11g搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BAoinstall%E5%92%8Cdba%E7%BB%84%EF%BC%8C%E5%88%9B%E5%BB%BAoracle%E7%94%A8%E6%88%B7"><span class="nav-number">1.0.1.</span> <span class="nav-text">1 创建oinstall和dba组，创建oracle用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%BF%AE%E6%94%B9%E5%86%85%E6%A0%B8%E5%8F%82%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">2. 修改内核参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%B8%A4%E8%8A%82%E7%82%B9%E8%B5%84%E6%BA%90%E9%99%90%E5%88%B6"><span class="nav-number">1.2.</span> <span class="nav-text">3.两节点资源限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-etc-profile-root%E7%94%A8%E6%88%B7%E7%9A%84%E5%8F%82%E6%95%B0%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="nav-number">1.3.</span> <span class="nav-text">4.&#x2F;etc&#x2F;profile #root用户的参数文件配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%EF%BC%88%E5%AF%B9%E5%BA%94%E7%94%A8%E6%88%B7%E4%B8%8B%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">5.配置用户环境变量（对应用户下执行）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-grid-%E7%94%A8%E6%88%B7"><span class="nav-number">1.4.1.</span> <span class="nav-text">5.1 grid 用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-Oracle%E7%94%A8%E6%88%B7"><span class="nav-number">1.4.2.</span> <span class="nav-text">5.2 Oracle用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E7%AD%89%E6%95%88%E6%80%A7%EF%BC%88%E5%AF%B9%E5%BA%94%E7%94%A8%E6%88%B7%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-number">1.5.</span> <span class="nav-text">6 配置用户等效性（对应用户执行）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-grid-%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E7%AD%89%E6%95%88%E6%80%A7"><span class="nav-number">1.5.1.</span> <span class="nav-text">6.1 grid 配置用户等效性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-oracle-%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E7%AD%89%E6%95%88%E6%80%A7"><span class="nav-number">1.5.2.</span> <span class="nav-text">6.2 oracle 配置用户等效性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ASM%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E5%AE%89%E8%A3%85rpm%E5%8C%85"><span class="nav-number">1.6.</span> <span class="nav-text">ASM磁盘管理安装rpm包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-ASM%E7%A3%81%E7%9B%98"><span class="nav-number">1.7.</span> <span class="nav-text">配置 ASM磁盘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%882%E4%B8%AA%E8%8A%82%E7%82%B9%E9%83%BD%E8%A6%81%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-number">1.7.1.</span> <span class="nav-text">1. 初始化（2个节点都要执行）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%EF%BC%88%E8%8A%82%E7%82%B91%E6%89%A7%E8%A1%8C%E5%8D%B3%E5%8F%AF%EF%BC%8C2%E4%B8%8D%E8%A6%81%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-number">1.7.2.</span> <span class="nav-text">磁盘分区（节点1执行即可，2不要执行）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%A3%81%E7%9B%98%EF%BC%88%E8%8A%82%E7%82%B91%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-number">1.7.3.</span> <span class="nav-text">创建磁盘（节点1执行）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%98%E6%9B%B4%E6%9F%A5%E7%9C%8B-rac1%E5%92%8Crac2%E4%B8%A4%E4%B8%AA%E8%8A%82%E7%82%B9%E9%83%BD%E8%A6%81%E6%89%A7%E8%A1%8C"><span class="nav-number">1.7.3.1.</span> <span class="nav-text">变更查看 (rac1和rac2两个节点都要执行)</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/lazyload.min.js"></script>
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+    
+        
+    
+        
+            
+<script class="custom-inject-js" src="/js/love.js" data-pjax></script>
+
+        
+    
+
+</body>
+</html>

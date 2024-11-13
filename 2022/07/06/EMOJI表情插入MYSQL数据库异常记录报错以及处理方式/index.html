@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="每日一句">
+    <meta name="author" content="ドラゴンボールのLong">
+    
+    <title>
+        
+            EMOJI表情插入MYSQL数据库异常记录报错以及处理方式 |
+        
+        ドラゴンボールのBlog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/brands.min.css">
+    
+        
+            
+        
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"zhongshenglong.xyz","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"ドラゴンボールのBlog","author":"ドラゴンボールのLong","avatar":"https://cdn.jsdelivr.net/gh/longhz/cdn@1.0/img/custom/avatar1.jpg","logo":"/images/favicon.ico","favicon":"/images/favicon.ico"},"menu":{"home":"/ || fa-solid fa-home","归档":{"icon":"fa-solid fa-book","children":[{"archives":"/archives || fa-solid fa-layer-group"},{"tags":"/tags || fa-solid fa-tags"}]},"links":"/links|| fa-solid fa-link","about":{"icon":"fa-solid fa-user-secret","children":[{"gallery":"/gallery || fa-solid fa-image"},{"about":"/about || fa-solid fa-user-graduate"}]}},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"黄色的森林分出两条路 || 我选择人迹更少的那一条，从此决定我一生的道路。","hitokoto":true},"social_contact":{"enable":false,"links":{"github":"https://github.com/longhz","weixin":null,"qq":"https://wpa.qq.com/msgrd?v=3&uin=1084045717&site=qq&menu=yes","weibo":null,"bilibili":"https://space.bilibili.com/9317816/bangumi","wangyiyun":"https://music.163.com/user/home?id=1348254961","zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":{"custom_license":"Long License","custom_link":"https://zhongshenglong.xyz"},"share":true,"reward":{"enable":true,"img_link":"/images/reward.jpg","text":"请作者喝咖啡","icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"obsidian"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":true,"use":"valine","valine":{"appid":"2TGCOmDNikdxOnVmQJEFhTOK-gzGzoHsz","appkey":"lU21jvewvcy043UjfpHRXfvA","server_urls":null,"placeholder":"😜 尽情吐槽吧~"},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.36"},"waline":{"server_url":null,"reaction":false,"version":"3.2.1"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2019,"word_count":true,"site_deploy":{"enable":true,"provider":"aliyun","url":null},"record":{"enable":true,"list":[{"code":"苏ICP备20001538号-1","link":"https://beian.miit.gov.cn"}]}},"inject":{"enable":true,"css":[null],"js":[null,"/js/love.js"]},"aplayer":{"id":4900925608,"server":"netease","type":"playlist","fixed":true,"autoplay":false,"loop":"all","order":"random","preload":"auto","volume":0.7,"mutex":true},"live2d":{"enable":true,"scriptFrom":"local","pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"use":"live2d-widget-model-liveuu"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}},"root":"","source_data":{"links":[{"name":"IT诗人","link":"https://xpoet.cn/","description":"所有命运的馈赠，早已在暗中标好价格。","avatar":"https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/common-use/avatar.jpg"},{"name":"不知名艺术家","link":"https://jinzhanqi.com/","description":"love artist, love code.","avatar":"https://s3.ax1x.com/2020/11/17/DVvkB4.jpg"},{"name":"阮一峰","link":"http://www.ruanyifeng.com/blog/archives.html","description":"阮一峰的网络日志","avatar":"https://www.ruanyifeng.com/blog/images/person2_s.jpg"},{"name":"墨","link":"https://www.kura.ren/","description":"清水1024","avatar":"https://www.kura.ren/upload/2020/05/up-up-man-4d2d7e917c9d476b86373b0aa17fcafe.png"},{"name":"爱·绮梦","link":"https://x.iqimeng.com/","description":"学而时习之 不亦说乎","avatar":"https://x.iqimeng.com/images/avatar.jpg"},{"name":"Keep learning","link":"https://blog.gooday.press/","description":"爱好学习，不断提升自我","avatar":"https://cdn.jsdelivr.net/gh/cemonliu/blogpic@main/avatar.svg"},{"name":"CitingNutria","link":"https://citingnutria.github.io/","description":"まだ夢がある","avatar":"https://cdn.jsdelivr.net/gh/CitingNutria/image_hosting@master/avatar.jpg"},{"name":"小龙的跋涉","link":"https://www.eduorg.ltd/","description":"但行好事，莫问前程","avatar":"https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/blog/favicon.42reb4izcgs0.png"},{"name":"Eveneko","link":"https://eveneko.com/","description":"我们这一生，能做一个优秀的普通人已经足够厉害了！","avatar":"https://cdn.jsdelivr.net/gh/Eveneko/Image-Hosting@master/PicX/A1644732-0330-47D7-A2A1-4EBA8B3C2855.3gp6q5zr8180.jpeg"},{"name":"Nico","link":"https://www.lzp.zone/","description":"蝉歌星夜，月影婆娑","avatar":"https://tva1.sinaimg.cn/large/008i3skNly1gwpe11i8adj301s01smwx.jpg"},{"name":"KAI’S NOTE","link":"https://kainote.top/","description":"三天打鱼(⊙ˍ⊙)两天晒网","avatar":"https://s2.loli.net/2022/01/09/UtbhxHv2IA8jqwZ.jpg"},{"name":"April的记录小屋","link":"https://april-tong.com/","description":"热爱可抵岁月漫长。","avatar":"https://raw.githubusercontent.com/AprilTong/image/master/img/photo.jpeg"},{"name":"ZhengXi","link":"https://zhengxi.io/","description":"你的时间有限，不要为了别人而活","avatar":"https://vip2.loli.io/2022/01/28/8bTLXSIoDckrjfz.png"},{"name":"PMP项目管理","link":"https://pmp.saiita.cn/","description":"学习PMP项目管理的笔记.","avatar":"https://cdn.saiita.com.cn/picgo/P3260015.JPG"},{"name":"开心驿站","link":"https://www.kxyz.eu.org/","description":"steam游戏交流中心","avatar":"https://www.kxyz.eu.org/wp-content/uploads/logo.png"},{"name":"免费公益v2ray节点订阅","link":"https://www.v2rayfree.eu.org/","description":"免费公益v2ray节点订阅","avatar":"https://www.v2rayfree.eu.org/images/avatar.png"},{"name":"ZXC's Blog","link":"https://www.v2rayfree.eu.org/","description":"生命不息，代码不止","avatar":"https://cdn.jsdelivr.net/gh/XavierJiezou/picx-image-hosting@main/about/avatar.jpg"},{"name":"FallenGemini的博客","link":"https://paraderno.github.io/Blog.github.io/","description":"愿地狱的终点是天堂","avatar":"https://raw.githubusercontent.com/Paraderno/image-hosting/master/avatar.3co1ubx6en80.png"},{"name":"AomanHao的博客","link":"https://www.aomanhao.top/","description":"热爱图像处理，优化彩色世界","avatar":"https://www.aomanhao.top/images/Avatar.jpg"},{"name":"༺ཌ༈君☠纤༈ད༻的博客","link":"https://www.cnblogs.com/asio/","description":"欲买桂花同载酒，荒泷天下第一斗。","avatar":"https://pic.cnblogs.com/avatar/1924746/20200215183155.png"},{"name":"clash免费节点","link":"https://clashfree.eu.org/","description":"ssr/v2ray/clash免费节点分享","avatar":"https://clashfree.eu.org/wp-content/uploads/avatar.png"}]},"version":"4.2.3"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="❦༺  LONGZ ༻❦" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/favicon.ico">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               ドラゴンボールのBlog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box has-sub-menu">
+                            <a class="menu-text-color border-box" href="javascript:void(0);">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-book"></i>
+                                
+                                归档
+                                
+                                    <i class="menu-text-color collapse-icon fa-solid fa-angle-down"></i>
+                                
+                            </a>
+                            
+                                <ul class="sub-menu-list border-box">
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/archives">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-layer-group"></i>
+                                                
+                                                归档
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/tags">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-tags"></i>
+                                                
+                                                标签
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/links">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-link"></i>
+                                
+                                友链
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box has-sub-menu">
+                            <a class="menu-text-color border-box" href="javascript:void(0);">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-secret"></i>
+                                
+                                关于
+                                
+                                    <i class="menu-text-color collapse-icon fa-solid fa-angle-down"></i>
+                                
+                            </a>
+                            
+                                <ul class="sub-menu-list border-box">
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/gallery">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-image"></i>
+                                                
+                                                GALLERY
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/about">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-user-graduate"></i>
+                                                
+                                                关于
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box has-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="javascript:void(0);">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-book"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                            <i class="right-side collapse-icon fa-solid fa-angle-left"></i>
+                        
+                    </label>
+                    
+                        <ul class="drawer-sub-menu-list border-box">
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/archives">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-layer-group"></i>
+                                            </span>
+                                        
+                                        归档
+                                    </a>
+                                </li>
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/tags">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-tags"></i>
+                                            </span>
+                                        
+                                        标签
+                                    </a>
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/links">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-link"></i>
+                                </span>
+                            
+                            友链
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box has-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="javascript:void(0);">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-secret"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                            <i class="right-side collapse-icon fa-solid fa-angle-left"></i>
+                        
+                    </label>
+                    
+                        <ul class="drawer-sub-menu-list border-box">
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/gallery">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-image"></i>
+                                            </span>
+                                        
+                                        GALLERY
+                                    </a>
+                                </li>
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/about">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-user-graduate"></i>
+                                            </span>
+                                        
+                                        关于
+                                    </a>
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        EMOJI表情插入MYSQL数据库异常记录报错以及处理方式
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="http://cdns.zhongshenglong.xyz/cdn-photos/img/custom/avatar1.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">岁月如梦</span>
+                                
+                                    <span class="author-badge">Lv4</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2022-07-06 20:10:12</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Fri Aug 12 2022 00:46:11 GMT+0800">2022-08-12 00:46:11</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E5%BF%83%E5%BE%97/">心得</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/mysql/">mysql</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>2.4k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>8 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h1 id="EMOJI表情插入MYSQL数据库异常记录报错以及处理方式"><a href="#EMOJI表情插入MYSQL数据库异常记录报错以及处理方式" class="headerlink" title="EMOJI表情插入MYSQL数据库异常记录报错以及处理方式"></a>EMOJI表情插入MYSQL数据库异常记录报错以及处理方式</h1><blockquote>
+<p>这个问题是由于数据库中字符集编码一般我们用utf8，utf8存储一般为2到3字节，但是emoji是四个字节导致插入错误,所以我们要<strong>更改字符集为utf8mb4</strong><br><strong>mysql的版本必须为5.5.3以上</strong></p>
+</blockquote>
+<h2 id="1-先登录MYSQL，查看当前数据库的编码格式"><a href="#1-先登录MYSQL，查看当前数据库的编码格式" class="headerlink" title="1.先登录MYSQL，查看当前数据库的编码格式"></a>1.先登录MYSQL，查看当前数据库的编码格式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#x27;char%&#x27;;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>Variable_name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>character_set_client</td>
+<td>utf8mb3</td>
+</tr>
+<tr>
+<td>character_set_connection</td>
+<td>utf8mb3</td>
+</tr>
+<tr>
+<td>character_set_database</td>
+<td>utf8mb3</td>
+</tr>
+<tr>
+<td>character_set_filesystem</td>
+<td>binary</td>
+</tr>
+<tr>
+<td>character_set_results</td>
+<td>utf8mb3</td>
+</tr>
+<tr>
+<td>character_set_server</td>
+<td>utf8mb3</td>
+</tr>
+<tr>
+<td>character_set_system</td>
+<td>utf8</td>
+</tr>
+<tr>
+<td>character_sets_dir</td>
+<td>&#x2F;usr&#x2F;share&#x2F;mysql-8.0&#x2F;charsets&#x2F;</td>
+</tr>
+</tbody></table>
+<p><strong>我们看到并不是utf8mb4</strong></p>
+<h2 id="2-在查看排序规则"><a href="#2-在查看排序规则" class="headerlink" title="2.在查看排序规则"></a>2.在查看排序规则</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#x27;collation_%&#x27;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>Variable_name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>collation_connection</td>
+<td>utf8_general_ci</td>
+</tr>
+<tr>
+<td>collation_database</td>
+<td>latin1_swedish_ci</td>
+</tr>
+<tr>
+<td>collation_server</td>
+<td>latin1_swedish_ci</td>
+</tr>
+</tbody></table>
+<p><strong>也不是,这时候开始修改</strong></p>
+<h2 id="3-修改MYSQL配置文件-MY-CNF"><a href="#3-修改MYSQL配置文件-MY-CNF" class="headerlink" title="3.修改MYSQL配置文件 MY.CNF"></a>3.修改MYSQL配置文件 MY.CNF</h2><p>找不到可以用以下代码，文件一般在<code>etc/mysql/my.cnf</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql --help | grep my.cnf</span><br></pre></td></tr></table></figure>
+<p><strong>加入</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[mysqld] </span><br><span class="line">character-set-server=utf8mb4</span><br><span class="line"></span><br><span class="line">[mysql] </span><br><span class="line">default-character-set=utf8mb4</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-重启MYSQL"><a href="#4-重启MYSQL" class="headerlink" title="4.重启MYSQL"></a>4.重启MYSQL</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service mysql restart</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-回到第一步看下字符集是否更改否则，再MYSQL里面运行以下设置代码"><a href="#5-回到第一步看下字符集是否更改否则，再MYSQL里面运行以下设置代码" class="headerlink" title="5.回到第一步看下字符集是否更改否则，再MYSQL里面运行以下设置代码"></a>5.回到第一步看下字符集是否更改否则，再MYSQL里面运行以下设置代码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set character_set_client = utf8mb4;</span><br><span class="line">set character_set_connection = utf8mb4;</span><br><span class="line">set character_set_database = utf8mb4;</span><br><span class="line">set character_set_results = utf8mb4;</span><br><span class="line">set character_set_server = utf8mb4;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-再次查看"><a href="#6-再次查看" class="headerlink" title="6.再次查看"></a>6.再次查看</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#x27;char%&#x27;;</span><br></pre></td></tr></table></figure>
+
+
+<table>
+<thead>
+<tr>
+<th>Variable_name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>character_set_client</td>
+<td>utf8mb4</td>
+</tr>
+<tr>
+<td>character_set_connection</td>
+<td>utf8mb4</td>
+</tr>
+<tr>
+<td>character_set_database</td>
+<td>utf8mb4</td>
+</tr>
+<tr>
+<td>character_set_filesystem</td>
+<td>binary</td>
+</tr>
+<tr>
+<td>character_set_results</td>
+<td>utf8mb4</td>
+</tr>
+<tr>
+<td>character_set_server</td>
+<td>utf8mb4</td>
+</tr>
+<tr>
+<td>character_set_system</td>
+<td>utf8</td>
+</tr>
+<tr>
+<td>character_sets_dir</td>
+<td>&#x2F;usr&#x2F;share&#x2F;mysql-8.0&#x2F;charsets&#x2F;</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Variable_name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>collation_connection</td>
+<td>utf8mb4_0900_ai_ci</td>
+</tr>
+<tr>
+<td>collation_database</td>
+<td>utf8mb4_0900_ai_ci</td>
+</tr>
+<tr>
+<td>collation_server</td>
+<td>utf8mb4_0900_ai_ci</td>
+</tr>
+</tbody></table>
+<h2 id="修改表及字段字符集"><a href="#修改表及字段字符集" class="headerlink" title="修改表及字段字符集"></a>修改表及字段字符集</h2><p>同样的，对于已经创建的表，修改全局及数据库的字符集并不会影响原表及字段的字符集。<br>原有的 utf8 表可以采用如下方法修改：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#修改数据库字符集</span><br><span class="line">alter database db_new charset utf8mb4;</span><br><span class="line"></span><br><span class="line"># 修改某字段字符集</span><br><span class="line">alter table `tb_name` default character set utf8mb4;</span><br><span class="line"></span><br><span class="line"># 同时修改表及字段字符集</span><br><span class="line">alter table `tb_name` modify col_name varchar(20) character set utf8mb4;</span><br><span class="line"></span><br><span class="line"># 如果某个库里面表比较多 可以拼接出要执行的批量修改语句</span><br><span class="line">alter table `tb_name` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="查看字符集"><a href="#查看字符集" class="headerlink" title="查看字符集"></a>查看字符集</h2><p>1、查看数据库支持的字符集：</p>
+<p>select * from information_schema.character_sets;</p>
+<p>2、查看数据库支持的检验规则：</p>
+<p>select * from information_schema.collations;</p>
+<p>3、查看表字符集及检验规则：</p>
+<p>show create table <code>tb_name</code></p>
+<p>select * from information_schema.tables where table_name&#x3D;<code>tb_name</code></p>
+<h1 id="MySQL几种编码格式的区别（utf8、utf8mb4、utf8mb4-general-ci、utf8mb4-unicode-ci-、utf8mb4-0900-ai-ci）"><a href="#MySQL几种编码格式的区别（utf8、utf8mb4、utf8mb4-general-ci、utf8mb4-unicode-ci-、utf8mb4-0900-ai-ci）" class="headerlink" title="MySQL几种编码格式的区别（utf8、utf8mb4、utf8mb4_general_ci、utf8mb4_unicode_ci 、utf8mb4_0900_ai_ci）"></a>MySQL几种编码格式的区别（utf8、utf8mb4、utf8mb4_general_ci、utf8mb4_unicode_ci 、utf8mb4_0900_ai_ci）</h1><h2 id="存储字符集-utf8-和-utf8mb4"><a href="#存储字符集-utf8-和-utf8mb4" class="headerlink" title="存储字符集 utf8 和 utf8mb4"></a>存储字符集 utf8 和 utf8mb4</h2><blockquote>
+<p>utf8 是 Mysql 中的一种字符集，只支持最长三个字节的 UTF-8 字符，也就是 Unicode 中的基本多文本平面。<br>要在 Mysql 中保存 4 字节长度的 UTF-8 字符，需要使用 utf8mb4 字符集，但只有 5.5.3 版本以后的才支持。我觉得，为了获取更好的兼容性，应该总是使用 utf8mb4 而非 utf8. 对于 CHAR 类型数据，utf8mb4 会多消耗一些空间，根据 Mysql 官方建议，使用 VARCHAR 替代 CHAR。</p>
+</blockquote>
+<p>如果数据库默认字符集不是 utf8mb4，那么可以在创建数据库时指定字符集：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE mydb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;</span><br></pre></td></tr></table></figure>
+<p>查看编码格式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &quot;%char%&quot;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="MySQL-配置文件中字符集相关变量"><a href="#MySQL-配置文件中字符集相关变量" class="headerlink" title="MySQL 配置文件中字符集相关变量"></a>MySQL 配置文件中字符集相关变量</h2><ul>
+<li>character_set_client：客户端请求数据的字符集</li>
+<li>character_set_connection：从客户端接收到数据，然后传输的字符集</li>
+<li>character_set_database：默认数据库的字符集，无论默认数据库如何改变，都是这个字符集；如果没有默认数据库，那就使用 character_set_server 指定的字符集，这个变量建议由系统自己管理，不要人为定义。</li>
+<li>character_set_filesystem：把操作系统上的文件名转化成此字符集，即把 character_set_client 转换 character_set_filesystem， 默认 binary 是不做任何转换的</li>
+<li>character_set_results：结果集的字符集</li>
+<li>character_set_server：数据库服务器的默认字符集</li>
+<li>character_set_system：存储系统元数据的字符集，总是 utf8，不需要设置</li>
+</ul>
+<h2 id="排序字符集"><a href="#排序字符集" class="headerlink" title="排序字符集"></a>排序字符集</h2><h3 id="utf8mb4-unicode-ci-和-utf8mb4-general-ci"><a href="#utf8mb4-unicode-ci-和-utf8mb4-general-ci" class="headerlink" title="utf8mb4_unicode_ci 和 utf8mb4_general_ci"></a>utf8mb4_unicode_ci 和 utf8mb4_general_ci</h3><h4 id="1、准确性"><a href="#1、准确性" class="headerlink" title="1、准确性"></a>1、准确性</h4><p>utf8mb4_unicode_ci 是基于标准的 Unicode 来排序和比较，能够在各种语言之间精确排序</p>
+<p>utf8mb4_general_ci 没有实现 Unicode 排序规则，在遇到某些特殊语言或者字符集，排序结果可能不一致。</p>
+<p>但是绝大多数情况下，这些特殊字符的顺序并不需要那么精确。</p>
+<h4 id="2、性能"><a href="#2、性能" class="headerlink" title="2、性能"></a>2、性能</h4><p>utf8mb4_general_ci 在比较和排序的时候更快</p>
+<p>utf8mb4_unicode_ci 在特殊情况下，Unicode 排序规则为了能够处理特殊字符的情况，实现了略微复杂的排序算法。</p>
+<p>但是在绝大多数情况下，不会发生此类复杂比较。相比选择哪一种 collation，使用者更应该关心字符集与排序规则在 db 里需要统一。</p>
+<h3 id="utf8mb4-0900-ai-ci"><a href="#utf8mb4-0900-ai-ci" class="headerlink" title="utf8mb4_0900_ai_ci"></a>utf8mb4_0900_ai_ci</h3><blockquote>
+<p>推荐用 utf8mb4_unicode_ci，但是用 utf8mb4_general_ci 也没啥问题。</p>
+</blockquote>
+<p>MySQL 8.0 默认的是 utf8mb4_0900_ai_ci，属于 utf8mb4_unicode_ci 中的一种，具体含义如下：</p>
+<ul>
+<li>uft8mb4 表示用 UTF-8 编码方案，每个字符最多占 4 个字节。</li>
+<li>0900 指的是 Unicode 校对算法版本。（Unicode 归类算法是用于比较符合 Unicode 标准要求的两个 Unicode 字符串的方法）。</li>
+<li>ai 指的是口音不敏感。也就是说，排序时 e，è，é，ê 和 ë 之间没有区别。</li>
+<li>ci 表示不区分大小写。也就是说，排序时 p 和 P 之间没有区别。</li>
+</ul>
+<p>utf8mb4 已成为默认字符集，在 MySQL 8.0.1 及更高版本中将 utf8mb4_0900_ai_ci 作为默认排序规则。以前，utf8mb4_general_ci 是默认排序规则。由于 utf8mb4_0900_ai_ci 排序规则现在是默认排序规则，因此默认情况下新表格可以存储基本多语言平面之外的字符。现在可以默认存储表情符号。如果需要重音灵敏度和区分大小写，则可以使用 utf8mb4_0900_as_cs 代替。</p>
+<h2 id="UTF-8-与-UTF-8MB4-的区别"><a href="#UTF-8-与-UTF-8MB4-的区别" class="headerlink" title="UTF-8 与 UTF-8MB4 的区别"></a>UTF-8 与 UTF-8MB4 的区别</h2><h3 id="UTF-8-（Unicode）"><a href="#UTF-8-（Unicode）" class="headerlink" title="UTF-8 （Unicode）"></a>UTF-8 （Unicode）</h3><blockquote>
+<p>我们先谈谈UTF-8,最早只有127个字符被编码到计算机里，也就是大小写英文字母、数字和一些符号，这个编码表被称为ASCII编码，但是要处理中文显然一个字节是不够的，至少需要两个字节，而且还不能和ASCII编码冲突，所以，中国制定了GB2312编码，用来把中文编进去。你可以想得到的是，全世界有上百种语言，日本把日文编到Shift_JIS里，韩国把韩文编到Euc-kr里，各国有各国的标准，就会不可避免地出现冲突，结果就是，在多语言混合的文本中，显示出来会有乱码。</p>
+</blockquote>
+<p>因此，Unicode应运而生。Unicode把所有语言都统一到一套编码里，这样就不会再有乱码问题了。现代操作系统和大多数编程语言都直接支持Unicode。</p>
+<p>所以在UTF-8编码中，一个英文字符占用一个字节的存储空间，一个中文（含繁体）占用三个字节的存储空间。</p>
+<p>目前基本上可见字符集都只需要三个字节，包含了所有字符，但是目前问题出在了unicode6系列编码上，它们需要4个字节，这部分就是有名的emoji。所以，你只要不是特种编码还是unicode，且不存emoji，保证不出问题。</p>
+<p>另外在此处，我有一点需要补充的是：</p>
+<p>MySQL数据库的 “utf8”并不是真正概念里的 UTF-8，原因上面是一点，还有一点是MySQL中的“utf8”编码只支持最大3字节每字符。真正的大家正在使用的UTF-8编码是应该能支持4字节每个字符。</p>
+<p>但其实MYSQL的开发者，并没有修饰这个bug，而是推出了新的字符集，就是UTF-8MB4字符编码。</p>
+<h2 id="UTF-8MB4"><a href="#UTF-8MB4" class="headerlink" title="UTF-8MB4"></a>UTF-8MB4</h2><blockquote>
+<p>UTF8MB4：MySQL在5.5.3之后增加了utf8mb4的编码，mb4就是most bytes 4的意思，专门用来兼容四字节的unicode。因此可以用来存储emoji表情。</p>
+</blockquote>
+<p>从8.0后，MySQL也将会在某个版本中开始使用UTF-8MB4作为默认的字符编码。</p>
+<p>所以简单说即是：UTF-8MB4才是MySQL中真正的UTF-8编码。</p>
+<p>那么如何让MySQL存储Emoji表情勒。</p>
+<h2 id="如何让MySQL存储Emoji表情"><a href="#如何让MySQL存储Emoji表情" class="headerlink" title="如何让MySQL存储Emoji表情"></a>如何让MySQL存储Emoji表情</h2><p>我们在创建数据库的时候，就需要选定utf-8mb4字符集，而不是utf-8。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://img-blog.csdnimg.cn/img_convert/46eb343e00a805b081c5c34ed81c6b82.png"
+                       
+                 ></p>
+<p>我们在设置字段字符集的时候，也需要设置为utf-8mb4字符集。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://img-blog.csdnimg.cn/img_convert/9864c2eaa4ee7d5e5c28f927371ddcd0.png"
+                       
+                 ></p>
+<p>这样我在Navicat 中测试是可以的。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://img-blog.csdnimg.cn/img_convert/12e349670c83a19348a9db7489a80f52.png"
+                       
+                 ></p>
+<p>但是，我之前在网上查询相关资料的时候，说是需要修改一下my.ini配置文件，</p>
+<p>在[mysqld]下面添加：character_set_server&#x3D;utf8mb4，保存，重启mysql，应该就可以解决了。</p>
+<h2 id="注意：下次再有人问起设置什么样的编码，记得直接推荐设置utf-8mb4哦，这个才是MySQL真正的UTF-8编码哦。"><a href="#注意：下次再有人问起设置什么样的编码，记得直接推荐设置utf-8mb4哦，这个才是MySQL真正的UTF-8编码哦。" class="headerlink" title="注意：下次再有人问起设置什么样的编码，记得直接推荐设置utf-8mb4哦，这个才是MySQL真正的UTF-8编码哦。"></a>注意：下次再有人问起设置什么样的编码，记得直接推荐设置utf-8mb4哦，这个才是MySQL真正的UTF-8编码哦。</h2><h2 id="一些建议"><a href="#一些建议" class="headerlink" title="一些建议"></a>一些建议</h2><blockquote>
+<p>看起来修改方法挺简单，不过对于生产环境还是要格外小心。特别是修改字段字符集时，会加锁，阻止写操作，对于大表执行下来也是很慢的，可能对线上业务造成影响。</p>
+<p>如果你的数据库比较小，用以上方法应该问题不大。对于线上环境，若要修改字符集，一定要做好评估，最好可以在业务低峰期停机修改，修改前一定要先备份。若无停机时间，可以考虑先在备库修改，然后再主备切换，不过这样做会更麻烦。</p>
+<p>有条件的话也可以再准备一个空实例，先导入表结构，改成 utf8mb4 字符集后再导入数据。这也是一种方法，不过也可能需要停机切换。</p>
+</blockquote>
+
+                    
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                EMOJI表情插入MYSQL数据库异常记录报错以及处理方式
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                2022/07/06/EMOJI表情插入MYSQL数据库异常记录报错以及处理方式/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">ドラゴンボールのLong</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2022-07-06 20:10</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="">
+                    <a href="https://zhongshenglong.xyz" target="_blank">
+                        
+                            Long License
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E5%BF%83%E5%BE%97/">心得</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/mysql/">mysql</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+                    
+
+<div class="reward-author-container border-box flex-center">
+    <div class="reward-btn border-box flex-center tooltip tooltip-img"
+            data-tooltip-img-url="/images/reward.jpg"
+            data-tooltip-img-trigger="click"
+            data-tooltip-img-style="top: -6px;"
+    >
+        <i class="fa-solid fa-gift"></i>&nbsp;请作者喝咖啡
+    </div>
+</div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2022/08/06/Docker%E4%BF%AE%E6%94%B9%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE%E5%AF%BC%E8%87%B4%E5%90%AF%E5%8A%A8%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"
+                                   title="Docker修改容器配置导致启动失败的解决方法"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Docker修改容器配置导致启动失败的解决方法</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2022/06/06/RAC%E3%80%81DG%E5%92%8COGG%E7%9A%84%E5%8C%BA%E5%88%AB/"
+                                   title="RAC、DG和OGG的区别"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">RAC、DG和OGG的区别</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+    <div class="comments-container border-box">
+        <div id="comments-anchor" class="comment-area-title border-box">
+            <i class="fas fa-comments"></i>&nbsp;评论
+        </div>
+        <div class="comment-plugin-fail border-box">
+    <span class="fail-tip">评论插件加载失败</span>
+    <button class="reload keep-button">点击重新加载</button>
+</div>
+<div class="comment-plugin-loading flex-center border-box">
+    <i class="loading-icon fa-solid fa-spinner fa-spin"></i>
+    <span class="load-tip">正在加载评论插件</span>
+</div>
+<script data-pjax>
+  window.KeepCommentPlugin = {}
+  window.KeepCommentPlugin.hideLoading = () => {
+    const cplDom = document.querySelector('.comments-container .comment-plugin-loading')
+    cplDom.style.display = 'none'
+  }
+  window.KeepCommentPlugin.loadFailHandle = () => {
+    window.KeepCommentPlugin.hideLoading()
+    const cpfDom = document.querySelector('.comments-container .comment-plugin-fail')
+    cpfDom.style.display = 'flex'
+    cpfDom.querySelector('.reload').addEventListener('click', () => {
+      window.location.reload()
+    })
+  }
+</script>
+
+        
+            
+
+    <div class="valine-container">
+        <div id="vcomments"></div>
+        <script 
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        ></script>
+        <script 
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        >
+          window.KeepCommentPlugin.initValine = () => {
+            const config = {
+              el: '#vcomments',
+              appId: '2TGCOmDNikdxOnVmQJEFhTOK-gzGzoHsz',
+              appKey: 'lU21jvewvcy043UjfpHRXfvA',
+              meta: ['nick', 'mail', 'link'],
+              avatar: 'wavatar',
+              enableQQ: true,
+              placeholder: '😜 尽情吐槽吧~',
+              lang: 'zh-CN'.toLowerCase()
+            }
+
+            if ('') {
+              config.serverURLs = ''
+            }
+
+            if (window?.Valine) {
+              new Valine(config)
+              window.KeepCommentPlugin.hideLoading()
+            } else {
+              setTimeout(() => {
+                window.KeepCommentPlugin.initValine()
+              }, 1000)
+            }
+          }
+
+          if ('false' === 'true') {
+            setTimeout(() => {
+              window.KeepCommentPlugin.initValine()
+            }, 1200)
+          } else {
+            window.addEventListener('DOMContentLoaded', window.KeepCommentPlugin.initValine)
+          }
+        </script>
+    </div>
+
+
+        
+    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#EMOJI%E8%A1%A8%E6%83%85%E6%8F%92%E5%85%A5MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%82%E5%B8%B8%E8%AE%B0%E5%BD%95%E6%8A%A5%E9%94%99%E4%BB%A5%E5%8F%8A%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">EMOJI表情插入MYSQL数据库异常记录报错以及处理方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%85%88%E7%99%BB%E5%BD%95MYSQL%EF%BC%8C%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">1.先登录MYSQL，查看当前数据库的编码格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%9C%A8%E6%9F%A5%E7%9C%8B%E6%8E%92%E5%BA%8F%E8%A7%84%E5%88%99"><span class="nav-number">1.2.</span> <span class="nav-text">2.在查看排序规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BF%AE%E6%94%B9MYSQL%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-MY-CNF"><span class="nav-number">1.3.</span> <span class="nav-text">3.修改MYSQL配置文件 MY.CNF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%87%8D%E5%90%AFMYSQL"><span class="nav-number">1.4.</span> <span class="nav-text">4.重启MYSQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%9B%9E%E5%88%B0%E7%AC%AC%E4%B8%80%E6%AD%A5%E7%9C%8B%E4%B8%8B%E5%AD%97%E7%AC%A6%E9%9B%86%E6%98%AF%E5%90%A6%E6%9B%B4%E6%94%B9%E5%90%A6%E5%88%99%EF%BC%8C%E5%86%8DMYSQL%E9%87%8C%E9%9D%A2%E8%BF%90%E8%A1%8C%E4%BB%A5%E4%B8%8B%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%A0%81"><span class="nav-number">1.5.</span> <span class="nav-text">5.回到第一步看下字符集是否更改否则，再MYSQL里面运行以下设置代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%86%8D%E6%AC%A1%E6%9F%A5%E7%9C%8B"><span class="nav-number">1.6.</span> <span class="nav-text">6.再次查看</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%A1%A8%E5%8F%8A%E5%AD%97%E6%AE%B5%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="nav-number">1.7.</span> <span class="nav-text">修改表及字段字符集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="nav-number">1.8.</span> <span class="nav-text">查看字符集</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL%E5%87%A0%E7%A7%8D%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%88utf8%E3%80%81utf8mb4%E3%80%81utf8mb4-general-ci%E3%80%81utf8mb4-unicode-ci-%E3%80%81utf8mb4-0900-ai-ci%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">MySQL几种编码格式的区别（utf8、utf8mb4、utf8mb4_general_ci、utf8mb4_unicode_ci 、utf8mb4_0900_ai_ci）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%AD%97%E7%AC%A6%E9%9B%86-utf8-%E5%92%8C-utf8mb4"><span class="nav-number">2.1.</span> <span class="nav-text">存储字符集 utf8 和 utf8mb4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%AD%E5%AD%97%E7%AC%A6%E9%9B%86%E7%9B%B8%E5%85%B3%E5%8F%98%E9%87%8F"><span class="nav-number">2.2.</span> <span class="nav-text">MySQL 配置文件中字符集相关变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="nav-number">2.3.</span> <span class="nav-text">排序字符集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#utf8mb4-unicode-ci-%E5%92%8C-utf8mb4-general-ci"><span class="nav-number">2.3.1.</span> <span class="nav-text">utf8mb4_unicode_ci 和 utf8mb4_general_ci</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E5%87%86%E7%A1%AE%E6%80%A7"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">1、准确性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E6%80%A7%E8%83%BD"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">2、性能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#utf8mb4-0900-ai-ci"><span class="nav-number">2.3.2.</span> <span class="nav-text">utf8mb4_0900_ai_ci</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UTF-8-%E4%B8%8E-UTF-8MB4-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.4.</span> <span class="nav-text">UTF-8 与 UTF-8MB4 的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UTF-8-%EF%BC%88Unicode%EF%BC%89"><span class="nav-number">2.4.1.</span> <span class="nav-text">UTF-8 （Unicode）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UTF-8MB4"><span class="nav-number">2.5.</span> <span class="nav-text">UTF-8MB4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%A9MySQL%E5%AD%98%E5%82%A8Emoji%E8%A1%A8%E6%83%85"><span class="nav-number">2.6.</span> <span class="nav-text">如何让MySQL存储Emoji表情</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%9A%E4%B8%8B%E6%AC%A1%E5%86%8D%E6%9C%89%E4%BA%BA%E9%97%AE%E8%B5%B7%E8%AE%BE%E7%BD%AE%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E7%BC%96%E7%A0%81%EF%BC%8C%E8%AE%B0%E5%BE%97%E7%9B%B4%E6%8E%A5%E6%8E%A8%E8%8D%90%E8%AE%BE%E7%BD%AEutf-8mb4%E5%93%A6%EF%BC%8C%E8%BF%99%E4%B8%AA%E6%89%8D%E6%98%AFMySQL%E7%9C%9F%E6%AD%A3%E7%9A%84UTF-8%E7%BC%96%E7%A0%81%E5%93%A6%E3%80%82"><span class="nav-number">2.7.</span> <span class="nav-text">注意：下次再有人问起设置什么样的编码，记得直接推荐设置utf-8mb4哦，这个才是MySQL真正的UTF-8编码哦。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE"><span class="nav-number">2.8.</span> <span class="nav-text">一些建议</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+		year - 作为date对象的年份，为4位年份值
+		month - 0-11之间的整数，做为date对象的月份
+		day - 1-31之间的整数，做为date对象的天数
+		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+		minutes - 0-59之间的整数，做为date对象的分钟数
+		seconds - 0-59之间的整数，做为date对象的秒数
+		microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+		var t1 = Date.UTC(2019,04,09,21,47,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML="❤亲爱的旅客,我已与你/妳相遇❤❤❤"+" 第 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒❤";
+	}/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+	siteTime();
+</script>
+
+<footer class="footer border-box">
+		
+	<a href="https://www.foreverblog.cn/" target="_blank" > <img src="https://img.foreverblog.cn/logo_en_default.png" alt="" style="width:auto;height:16px;"> </a>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            本站由 <span class="tooltip" data-tooltip-content="阿里云"><img src="/images/brands/aliyun.png"></span> 提供部署服务
+            
+        </div>
+    
+
+    
+        <div class="record-info info-item">
+		ICP备案号：【&nbsp;
+            
+                
+                    <div class="record-item border-box">
+                        <a class=""
+                           target="_blank"
+                           href="https://beian.miit.gov.cn"
+                        >
+                            苏ICP备20001538号-1
+                        </a>
+                    </div>
+                
+            
+		&nbsp;】&nbsp;
+        </div>
+    
+	
+    <div class="copyright-info info-item">
+        &copy;&nbsp;<span>2019</span>&nbsp;-&nbsp;2024
+        
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">ドラゴンボールのLong</a>
+        
+		&nbsp;&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        <div class="count-info info-item">
+            
+                <span class="count-item border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">125.5k</span>
+                </span>
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+	
+	<!--自定义了时间-->
+    <p id="sitetime" target="_blank"></p>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+            <li class="tools-item go-to-comments-tablet flex-center">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#EMOJI%E8%A1%A8%E6%83%85%E6%8F%92%E5%85%A5MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%82%E5%B8%B8%E8%AE%B0%E5%BD%95%E6%8A%A5%E9%94%99%E4%BB%A5%E5%8F%8A%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">EMOJI表情插入MYSQL数据库异常记录报错以及处理方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%85%88%E7%99%BB%E5%BD%95MYSQL%EF%BC%8C%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">1.先登录MYSQL，查看当前数据库的编码格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%9C%A8%E6%9F%A5%E7%9C%8B%E6%8E%92%E5%BA%8F%E8%A7%84%E5%88%99"><span class="nav-number">1.2.</span> <span class="nav-text">2.在查看排序规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BF%AE%E6%94%B9MYSQL%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-MY-CNF"><span class="nav-number">1.3.</span> <span class="nav-text">3.修改MYSQL配置文件 MY.CNF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%87%8D%E5%90%AFMYSQL"><span class="nav-number">1.4.</span> <span class="nav-text">4.重启MYSQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%9B%9E%E5%88%B0%E7%AC%AC%E4%B8%80%E6%AD%A5%E7%9C%8B%E4%B8%8B%E5%AD%97%E7%AC%A6%E9%9B%86%E6%98%AF%E5%90%A6%E6%9B%B4%E6%94%B9%E5%90%A6%E5%88%99%EF%BC%8C%E5%86%8DMYSQL%E9%87%8C%E9%9D%A2%E8%BF%90%E8%A1%8C%E4%BB%A5%E4%B8%8B%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%A0%81"><span class="nav-number">1.5.</span> <span class="nav-text">5.回到第一步看下字符集是否更改否则，再MYSQL里面运行以下设置代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%86%8D%E6%AC%A1%E6%9F%A5%E7%9C%8B"><span class="nav-number">1.6.</span> <span class="nav-text">6.再次查看</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%A1%A8%E5%8F%8A%E5%AD%97%E6%AE%B5%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="nav-number">1.7.</span> <span class="nav-text">修改表及字段字符集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="nav-number">1.8.</span> <span class="nav-text">查看字符集</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL%E5%87%A0%E7%A7%8D%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%88utf8%E3%80%81utf8mb4%E3%80%81utf8mb4-general-ci%E3%80%81utf8mb4-unicode-ci-%E3%80%81utf8mb4-0900-ai-ci%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">MySQL几种编码格式的区别（utf8、utf8mb4、utf8mb4_general_ci、utf8mb4_unicode_ci 、utf8mb4_0900_ai_ci）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%AD%97%E7%AC%A6%E9%9B%86-utf8-%E5%92%8C-utf8mb4"><span class="nav-number">2.1.</span> <span class="nav-text">存储字符集 utf8 和 utf8mb4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%AD%E5%AD%97%E7%AC%A6%E9%9B%86%E7%9B%B8%E5%85%B3%E5%8F%98%E9%87%8F"><span class="nav-number">2.2.</span> <span class="nav-text">MySQL 配置文件中字符集相关变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="nav-number">2.3.</span> <span class="nav-text">排序字符集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#utf8mb4-unicode-ci-%E5%92%8C-utf8mb4-general-ci"><span class="nav-number">2.3.1.</span> <span class="nav-text">utf8mb4_unicode_ci 和 utf8mb4_general_ci</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E5%87%86%E7%A1%AE%E6%80%A7"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">1、准确性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E6%80%A7%E8%83%BD"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">2、性能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#utf8mb4-0900-ai-ci"><span class="nav-number">2.3.2.</span> <span class="nav-text">utf8mb4_0900_ai_ci</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UTF-8-%E4%B8%8E-UTF-8MB4-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.4.</span> <span class="nav-text">UTF-8 与 UTF-8MB4 的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UTF-8-%EF%BC%88Unicode%EF%BC%89"><span class="nav-number">2.4.1.</span> <span class="nav-text">UTF-8 （Unicode）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UTF-8MB4"><span class="nav-number">2.5.</span> <span class="nav-text">UTF-8MB4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%A9MySQL%E5%AD%98%E5%82%A8Emoji%E8%A1%A8%E6%83%85"><span class="nav-number">2.6.</span> <span class="nav-text">如何让MySQL存储Emoji表情</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%9A%E4%B8%8B%E6%AC%A1%E5%86%8D%E6%9C%89%E4%BA%BA%E9%97%AE%E8%B5%B7%E8%AE%BE%E7%BD%AE%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E7%BC%96%E7%A0%81%EF%BC%8C%E8%AE%B0%E5%BE%97%E7%9B%B4%E6%8E%A5%E6%8E%A8%E8%8D%90%E8%AE%BE%E7%BD%AEutf-8mb4%E5%93%A6%EF%BC%8C%E8%BF%99%E4%B8%AA%E6%89%8D%E6%98%AFMySQL%E7%9C%9F%E6%AD%A3%E7%9A%84UTF-8%E7%BC%96%E7%A0%81%E5%93%A6%E3%80%82"><span class="nav-number">2.7.</span> <span class="nav-text">注意：下次再有人问起设置什么样的编码，记得直接推荐设置utf-8mb4哦，这个才是MySQL真正的UTF-8编码哦。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE"><span class="nav-number">2.8.</span> <span class="nav-text">一些建议</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/lazyload.min.js"></script>
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+    
+        
+    
+        
+            
+<script class="custom-inject-js" src="/js/love.js" data-pjax></script>
+
+        
+    
+
+</body>
+</html>

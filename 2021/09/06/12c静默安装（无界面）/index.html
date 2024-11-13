@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="每日一句">
+    <meta name="author" content="ドラゴンボールのLong">
+    
+    <title>
+        
+            centos7_oracle_12c静默安装（无界面） |
+        
+        ドラゴンボールのBlog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/brands.min.css">
+    
+        
+            
+        
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"zhongshenglong.xyz","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"ドラゴンボールのBlog","author":"ドラゴンボールのLong","avatar":"https://cdn.jsdelivr.net/gh/longhz/cdn@1.0/img/custom/avatar1.jpg","logo":"/images/favicon.ico","favicon":"/images/favicon.ico"},"menu":{"home":"/ || fa-solid fa-home","归档":{"icon":"fa-solid fa-book","children":[{"archives":"/archives || fa-solid fa-layer-group"},{"tags":"/tags || fa-solid fa-tags"}]},"links":"/links|| fa-solid fa-link","about":{"icon":"fa-solid fa-user-secret","children":[{"gallery":"/gallery || fa-solid fa-image"},{"about":"/about || fa-solid fa-user-graduate"}]}},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"黄色的森林分出两条路 || 我选择人迹更少的那一条，从此决定我一生的道路。","hitokoto":true},"social_contact":{"enable":false,"links":{"github":"https://github.com/longhz","weixin":null,"qq":"https://wpa.qq.com/msgrd?v=3&uin=1084045717&site=qq&menu=yes","weibo":null,"bilibili":"https://space.bilibili.com/9317816/bangumi","wangyiyun":"https://music.163.com/user/home?id=1348254961","zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":{"custom_license":"Long License","custom_link":"https://zhongshenglong.xyz"},"share":true,"reward":{"enable":true,"img_link":"/images/reward.jpg","text":"请作者喝咖啡","icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"obsidian"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":true,"use":"valine","valine":{"appid":"2TGCOmDNikdxOnVmQJEFhTOK-gzGzoHsz","appkey":"lU21jvewvcy043UjfpHRXfvA","server_urls":null,"placeholder":"😜 尽情吐槽吧~"},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.36"},"waline":{"server_url":null,"reaction":false,"version":"3.2.1"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2019,"word_count":true,"site_deploy":{"enable":true,"provider":"aliyun","url":null},"record":{"enable":true,"list":[{"code":"苏ICP备20001538号-1","link":"https://beian.miit.gov.cn"}]}},"inject":{"enable":true,"css":[null],"js":[null,"/js/love.js"]},"aplayer":{"id":4900925608,"server":"netease","type":"playlist","fixed":true,"autoplay":false,"loop":"all","order":"random","preload":"auto","volume":0.7,"mutex":true},"live2d":{"enable":true,"scriptFrom":"local","pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"use":"live2d-widget-model-liveuu"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}},"root":"","source_data":{"links":[{"name":"IT诗人","link":"https://xpoet.cn/","description":"所有命运的馈赠，早已在暗中标好价格。","avatar":"https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/common-use/avatar.jpg"},{"name":"不知名艺术家","link":"https://jinzhanqi.com/","description":"love artist, love code.","avatar":"https://s3.ax1x.com/2020/11/17/DVvkB4.jpg"},{"name":"阮一峰","link":"http://www.ruanyifeng.com/blog/archives.html","description":"阮一峰的网络日志","avatar":"https://www.ruanyifeng.com/blog/images/person2_s.jpg"},{"name":"墨","link":"https://www.kura.ren/","description":"清水1024","avatar":"https://www.kura.ren/upload/2020/05/up-up-man-4d2d7e917c9d476b86373b0aa17fcafe.png"},{"name":"爱·绮梦","link":"https://x.iqimeng.com/","description":"学而时习之 不亦说乎","avatar":"https://x.iqimeng.com/images/avatar.jpg"},{"name":"Keep learning","link":"https://blog.gooday.press/","description":"爱好学习，不断提升自我","avatar":"https://cdn.jsdelivr.net/gh/cemonliu/blogpic@main/avatar.svg"},{"name":"CitingNutria","link":"https://citingnutria.github.io/","description":"まだ夢がある","avatar":"https://cdn.jsdelivr.net/gh/CitingNutria/image_hosting@master/avatar.jpg"},{"name":"小龙的跋涉","link":"https://www.eduorg.ltd/","description":"但行好事，莫问前程","avatar":"https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/blog/favicon.42reb4izcgs0.png"},{"name":"Eveneko","link":"https://eveneko.com/","description":"我们这一生，能做一个优秀的普通人已经足够厉害了！","avatar":"https://cdn.jsdelivr.net/gh/Eveneko/Image-Hosting@master/PicX/A1644732-0330-47D7-A2A1-4EBA8B3C2855.3gp6q5zr8180.jpeg"},{"name":"Nico","link":"https://www.lzp.zone/","description":"蝉歌星夜，月影婆娑","avatar":"https://tva1.sinaimg.cn/large/008i3skNly1gwpe11i8adj301s01smwx.jpg"},{"name":"KAI’S NOTE","link":"https://kainote.top/","description":"三天打鱼(⊙ˍ⊙)两天晒网","avatar":"https://s2.loli.net/2022/01/09/UtbhxHv2IA8jqwZ.jpg"},{"name":"April的记录小屋","link":"https://april-tong.com/","description":"热爱可抵岁月漫长。","avatar":"https://raw.githubusercontent.com/AprilTong/image/master/img/photo.jpeg"},{"name":"ZhengXi","link":"https://zhengxi.io/","description":"你的时间有限，不要为了别人而活","avatar":"https://vip2.loli.io/2022/01/28/8bTLXSIoDckrjfz.png"},{"name":"PMP项目管理","link":"https://pmp.saiita.cn/","description":"学习PMP项目管理的笔记.","avatar":"https://cdn.saiita.com.cn/picgo/P3260015.JPG"},{"name":"开心驿站","link":"https://www.kxyz.eu.org/","description":"steam游戏交流中心","avatar":"https://www.kxyz.eu.org/wp-content/uploads/logo.png"},{"name":"免费公益v2ray节点订阅","link":"https://www.v2rayfree.eu.org/","description":"免费公益v2ray节点订阅","avatar":"https://www.v2rayfree.eu.org/images/avatar.png"},{"name":"ZXC's Blog","link":"https://www.v2rayfree.eu.org/","description":"生命不息，代码不止","avatar":"https://cdn.jsdelivr.net/gh/XavierJiezou/picx-image-hosting@main/about/avatar.jpg"},{"name":"FallenGemini的博客","link":"https://paraderno.github.io/Blog.github.io/","description":"愿地狱的终点是天堂","avatar":"https://raw.githubusercontent.com/Paraderno/image-hosting/master/avatar.3co1ubx6en80.png"},{"name":"AomanHao的博客","link":"https://www.aomanhao.top/","description":"热爱图像处理，优化彩色世界","avatar":"https://www.aomanhao.top/images/Avatar.jpg"},{"name":"༺ཌ༈君☠纤༈ད༻的博客","link":"https://www.cnblogs.com/asio/","description":"欲买桂花同载酒，荒泷天下第一斗。","avatar":"https://pic.cnblogs.com/avatar/1924746/20200215183155.png"},{"name":"clash免费节点","link":"https://clashfree.eu.org/","description":"ssr/v2ray/clash免费节点分享","avatar":"https://clashfree.eu.org/wp-content/uploads/avatar.png"}]},"version":"4.2.3"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="❦༺  LONGZ ༻❦" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/favicon.ico">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               ドラゴンボールのBlog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box has-sub-menu">
+                            <a class="menu-text-color border-box" href="javascript:void(0);">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-book"></i>
+                                
+                                归档
+                                
+                                    <i class="menu-text-color collapse-icon fa-solid fa-angle-down"></i>
+                                
+                            </a>
+                            
+                                <ul class="sub-menu-list border-box">
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/archives">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-layer-group"></i>
+                                                
+                                                归档
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/tags">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-tags"></i>
+                                                
+                                                标签
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/links">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-link"></i>
+                                
+                                友链
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box has-sub-menu">
+                            <a class="menu-text-color border-box" href="javascript:void(0);">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-secret"></i>
+                                
+                                关于
+                                
+                                    <i class="menu-text-color collapse-icon fa-solid fa-angle-down"></i>
+                                
+                            </a>
+                            
+                                <ul class="sub-menu-list border-box">
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/gallery">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-image"></i>
+                                                
+                                                GALLERY
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/about">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-user-graduate"></i>
+                                                
+                                                关于
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box has-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="javascript:void(0);">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-book"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                            <i class="right-side collapse-icon fa-solid fa-angle-left"></i>
+                        
+                    </label>
+                    
+                        <ul class="drawer-sub-menu-list border-box">
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/archives">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-layer-group"></i>
+                                            </span>
+                                        
+                                        归档
+                                    </a>
+                                </li>
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/tags">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-tags"></i>
+                                            </span>
+                                        
+                                        标签
+                                    </a>
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/links">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-link"></i>
+                                </span>
+                            
+                            友链
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box has-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="javascript:void(0);">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-secret"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                            <i class="right-side collapse-icon fa-solid fa-angle-left"></i>
+                        
+                    </label>
+                    
+                        <ul class="drawer-sub-menu-list border-box">
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/gallery">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-image"></i>
+                                            </span>
+                                        
+                                        GALLERY
+                                    </a>
+                                </li>
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/about">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-user-graduate"></i>
+                                            </span>
+                                        
+                                        关于
+                                    </a>
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        centos7_oracle_12c静默安装（无界面）
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="http://cdns.zhongshenglong.xyz/cdn-photos/img/custom/avatar1.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">岁月如梦</span>
+                                
+                                    <span class="author-badge">Lv4</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2021-09-06 20:10:12</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Sat Feb 11 2023 19:49:00 GMT+0800">2023-02-11 19:49:00</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E8%BD%AF%E4%BB%B6%E6%95%99%E7%A8%8B/">软件教程</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/oracle/">oracle</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E5%BF%83%E5%BE%97/">心得</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>5.7k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>22 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h2 id="CentOS-7下Oracle-12C-无图形界面静默安装"><a href="#CentOS-7下Oracle-12C-无图形界面静默安装" class="headerlink" title="CentOS 7下Oracle 12C 无图形界面静默安装"></a><center>CentOS 7下Oracle 12C 无图形界面静默安装</h2><h3 id="1、关闭防火墙-可跳过"><a href="#1、关闭防火墙-可跳过" class="headerlink" title="1、关闭防火墙(可跳过)"></a><strong>1、关闭防火墙(可跳过)</strong></h3><p>systemctl stop firewalld.service –关闭防火墙<br>systemctl disable firewalld.service – 禁止防火墙开机启动</p>
+<h3 id="2、关闭selinux-不可跳过"><a href="#2、关闭selinux-不可跳过" class="headerlink" title="2、关闭selinux(不可跳过)"></a><strong>2、关闭selinux(不可跳过)</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0</span><br></pre></td></tr></table></figure>
+<p>编辑文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/selinux/config</span><br></pre></td></tr></table></figure>
+
+<p>文件中设置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELINUX=disabled</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="3、修改host名称（其实可以省略）"><a href="#3、修改host名称（其实可以省略）" class="headerlink" title="3、修改host名称（其实可以省略）"></a><strong>3、修改host名称（其实可以省略）</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hosts</span><br></pre></td></tr></table></figure>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220211-1529.png"
+                       
+                 ></p>
+<p>在文件末尾加上 自己的ip和 oracleVM</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">192.168.217.128 oracleVM</span><br></pre></td></tr></table></figure>
+<h3 id="3、安装必要的依赖包"><a href="#3、安装必要的依赖包" class="headerlink" title="3、安装必要的依赖包"></a><strong>3、安装必要的依赖包</strong></h3><h5 id="配置yum源"><a href="#配置yum源" class="headerlink" title="配置yum源"></a>配置yum源</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cd /etc</span><br><span class="line">mv yum.repos.d yum.repos.d.bak</span><br><span class="line">mkdir yum.repos.d</span><br><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line"># 清理缓存</span><br><span class="line">yum clean all</span><br><span class="line"># 建缓存</span><br><span class="line">yum makecache</span><br><span class="line">#安装epel源</span><br><span class="line">yum -y install epel-release</span><br></pre></td></tr></table></figure>
+
+<h5 id="如果没有外网，可以挂载系统盘，来配置yum源"><a href="#如果没有外网，可以挂载系统盘，来配置yum源" class="headerlink" title="如果没有外网，可以挂载系统盘，来配置yum源"></a>如果没有外网，可以挂载系统盘，来配置yum源</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mnt/cdrom/</span><br><span class="line">mount /dev/cdrom /mnt/cdrom/</span><br><span class="line">#配置开机挂载光盘</span><br><span class="line">vim /etc/fstab</span><br><span class="line">//编辑fastab文件，在文本末行加入以下参数，&#x27;ro&#x27;为只读。</span><br><span class="line">/dev/cdrom /mnt/cdrom  iso9660 ro   0 0</span><br><span class="line"></span><br><span class="line">#更换yum源</span><br><span class="line">##清理旧的配置（cp备份或mv移走或者rm删除都行）</span><br><span class="line">mv /etc/yum.repos.d/ /etc/yum.repos.d.bak</span><br><span class="line">mkdir /etc/yum.repos.d</span><br><span class="line">cd /etc/yum.repos.d</span><br><span class="line">touch CentOS-Sources.repo</span><br><span class="line"></span><br><span class="line">##手动添加新的软件源，指向前一步准备的本地软件仓库</span><br><span class="line">vi /etc/yum.repos.d/CentOS-Sources.repo</span><br><span class="line">##填写以下内容</span><br><span class="line">[CentOS7-Localsource]</span><br><span class="line">name=CentOS7</span><br><span class="line">baseurl=file:///mnt/cdrom</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line">[CentOS7-Localsource] ## 这个是源的名字，具有唯一性，不能和其他的重复</span><br><span class="line">name=CentOS7  ## 相当于注释，对redhat源的描述</span><br><span class="line">baseurl=file:///mnt/cdrom  ## 挂载的目录</span><br><span class="line">enabled=1 #yum源是否启用 1-启用 0-不启用</span><br><span class="line">gpgcheck=0 #安全检测 1-开启 0-不开启</span><br><span class="line"></span><br><span class="line"># 清理缓存并生成</span><br><span class="line"># 清理缓存</span><br><span class="line">yum clean all</span><br><span class="line"># 建缓存</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+
+<p><strong>期间可能会出现错误的情况，执行多几次就好了</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh --nodeps --force pdksh-5.2.14-37.el5_8.1.x86_64.rpm</span><br><span class="line">rpm -ivh --nodeps --force compat-libstdc++-33-3.2.3-72.el7.x86_64.rpm</span><br><span class="line">yum -y install binutils compat-libcap1 compat-libstdc++-33 compat-libstdc++-33*i686 compat-libstdc++-33*.devel compat-libstdc++-33 compat-libstdc++-33*.devel gcc gcc-c++ glibc glibc*.i686 glibc-devel glibc-devel*.i686 ksh libaio libaio*.i686 libaio-devel libaio-devel*.devel libgcc libgcc*.i686 libstdc++ libstdc++*.i686 libstdc++-devel libstdc++-devel*.devel libXi libXi*.i686 libXtst libXtst*.i686 make sysstat unixODBC unixODBC*.i686 unixODBC-devel unixODBC-devel*.i686 elfutils*</span><br></pre></td></tr></table></figure>
+
+<p><strong>安装完后检查是否安装成功，成功是31个包</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -q binutils compat-libcap1 compat-libstdc++-33 gcc gcc-c++ glibc glibc-devel ksh libaio libaio-devel libgcc libstdc++ libstdc++-devel libXi libXtst make sysstat unixODBC unixODBC-devel</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220211-1533.png"
+                       
+                 ></p>
+<h4 id="查看和修改系统语言"><a href="#查看和修改系统语言" class="headerlink" title="查看和修改系统语言"></a>查看和修改系统语言</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#查看本地语言</span><br><span class="line">echo $LANG</span><br><span class="line">#修改语言配制文件</span><br><span class="line">vi /etc/locale.conf</span><br><span class="line">#英文或者中文</span><br><span class="line">LANG=en_US.UTF-8</span><br><span class="line">#LANG=zh_CN.UTF-8</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、创建用户和用户组"><a href="#4、创建用户和用户组" class="headerlink" title="4、创建用户和用户组"></a><strong>4、创建用户和用户组</strong></h3><p><strong>创建oinstall和dba组</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">groupadd oinstall</span><br><span class="line">groupadd dba</span><br><span class="line">groupadd oper</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建Oracle用户</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#useradd -g oinstall -G dba oracle</span><br><span class="line">useradd oracle -g oinstall -G dba,oper</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置Oracle用户密码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd oracle</span><br></pre></td></tr></table></figure>
+<p><strong>查看创建结果</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id oracle</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="5、修改内核参数（根据需要修改）"><a href="#5、修改内核参数（根据需要修改）" class="headerlink" title="5、修改内核参数（根据需要修改）"></a><strong>5、修改内核参数（根据需要修改）</strong></h3><p>编辑打开配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysctl.conf</span><br></pre></td></tr></table></figure>
+
+<p><strong>在文件中加上：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">fs.aio-max-nr=1048576</span><br><span class="line">fs.file-max=6815744</span><br><span class="line">kernel.shmall=2097152</span><br><span class="line">kernel.shmmax=2147483647</span><br><span class="line"># kernel.shmmax 参数设置为物理内存的一半</span><br><span class="line">kernel.shmmni=4096</span><br><span class="line">kernel.sem=250 32000 100 128</span><br><span class="line">kernel.panic_on_oops=1</span><br><span class="line">#当系统发生oops或BUG时,所采取的措施0:继续运行;</span><br><span class="line">net.ipv4.ip_local_port_range=9000 65500</span><br><span class="line">net.core.rmem_default=262144</span><br><span class="line">net.core.rmem_max=4194304</span><br><span class="line">net.core.wmem_default=262144</span><br><span class="line">net.core.wmem_max=1048576</span><br><span class="line">#net.ipv4.conf.all.rp_filter=2</span><br><span class="line">#net.ipv4.conf.default.rp_filter=2</span><br></pre></td></tr></table></figure>
+
+
+<p>然后使配置文件生效</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>付上各个参数说明：<br>fs.aio-max-nr：<br>此参数限制并发未完成的请求，应该设置避免I&#x2F;O子系统故障。<br>fs.file-max：<br>该参数决定了系统中所允许的文件句柄最大数目，文件句柄设置代表linux系统中可以打开的文件的数量。<br>kernel.shmall：<br>该参数控制可以使用的共享内存的总页数。Linux共享内存页大小为4KB,共享内存段的大小都是共享内存页大小的整数倍。一个共享内存段的最大大小是16G，那么需要共享内存页数是16GB&#x2F;4KB&#x3D;16777216KB &#x2F;4KB&#x3D;4194304（页），也就是64Bit系统下16GB物理内存，设置kernel.shmall &#x3D; 4194304才符合要求.<br>kernel.shmmax：<br>是核心参数中最重要的参数之一，用于定义单个共享内存段的最大值。设置应该足够大，设置的过低可能会导致需要创建多个共享内存段，这样可能导致系统性能的下降。至于导致系统下降的主要原因为在实例启动以及ServerProcess创建的时候，多个小的共享内存段可能会导致当时轻微的系统性能的降低(在启动的时候需要去创建多个虚拟地址段，在进程创建的时候要让进程对多个段进行“识别”，会有一些影响)，但是其他时候都不会有影响。<br>官方建议值：<br>32位linux系统：可取最大值为4GB（4294967296bytes）-1byte，即4294967295。建议值为多于内存的一半，所以如果是32为系统，一般可取值为4294967295。<br>64位linux系统：可取的最大值为物理内存值-1byte，建议值为多于物理内存的一半，例如，如果为12GB物理内存，可取1210241024*1024-1&#x3D;12884901887。<br>kernel.shmmni：<br>该参数是共享内存段的最大数量。shmmni缺省值4096，一般肯定是够用了。<br>kernel.sem：<br>以kernel.sem &#x3D; 250 32000 100 128为例：</p>
+<p>250是参数semmsl的值，表示一个信号量集合中能够包含的信号量最大数目。</p>
+<p>32000是参数semmns的值，表示系统内可允许的信号量最大数目。</p>
+<p>100是参数semopm的值，表示单个semopm()调用在一个信号量集合上可以执行的操作数量。</p>
+<p>128是参数semmni的值，表示系统信号量集合总数。</p>
+<p>net.ipv4.ip_local_port_range：<br>表示应用程序可使用的IPv4端口范围。<br>net.core.rmem_default：<br>表示套接字接收缓冲区大小的缺省值。<br>net.core.rmem_max：<br>表示套接字接收缓冲区大小的最大值。<br>net.core.wmem_default：<br>表示套接字发送缓冲区大小的缺省值。<br>net.core.wmem_max：<br>表示套接字发送缓冲区大小的最大值。</p>
+</blockquote>
+<h3 id="6、修改配置"><a href="#6、修改配置" class="headerlink" title="6、修改配置"></a><strong>6、修改配置</strong></h3><p><strong>（1）打开并编辑文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/security/limits.conf</span><br></pre></td></tr></table></figure>
+
+<p>在文件末尾加上：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">oracle soft nproc 2047</span><br><span class="line">oracle hard nproc 16384</span><br><span class="line">oracle soft nofile 1024</span><br><span class="line">oracle hard nofile 65536</span><br><span class="line">oracle soft stack 10240</span><br><span class="line">oracle hard stack 10240</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>为了优化性能，需要添加oracle用户的限制参数</p>
+<p>第1行是设置进程数软限制；<br>第2行是设置进程数硬限制；<br>第3行是设置文件数软限制；<br>第4行是设置文件数硬限制</p>
+</blockquote>
+<p><strong>（2）打开并编辑文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/pam.d/login</span><br></pre></td></tr></table></figure>
+
+<p><strong>添加以下内容</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">session required /lib64/security/pam_limits.so</span><br><span class="line">session required pam_limits.so</span><br></pre></td></tr></table></figure>
+<p><strong>使配置文件生效</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+<p><strong>（4）创数据库目录</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 安装包解压目录，随意放</span><br><span class="line">mkdir -p /u01/tmp</span><br><span class="line"># oracle安装目录</span><br><span class="line">mkdir -p /u01/oracle/app/oracle/product/11.2.0</span><br><span class="line">mkdir -p /u01/oracle/app/oraInventory</span><br><span class="line"># 授权</span><br><span class="line">chown -R oracle:oinstall /u01/oracle/app/oracle/</span><br><span class="line">chown -R oracle:oinstall /u01/oracle/app/oraInventory/</span><br><span class="line">chown -R oracle:oinstall /u01/tmp</span><br><span class="line">chmod -R 775 /u01/oracle/app/oracle/</span><br></pre></td></tr></table></figure>
+
+<p><strong>（5）配置Oracle用户</strong></p>
+<p><strong>切换到oracle用户下</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su - oracle</span><br></pre></td></tr></table></figure>
+
+<p><strong>打开并编辑环境变量文件，配置oracle用户环境变量</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<p><strong>在末尾添加</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 添加如下内容</span><br><span class="line">export TMP=/tmp</span><br><span class="line">export TMPDIR=$TMP</span><br><span class="line">export ORACLE_BASE=/u01/oracle/app/oracle</span><br><span class="line">export ORACLE_HOME=$ORACLE_BASE/product/11.2.0/db_1</span><br><span class="line">export ORACLE_SID=ora11g</span><br><span class="line">export ORACLE_UNQNAME=$ORACLE_SID</span><br><span class="line">export ORACLE_TERM=xterm</span><br><span class="line">export PATH=$ORACLE_HOME/bin:$PATH</span><br><span class="line">export NLS_LANG=AMERICAN_AMERICA.ZHS16GBK</span><br><span class="line"></span><br><span class="line">if [ $USER = &quot;oracle&quot; ]; then</span><br><span class="line">    if [ $SHELL = &quot;/bin/ksh&quot; ]; then</span><br><span class="line">        ulimit -p 16384</span><br><span class="line">        ulimit -n 65536</span><br><span class="line">    else</span><br><span class="line">        ulimit -u 16384 -n 65536</span><br><span class="line">    fi</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p><strong>使配置生效</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="四、安装部署及配置"><a href="#四、安装部署及配置" class="headerlink" title="四、安装部署及配置"></a><strong>四、安装部署及配置</strong></h3><p><strong>1、上传Oracle安装包</strong><br>创建一个文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /u01/oradb</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、安装解压工具</strong><br>切换到root用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su - root</span><br></pre></td></tr></table></figure>
+
+<p>安装解压工具</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y unzip zip</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、解压文件</strong><br>切换到oracle用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su - oracle</span><br></pre></td></tr></table></figure>
+
+<p>解压文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip xxx.zip</span><br></pre></td></tr></table></figure>
+
+<p><strong>等安装文件解压完毕后，要对解压文件授权，防止文件执行权限不足</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R 775 /u01/tmp/database/</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>4、复制相应的模板</strong><br>为了不影响原来的文件内容（后面文件脚本内容会作修改），将相应的模板复制一份，当然也可以省略这步</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /u01/oradb</span><br><span class="line">mkdir etc </span><br><span class="line">cp  /u01/tmp/database/response/* /u01/oradb/etc/</span><br></pre></td></tr></table></figure>
+
+<p><strong>切换到root用户</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su - root</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置权限</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 700 /u01/oradb/etc/*.rsp</span><br></pre></td></tr></table></figure>
+
+<p><strong>5、编辑文件内容</strong><br>切换到oracle用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su - oracle</span><br></pre></td></tr></table></figure>
+
+<p><strong>打开编辑db_install.rsp</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /u01/oradb/etc/db_install.rsp</span><br></pre></td></tr></table></figure>
+
+<p><strong>找出以下项，并作修改（根据个人实际情况修改，比如我这边的oracle的目录是做过调整的）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">oracle.install.option=INSTALL_DB_SWONLY // 安装类型  </span><br><span class="line">UNIX_GROUP_NAME=oinstall // 安装组  </span><br><span class="line">INVENTORY_LOCATION=/u01/oracle/app/oracle/oraInventory </span><br><span class="line">//INVENTORY目录（不填就是默认值）  </span><br><span class="line">ORACLE_HOME=/u01/oracle/app/oracle/product/12/db_1  </span><br><span class="line">ORACLE_BASE=/u01/oracle/app/oracle  </span><br><span class="line">oracle.install.db.InstallEdition=EE 　　　　// 企业版本  </span><br><span class="line">oracle.install.db.OSDBA_GROUP=dba  </span><br><span class="line">oracle.install.db.OSOPER_GROUP=oinstall  </span><br><span class="line">oracle.install.db.OSBACKUPDBA_GROUP=oinstall  </span><br><span class="line">oracle.install.db.OSDGDBA_GROUP=oinstall  </span><br><span class="line">oracle.install.db.OSKMDBA_GROUP=oinstall  </span><br><span class="line">oracle.install.db.OSRACDBA_GROUP=oinstall  </span><br><span class="line">oracle.install.db.config.starterdb.type=GENERAL_PURPOSE //数据库类型  </span><br><span class="line">oracle.install.db.config.starterdb.globalDBName=orcl  </span><br><span class="line">oracle.install.db.config.starterdb.SID=orcl  </span><br><span class="line">oracle.install.db.config.starterdb.memoryLimit=81920 //自动管理内存的内存(M)  </span><br><span class="line">oracle.install.db.config.starterdb.password.ALL=oracle//设定所有数据库用户使用同一个密码  </span><br><span class="line">SECURITY_UPDATES_VIA_MYORACLESUPPORT=false  </span><br><span class="line">DECLINE_SECURITY_UPDATES=true</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>6、开始安装</strong><br><strong>执行db_install.rsp文件</strong><br><strong>这里要将修改过的执行文件带入，别写错</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /u01/oradb/database</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./runInstaller -ignoreSysPrereqs -ignorePrereq -waitforcompletion \</span><br><span class="line">-showProgress -silent -responseFile /u01/oradb/etc/db_install.rsp</span><br><span class="line">#/home/oracle/database/response/db_install.rsp</span><br></pre></td></tr></table></figure>
+
+<p><strong>在安装快完成的时候会提示要切换到root用户执行两个脚本，这步跟着照做就是</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su - root</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/u01/database/oracle/oraInventory/orainstRoot.sh</span><br><span class="line">/u01/database/oracle/oracle/product/12/db_1/root.sh</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>7、修改oracle用户环境变量</strong><br>切换到oracle用户，打开并编辑用户编辑变量文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su - oracle</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<p><strong>按需求将以下内容加上</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">export ORACLE_BASE=/u01/database/oracle/oracle</span><br><span class="line">export ORACLE_SID=orcl </span><br><span class="line">export ROACLE_PID=oral12</span><br><span class="line">#export NLS_LANG=AMERICAN_AMERICA.AL32UTF8</span><br><span class="line">export LD_LIBRARY_PATH=/lib:/usr/lib</span><br><span class="line">export ORACLE_HOME=/u01/database/oracle/oracle/product/12/db_1</span><br><span class="line">export PATH=:/bin</span><br><span class="line">export LANG=&quot;zh_CN.UTF-8&quot;</span><br><span class="line">export NLS_LANG=&quot;SIMPLIFIED CHINESE_CHINA.AL32UTF8&quot;</span><br><span class="line">export NLS_DATE_FORMAT=&#x27;yyyy-mm-dd hh24:mi:ss&#x27;</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>使配置生效</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<p><strong>配置监听</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netca /silent /responsefile /u01/oradb/etc/netca.rsp</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220211-1552.png"
+                       
+                 ></p>
+<p><strong>启动监听</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsnrctl start</span><br></pre></td></tr></table></figure>
+
+<p><strong>修改静默建库文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /u01/oradb/etc/dbca.rsp</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>其中文件内容修改如下（根据实际情况修改</strong>）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">responseFileVersion=/oracle/assistants/rspfmt_dbca_response_schema_v12.2.0  </span><br><span class="line">gdbName=orcl  </span><br><span class="line">sid=orcl  </span><br><span class="line">databaseConfigType=SI  </span><br><span class="line">createAsContainerDatabase=true  </span><br><span class="line">numberOfPDBs=1  </span><br><span class="line">pdbName=orclpdb  </span><br><span class="line">templateName=/u01/database/oracle/oracle/product/12/db_1/assistants/dbca/templates/General_Purpose.dbc  </span><br><span class="line">emExpressPort=5500  </span><br><span class="line">omsPort=0  </span><br><span class="line">characterSet=AL32UTF8  </span><br><span class="line">listeners=LISTENER  </span><br><span class="line">memoryPercentage=40  </span><br><span class="line">automaticMemoryManagement=false  </span><br><span class="line">totalMemory=0</span><br></pre></td></tr></table></figure>
+
+<p><strong>执行静默建库</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dbca -silent -createDatabase  -responseFile  /u01/oradb/etc/dbca.rsp</span><br></pre></td></tr></table></figure>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220211-1549.png"
+                       
+                 ><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220211-1550.png"
+                       
+                 ></p>
+<p><strong>执行的口令是上面设定的密码：oracle</strong></p>
+<p>等待安装完成后就可以正常登陆了</p>
+<p>8、登进数据库开启实例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlplus / as sysdba</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt;startup</span><br></pre></td></tr></table></figure>
+<h3 id="五、数据库启动与关闭"><a href="#五、数据库启动与关闭" class="headerlink" title="五、数据库启动与关闭"></a><strong>五、数据库启动与关闭</strong></h3><blockquote>
+<p>概述：只有具备sysdba和sysoper系统特权的用户才能启动和关闭数据库。<br>在启动数据库之前应该启动监听程序，否则就不能利用命令方式来管理数据库，包括启动和关闭数据库。<br>虽然数据库正常运行，但如果没有启动监听程序，客户端就不能连接到数据库。</p>
+<p><strong>1、启动</strong><br>Oracle数据库的完整启动过程包含以下3个步骤：<br>简单地说，就是：启动实例–&gt;加载数据库–&gt;打开数据库.<br>具体说明：<br><strong>1.创建并启动与数据库对应的实例。</strong><br>在启动实例时，将为实例创建一系列后台进程和服务进程，并且在内存中创建SGA区等内存结构。在实例启动的过程中只会使用到初始化参数文件，数据库是否存在对实例的启动没有影响。如果初化参数设置有误，实例将无法启动。<br><strong>2.为实例加载数据库。</strong><br>加载数据库时实例将打开数据库的控制文件，从控制文件中获取数据库名称、数据文件的位置和名称等有关数据库物理结构的信息，为打开数据库做好准备。如果控制文件损坏，则实例将无法加载数据库。在加载数据库阶段，实例并不会打开数据库的物理文件—-数据文件和重做日志文件。<br>3.将数据库设置为打开状态。<br>打开数据库时，实例将打开所有处于联机状态的数据文件和重做日志文件。控制文件中的任何一个数据文件或重做日志文件无法正常打开，数据库都将返回错误信息，这时需要进行数据库恢复。<br>只有将数据库设置为打开状态后，数据库才处于正常状态，这时普通用户才能够访问数据库。在很多情况下，启动数据库时并不是直接完成上述3个步骤，而是逐步完成的，然后执行必要的管理操作，最后才使数据库进入正常运行状态。所以，才有了各种不同的启动模式用于不同的数据库维护操作。<br>因为Oracle数据库启动过程中不同的阶段可以对数据库进行不同的维护操作，对应我们不同的需求，所以就需不同的模式启动数据库。</p>
+<p>各种模式详解：<br><strong>1.NoMount 模式</strong>（启动实例不加载数据库）<br>命令：<code>startup nomount</code><br>讲解：这种启动模式只会创建实例，并不加载数据库，Oracle仅为实例创建各种内存结构和服务进程，不会打开任何数据文件。在NoMount模式下，只能访问那些与SGA区相关的数据字典视图，包括V$PARAMETER、V$SGA、V$PROCESS 和 V$SESSION等，这些视图中的信息都是从SGA区中获取的，与数据库无关。非安装启动，这种方式启动下可执行:重建控制文件、重建数据库、读取init.ora文件，启动instance，即启动SGA和后台进程，这种启动只需要init.ora文件。<br>模式用途：<br>(1)创建新数据库；<br>(2)重建控制文件。</p>
+<p>2.Mount模式（加载数据库但不打开数据库）<br>命令：<code>startup mount</code><br>讲解：这种启动模式将为实例加载数据库，但保持数据库为关闭状态。因为加载数据库时需要打开数据库控制文件，但数据文件和重做日志文件都都无法进行读写，所以用户还无法对数据库进行操作。 在Mount模式下，只能访问那些与控制文件相关的数据字典视图，包括</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">V$THREAD、V$CONTROLFILE、V$DATABASE、V$DATAFILE 和 V$LOGFILE等，这些视图都是从控制文件中获取的。</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>模式用途：<br>(1)重命名数据文件；<br>(2)添加、删除或重命名重做日志文件；<br>(3)执行数据库完全恢复操作；<br>(4)改变数据库的归档模式。</p>
+<p>3.Open模式（正常打开数据库）<br>命令：<code>startup</code> [open]<br>讲解：正常按3个步骤启动数据库。<br>模式用途：平时不对数据库做什么维护，像只做应用开发，用这个模式就好了。</p>
+<p>4.强制启动模式<br>命令：<code>startup force</code><br>用途&amp;讲解：在某些情况下，使用前面的各种模式都无法成功启动数据库时，可以尝试强制启动模式。<br>使用Alter Database语句，还可以在各启动模式间切换。并且，还可以对数据库设置不同的状态用于不同的操作，如受&#x2F;非受限抽状态、只读。</p>
+<p>使用Alter Database语句，在各启动模式间切换。<br>(1)从NoMount模式切换到Mount模式(没有从mount切换到nomount的)：<br>命令：ALTER DATABASE MOUNT;<br>(2)当数据库状态为关闭时，切换到Open模式<br>命令：ALTER DATABASE OPEN;<br>(3)在Open模式下，还可以选择将数据库设置为非受限状态和受限状态。<br>命令：<br>在启动Open模式时，添加restrict关键字：startup restrict<br>设置或取消受限状态：alter system enable\disable restricted session;<br>讲解：<br>非受限状态，就是我们平时应用程序开发用到的状态。<br>受限状态，当打开的数据库被设置为受限状态时，只有Create Session 和 Restricted Session系统权限 或者 具有SYSDBA 和 SYSPORE 系统权限的用户才能连接到数据库。但进入受限状态后，系统中仍然可能会存在活动的普通用户会话。<br>受限状态用途：<br>(1)执行数据导入或导出操作；<br>(2)暂时拒绝普通用户访问数据库；<br>(3)进行数据库移植或升级操作。<br>(4) 只读状态<br>设置只读命令：alter database open read only;<br>取消只读命令：alter database open read write;<br>用途&amp;讲解：当一个正常打开的数据库被设置为只读状态时，用户只能查询数据，但不能以任何方式对数据库对象进行修改。处于只读状态，可能保证数据文件和重做日志文件中的内容不被修改，但是并不限制那些不会写入数据文件与重做日志文件的操作。</p>
+<p>2、关闭<br>与数据库启动一样，关闭数据库与实例也分为3步：关闭数据库–&gt;实例卸载数据库—&gt;终止实例。<br>详细步骤为：<br>(1)关闭数据库，oracle将重做日志高速缓存中的内容写入重做日志文件，并且将数据库高速缓存中被改动过的数据写入数据文件，然后再关闭所有的数据文件和重做日志文件，这时数据库的控制文件仍然处于打开状态，但是由于数据库处于关闭状态，所以用户无法访问数据库。<br>（2）卸载数据库，关闭数据库后，例程才能被卸载，控制文件再这个时候被关闭，但例程仍然存在 。<br>（3）终止例程，进程终止，分配给例程的内存sga区被回收。</p>
+<p>1.Nomal（正常关闭方式）<br>命令：shutdown nomal<br>讲解：正常方式关闭数据时，Oracle执行如下操作：<br>(1)阻止任何用户建立新的连接。<br>(2)等待当前所有正在连接的用户主动断开连接（此方式下Oracle不会立即断掉当前用户的连接，这些用户仍然操作相关的操作）<br>(3)一旦所有的用户都断开连接，则立即关闭、卸载数据库，并终止实例。（所以，一般以正常方式关闭数据库时，应该通知所有在线的用户尽快断开连接）<br>2.Immediate（立即关闭方式）<br>命令：shutdown immediate<br>讲解：<br>(1)阻止任何用户建立新的连接，同时阻止当前连接的用户开始任何新的事务。<br>(2)Oracle不等待在线用户主动断开连接，强制终止用户的当前事务，将任何未提交的事务回退。（如果存在太多未提交的事务，此方式将会耗费很长时间终止和回退事务）<br>(3)直接关闭、卸载数据库，并终止实例。<br>3.Transactional（事务关闭方式）<br>命令：shutdown transactional<br>讲解：这种方式介于正常关闭方式跟立即关闭方式之间，响应时间会比较快，处理也将比较得当。执行过程如下：<br>(1)阻止任何用户建立新的连接，同时阻止当前连接的用户开始任何新的事务。<br>(2)等待所有未提交的活动事务提交完毕，然后立即断开用户的连接。<br>(3)直接关闭、卸载数据库，并终止实例。<br>4.Abort（终止关闭方式）<br>命令：shutdown abort<br>讲解：这是比较粗暴的一种关闭方式，当前面3种方式都无法关闭时，可以尝试使用终止方式来关闭数据库。但是以这种方式关闭数据库将会丢失一部份数据信息，当重新启动实例并打开数据库时，后台进程SMON会执行实例恢复操作。一般情况下，应当尽量避免使用这种方式来关闭数据库。执行过程如下：<br>(1)阻止任何用户建立新的连接，同时阻止当前连接的用户开始任何新的事务。<br>(2)立即终止当前正在执行的SQL语句。<br>(3)任何未提交的事务均不被退名。<br>(4)直接断开所有用户的连接，关闭、卸载数据库，并终止实例。</p>
+</blockquote>
+<h3 id="六、sqlplus改进（退格不能用的情况下）"><a href="#六、sqlplus改进（退格不能用的情况下）" class="headerlink" title="六、sqlplus改进（退格不能用的情况下）"></a><strong>六、sqlplus改进（退格不能用的情况下）</strong></h3><blockquote>
+<p>概述：在默认的sqlplus的使用过程中发现是比较难用的，最好的例子就是不能用退格键以及掉出历史命令的上下键，这里介绍退格键的改进，至于掉出历史命令的上下键可参考文末的文章</p>
+</blockquote>
+<p><strong>切换至oracle用户</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su - oracle</span><br></pre></td></tr></table></figure>
+
+<p>打开并编辑用户环境变量配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<p>在文件末尾加上以下代码并保存退出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stty erase ^h</span><br></pre></td></tr></table></figure>
+
+
+<p>使配置文件生效</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<p>此时再进入sqlplus测试发现，退格键已经能用了</p>
+<h3 id="七、navicat远程数据库遇到的问题及解决方案"><a href="#七、navicat远程数据库遇到的问题及解决方案" class="headerlink" title="七、navicat远程数据库遇到的问题及解决方案"></a><strong>七、navicat远程数据库遇到的问题及解决方案</strong></h3><p>一般数据库是安装在远程服务器上，然后用本机的管理软件去连接，此时需要配置一下<br>在oracle用户下，打开并编辑listener.ora文件（一般在安装目录下）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /u01/database/oracle/oracle/product/12/db_1/network/admin/listener.ora</span><br></pre></td></tr></table></figure>
+
+<p>然后将其中的HOST改为服务器的IP（这里为了保留之前的配置所以直接在文件后面复制了上面的配置然后作修改）</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220211-1613.png"
+                       
+                 ></p>
+<p>保存退出<br>打开并编辑tnsnames.ora文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /u01/database/oracle/oracle/product/12/db_1/network/admin/tnsnames.ora</span><br></pre></td></tr></table></figure>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220211-1612.png"
+                       
+                 ></p>
+<p>跟上面操作一样，将HOST改为服务器的IP</p>
+<p>保存退出<br>然后重启数据库实例和数据库监听，此时可以用navicat来连接数据库了</p>
+<p>可能会遇到的错误：<br>1、</p>
+<blockquote>
+<p>ORA-12170:TNS:连接超时<br>检查步骤及解决方法：<br>（1）从本机ping服务器IP是否能ping通<br>（2）使用tnsping或者telnet测试端口是否通畅<br>（3）服务器防火墙是否已关闭<br>（4）服务器selinux是否已关闭<br>（5）数据库监听是否开启<br>（6）如果是用PL&#x2F;SQL的话，tns配置中，host是否为服务器的IP</p>
+</blockquote>
+<p>2、</p>
+<blockquote>
+<p>ORA-28040:No matching authentication protocol<br>错误原因是因为navicat的oci.dll版本不匹配，通常是因为版本过低，即低版本的oci.dll连接高版本的数据</p>
+</blockquote>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220211-1615.png"
+                       
+                 ></p>
+<p>Linux7安装 Oracle 11g时，Install Product 86%时出现报错  Error in invoking target ‘agent nmhs’ of makefile</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">解决方案</span><br><span class="line">在makefile中添加链接libnnz11库的参数</span><br><span class="line">修改$ORACLE_HOME/sysman/lib/ins_emagent.mk，将</span><br><span class="line">$(MK_EMAGENT_NMECTL)修改为：$(MK_EMAGENT_NMECTL) -lnnz11</span><br><span class="line">建议修改前备份原始文件</span><br><span class="line">[oracle@ysserver ~]$ cd $ORACLE_HOME/sysman/lib</span><br><span class="line">[oracle@ysserver lib]$ cp ins_emagent.mk ins_emagent.mk.bak</span><br><span class="line">[oracle@ysserver lib]$ vi ins_emagent.mk</span><br><span class="line">进入vi编辑器后  命令模式输入/NMECTL 进行查找，快速定位要修改的行</span><br><span class="line">在后面追加参数-lnnz11        第一个是字母l   后面两个是数字1</span><br></pre></td></tr></table></figure>
+
+                    
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                centos7_oracle_12c静默安装（无界面）
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                2021/09/06/12c静默安装（无界面）/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">ドラゴンボールのLong</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2021-09-06 20:10</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="">
+                    <a href="https://zhongshenglong.xyz" target="_blank">
+                        
+                            Long License
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/linux/">linux</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/oracle/">oracle</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E5%BF%83%E5%BE%97/">心得</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+                    
+
+<div class="reward-author-container border-box flex-center">
+    <div class="reward-btn border-box flex-center tooltip tooltip-img"
+            data-tooltip-img-url="/images/reward.jpg"
+            data-tooltip-img-trigger="click"
+            data-tooltip-img-style="top: -6px;"
+    >
+        <i class="fa-solid fa-gift"></i>&nbsp;请作者喝咖啡
+    </div>
+</div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2021/10/06/%E5%85%B3%E4%BA%8EOracle%E5%BD%92%E6%A1%A3%E6%A8%A1%E5%BC%8F/"
+                                   title="关于Oracle归档模式"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">关于Oracle归档模式</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2021/08/06/rac%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E7%9F%A5%E8%AF%86/"
+                                   title="rac相关操作知识"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">rac相关操作知识</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+    <div class="comments-container border-box">
+        <div id="comments-anchor" class="comment-area-title border-box">
+            <i class="fas fa-comments"></i>&nbsp;评论
+        </div>
+        <div class="comment-plugin-fail border-box">
+    <span class="fail-tip">评论插件加载失败</span>
+    <button class="reload keep-button">点击重新加载</button>
+</div>
+<div class="comment-plugin-loading flex-center border-box">
+    <i class="loading-icon fa-solid fa-spinner fa-spin"></i>
+    <span class="load-tip">正在加载评论插件</span>
+</div>
+<script data-pjax>
+  window.KeepCommentPlugin = {}
+  window.KeepCommentPlugin.hideLoading = () => {
+    const cplDom = document.querySelector('.comments-container .comment-plugin-loading')
+    cplDom.style.display = 'none'
+  }
+  window.KeepCommentPlugin.loadFailHandle = () => {
+    window.KeepCommentPlugin.hideLoading()
+    const cpfDom = document.querySelector('.comments-container .comment-plugin-fail')
+    cpfDom.style.display = 'flex'
+    cpfDom.querySelector('.reload').addEventListener('click', () => {
+      window.location.reload()
+    })
+  }
+</script>
+
+        
+            
+
+    <div class="valine-container">
+        <div id="vcomments"></div>
+        <script 
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        ></script>
+        <script 
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        >
+          window.KeepCommentPlugin.initValine = () => {
+            const config = {
+              el: '#vcomments',
+              appId: '2TGCOmDNikdxOnVmQJEFhTOK-gzGzoHsz',
+              appKey: 'lU21jvewvcy043UjfpHRXfvA',
+              meta: ['nick', 'mail', 'link'],
+              avatar: 'wavatar',
+              enableQQ: true,
+              placeholder: '😜 尽情吐槽吧~',
+              lang: 'zh-CN'.toLowerCase()
+            }
+
+            if ('') {
+              config.serverURLs = ''
+            }
+
+            if (window?.Valine) {
+              new Valine(config)
+              window.KeepCommentPlugin.hideLoading()
+            } else {
+              setTimeout(() => {
+                window.KeepCommentPlugin.initValine()
+              }, 1000)
+            }
+          }
+
+          if ('false' === 'true') {
+            setTimeout(() => {
+              window.KeepCommentPlugin.initValine()
+            }, 1200)
+          } else {
+            window.addEventListener('DOMContentLoaded', window.KeepCommentPlugin.initValine)
+          }
+        </script>
+    </div>
+
+
+        
+    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CentOS-7%E4%B8%8BOracle-12C-%E6%97%A0%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">CentOS 7下Oracle 12C 无图形界面静默安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99-%E5%8F%AF%E8%B7%B3%E8%BF%87"><span class="nav-number">1.1.</span> <span class="nav-text">1、关闭防火墙(可跳过)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%85%B3%E9%97%ADselinux-%E4%B8%8D%E5%8F%AF%E8%B7%B3%E8%BF%87"><span class="nav-number">1.2.</span> <span class="nav-text">2、关闭selinux(不可跳过)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E4%BF%AE%E6%94%B9host%E5%90%8D%E7%A7%B0%EF%BC%88%E5%85%B6%E5%AE%9E%E5%8F%AF%E4%BB%A5%E7%9C%81%E7%95%A5%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">3、修改host名称（其实可以省略）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E5%AE%89%E8%A3%85%E5%BF%85%E8%A6%81%E7%9A%84%E4%BE%9D%E8%B5%96%E5%8C%85"><span class="nav-number">1.4.</span> <span class="nav-text">3、安装必要的依赖包</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEyum%E6%BA%90"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">配置yum源</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89%E5%A4%96%E7%BD%91%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%8C%82%E8%BD%BD%E7%B3%BB%E7%BB%9F%E7%9B%98%EF%BC%8C%E6%9D%A5%E9%85%8D%E7%BD%AEyum%E6%BA%90"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">如果没有外网，可以挂载系统盘，来配置yum源</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%92%8C%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E8%AF%AD%E8%A8%80"><span class="nav-number">1.4.1.</span> <span class="nav-text">查看和修改系统语言</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7%E5%92%8C%E7%94%A8%E6%88%B7%E7%BB%84"><span class="nav-number">1.5.</span> <span class="nav-text">4、创建用户和用户组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81%E4%BF%AE%E6%94%B9%E5%86%85%E6%A0%B8%E5%8F%82%E6%95%B0%EF%BC%88%E6%A0%B9%E6%8D%AE%E9%9C%80%E8%A6%81%E4%BF%AE%E6%94%B9%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">5、修改内核参数（根据需要修改）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE"><span class="nav-number">1.7.</span> <span class="nav-text">6、修改配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E5%8F%8A%E9%85%8D%E7%BD%AE"><span class="nav-number">1.8.</span> <span class="nav-text">四、安装部署及配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%AF%E5%8A%A8%E4%B8%8E%E5%85%B3%E9%97%AD"><span class="nav-number">1.9.</span> <span class="nav-text">五、数据库启动与关闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E3%80%81sqlplus%E6%94%B9%E8%BF%9B%EF%BC%88%E9%80%80%E6%A0%BC%E4%B8%8D%E8%83%BD%E7%94%A8%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%EF%BC%89"><span class="nav-number">1.10.</span> <span class="nav-text">六、sqlplus改进（退格不能用的情况下）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%83%E3%80%81navicat%E8%BF%9C%E7%A8%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">1.11.</span> <span class="nav-text">七、navicat远程数据库遇到的问题及解决方案</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+		year - 作为date对象的年份，为4位年份值
+		month - 0-11之间的整数，做为date对象的月份
+		day - 1-31之间的整数，做为date对象的天数
+		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+		minutes - 0-59之间的整数，做为date对象的分钟数
+		seconds - 0-59之间的整数，做为date对象的秒数
+		microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+		var t1 = Date.UTC(2019,04,09,21,47,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML="❤亲爱的旅客,我已与你/妳相遇❤❤❤"+" 第 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒❤";
+	}/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+	siteTime();
+</script>
+
+<footer class="footer border-box">
+		
+	<a href="https://www.foreverblog.cn/" target="_blank" > <img src="https://img.foreverblog.cn/logo_en_default.png" alt="" style="width:auto;height:16px;"> </a>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            本站由 <span class="tooltip" data-tooltip-content="阿里云"><img src="/images/brands/aliyun.png"></span> 提供部署服务
+            
+        </div>
+    
+
+    
+        <div class="record-info info-item">
+		ICP备案号：【&nbsp;
+            
+                
+                    <div class="record-item border-box">
+                        <a class=""
+                           target="_blank"
+                           href="https://beian.miit.gov.cn"
+                        >
+                            苏ICP备20001538号-1
+                        </a>
+                    </div>
+                
+            
+		&nbsp;】&nbsp;
+        </div>
+    
+	
+    <div class="copyright-info info-item">
+        &copy;&nbsp;<span>2019</span>&nbsp;-&nbsp;2024
+        
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">ドラゴンボールのLong</a>
+        
+		&nbsp;&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        <div class="count-info info-item">
+            
+                <span class="count-item border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">125.5k</span>
+                </span>
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+	
+	<!--自定义了时间-->
+    <p id="sitetime" target="_blank"></p>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+            <li class="tools-item go-to-comments-tablet flex-center">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CentOS-7%E4%B8%8BOracle-12C-%E6%97%A0%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">CentOS 7下Oracle 12C 无图形界面静默安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99-%E5%8F%AF%E8%B7%B3%E8%BF%87"><span class="nav-number">1.1.</span> <span class="nav-text">1、关闭防火墙(可跳过)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%85%B3%E9%97%ADselinux-%E4%B8%8D%E5%8F%AF%E8%B7%B3%E8%BF%87"><span class="nav-number">1.2.</span> <span class="nav-text">2、关闭selinux(不可跳过)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E4%BF%AE%E6%94%B9host%E5%90%8D%E7%A7%B0%EF%BC%88%E5%85%B6%E5%AE%9E%E5%8F%AF%E4%BB%A5%E7%9C%81%E7%95%A5%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">3、修改host名称（其实可以省略）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E5%AE%89%E8%A3%85%E5%BF%85%E8%A6%81%E7%9A%84%E4%BE%9D%E8%B5%96%E5%8C%85"><span class="nav-number">1.4.</span> <span class="nav-text">3、安装必要的依赖包</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEyum%E6%BA%90"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">配置yum源</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89%E5%A4%96%E7%BD%91%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%8C%82%E8%BD%BD%E7%B3%BB%E7%BB%9F%E7%9B%98%EF%BC%8C%E6%9D%A5%E9%85%8D%E7%BD%AEyum%E6%BA%90"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">如果没有外网，可以挂载系统盘，来配置yum源</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%92%8C%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E8%AF%AD%E8%A8%80"><span class="nav-number">1.4.1.</span> <span class="nav-text">查看和修改系统语言</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7%E5%92%8C%E7%94%A8%E6%88%B7%E7%BB%84"><span class="nav-number">1.5.</span> <span class="nav-text">4、创建用户和用户组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81%E4%BF%AE%E6%94%B9%E5%86%85%E6%A0%B8%E5%8F%82%E6%95%B0%EF%BC%88%E6%A0%B9%E6%8D%AE%E9%9C%80%E8%A6%81%E4%BF%AE%E6%94%B9%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">5、修改内核参数（根据需要修改）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE"><span class="nav-number">1.7.</span> <span class="nav-text">6、修改配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E5%8F%8A%E9%85%8D%E7%BD%AE"><span class="nav-number">1.8.</span> <span class="nav-text">四、安装部署及配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%AF%E5%8A%A8%E4%B8%8E%E5%85%B3%E9%97%AD"><span class="nav-number">1.9.</span> <span class="nav-text">五、数据库启动与关闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E3%80%81sqlplus%E6%94%B9%E8%BF%9B%EF%BC%88%E9%80%80%E6%A0%BC%E4%B8%8D%E8%83%BD%E7%94%A8%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%EF%BC%89"><span class="nav-number">1.10.</span> <span class="nav-text">六、sqlplus改进（退格不能用的情况下）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%83%E3%80%81navicat%E8%BF%9C%E7%A8%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">1.11.</span> <span class="nav-text">七、navicat远程数据库遇到的问题及解决方案</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/lazyload.min.js"></script>
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+    
+        
+    
+        
+            
+<script class="custom-inject-js" src="/js/love.js" data-pjax></script>
+
+        
+    
+
+</body>
+</html>

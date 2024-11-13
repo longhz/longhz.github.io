@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="每日一句">
+    <meta name="author" content="ドラゴンボールのLong">
+    
+    <title>
+        
+            python实现b站自动下载收藏视频，防止视频和谐 |
+        
+        ドラゴンボールのBlog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/brands.min.css">
+    
+        
+            
+        
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"zhongshenglong.xyz","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"ドラゴンボールのBlog","author":"ドラゴンボールのLong","avatar":"https://cdn.jsdelivr.net/gh/longhz/cdn@1.0/img/custom/avatar1.jpg","logo":"/images/favicon.ico","favicon":"/images/favicon.ico"},"menu":{"home":"/ || fa-solid fa-home","归档":{"icon":"fa-solid fa-book","children":[{"archives":"/archives || fa-solid fa-layer-group"},{"tags":"/tags || fa-solid fa-tags"}]},"links":"/links|| fa-solid fa-link","about":{"icon":"fa-solid fa-user-secret","children":[{"gallery":"/gallery || fa-solid fa-image"},{"about":"/about || fa-solid fa-user-graduate"}]}},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"黄色的森林分出两条路 || 我选择人迹更少的那一条，从此决定我一生的道路。","hitokoto":true},"social_contact":{"enable":false,"links":{"github":"https://github.com/longhz","weixin":null,"qq":"https://wpa.qq.com/msgrd?v=3&uin=1084045717&site=qq&menu=yes","weibo":null,"bilibili":"https://space.bilibili.com/9317816/bangumi","wangyiyun":"https://music.163.com/user/home?id=1348254961","zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":{"custom_license":"Long License","custom_link":"https://zhongshenglong.xyz"},"share":true,"reward":{"enable":true,"img_link":"/images/reward.jpg","text":"请作者喝咖啡","icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"obsidian"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":true,"use":"valine","valine":{"appid":"2TGCOmDNikdxOnVmQJEFhTOK-gzGzoHsz","appkey":"lU21jvewvcy043UjfpHRXfvA","server_urls":null,"placeholder":"😜 尽情吐槽吧~"},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.36"},"waline":{"server_url":null,"reaction":false,"version":"3.2.1"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2019,"word_count":true,"site_deploy":{"enable":true,"provider":"aliyun","url":null},"record":{"enable":true,"list":[{"code":"苏ICP备20001538号-1","link":"https://beian.miit.gov.cn"}]}},"inject":{"enable":true,"css":[null],"js":[null,"/js/love.js"]},"aplayer":{"id":4900925608,"server":"netease","type":"playlist","fixed":true,"autoplay":false,"loop":"all","order":"random","preload":"auto","volume":0.7,"mutex":true},"live2d":{"enable":true,"scriptFrom":"local","pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"use":"live2d-widget-model-liveuu"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}},"root":"","source_data":{"links":[{"name":"IT诗人","link":"https://xpoet.cn/","description":"所有命运的馈赠，早已在暗中标好价格。","avatar":"https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/common-use/avatar.jpg"},{"name":"不知名艺术家","link":"https://jinzhanqi.com/","description":"love artist, love code.","avatar":"https://s3.ax1x.com/2020/11/17/DVvkB4.jpg"},{"name":"阮一峰","link":"http://www.ruanyifeng.com/blog/archives.html","description":"阮一峰的网络日志","avatar":"https://www.ruanyifeng.com/blog/images/person2_s.jpg"},{"name":"墨","link":"https://www.kura.ren/","description":"清水1024","avatar":"https://www.kura.ren/upload/2020/05/up-up-man-4d2d7e917c9d476b86373b0aa17fcafe.png"},{"name":"爱·绮梦","link":"https://x.iqimeng.com/","description":"学而时习之 不亦说乎","avatar":"https://x.iqimeng.com/images/avatar.jpg"},{"name":"Keep learning","link":"https://blog.gooday.press/","description":"爱好学习，不断提升自我","avatar":"https://cdn.jsdelivr.net/gh/cemonliu/blogpic@main/avatar.svg"},{"name":"CitingNutria","link":"https://citingnutria.github.io/","description":"まだ夢がある","avatar":"https://cdn.jsdelivr.net/gh/CitingNutria/image_hosting@master/avatar.jpg"},{"name":"小龙的跋涉","link":"https://www.eduorg.ltd/","description":"但行好事，莫问前程","avatar":"https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/blog/favicon.42reb4izcgs0.png"},{"name":"Eveneko","link":"https://eveneko.com/","description":"我们这一生，能做一个优秀的普通人已经足够厉害了！","avatar":"https://cdn.jsdelivr.net/gh/Eveneko/Image-Hosting@master/PicX/A1644732-0330-47D7-A2A1-4EBA8B3C2855.3gp6q5zr8180.jpeg"},{"name":"Nico","link":"https://www.lzp.zone/","description":"蝉歌星夜，月影婆娑","avatar":"https://tva1.sinaimg.cn/large/008i3skNly1gwpe11i8adj301s01smwx.jpg"},{"name":"KAI’S NOTE","link":"https://kainote.top/","description":"三天打鱼(⊙ˍ⊙)两天晒网","avatar":"https://s2.loli.net/2022/01/09/UtbhxHv2IA8jqwZ.jpg"},{"name":"April的记录小屋","link":"https://april-tong.com/","description":"热爱可抵岁月漫长。","avatar":"https://raw.githubusercontent.com/AprilTong/image/master/img/photo.jpeg"},{"name":"ZhengXi","link":"https://zhengxi.io/","description":"你的时间有限，不要为了别人而活","avatar":"https://vip2.loli.io/2022/01/28/8bTLXSIoDckrjfz.png"},{"name":"PMP项目管理","link":"https://pmp.saiita.cn/","description":"学习PMP项目管理的笔记.","avatar":"https://cdn.saiita.com.cn/picgo/P3260015.JPG"},{"name":"开心驿站","link":"https://www.kxyz.eu.org/","description":"steam游戏交流中心","avatar":"https://www.kxyz.eu.org/wp-content/uploads/logo.png"},{"name":"免费公益v2ray节点订阅","link":"https://www.v2rayfree.eu.org/","description":"免费公益v2ray节点订阅","avatar":"https://www.v2rayfree.eu.org/images/avatar.png"},{"name":"ZXC's Blog","link":"https://www.v2rayfree.eu.org/","description":"生命不息，代码不止","avatar":"https://cdn.jsdelivr.net/gh/XavierJiezou/picx-image-hosting@main/about/avatar.jpg"},{"name":"FallenGemini的博客","link":"https://paraderno.github.io/Blog.github.io/","description":"愿地狱的终点是天堂","avatar":"https://raw.githubusercontent.com/Paraderno/image-hosting/master/avatar.3co1ubx6en80.png"},{"name":"AomanHao的博客","link":"https://www.aomanhao.top/","description":"热爱图像处理，优化彩色世界","avatar":"https://www.aomanhao.top/images/Avatar.jpg"},{"name":"༺ཌ༈君☠纤༈ད༻的博客","link":"https://www.cnblogs.com/asio/","description":"欲买桂花同载酒，荒泷天下第一斗。","avatar":"https://pic.cnblogs.com/avatar/1924746/20200215183155.png"},{"name":"clash免费节点","link":"https://clashfree.eu.org/","description":"ssr/v2ray/clash免费节点分享","avatar":"https://clashfree.eu.org/wp-content/uploads/avatar.png"}]},"version":"4.2.3"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="❦༺  LONGZ ༻❦" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/favicon.ico">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               ドラゴンボールのBlog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box has-sub-menu">
+                            <a class="menu-text-color border-box" href="javascript:void(0);">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-book"></i>
+                                
+                                归档
+                                
+                                    <i class="menu-text-color collapse-icon fa-solid fa-angle-down"></i>
+                                
+                            </a>
+                            
+                                <ul class="sub-menu-list border-box">
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/archives">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-layer-group"></i>
+                                                
+                                                归档
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/tags">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-tags"></i>
+                                                
+                                                标签
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/links">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-link"></i>
+                                
+                                友链
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box has-sub-menu">
+                            <a class="menu-text-color border-box" href="javascript:void(0);">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-secret"></i>
+                                
+                                关于
+                                
+                                    <i class="menu-text-color collapse-icon fa-solid fa-angle-down"></i>
+                                
+                            </a>
+                            
+                                <ul class="sub-menu-list border-box">
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/gallery">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-image"></i>
+                                                
+                                                GALLERY
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/about">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-user-graduate"></i>
+                                                
+                                                关于
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box has-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="javascript:void(0);">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-book"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                            <i class="right-side collapse-icon fa-solid fa-angle-left"></i>
+                        
+                    </label>
+                    
+                        <ul class="drawer-sub-menu-list border-box">
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/archives">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-layer-group"></i>
+                                            </span>
+                                        
+                                        归档
+                                    </a>
+                                </li>
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/tags">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-tags"></i>
+                                            </span>
+                                        
+                                        标签
+                                    </a>
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/links">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-link"></i>
+                                </span>
+                            
+                            友链
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box has-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="javascript:void(0);">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-secret"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                            <i class="right-side collapse-icon fa-solid fa-angle-left"></i>
+                        
+                    </label>
+                    
+                        <ul class="drawer-sub-menu-list border-box">
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/gallery">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-image"></i>
+                                            </span>
+                                        
+                                        GALLERY
+                                    </a>
+                                </li>
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/about">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-user-graduate"></i>
+                                            </span>
+                                        
+                                        关于
+                                    </a>
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        python实现b站自动下载收藏视频，防止视频和谐
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="http://cdns.zhongshenglong.xyz/cdn-photos/img/custom/avatar1.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">岁月如梦</span>
+                                
+                                    <span class="author-badge">Lv4</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2022-10-01 18:17:21</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Sat Oct 01 2022 18:51:31 GMT+0800">2022-10-01 18:51:31</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E5%BF%83%E5%BE%97/">心得</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/python/">python</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>4.9k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>23 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h1 id="点击收藏b站视频后，自动下载收藏视频"><a href="#点击收藏b站视频后，自动下载收藏视频" class="headerlink" title="点击收藏b站视频后，自动下载收藏视频"></a>点击收藏b站视频后，自动下载收藏视频</h1></br>
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>详细代码已上传至GitHub,<br>访问链接：<a class="link"   target="_blank" rel="noopener" href="https://github.com/longhz/Collection_download_bilibili_video" >https://github.com/longhz/Collection_download_bilibili_video<i class="fas fa-external-link-alt"></i></a><br>当然，你也可以直接下载测试运行，我已经打包好了<br>下载链接：<a class="link"   target="_blank" rel="noopener" href="https://github.com/longhz/Collection_download_bilibili_video/releases" >https://github.com/longhz/Collection_download_bilibili_video/releases<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">写这个同步下载的小脚本是为了什么？</span><br><span class="line">今年，我在b站寻找资料时候，发现我关注的up主一些视频下架了，收藏的视频失效了很多，</span><br><span class="line">然后萌生了本地收藏视频的想法，想到了就开始动手去做</span><br></pre></td></tr></table></figure>
+
+<h3 id="实现的结果"><a href="#实现的结果" class="headerlink" title="实现的结果"></a>实现的结果</h3><p><strong>我最终要实现一个什么样的结果？</strong></p>
+<blockquote>
+<ul>
+<li>我在b站点赞收藏的视频，分类规划文件夹</li>
+<li>根据不同的文件夹来生成不同的本地json</li>
+<li>脚本在执行后，每隔10分钟检测一次收藏夹是否有变动</li>
+<li>如果监测到有新收藏，会触发下载脚本</li>
+<li>下载的视频不能是音频和视频分开，得合二为一，所以会用的ffmpeg</li>
+<li>最终,在我本地电脑指定的保存视频路径中，能看到我的收藏视频</li>
+</ul>
+<p> <strong>我已经实现了我的最终目标，我将脚本放在了我的nas后台，于是视频再也不会失效</strong></p>
+</blockquote>
+<h1 id="下面是主体的运行逻辑和框架"><a href="#下面是主体的运行逻辑和框架" class="headerlink" title="下面是主体的运行逻辑和框架"></a><strong>下面是主体的运行逻辑和框架</strong></h1><h2 id="生成本地json"><a href="#生成本地json" class="headerlink" title="生成本地json"></a>生成本地json</h2><h4 id="获取收藏夹中的一页内容"><a href="#获取收藏夹中的一页内容" class="headerlink" title="获取收藏夹中的一页内容"></a>获取收藏夹中的一页内容</h4><p>当收藏夹的内容超过20，那么将会产生新的一页，这里pag来进行分页获取每一页的信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 获取收藏夹一页内容</span><br><span class="line">def generate_fav_content_url(fid: int, page_number: int) -&gt; str:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">        获取收藏夹一页内容</span><br><span class="line">        https://api.bilibili.com/x/v3/fav/resource/list?</span><br><span class="line">            keyword=&amp;order=mtime&amp;type=0&amp;tid=0&amp;platform=web&amp;jsonp=jsonp&amp;ps=20&amp;</span><br><span class="line">            media_id=&#123;fid&#125;&amp;pn=&#123;page_number&#125;</span><br><span class="line">        :param fid: 收藏夹id</span><br><span class="line">        :param page_number: 收藏夹中页码</span><br><span class="line">        :return: 获取收藏夹一页内容url</span><br><span class="line"></span><br><span class="line">return f&#x27;https://api.bilibili.com/x/v3/fav/resource/list?ps=20&amp;media_id=&#123;fid&#125;&amp;pn=&#123;page_number&#125;&#x27;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取收藏夹信息"><a href="#获取收藏夹信息" class="headerlink" title="获取收藏夹信息"></a>获取收藏夹信息</h4><p>这里获取的信息用于解析出查询页面的前置条件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 获取收藏夹信息</span><br><span class="line">def generate_fav_url(fid: int) -&gt; str:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    获取收藏夹信息</span><br><span class="line">    https://api.bilibili.com/x/v3/fav/resource/list?</span><br><span class="line">        pn=1&amp;ps=20&amp;keyword=&amp;order=mtime&amp;type=0&amp;tid=0&amp;platform=web&amp;jsonp=jsonp&amp;</span><br><span class="line">        media_id=&#123;fid&#125;</span><br><span class="line">    :param fid: 收藏夹id</span><br><span class="line">    :return: 获取收藏夹信息url</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    return f&#x27;https://api.bilibili.com/x/v3/fav/resource/list?ps=1&amp;media_id=&#123;fid&#125;&#x27;</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询页码"><a href="#查询页码" class="headerlink" title="查询页码"></a>查询页码</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 查询页码</span><br><span class="line">def page_numbe(fid):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    fid: 视频收藏夹id</span><br><span class="line">    Returns: 分页统计</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    resp = request_retry_json(generate_fav_url(fid))</span><br><span class="line">    media_count = resp[&#x27;data&#x27;][&#x27;info&#x27;][&#x27;media_count&#x27;]</span><br><span class="line">    page_count = math.ceil(media_count / 20)</span><br><span class="line"></span><br><span class="line">    return page_count</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取Response信息"><a href="#获取Response信息" class="headerlink" title="获取Response信息"></a>获取Response信息</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">def request_retry(url: str, headers: dict = None, retry: int = 3) -&gt; requests.Response:</span><br><span class="line">    if headers is None:</span><br><span class="line">        headers = &#123;&#x27;Connection&#x27;: &#x27;close&#x27;&#125;</span><br><span class="line">    headers[&#x27;Connection&#x27;] = &#x27;close&#x27;</span><br><span class="line">    while retry &gt; 0:</span><br><span class="line">        try:</span><br><span class="line">            resp = requests.get(url, headers=headers)</span><br><span class="line">            return resp</span><br><span class="line">        except:</span><br><span class="line">            logging.error(&#x27;request %s error: %s&#x27; % (url, sys.exc_info()[0]))</span><br><span class="line">            time.sleep(5 - retry)</span><br><span class="line">        retry -= 1</span><br><span class="line">    raise requests.RequestException</span><br><span class="line"></span><br><span class="line">def request_retry_json(url: str, headers=None, retry: int = 3) -&gt; dict:</span><br><span class="line">    return json.loads(request_retry(url, headers, retry).text)</span><br></pre></td></tr></table></figure>
+
+<h4 id="读取网页信息，并转化为son格式"><a href="#读取网页信息，并转化为son格式" class="headerlink" title="读取网页信息，并转化为son格式"></a>读取网页信息，并转化为son格式</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">def request_info(resp):</span><br><span class="line"></span><br><span class="line">    bili_json1 = []</span><br><span class="line">    for a in resp[&#x27;data&#x27;][&#x27;medias&#x27;]:</span><br><span class="line">        # 视频搜索id</span><br><span class="line">        av_id = a[&#x27;id&#x27;]</span><br><span class="line">        # 视频搜索av_id链接</span><br><span class="line">        av_id_link = a[&#x27;link&#x27;]</span><br><span class="line">        # 播放时长</span><br><span class="line">        n = int(a[&#x27;duration&#x27;])</span><br><span class="line">        m = int(n / 60)</span><br><span class="line">        s = n - m * 60</span><br><span class="line">        # print(f&quot;可以换算成 &#123;m&#125;分钟 &#123;s&#125;秒。&quot;)</span><br><span class="line">        duration = f&quot;时长：&#123;m&#125;分钟&#123;s&#125;秒&quot;</span><br><span class="line"></span><br><span class="line">        # 类型</span><br><span class="line">        type = a[&#x27;type&#x27;]</span><br><span class="line">        # 标题</span><br><span class="line">        title = a[&#x27;title&#x27;]</span><br><span class="line"></span><br><span class="line">        # 去除格式和特殊符号</span><br><span class="line">        re_exp = u&quot;([^\u4e00-\u9fa5\u0030-\u0039\u0041-\u005a\u0061-\u007a\’!\&quot;#$%&amp;\&#x27;()*+,-./:;&lt;=&gt;?@，。?、…【】《》？“”‘’！[&quot;u&quot;\\]^_`&#123;|&#125;~\s])&quot;</span><br><span class="line">        video_title = str(title).strip(re_exp)</span><br><span class="line">        </span><br><span class="line">        # 对一些格式的保留和替换</span><br><span class="line">        video_name = &quot;&quot;.join(video_title.split())</span><br><span class="line">        video_name = (((video_name.replace(&quot;/&quot;, &quot;-&quot;)).replace(&quot;】&quot;, &quot;-&quot;)).replace(&quot;[&quot;, &quot;-&quot;)).replace(&quot;【&quot;, &quot;-&quot;)</span><br><span class="line">        video_name = (((video_name.replace(&quot;；&quot;, &quot;-&quot;)).replace(&quot;\n&quot;, &quot;&quot;)).replace(&quot;]&quot;, &quot;-&quot;)).replace(&quot;r&amp;b&quot;, &quot;&quot;)</span><br><span class="line">        video_name = (((video_name.replace(&quot;（&quot;, &quot;-&quot;)).replace(&quot;）&quot;, &quot;&quot;)).replace(&quot; &quot;, &quot;&quot;)).replace(&quot;＆&quot;, &quot;与&quot;)</span><br><span class="line">        video_name = (((video_name.replace(&quot;--&quot;, &quot;-&quot;)).replace(&quot;(&quot;, &quot;&quot;)).replace(&quot;)&quot;, &quot;&quot;)).replace(&quot;&amp;&quot;,&quot;&quot;)</span><br><span class="line">        video_name = (((video_name.replace(&quot;amp;&quot;, &quot;&quot;)).replace(&quot;|&quot;, &quot;-&quot;)).replace(&quot;《&quot;, &quot;&quot;)).replace(&quot;》&quot;, &quot;&quot;)</span><br><span class="line">        </span><br><span class="line">        # 图片链接</span><br><span class="line">        cover = a[&#x27;cover&#x27;]</span><br><span class="line">        # 摘要</span><br><span class="line">        intro = a[&#x27;intro&#x27;]</span><br><span class="line">        # 页数</span><br><span class="line">        page = a[&#x27;page&#x27;]</span><br><span class="line">        # up主个人id</span><br><span class="line">        up_mid = a[&#x27;upper&#x27;][&#x27;mid&#x27;]</span><br><span class="line">        # up主昵称</span><br><span class="line">        up_name = a[&#x27;upper&#x27;][&#x27;name&#x27;]</span><br><span class="line">        # up主头像</span><br><span class="line">        up_face = a[&#x27;upper&#x27;][&#x27;face&#x27;]</span><br><span class="line">        # 视频id</span><br><span class="line">        bv_id = a[&#x27;bv_id&#x27;]</span><br><span class="line">        # 视频链接</span><br><span class="line">        bv_link = &quot;https://www.bilibili.com/video/&quot; + a[&#x27;bv_id&#x27;]</span><br><span class="line">        # 该视频收藏人数</span><br><span class="line">        bv_collect = a[&#x27;cnt_info&#x27;][&#x27;collect&#x27;]</span><br><span class="line">        # 该视频播放次数</span><br><span class="line">        bv_play = a[&#x27;cnt_info&#x27;][&#x27;play&#x27;]</span><br><span class="line">        # 当前观看人数</span><br><span class="line">        bv_danmaku = a[&#x27;cnt_info&#x27;][&#x27;danmaku&#x27;]</span><br><span class="line"></span><br><span class="line">        bili_json = &#123;</span><br><span class="line">            &#x27;title&#x27;: video_name,</span><br><span class="line">            &#x27;intro&#x27;: intro,</span><br><span class="line">            &#x27;cover&#x27;: cover,</span><br><span class="line">            &#x27;bv_id&#x27;: bv_id,</span><br><span class="line">            &#x27;bv_link&#x27;: bv_link,</span><br><span class="line">            &#x27;page&#x27;: page,</span><br><span class="line">            &#x27;av_id&#x27;: av_id,</span><br><span class="line">            &#x27;av_id_link&#x27;: av_id_link,</span><br><span class="line">            &#x27;type&#x27;: type,</span><br><span class="line">            &#x27;duration&#x27;: duration,</span><br><span class="line">            &#x27;bv_collect&#x27;: bv_collect,</span><br><span class="line">            &#x27;bv_play&#x27;: bv_play,</span><br><span class="line">            &#x27;bv_danmaku&#x27;: bv_danmaku,</span><br><span class="line">            &#x27;up_mid&#x27;: up_mid,</span><br><span class="line">            &#x27;up_name&#x27;: up_name,</span><br><span class="line">            &#x27;up_face&#x27;: up_face,</span><br><span class="line">            &#x27;is_Download&#x27;: 0</span><br><span class="line">        &#125;</span><br><span class="line">        bili_json1.append(bili_json)</span><br><span class="line"></span><br><span class="line">    return bili_json1</span><br></pre></td></tr></table></figure>
+
+<h4 id="json调用格式清理"><a href="#json调用格式清理" class="headerlink" title="json调用格式清理"></a>json调用格式清理</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">def write_json(resp, json_file_path_name):</span><br><span class="line"></span><br><span class="line">    bili_create_json(json_file_path_name)</span><br><span class="line">    try:</span><br><span class="line">        bili_json_format_eliminate(json_file_path_name)</span><br><span class="line">    except Exception as err:</span><br><span class="line">        pass</span><br><span class="line">    with open(json_file_path_name, &#x27;a&#x27;, encoding=&#x27;utf-8&#x27;) as fw:</span><br><span class="line">        fw.write(&#x27;,&#x27;)</span><br><span class="line">        json.dump(resp, fw, indent=4, ensure_ascii=False)</span><br><span class="line">        fw.write(&#x27;\n&#x27;)</span><br><span class="line">    # print(&quot;写入完毕&quot;)</span><br><span class="line">    fw.close()</span><br><span class="line">    bili_create_json(json_file_path_name)</span><br><span class="line">    bili_tihuan(json_file_path_name)</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="写入json文件"><a href="#写入json文件" class="headerlink" title="写入json文件"></a>写入json文件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">def read_write_json(resp, json_file_path_name):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">        文件操作中的 r, r+, a, a+, w, w+ 几种方式的区别:</span><br><span class="line">        r只读，r+ 可读可写，若文件不存在，报错；</span><br><span class="line">        w只写，w+ 可读可写，二者都会将文件内容清零,若文件不存在，创建；</span><br><span class="line">        a附加写方式打开，不可读，a+ 附加读写方式打开，二者都是若文件不存在，创建；</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    my_file = Path(json_file_path_name)</span><br><span class="line">    resp1 = request_info(resp)</span><br><span class="line">    a = 0</span><br><span class="line">    b = 0</span><br><span class="line"></span><br><span class="line">    if my_file.is_file():</span><br><span class="line">        for rss in resp1:</span><br><span class="line">            tt1 = rss[&#x27;bv_id&#x27;]</span><br><span class="line">            title_ysx = str(rss[&#x27;title&#x27;].strip())</span><br><span class="line">            flag = select_json(tt1, json_file_path_name)</span><br><span class="line">            </span><br><span class="line">            if flag == 1:</span><br><span class="line">                # print(&quot;检测到已存在json文件中&quot;)</span><br><span class="line">                a = a + 1</span><br><span class="line">                # pass</span><br><span class="line">            else:</span><br><span class="line">                if title_ysx in &quot;已失效视频&quot;:</span><br><span class="line">                    print(&quot;该视频已被up主删除，已失效，为您跳过该条新增记录！&quot;)</span><br><span class="line">                    # b = b + 1</span><br><span class="line">                else:</span><br><span class="line">                    write_json(rss, json_file_path_name)</span><br><span class="line">                    b = b + 1</span><br><span class="line">                    print(f&#x27;新增了第&#123;b&#125;条收藏记录，标题：&#x27; + rss[&#x27;title&#x27;])</span><br><span class="line">        print(f&#x27;已检测到已存在收藏记录&#123;a&#125;条,新增了&#123;b&#125;条收藏记录&#x27;)</span><br><span class="line">    else:</span><br><span class="line">        print(&quot;检测到文件不存在，已为您新建json文件&quot;)</span><br><span class="line">        for rss in resp1:</span><br><span class="line">            title_ysx = str(rss[&#x27;title&#x27;].strip())</span><br><span class="line">            if title_ysx in &quot;已失效视频&quot;:</span><br><span class="line">                print(&quot;该视频已被up主删除，已失效，为您跳过该条新增记录！&quot;)</span><br><span class="line">            else:</span><br><span class="line">                write_json(rss, json_file_path_name)</span><br><span class="line">                b = b + 1</span><br><span class="line">                print(f&#x27;新增了第&#123;b&#125;条收藏记录，标题：&#x27; + rss[&#x27;title&#x27;])</span><br><span class="line">        print(f&#x27;已检测到已存在收藏记录&#123;a&#125;条,新增了&#123;b&#125;条收藏记录&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建并添加json文件内容"><a href="#创建并添加json文件内容" class="headerlink" title="创建并添加json文件内容"></a>创建并添加json文件内容</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">def ins_json(fid: int, json_name: str, file_dir):</span><br><span class="line">    # fid: 收藏夹id</span><br><span class="line">    fid = fid</span><br><span class="line">    # page_number: 收藏夹中页码</span><br><span class="line">    page_number = page_numbe(fid)</span><br><span class="line">    # 文件名称</span><br><span class="line">    json_name = json_name + &#x27;.json&#x27;</span><br><span class="line"></span><br><span class="line">    Subscribe = os.path.join(file_dir, &#x27;Subscribe_json&#x27;)</span><br><span class="line">    mkdir_folder(Subscribe)</span><br><span class="line">    # json文件路径名称</span><br><span class="line">    json_file_path_name = File_dir(Subscribe, json_name)</span><br><span class="line">    # total 负责做累加和</span><br><span class="line">    total = 1</span><br><span class="line"></span><br><span class="line">    while total &lt;= page_number:</span><br><span class="line">        url = generate_fav_content_url(fid, total)</span><br><span class="line">        resp = request_retry_json(url)</span><br><span class="line">        read_write_json(resp, json_file_path_name)</span><br><span class="line">        print(f&#x27;第&#123;total&#125;页收藏夹已记录~~\n&#x27;)</span><br><span class="line">        total += 1</span><br><span class="line"></span><br><span class="line">    print(&quot;执行完毕&quot;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="下载收藏夹中的视频"><a href="#下载收藏夹中的视频" class="headerlink" title="下载收藏夹中的视频"></a>下载收藏夹中的视频</h2><h4 id="请求的url地址"><a href="#请求的url地址" class="headerlink" title="请求的url地址"></a>请求的url地址</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># 请求的url地址</span><br><span class="line">def get_response(html_url):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    Args: 发送请求，以及获取数据函数</span><br><span class="line">        html_url: 请求的url地址</span><br><span class="line">    Returns: 返回请求服务器返回的响应数据</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    # 请求代码，在发送请求前，需要进行伪装 headers 请求头</span><br><span class="line">    # user-agent 浏览器基本标识 用户代理 基本伪装 反爬手段</span><br><span class="line">    # &lt;Response [200]&gt; 对象response响应对象 200 状态码 表示请求成功</span><br><span class="line">    # 404 网址可能出错</span><br><span class="line">    # 403 网址没有权限，出现 403 加防盗链 referer ,是为了告诉服务器，我们发送请求的url地址，是从哪里跳转过来的</span><br><span class="line"></span><br><span class="line">    headers = &#123;</span><br><span class="line">        &quot;referer&quot;: &quot;https://search.www.bilibili.com&quot;,</span><br><span class="line">        &quot;user-agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36&quot;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    response = requests.get(url=html_url, headers=headers, stream=True)  # 请求代码</span><br><span class="line">    # stream 字节流 (可选，开启后可用于判断大小以及做进度条使用)</span><br><span class="line">    # 一般选取小而快的内容时，将stream设置为false或者不加也许，可以快速的读取response.content内容</span><br><span class="line">    # 当stream开启后，后面需要自己执行response.close()操作进行关闭接收，否则只有所有的响应体数据被读取完毕连接才会被释放，如果用with可以不用close()</span><br><span class="line"></span><br><span class="line">    return response</span><br></pre></td></tr></table></figure>
+
+<h4 id="视频的详情页"><a href="#视频的详情页" class="headerlink" title="视频的详情页"></a>视频的详情页</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">def get_video_info(html_url):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    获取视频标题 /音频 url地址 / 视频画面url地址</span><br><span class="line">    Args:</span><br><span class="line">        html_url: 视频的详情页</span><br><span class="line"></span><br><span class="line">    Returns: 视频标题 /音频 url地址 / 视频画面url地址</span><br><span class="line"></span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    response = get_response(html_url=html_url)</span><br><span class="line">    # response.text 获取响应体的文本数据</span><br><span class="line">    # print(response.text)</span><br><span class="line">    # 解析数据 提取视频标题 re正则表达式 css选择器 xpath bs4 parsel lxml (解析模块) jsonpath 主要提取json数据</span><br><span class="line"></span><br><span class="line">    # 正则表达式提取的数据内容 返回都是列表数据类型[0] 列表 所返回的索引取值（ 0或者-1都行，0是从左往右，-1是从右往左）</span><br><span class="line">    title = re.findall(&#x27;&lt;h1 title=&quot;(.*?)&quot; class=&quot;video-title tit&quot;&gt;&#x27;, response.text)[0] # 标题</span><br><span class="line"></span><br><span class="line">    # 去除格式和特殊符号</span><br><span class="line">    re_exp = u&quot;([^\u4e00-\u9fa5\u0030-\u0039\u0041-\u005a\u0061-\u007a\’!\&quot;#$%&amp;\&#x27;()*+,-./:;&lt;=&gt;?@，。?、…【】《》？“”‘’！[&quot;u&quot;\\]^_`&#123;|&#125;~\s])&quot;</span><br><span class="line">    video_title = str(title).strip(re_exp)</span><br><span class="line">    # 替换和保留一些格式</span><br><span class="line">    video_name = &quot;&quot;.join(video_title.split())</span><br><span class="line">    video_name = (((video_name.replace(&quot;/&quot;, &quot;-&quot;)).replace(&quot;】&quot;, &quot;-&quot;)).replace(&quot;[&quot;, &quot;-&quot;)).replace(&quot;【&quot;, &quot;-&quot;)</span><br><span class="line">    video_name = (((video_name.replace(&quot;；&quot;, &quot;-&quot;)).replace(&quot;\n&quot;, &quot;&quot;)).replace(&quot;]&quot;, &quot;-&quot;)).replace(&quot;r&amp;b&quot;, &quot;&quot;)</span><br><span class="line">    video_name = (((video_name.replace(&quot;（&quot;, &quot;-&quot;)).replace(&quot;）&quot;, &quot;&quot;)).replace(&quot; &quot;, &quot;&quot;)).replace(&quot;＆&quot;, &quot;与&quot;)</span><br><span class="line">    video_name = (((video_name.replace(&quot;--&quot;, &quot;-&quot;)).replace(&quot;(&quot;, &quot;&quot;)).replace(&quot;)&quot;, &quot;&quot;)).replace(&quot;&amp;&quot;, &quot;&quot;)</span><br><span class="line">    video_name = (((video_name.replace(&quot;amp;&quot;, &quot;&quot;)).replace(&quot;|&quot;, &quot;-&quot;)).replace(&quot;《&quot;, &quot;&quot;)).replace(&quot;》&quot;, &quot;&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    html_data = re.findall(&#x27;&lt;script&gt;window.__playinfo__=(.*?)&lt;/script&gt;&#x27;,response.text)[0]</span><br><span class="line">    # html_data 是&lt;class &#x27;str&#x27;&gt;数据类型</span><br><span class="line">    # 为了更加方便提取数据，可以字符串数据 转换成 字典数据类型</span><br><span class="line">    json_data = json.loads(html_data)</span><br><span class="line">    # 根据键值对取值</span><br><span class="line">    audio_url = json_data[&#x27;data&#x27;][&#x27;dash&#x27;][&#x27;audio&#x27;][0][&#x27;base_url&#x27;]</span><br><span class="line">    video_url = json_data[&#x27;data&#x27;][&#x27;dash&#x27;][&#x27;video&#x27;][0][&#x27;base_url&#x27;]</span><br><span class="line">    video_info = [video_name, audio_url, video_url]</span><br><span class="line"></span><br><span class="line">    return video_info</span><br></pre></td></tr></table></figure>
+
+<h4 id="下载保存"><a href="#下载保存" class="headerlink" title="下载保存"></a>下载保存</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">def save(title, audio_url, video_url, tmp_dir):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    Args: 保存数据函数</span><br><span class="line">        title: 视频标题</span><br><span class="line">        audio_url: 音频url</span><br><span class="line">        video_url: 视频画面url</span><br><span class="line">    Returns:</span><br><span class="line"></span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    au_response = get_response(html_url=audio_url)</span><br><span class="line">    audio_content = au_response.iter_content(chunk_size=1024)</span><br><span class="line">    au_total = int(au_response.headers.get(&#x27;content-length&#x27;, 0))</span><br><span class="line"></span><br><span class="line">    vi_response = get_response(html_url=video_url)</span><br><span class="line">    video_content = vi_response.iter_content(chunk_size=1024)</span><br><span class="line">    vi_total = int(vi_response.headers.get(&#x27;content-length&#x27;, 0))</span><br><span class="line"></span><br><span class="line">    with open(tmp_dir + &#x27;/&#x27; + title + &#x27;.mp3&#x27;, mode=&#x27;wb&#x27;) as f, tqdm(</span><br><span class="line">            desc=&quot;音频下载进度&quot;,</span><br><span class="line">            total=au_total,</span><br><span class="line">            unit=&#x27;iB&#x27;,</span><br><span class="line">            unit_scale=True,</span><br><span class="line">            unit_divisor=1024</span><br><span class="line">    ) as bar:</span><br><span class="line">        for data in audio_content:</span><br><span class="line">            size = f.write(data)</span><br><span class="line">            bar.update(size)</span><br><span class="line">        f.close()</span><br><span class="line"></span><br><span class="line">    with open(tmp_dir + &#x27;/&#x27; + title + &#x27;.mp4&#x27;, mode=&#x27;wb&#x27;) as f, tqdm(</span><br><span class="line">            desc=&quot;视频下载进度&quot;,</span><br><span class="line">            total=vi_total,</span><br><span class="line">            unit=&#x27;iB&#x27;,</span><br><span class="line">            unit_scale=True,</span><br><span class="line">            unit_divisor=1024</span><br><span class="line">    ) as bar:</span><br><span class="line">        for data in video_content:</span><br><span class="line">            size = f.write(data)</span><br><span class="line">            bar.update(size)</span><br><span class="line">        f.close()</span><br><span class="line"></span><br><span class="line">    print(title, &quot;已下载保存至临时目录：&quot; + tmp_dir + &#x27;/&#x27; + title)</span><br></pre></td></tr></table></figure>
+
+<h4 id="下载主函数"><a href="#下载主函数" class="headerlink" title="下载主函数"></a>下载主函数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">def Download_main(bv_id, tmp_dir, Download_videos):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    Args: 下载主函数</span><br><span class="line">        bv_id: bv号</span><br><span class="line">        tmp_dir：临时目录</span><br><span class="line">        Download_videos：实际保存目录</span><br><span class="line">    Returns:</span><br><span class="line"></span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    url = f&#x27;https://www.bilibili.com/video/&#123;bv_id&#125;&#x27;</span><br><span class="line">    video_info = get_video_info(url)  # [title, audio_url, video_url]</span><br><span class="line"></span><br><span class="line">    save(video_info[0], video_info[1], video_info[2], tmp_dir)</span><br><span class="line">    merge_data(video_info[0], tmp_dir, Download_videos)</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="数据合并-视频合并（使用了ffmpeg）"><a href="#数据合并-视频合并（使用了ffmpeg）" class="headerlink" title="数据合并 - 视频合并（使用了ffmpeg）"></a>数据合并 - 视频合并（使用了ffmpeg）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def merge_data(video_name, tmp_dir, Download_videos):</span><br><span class="line">    &quot;&quot;&quot; 数据合并 - 视频合并 &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    print(&#x27;视频合并开始：&#x27;, video_name)</span><br><span class="line">    cmd = f&quot;ffmpeg -i &#123;tmp_dir&#125;/&#123;video_name&#125;.mp4 -i &#123;tmp_dir&#125;/&#123;video_name&#125;.mp3 -c:v copy -c:a aac -strict experimental &#123;Download_videos&#125;/&#123;video_name&#125;.mp4&quot;</span><br><span class="line">    subprocess.run(cmd, shell=True)</span><br><span class="line">    print(f&#x27;视频合成结束,已将视频保存至路径： &#123;Download_videos&#125;/&#123;video_name&#125;.mp4&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="读取json文件，执行脚本，修改下载状态"><a href="#读取json文件，执行脚本，修改下载状态" class="headerlink" title="读取json文件，执行脚本，修改下载状态"></a>读取json文件，执行脚本，修改下载状态</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">def bili_json(folder_dir, Download_videos, json_file_path_name):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    Args: 读取json文件，执行脚本，修改下载状态</span><br><span class="line">        folder_dir:</span><br><span class="line">        Download_videos:</span><br><span class="line"></span><br><span class="line">    Returns:</span><br><span class="line"></span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    # 休眠10s</span><br><span class="line">    sleepTime = 10</span><br><span class="line"></span><br><span class="line">    json_flag = json_file_path_name.strip()</span><br><span class="line">    # 判断路径是否存在 存在 True 不存在   False</span><br><span class="line">    isExists = os.path.exists(json_flag)</span><br><span class="line"></span><br><span class="line">    # 判断结果</span><br><span class="line">    if not isExists:</span><br><span class="line">        print(json_file_path_name + &quot;不存在,已为您跳过!&quot;)</span><br><span class="line">    else:</span><br><span class="line">        with open(json_file_path_name, &#x27;r&#x27;, encoding=&#x27;utf-8&#x27;) as jsonFile:</span><br><span class="line"></span><br><span class="line">            data = json.load(jsonFile)</span><br><span class="line">            for aa in data:</span><br><span class="line">                bv_id = aa[&#x27;bv_id&#x27;]</span><br><span class="line">                is_Download = aa[&#x27;is_Download&#x27;]</span><br><span class="line">                title = aa[&#x27;title&#x27;]</span><br><span class="line"></span><br><span class="line">                # print(type(is_Download))</span><br><span class="line">                if is_Download == 0:</span><br><span class="line"></span><br><span class="line">                    bb = str(aa[&#x27;is_Download&#x27;]).replace(&#x27;0&#x27;, &#x27;1&#x27;)</span><br><span class="line">                    print(f&quot;\n检测到新收藏,标题为：&#123;title&#125;,正在下载,请稍后&quot;)</span><br><span class="line">                    bili_download_main(folder_dir, Download_videos, bv_id)</span><br><span class="line">                    aa[&#x27;is_Download&#x27;] = int(bb)</span><br><span class="line">                    # print(&quot;下载脚本执行完毕！,休眠30s后，继续执行！ \n ------------------------------------------------&quot;)</span><br><span class="line">                    with open(json_file_path_name, &#x27;w&#x27;, encoding=&#x27;utf-8&#x27;) as f:</span><br><span class="line">                        json.dump(data, f, indent=4, ensure_ascii=False)</span><br><span class="line">                        f.close()</span><br><span class="line">                    # jsonFile.close()</span><br><span class="line">                    print(f&quot;休眠10s后，将执行下载命令！ \n ------------------------------------------------&quot;)</span><br><span class="line">                    time.sleep(sleepTime)</span><br><span class="line"></span><br><span class="line">                else:</span><br><span class="line">                    jsonFile.close()</span><br><span class="line">                    print(title + &quot;\n检测到已存在下载历史，已为你跳过下载~ \n ------------------------------------------------&quot;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="下载前校验文件夹是否存在"><a href="#下载前校验文件夹是否存在" class="headerlink" title="下载前校验文件夹是否存在"></a>下载前校验文件夹是否存在</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">def bili_download_main(folder_dir, Download_videos, bv_id):</span><br><span class="line">    # url = &#x27;https://www.bilibili.com/video/BV1xL411M7yg/&#x27;</span><br><span class="line">    # video_info = get_video_info(url)</span><br><span class="line">    # print(video_info)</span><br><span class="line"></span><br><span class="line">    # 键盘输入</span><br><span class="line">    # keyword = input(&quot;输入要下载的bv号：&quot;)</span><br><span class="line">    # main(keyword)</span><br><span class="line">    start_time = datetime.now().strftime(&quot;%Y-%m-%d %H:%M:%S&quot;)</span><br><span class="line">    start_time = datetime.strptime(start_time, r&quot;%Y-%m-%d %H:%M:%S&quot;)</span><br><span class="line"></span><br><span class="line">    try:</span><br><span class="line">        mkdir_folder(folder_dir)</span><br><span class="line">        print(&quot;临时文件夹——创建成功&quot;)</span><br><span class="line"></span><br><span class="line">        mkdir_folder(Download_videos)</span><br><span class="line">        print(&quot;视频实际存储文件夹——创建成功&quot;)</span><br><span class="line"></span><br><span class="line">        Download_main(bv_id, folder_dir, Download_videos)</span><br><span class="line">        print(&quot;视频下载成功&quot;)</span><br><span class="line"></span><br><span class="line">        end_time = datetime.now().strftime(&#x27;%Y-%m-%d %H:%M:%S&#x27;)</span><br><span class="line">        end_time = datetime.strptime(end_time, r&quot;%Y-%m-%d %H:%M:%S&quot;)</span><br><span class="line">        diff = end_time - start_time</span><br><span class="line"></span><br><span class="line">        rm_folder(folder_dir)</span><br><span class="line">        print(&quot;临时文件夹——已删除&quot;)</span><br><span class="line">        print(f&quot;总计运行&#123;diff.total_seconds()&#125;秒&quot;)</span><br><span class="line">    except Exception as err:</span><br><span class="line">        end_time = datetime.now().strftime(&#x27;%Y-%m-%d %H:%M:%S&#x27;)</span><br><span class="line">        end_time = datetime.strptime(end_time, r&quot;%Y-%m-%d %H:%M:%S&quot;)</span><br><span class="line">        diff = end_time - start_time</span><br><span class="line">        print(&quot;临时文件夹——已删除&quot;)</span><br><span class="line">        print(f&quot;总计运行&#123;diff.total_seconds()&#125;秒&quot;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="config-ini设置与导入包"><a href="#config-ini设置与导入包" class="headerlink" title="config.ini设置与导入包"></a>config.ini设置与导入包</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def config_collection():</span><br><span class="line">    # 导入configparser模块，</span><br><span class="line">    conf = ConfigParser()</span><br><span class="line"></span><br><span class="line">    return conf</span><br></pre></td></tr></table></figure>
+
+<p>config.ini设置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[bili_collection]</span><br><span class="line">fid_1: 1781782216</span><br><span class="line">fid_1_name: 测试收藏</span><br><span class="line">;如果有多个收藏夹，复制fid_序列数字，如下面所示</span><br><span class="line">;fid_2: #</span><br><span class="line">;fid_2_name: #</span><br><span class="line">[video_dir]</span><br><span class="line">;临时文件夹名称</span><br><span class="line">Temporary_folder: tmp</span><br><span class="line">;视频文件夹名称</span><br><span class="line">Download_videos_folder: Download_videos</span><br><span class="line">;具体保存路径</span><br><span class="line">windows_dir: D:/Downloads/video/</span><br><span class="line">;如果linux使用</span><br><span class="line">;linux_dir: /tmp/</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建文件夹和替换文本"><a href="#创建文件夹和替换文本" class="headerlink" title="创建文件夹和替换文本"></a>创建文件夹和替换文本</h2><h4 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">def mkdir_folder(path):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    Args:</span><br><span class="line">        path: 创建临时文件</span><br><span class="line">    Returns:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    # 去除首位空格</span><br><span class="line">    path = path.strip()</span><br><span class="line">    # 去除尾部 \ 符号</span><br><span class="line">    path = path.rstrip(&quot;\\&quot;)</span><br><span class="line">    # 判断路径是否存在 存在 True 不存在   False</span><br><span class="line">    isExists = os.path.exists(path)</span><br><span class="line"></span><br><span class="line">    # 判断结果</span><br><span class="line">    if not isExists:</span><br><span class="line">        # 如果不存在则创建目录</span><br><span class="line">        # 创建目录操作函数</span><br><span class="line">        os.makedirs(path)</span><br><span class="line">        # print(path+&#x27; 创建成功&#x27;)</span><br><span class="line">        return True</span><br><span class="line">    else:</span><br><span class="line">        # 如果目录存在则不创建，并提示目录已存在</span><br><span class="line">        # print(path+&#x27; 目录已存在&#x27;)</span><br><span class="line">        return False</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除文件和文件夹"><a href="#删除文件和文件夹" class="headerlink" title="删除文件和文件夹"></a>删除文件和文件夹</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">def rm_folder(dir):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    Args:</span><br><span class="line">        dir: 遍历删除文件夹和文件</span><br><span class="line"></span><br><span class="line">    Returns:</span><br><span class="line"></span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    # 引入模块</span><br><span class="line">    import os</span><br><span class="line">    # 判断是否是文件夹，如果是，递归调用rmdir()函数</span><br><span class="line">    if (os.path.isdir(dir)):</span><br><span class="line">        # 遍历地址下的所有文件</span><br><span class="line">        for file in os.listdir(dir):</span><br><span class="line">            # 删除文件</span><br><span class="line">            oo = dir + r&#x27;/&#x27; + file</span><br><span class="line">            os.remove(oo)</span><br><span class="line">            # print(&quot;文件已删除&quot;)</span><br><span class="line">            # 继续删除文件夹</span><br><span class="line">            rm_folder(dir)</span><br><span class="line">        # 如果是空文件夹，直接删除</span><br><span class="line">        if (os.path.exists(dir)):</span><br><span class="line">            os.rmdir(dir)</span><br><span class="line">            # print(dir, &quot;文件夹删除成功&quot;)</span><br><span class="line">    # 如果是文件，直接删除</span><br><span class="line">    else:</span><br><span class="line">        if (os.path.exists(dir)):</span><br><span class="line">            os.remove(dir)</span><br><span class="line">            print(dir, &quot;文件删除成功&quot;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="json文件格式初始化"><a href="#json文件格式初始化" class="headerlink" title="json文件格式初始化"></a>json文件格式初始化</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">def bili_create_json(json_file_path_name):</span><br><span class="line">    ffe = os.path.exists(json_file_path_name)</span><br><span class="line"></span><br><span class="line">    if ffe == True:</span><br><span class="line"></span><br><span class="line">        with open(json_file_path_name, &#x27;a&#x27;, encoding=&#x27;utf-8&#x27;) as fw:</span><br><span class="line">            fw.write(&#x27;]\n&#x27;)</span><br><span class="line">        # print(&quot;写入完毕&quot;)</span><br><span class="line">        fw.close()</span><br><span class="line">    else:</span><br><span class="line">        with open(json_file_path_name, &#x27;w+&#x27;, encoding=&#x27;utf-8&#x27;) as fw:</span><br><span class="line">            fw.write(&#x27;[&#x27;)</span><br><span class="line">        # print(&quot;创建写入完毕&quot;)</span><br><span class="line">        fw.close()</span><br></pre></td></tr></table></figure>
+
+<h4 id="文本格式清理"><a href="#文本格式清理" class="headerlink" title="文本格式清理"></a>文本格式清理</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">def bili_json_format_eliminate(json_file_path_name):</span><br><span class="line">    matchPattern = re.compile(r&#x27;]&#x27;)</span><br><span class="line"></span><br><span class="line">    file = open(json_file_path_name, &#x27;r&#x27;, encoding=&#x27;UTF-8&#x27;)</span><br><span class="line">    lineList = []</span><br><span class="line">    while 1:</span><br><span class="line">        line = file.readline()</span><br><span class="line">        if not line:</span><br><span class="line">            # print(&quot;指定格式已清理&quot;)</span><br><span class="line">            break</span><br><span class="line">        elif matchPattern.search(line):</span><br><span class="line">            pass</span><br><span class="line">        else:</span><br><span class="line">            lineList.append(line)</span><br><span class="line">    file.close()</span><br><span class="line">    file = open(json_file_path_name, &#x27;w&#x27;, encoding=&#x27;UTF-8&#x27;)</span><br><span class="line">    for i in lineList:</span><br><span class="line">        file.write(i)</span><br><span class="line">    file.close()</span><br></pre></td></tr></table></figure>
+<h4 id="文本查询和替换"><a href="#文本查询和替换" class="headerlink" title="文本查询和替换"></a>文本查询和替换</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">def bili_tihuan(json_file_path_name):</span><br><span class="line">    # 创建一个变量并存储我们要搜索的文本</span><br><span class="line">    search_text = &quot;[,&quot;</span><br><span class="line"></span><br><span class="line">    # 创建一个变量并存储我们要添加的文本</span><br><span class="line">    replace_text = &quot;[&quot;</span><br><span class="line"></span><br><span class="line">    # 使用 open() 函数以只读模式打开我们的文本文件</span><br><span class="line">    with open(json_file_path_name, &#x27;r&#x27;, encoding=&#x27;UTF-8&#x27;) as file:</span><br><span class="line">        # 使用 read() 函数读取文件内容并将它们存储在一个新变量中</span><br><span class="line">        data = file.read()</span><br><span class="line"></span><br><span class="line">        # 使用 replace() 函数搜索和替换文本</span><br><span class="line">        data = data.replace(search_text, replace_text)</span><br><span class="line"></span><br><span class="line">    # 以只写模式打开我们的文本文件以写入替换的内容</span><br><span class="line">    with open(json_file_path_name, &#x27;w&#x27;, encoding=&#x27;UTF-8&#x27;) as file:</span><br><span class="line">        # 在我们的文本文件中写入替换的数据</span><br><span class="line">        file.write(data)</span><br><span class="line"></span><br><span class="line">    # 打印文本已替换</span><br><span class="line">    # print(&quot;文本已替换&quot;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询验证文本是否存在"><a href="#查询验证文本是否存在" class="headerlink" title="查询验证文本是否存在"></a>查询验证文本是否存在</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">def select_json(bv_id, json_file_path_name):</span><br><span class="line">    with open(json_file_path_name, &#x27;r&#x27;, encoding=&#x27;utf-8&#x27;) as jsonFile:</span><br><span class="line">        data = json.load(jsonFile)</span><br><span class="line">        aa = 0</span><br><span class="line">        for data_a in data:</span><br><span class="line">            if bv_id == data_a[&#x27;bv_id&#x27;]:</span><br><span class="line">                # print(&quot;存在&quot;)</span><br><span class="line">                aa = aa+1</span><br><span class="line">                jsonFile.close()</span><br><span class="line">                return aa</span><br><span class="line">            else:</span><br><span class="line">                pass</span><br><span class="line">        # print(aa)</span><br><span class="line">        jsonFile.close()</span><br><span class="line">        return aa</span><br></pre></td></tr></table></figure>
+
+<h2 id="判断系统平台和文件保存路径"><a href="#判断系统平台和文件保存路径" class="headerlink" title="判断系统平台和文件保存路径"></a>判断系统平台和文件保存路径</h2><h4 id="判断当前运行平台是windows还是linux"><a href="#判断当前运行平台是windows还是linux" class="headerlink" title="判断当前运行平台是windows还是linux"></a>判断当前运行平台是windows还是linux</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def isWondowsorLinux():</span><br><span class="line">    &#x27;&#x27;&#x27; 判断当前运行平台 :return: &#x27;&#x27;&#x27;</span><br><span class="line">    sysstr = platform.system()</span><br><span class="line">    if (sysstr == &quot;Windows&quot;):</span><br><span class="line">        return True</span><br><span class="line">    elif (sysstr == &quot;Linux&quot;):</span><br><span class="line">        return False</span><br><span class="line">    else:</span><br><span class="line">        print(&quot;Other System &quot;)</span><br><span class="line">    return False</span><br></pre></td></tr></table></figure>
+
+<h4 id="根据系统环境分配文件保存路径"><a href="#根据系统环境分配文件保存路径" class="headerlink" title="根据系统环境分配文件保存路径"></a>根据系统环境分配文件保存路径</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def File_dir(file_dir: str, json_name: str):</span><br><span class="line">    mkdir_folder(file_dir)</span><br><span class="line"></span><br><span class="line">    # 判断当前系统环境</span><br><span class="line">    if isWondowsorLinux() == True:</span><br><span class="line">        windows_dir = os.path.join(file_dir, json_name)</span><br><span class="line">        return windows_dir</span><br><span class="line">    else:</span><br><span class="line">        linux_dir = os.path.join(file_dir, json_name)</span><br><span class="line">        return linux_dir</span><br></pre></td></tr></table></figure>
+
+<h2 id="调用收藏同步和执行下载"><a href="#调用收藏同步和执行下载" class="headerlink" title="调用收藏同步和执行下载"></a>调用收藏同步和执行下载</h2><h4 id="日期获取"><a href="#日期获取" class="headerlink" title="日期获取"></a>日期获取</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def getDate():</span><br><span class="line">    date = datetime.now().strftime(&quot;%Y-%m-%d %H:%M:%S&quot;)</span><br><span class="line">    return &quot;当前时间：&quot;+date</span><br></pre></td></tr></table></figure>
+
+<h4 id="config-初始化"><a href="#config-初始化" class="headerlink" title="config 初始化"></a>config 初始化</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">conf = config_collection()</span><br><span class="line"># 获取当前目录路径</span><br><span class="line">file_dir = os.path.dirname(os.path.abspath(__file__))</span><br><span class="line"># 实际文件路径</span><br><span class="line">CONF_FILE = os.path.join(file_dir, &#x27;config.ini&#x27;)</span><br><span class="line"># 实例化语言格式</span><br><span class="line">conf.read(CONF_FILE, encoding=&quot;utf-8&quot;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="同步收藏夹"><a href="#同步收藏夹" class="headerlink" title="同步收藏夹"></a>同步收藏夹</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def tb_sc():</span><br><span class="line">    # 获取配置文件的参数信息</span><br><span class="line">    fid_1 = conf.get(&quot;bili_collection&quot;, &quot;fid_1&quot;)</span><br><span class="line">    fid_1_name = conf.get(&quot;bili_collection&quot;, &quot;fid_1_name&quot;)</span><br><span class="line">    ins_json(fid_1, fid_1_name, file_dir)</span><br><span class="line"></span><br><span class="line">    # ---如果有多个收藏夹，可以仿照下面复制，要记得修改数字---</span><br><span class="line">    # fid_2 = conf.get(&quot;bili_collection&quot;, &quot;fid_2&quot;)</span><br><span class="line">    # fid_2_name = conf.get(&quot;bili_collection&quot;, &quot;fid_2_name&quot;)</span><br><span class="line">    # ins_json(fid_2, fid_2_name, file_dir)</span><br></pre></td></tr></table></figure>
+
+<h4 id="下载收藏夹视频"><a href="#下载收藏夹视频" class="headerlink" title="下载收藏夹视频"></a>下载收藏夹视频</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">def download_video():</span><br><span class="line">    # 获取配置文件的参数信息</span><br><span class="line">    tmp_file_name = conf.get(&quot;video_dir&quot;, &quot;Temporary_folder&quot;)</span><br><span class="line">    download_file_name = conf.get(&quot;video_dir&quot;, &quot;Download_videos_folder&quot;)</span><br><span class="line">    # 根据系统来使用linux还是windows</span><br><span class="line">    # linux_dir = conf.get(&quot;video_dir&quot;, &quot;linux_dir&quot;)</span><br><span class="line">    windows_dir = conf.get(&quot;video_dir&quot;, &quot;windows_dir&quot;)</span><br><span class="line"></span><br><span class="line">    # 临时文件夹路径</span><br><span class="line">    folder_dir_path = File_dir(windows_dir, tmp_file_name)</span><br><span class="line">    # 视频下载实际保存路径</span><br><span class="line">    Download_videos_path = File_dir(windows_dir, download_file_name)</span><br><span class="line">    # 收藏夹视频json文件路径</span><br><span class="line">    json_file_path_name1 = File_dir((os.path.join(file_dir, &#x27;Subscribe_json&#x27;)), (conf.get(&quot;bili_collection&quot;, &quot;fid_1_name&quot;)) + &quot;.json&quot;)</span><br><span class="line">    # 调用下载</span><br><span class="line">    bili_json(folder_dir_path, Download_videos_path, json_file_path_name1)</span><br><span class="line"></span><br><span class="line">    # ---如果有多个收藏夹，可以仿照下面复制，要记得修改数字---</span><br><span class="line">    # json_file_path_name2 = File_dir((os.path.join(file_dir, &#x27;Subscribe_json&#x27;)), (conf.get(&quot;bili_collection&quot;, &quot;fid_2_name&quot;)) + &quot;.json&quot;)</span><br><span class="line">    # bili_json(folder_dir_path, Download_videos_path, json_file_path_name2)</span><br></pre></td></tr></table></figure>
+
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># 1分=60s,休眠10分钟</span><br><span class="line">    sleepTime = 600</span><br><span class="line">    # 添加err_log日志文件</span><br><span class="line">    logging.basicConfig(filename=&#x27;err.log&#x27;)</span><br><span class="line"></span><br><span class="line">    while True:</span><br><span class="line">        try:</span><br><span class="line">            # 执行收藏同步</span><br><span class="line">            tb_sc()</span><br><span class="line">            print(getDate() + &quot; 收藏记录执行完毕！&quot;)</span><br><span class="line"></span><br><span class="line">            try:</span><br><span class="line">                # 执行视频下载</span><br><span class="line">                download_video()</span><br><span class="line">                print(getDate() + &quot; 视频下载执行完毕！&quot;)</span><br><span class="line">            except Exception as e:</span><br><span class="line">                s = traceback.format_exc()</span><br><span class="line">                print(getDate() + &quot; 视频下载执行失败！&quot;)</span><br><span class="line">                logging.error(s)</span><br><span class="line"></span><br><span class="line">        except Exception as e:</span><br><span class="line">            s = traceback.format_exc()</span><br><span class="line">            print(getDate() + &quot; 收藏记录执行失败！&quot;)</span><br><span class="line">            logging.error(s)</span><br><span class="line"></span><br><span class="line">        print(&quot;脚本执行完毕！&quot; + getDate() + &quot; ,休眠10分钟后，继续执行！&quot;)</span><br><span class="line">        # 休眠10分钟</span><br><span class="line">        time.sleep(sleepTime)</span><br><span class="line">        continue</span><br></pre></td></tr></table></figure>
+
+                    
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                python实现b站自动下载收藏视频，防止视频和谐
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                2022/10/01/python-bilibili-Collection-Download/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">ドラゴンボールのLong</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2022-10-01 18:17</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="">
+                    <a href="https://zhongshenglong.xyz" target="_blank">
+                        
+                            Long License
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E5%BF%83%E5%BE%97/">心得</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/python/">python</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+                    
+
+<div class="reward-author-container border-box flex-center">
+    <div class="reward-btn border-box flex-center tooltip tooltip-img"
+            data-tooltip-img-url="/images/reward.jpg"
+            data-tooltip-img-trigger="click"
+            data-tooltip-img-style="top: -6px;"
+    >
+        <i class="fa-solid fa-gift"></i>&nbsp;请作者喝咖啡
+    </div>
+</div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2023/05/20/midiourney%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/"
+                                   title="Midjourney_ai绘画全面解析"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Midjourney_ai绘画全面解析</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2022/09/06/Oracle12c%E8%B7%A8%E5%B9%B3%E5%8F%B0%E8%BF%81%E7%A7%BB%E4%B9%8Blinux%E8%87%B3windows/"
+                                   title="Oracle12c跨平台迁移之linux至windows"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Oracle12c跨平台迁移之linux至windows</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+    <div class="comments-container border-box">
+        <div id="comments-anchor" class="comment-area-title border-box">
+            <i class="fas fa-comments"></i>&nbsp;评论
+        </div>
+        <div class="comment-plugin-fail border-box">
+    <span class="fail-tip">评论插件加载失败</span>
+    <button class="reload keep-button">点击重新加载</button>
+</div>
+<div class="comment-plugin-loading flex-center border-box">
+    <i class="loading-icon fa-solid fa-spinner fa-spin"></i>
+    <span class="load-tip">正在加载评论插件</span>
+</div>
+<script data-pjax>
+  window.KeepCommentPlugin = {}
+  window.KeepCommentPlugin.hideLoading = () => {
+    const cplDom = document.querySelector('.comments-container .comment-plugin-loading')
+    cplDom.style.display = 'none'
+  }
+  window.KeepCommentPlugin.loadFailHandle = () => {
+    window.KeepCommentPlugin.hideLoading()
+    const cpfDom = document.querySelector('.comments-container .comment-plugin-fail')
+    cpfDom.style.display = 'flex'
+    cpfDom.querySelector('.reload').addEventListener('click', () => {
+      window.location.reload()
+    })
+  }
+</script>
+
+        
+            
+
+    <div class="valine-container">
+        <div id="vcomments"></div>
+        <script 
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        ></script>
+        <script 
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        >
+          window.KeepCommentPlugin.initValine = () => {
+            const config = {
+              el: '#vcomments',
+              appId: '2TGCOmDNikdxOnVmQJEFhTOK-gzGzoHsz',
+              appKey: 'lU21jvewvcy043UjfpHRXfvA',
+              meta: ['nick', 'mail', 'link'],
+              avatar: 'wavatar',
+              enableQQ: true,
+              placeholder: '😜 尽情吐槽吧~',
+              lang: 'zh-CN'.toLowerCase()
+            }
+
+            if ('') {
+              config.serverURLs = ''
+            }
+
+            if (window?.Valine) {
+              new Valine(config)
+              window.KeepCommentPlugin.hideLoading()
+            } else {
+              setTimeout(() => {
+                window.KeepCommentPlugin.initValine()
+              }, 1000)
+            }
+          }
+
+          if ('false' === 'true') {
+            setTimeout(() => {
+              window.KeepCommentPlugin.initValine()
+            }, 1200)
+          } else {
+            window.addEventListener('DOMContentLoaded', window.KeepCommentPlugin.initValine)
+          }
+        </script>
+    </div>
+
+
+        
+    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%82%B9%E5%87%BB%E6%94%B6%E8%97%8Fb%E7%AB%99%E8%A7%86%E9%A2%91%E5%90%8E%EF%BC%8C%E8%87%AA%E5%8A%A8%E4%B8%8B%E8%BD%BD%E6%94%B6%E8%97%8F%E8%A7%86%E9%A2%91"><span class="nav-number">1.</span> <span class="nav-text">点击收藏b站视频后，自动下载收藏视频</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84"><span class="nav-number">1.1.1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%9A%84%E7%BB%93%E6%9E%9C"><span class="nav-number">1.1.2.</span> <span class="nav-text">实现的结果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E9%9D%A2%E6%98%AF%E4%B8%BB%E4%BD%93%E7%9A%84%E8%BF%90%E8%A1%8C%E9%80%BB%E8%BE%91%E5%92%8C%E6%A1%86%E6%9E%B6"><span class="nav-number">2.</span> <span class="nav-text">下面是主体的运行逻辑和框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%9C%AC%E5%9C%B0json"><span class="nav-number">2.1.</span> <span class="nav-text">生成本地json</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%94%B6%E8%97%8F%E5%A4%B9%E4%B8%AD%E7%9A%84%E4%B8%80%E9%A1%B5%E5%86%85%E5%AE%B9"><span class="nav-number">2.1.0.1.</span> <span class="nav-text">获取收藏夹中的一页内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%94%B6%E8%97%8F%E5%A4%B9%E4%BF%A1%E6%81%AF"><span class="nav-number">2.1.0.2.</span> <span class="nav-text">获取收藏夹信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E9%A1%B5%E7%A0%81"><span class="nav-number">2.1.0.3.</span> <span class="nav-text">查询页码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96Response%E4%BF%A1%E6%81%AF"><span class="nav-number">2.1.0.4.</span> <span class="nav-text">获取Response信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E7%BD%91%E9%A1%B5%E4%BF%A1%E6%81%AF%EF%BC%8C%E5%B9%B6%E8%BD%AC%E5%8C%96%E4%B8%BAson%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.1.0.5.</span> <span class="nav-text">读取网页信息，并转化为son格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#json%E8%B0%83%E7%94%A8%E6%A0%BC%E5%BC%8F%E6%B8%85%E7%90%86"><span class="nav-number">2.1.0.6.</span> <span class="nav-text">json调用格式清理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%99%E5%85%A5json%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.0.7.</span> <span class="nav-text">写入json文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%B9%B6%E6%B7%BB%E5%8A%A0json%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="nav-number">2.1.0.8.</span> <span class="nav-text">创建并添加json文件内容</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%94%B6%E8%97%8F%E5%A4%B9%E4%B8%AD%E7%9A%84%E8%A7%86%E9%A2%91"><span class="nav-number">2.2.</span> <span class="nav-text">下载收藏夹中的视频</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E7%9A%84url%E5%9C%B0%E5%9D%80"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">请求的url地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%86%E9%A2%91%E7%9A%84%E8%AF%A6%E6%83%85%E9%A1%B5"><span class="nav-number">2.2.0.2.</span> <span class="nav-text">视频的详情页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BF%9D%E5%AD%98"><span class="nav-number">2.2.0.3.</span> <span class="nav-text">下载保存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%B8%BB%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.0.4.</span> <span class="nav-text">下载主函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%90%88%E5%B9%B6-%E8%A7%86%E9%A2%91%E5%90%88%E5%B9%B6%EF%BC%88%E4%BD%BF%E7%94%A8%E4%BA%86ffmpeg%EF%BC%89"><span class="nav-number">2.2.0.5.</span> <span class="nav-text">数据合并 - 视频合并（使用了ffmpeg）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96json%E6%96%87%E4%BB%B6%EF%BC%8C%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%EF%BC%8C%E4%BF%AE%E6%94%B9%E4%B8%8B%E8%BD%BD%E7%8A%B6%E6%80%81"><span class="nav-number">2.2.0.6.</span> <span class="nav-text">读取json文件，执行脚本，修改下载状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%89%8D%E6%A0%A1%E9%AA%8C%E6%96%87%E4%BB%B6%E5%A4%B9%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8"><span class="nav-number">2.2.0.7.</span> <span class="nav-text">下载前校验文件夹是否存在</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#config-ini%E8%AE%BE%E7%BD%AE%E4%B8%8E%E5%AF%BC%E5%85%A5%E5%8C%85"><span class="nav-number">2.3.</span> <span class="nav-text">config.ini设置与导入包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9%E5%92%8C%E6%9B%BF%E6%8D%A2%E6%96%87%E6%9C%AC"><span class="nav-number">2.4.</span> <span class="nav-text">创建文件夹和替换文本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6"><span class="nav-number">2.4.0.1.</span> <span class="nav-text">创建文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E5%92%8C%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">2.4.0.2.</span> <span class="nav-text">删除文件和文件夹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#json%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.4.0.3.</span> <span class="nav-text">json文件格式初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E6%A0%BC%E5%BC%8F%E6%B8%85%E7%90%86"><span class="nav-number">2.4.0.4.</span> <span class="nav-text">文本格式清理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E6%9F%A5%E8%AF%A2%E5%92%8C%E6%9B%BF%E6%8D%A2"><span class="nav-number">2.4.0.5.</span> <span class="nav-text">文本查询和替换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E9%AA%8C%E8%AF%81%E6%96%87%E6%9C%AC%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8"><span class="nav-number">2.4.0.6.</span> <span class="nav-text">查询验证文本是否存在</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E7%B3%BB%E7%BB%9F%E5%B9%B3%E5%8F%B0%E5%92%8C%E6%96%87%E4%BB%B6%E4%BF%9D%E5%AD%98%E8%B7%AF%E5%BE%84"><span class="nav-number">2.5.</span> <span class="nav-text">判断系统平台和文件保存路径</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E8%BF%90%E8%A1%8C%E5%B9%B3%E5%8F%B0%E6%98%AFwindows%E8%BF%98%E6%98%AFlinux"><span class="nav-number">2.5.0.1.</span> <span class="nav-text">判断当前运行平台是windows还是linux</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E5%88%86%E9%85%8D%E6%96%87%E4%BB%B6%E4%BF%9D%E5%AD%98%E8%B7%AF%E5%BE%84"><span class="nav-number">2.5.0.2.</span> <span class="nav-text">根据系统环境分配文件保存路径</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E6%94%B6%E8%97%8F%E5%90%8C%E6%AD%A5%E5%92%8C%E6%89%A7%E8%A1%8C%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.6.</span> <span class="nav-text">调用收藏同步和执行下载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E8%8E%B7%E5%8F%96"><span class="nav-number">2.6.0.1.</span> <span class="nav-text">日期获取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#config-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.6.0.2.</span> <span class="nav-text">config 初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E6%94%B6%E8%97%8F%E5%A4%B9"><span class="nav-number">2.6.0.3.</span> <span class="nav-text">同步收藏夹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%94%B6%E8%97%8F%E5%A4%B9%E8%A7%86%E9%A2%91"><span class="nav-number">2.6.0.4.</span> <span class="nav-text">下载收藏夹视频</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C"><span class="nav-number">2.7.</span> <span class="nav-text">运行</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+		year - 作为date对象的年份，为4位年份值
+		month - 0-11之间的整数，做为date对象的月份
+		day - 1-31之间的整数，做为date对象的天数
+		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+		minutes - 0-59之间的整数，做为date对象的分钟数
+		seconds - 0-59之间的整数，做为date对象的秒数
+		microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+		var t1 = Date.UTC(2019,04,09,21,47,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML="❤亲爱的旅客,我已与你/妳相遇❤❤❤"+" 第 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒❤";
+	}/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+	siteTime();
+</script>
+
+<footer class="footer border-box">
+		
+	<a href="https://www.foreverblog.cn/" target="_blank" > <img src="https://img.foreverblog.cn/logo_en_default.png" alt="" style="width:auto;height:16px;"> </a>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            本站由 <span class="tooltip" data-tooltip-content="阿里云"><img src="/images/brands/aliyun.png"></span> 提供部署服务
+            
+        </div>
+    
+
+    
+        <div class="record-info info-item">
+		ICP备案号：【&nbsp;
+            
+                
+                    <div class="record-item border-box">
+                        <a class=""
+                           target="_blank"
+                           href="https://beian.miit.gov.cn"
+                        >
+                            苏ICP备20001538号-1
+                        </a>
+                    </div>
+                
+            
+		&nbsp;】&nbsp;
+        </div>
+    
+	
+    <div class="copyright-info info-item">
+        &copy;&nbsp;<span>2019</span>&nbsp;-&nbsp;2024
+        
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">ドラゴンボールのLong</a>
+        
+		&nbsp;&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        <div class="count-info info-item">
+            
+                <span class="count-item border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">125.5k</span>
+                </span>
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+	
+	<!--自定义了时间-->
+    <p id="sitetime" target="_blank"></p>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+            <li class="tools-item go-to-comments-tablet flex-center">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%82%B9%E5%87%BB%E6%94%B6%E8%97%8Fb%E7%AB%99%E8%A7%86%E9%A2%91%E5%90%8E%EF%BC%8C%E8%87%AA%E5%8A%A8%E4%B8%8B%E8%BD%BD%E6%94%B6%E8%97%8F%E8%A7%86%E9%A2%91"><span class="nav-number">1.</span> <span class="nav-text">点击收藏b站视频后，自动下载收藏视频</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84"><span class="nav-number">1.1.1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%9A%84%E7%BB%93%E6%9E%9C"><span class="nav-number">1.1.2.</span> <span class="nav-text">实现的结果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E9%9D%A2%E6%98%AF%E4%B8%BB%E4%BD%93%E7%9A%84%E8%BF%90%E8%A1%8C%E9%80%BB%E8%BE%91%E5%92%8C%E6%A1%86%E6%9E%B6"><span class="nav-number">2.</span> <span class="nav-text">下面是主体的运行逻辑和框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%9C%AC%E5%9C%B0json"><span class="nav-number">2.1.</span> <span class="nav-text">生成本地json</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%94%B6%E8%97%8F%E5%A4%B9%E4%B8%AD%E7%9A%84%E4%B8%80%E9%A1%B5%E5%86%85%E5%AE%B9"><span class="nav-number">2.1.0.1.</span> <span class="nav-text">获取收藏夹中的一页内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%94%B6%E8%97%8F%E5%A4%B9%E4%BF%A1%E6%81%AF"><span class="nav-number">2.1.0.2.</span> <span class="nav-text">获取收藏夹信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E9%A1%B5%E7%A0%81"><span class="nav-number">2.1.0.3.</span> <span class="nav-text">查询页码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96Response%E4%BF%A1%E6%81%AF"><span class="nav-number">2.1.0.4.</span> <span class="nav-text">获取Response信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E7%BD%91%E9%A1%B5%E4%BF%A1%E6%81%AF%EF%BC%8C%E5%B9%B6%E8%BD%AC%E5%8C%96%E4%B8%BAson%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.1.0.5.</span> <span class="nav-text">读取网页信息，并转化为son格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#json%E8%B0%83%E7%94%A8%E6%A0%BC%E5%BC%8F%E6%B8%85%E7%90%86"><span class="nav-number">2.1.0.6.</span> <span class="nav-text">json调用格式清理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%99%E5%85%A5json%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.0.7.</span> <span class="nav-text">写入json文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%B9%B6%E6%B7%BB%E5%8A%A0json%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="nav-number">2.1.0.8.</span> <span class="nav-text">创建并添加json文件内容</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%94%B6%E8%97%8F%E5%A4%B9%E4%B8%AD%E7%9A%84%E8%A7%86%E9%A2%91"><span class="nav-number">2.2.</span> <span class="nav-text">下载收藏夹中的视频</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E7%9A%84url%E5%9C%B0%E5%9D%80"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">请求的url地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%86%E9%A2%91%E7%9A%84%E8%AF%A6%E6%83%85%E9%A1%B5"><span class="nav-number">2.2.0.2.</span> <span class="nav-text">视频的详情页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BF%9D%E5%AD%98"><span class="nav-number">2.2.0.3.</span> <span class="nav-text">下载保存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%B8%BB%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.0.4.</span> <span class="nav-text">下载主函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%90%88%E5%B9%B6-%E8%A7%86%E9%A2%91%E5%90%88%E5%B9%B6%EF%BC%88%E4%BD%BF%E7%94%A8%E4%BA%86ffmpeg%EF%BC%89"><span class="nav-number">2.2.0.5.</span> <span class="nav-text">数据合并 - 视频合并（使用了ffmpeg）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96json%E6%96%87%E4%BB%B6%EF%BC%8C%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%EF%BC%8C%E4%BF%AE%E6%94%B9%E4%B8%8B%E8%BD%BD%E7%8A%B6%E6%80%81"><span class="nav-number">2.2.0.6.</span> <span class="nav-text">读取json文件，执行脚本，修改下载状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%89%8D%E6%A0%A1%E9%AA%8C%E6%96%87%E4%BB%B6%E5%A4%B9%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8"><span class="nav-number">2.2.0.7.</span> <span class="nav-text">下载前校验文件夹是否存在</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#config-ini%E8%AE%BE%E7%BD%AE%E4%B8%8E%E5%AF%BC%E5%85%A5%E5%8C%85"><span class="nav-number">2.3.</span> <span class="nav-text">config.ini设置与导入包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9%E5%92%8C%E6%9B%BF%E6%8D%A2%E6%96%87%E6%9C%AC"><span class="nav-number">2.4.</span> <span class="nav-text">创建文件夹和替换文本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6"><span class="nav-number">2.4.0.1.</span> <span class="nav-text">创建文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E5%92%8C%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">2.4.0.2.</span> <span class="nav-text">删除文件和文件夹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#json%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.4.0.3.</span> <span class="nav-text">json文件格式初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E6%A0%BC%E5%BC%8F%E6%B8%85%E7%90%86"><span class="nav-number">2.4.0.4.</span> <span class="nav-text">文本格式清理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E6%9F%A5%E8%AF%A2%E5%92%8C%E6%9B%BF%E6%8D%A2"><span class="nav-number">2.4.0.5.</span> <span class="nav-text">文本查询和替换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E9%AA%8C%E8%AF%81%E6%96%87%E6%9C%AC%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8"><span class="nav-number">2.4.0.6.</span> <span class="nav-text">查询验证文本是否存在</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E7%B3%BB%E7%BB%9F%E5%B9%B3%E5%8F%B0%E5%92%8C%E6%96%87%E4%BB%B6%E4%BF%9D%E5%AD%98%E8%B7%AF%E5%BE%84"><span class="nav-number">2.5.</span> <span class="nav-text">判断系统平台和文件保存路径</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E8%BF%90%E8%A1%8C%E5%B9%B3%E5%8F%B0%E6%98%AFwindows%E8%BF%98%E6%98%AFlinux"><span class="nav-number">2.5.0.1.</span> <span class="nav-text">判断当前运行平台是windows还是linux</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E5%88%86%E9%85%8D%E6%96%87%E4%BB%B6%E4%BF%9D%E5%AD%98%E8%B7%AF%E5%BE%84"><span class="nav-number">2.5.0.2.</span> <span class="nav-text">根据系统环境分配文件保存路径</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E6%94%B6%E8%97%8F%E5%90%8C%E6%AD%A5%E5%92%8C%E6%89%A7%E8%A1%8C%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.6.</span> <span class="nav-text">调用收藏同步和执行下载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E8%8E%B7%E5%8F%96"><span class="nav-number">2.6.0.1.</span> <span class="nav-text">日期获取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#config-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.6.0.2.</span> <span class="nav-text">config 初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E6%94%B6%E8%97%8F%E5%A4%B9"><span class="nav-number">2.6.0.3.</span> <span class="nav-text">同步收藏夹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%94%B6%E8%97%8F%E5%A4%B9%E8%A7%86%E9%A2%91"><span class="nav-number">2.6.0.4.</span> <span class="nav-text">下载收藏夹视频</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C"><span class="nav-number">2.7.</span> <span class="nav-text">运行</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/lazyload.min.js"></script>
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+    
+        
+    
+        
+            
+<script class="custom-inject-js" src="/js/love.js" data-pjax></script>
+
+        
+    
+
+</body>
+</html>

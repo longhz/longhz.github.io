@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="每日一句">
+    <meta name="author" content="ドラゴンボールのLong">
+    
+    <title>
+        
+            Mysql使用命令备份和还原数据库 |
+        
+        ドラゴンボールのBlog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/brands.min.css">
+    
+        
+            
+        
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"zhongshenglong.xyz","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"ドラゴンボールのBlog","author":"ドラゴンボールのLong","avatar":"https://cdn.jsdelivr.net/gh/longhz/cdn@1.0/img/custom/avatar1.jpg","logo":"/images/favicon.ico","favicon":"/images/favicon.ico"},"menu":{"home":"/ || fa-solid fa-home","归档":{"icon":"fa-solid fa-book","children":[{"archives":"/archives || fa-solid fa-layer-group"},{"tags":"/tags || fa-solid fa-tags"}]},"links":"/links|| fa-solid fa-link","about":{"icon":"fa-solid fa-user-secret","children":[{"gallery":"/gallery || fa-solid fa-image"},{"about":"/about || fa-solid fa-user-graduate"}]}},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"黄色的森林分出两条路 || 我选择人迹更少的那一条，从此决定我一生的道路。","hitokoto":true},"social_contact":{"enable":false,"links":{"github":"https://github.com/longhz","weixin":null,"qq":"https://wpa.qq.com/msgrd?v=3&uin=1084045717&site=qq&menu=yes","weibo":null,"bilibili":"https://space.bilibili.com/9317816/bangumi","wangyiyun":"https://music.163.com/user/home?id=1348254961","zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":{"custom_license":"Long License","custom_link":"https://zhongshenglong.xyz"},"share":true,"reward":{"enable":true,"img_link":"/images/reward.jpg","text":"请作者喝咖啡","icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"obsidian"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":true,"use":"valine","valine":{"appid":"2TGCOmDNikdxOnVmQJEFhTOK-gzGzoHsz","appkey":"lU21jvewvcy043UjfpHRXfvA","server_urls":null,"placeholder":"😜 尽情吐槽吧~"},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.36"},"waline":{"server_url":null,"reaction":false,"version":"3.2.1"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2019,"word_count":true,"site_deploy":{"enable":true,"provider":"aliyun","url":null},"record":{"enable":true,"list":[{"code":"苏ICP备20001538号-1","link":"https://beian.miit.gov.cn"}]}},"inject":{"enable":true,"css":[null],"js":[null,"/js/love.js"]},"aplayer":{"id":4900925608,"server":"netease","type":"playlist","fixed":true,"autoplay":false,"loop":"all","order":"random","preload":"auto","volume":0.7,"mutex":true},"live2d":{"enable":true,"scriptFrom":"local","pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"use":"live2d-widget-model-liveuu"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}},"root":"","source_data":{"links":[{"name":"IT诗人","link":"https://xpoet.cn/","description":"所有命运的馈赠，早已在暗中标好价格。","avatar":"https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/common-use/avatar.jpg"},{"name":"不知名艺术家","link":"https://jinzhanqi.com/","description":"love artist, love code.","avatar":"https://s3.ax1x.com/2020/11/17/DVvkB4.jpg"},{"name":"阮一峰","link":"http://www.ruanyifeng.com/blog/archives.html","description":"阮一峰的网络日志","avatar":"https://www.ruanyifeng.com/blog/images/person2_s.jpg"},{"name":"墨","link":"https://www.kura.ren/","description":"清水1024","avatar":"https://www.kura.ren/upload/2020/05/up-up-man-4d2d7e917c9d476b86373b0aa17fcafe.png"},{"name":"爱·绮梦","link":"https://x.iqimeng.com/","description":"学而时习之 不亦说乎","avatar":"https://x.iqimeng.com/images/avatar.jpg"},{"name":"Keep learning","link":"https://blog.gooday.press/","description":"爱好学习，不断提升自我","avatar":"https://cdn.jsdelivr.net/gh/cemonliu/blogpic@main/avatar.svg"},{"name":"CitingNutria","link":"https://citingnutria.github.io/","description":"まだ夢がある","avatar":"https://cdn.jsdelivr.net/gh/CitingNutria/image_hosting@master/avatar.jpg"},{"name":"小龙的跋涉","link":"https://www.eduorg.ltd/","description":"但行好事，莫问前程","avatar":"https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/blog/favicon.42reb4izcgs0.png"},{"name":"Eveneko","link":"https://eveneko.com/","description":"我们这一生，能做一个优秀的普通人已经足够厉害了！","avatar":"https://cdn.jsdelivr.net/gh/Eveneko/Image-Hosting@master/PicX/A1644732-0330-47D7-A2A1-4EBA8B3C2855.3gp6q5zr8180.jpeg"},{"name":"Nico","link":"https://www.lzp.zone/","description":"蝉歌星夜，月影婆娑","avatar":"https://tva1.sinaimg.cn/large/008i3skNly1gwpe11i8adj301s01smwx.jpg"},{"name":"KAI’S NOTE","link":"https://kainote.top/","description":"三天打鱼(⊙ˍ⊙)两天晒网","avatar":"https://s2.loli.net/2022/01/09/UtbhxHv2IA8jqwZ.jpg"},{"name":"April的记录小屋","link":"https://april-tong.com/","description":"热爱可抵岁月漫长。","avatar":"https://raw.githubusercontent.com/AprilTong/image/master/img/photo.jpeg"},{"name":"ZhengXi","link":"https://zhengxi.io/","description":"你的时间有限，不要为了别人而活","avatar":"https://vip2.loli.io/2022/01/28/8bTLXSIoDckrjfz.png"},{"name":"PMP项目管理","link":"https://pmp.saiita.cn/","description":"学习PMP项目管理的笔记.","avatar":"https://cdn.saiita.com.cn/picgo/P3260015.JPG"},{"name":"开心驿站","link":"https://www.kxyz.eu.org/","description":"steam游戏交流中心","avatar":"https://www.kxyz.eu.org/wp-content/uploads/logo.png"},{"name":"免费公益v2ray节点订阅","link":"https://www.v2rayfree.eu.org/","description":"免费公益v2ray节点订阅","avatar":"https://www.v2rayfree.eu.org/images/avatar.png"},{"name":"ZXC's Blog","link":"https://www.v2rayfree.eu.org/","description":"生命不息，代码不止","avatar":"https://cdn.jsdelivr.net/gh/XavierJiezou/picx-image-hosting@main/about/avatar.jpg"},{"name":"FallenGemini的博客","link":"https://paraderno.github.io/Blog.github.io/","description":"愿地狱的终点是天堂","avatar":"https://raw.githubusercontent.com/Paraderno/image-hosting/master/avatar.3co1ubx6en80.png"},{"name":"AomanHao的博客","link":"https://www.aomanhao.top/","description":"热爱图像处理，优化彩色世界","avatar":"https://www.aomanhao.top/images/Avatar.jpg"},{"name":"༺ཌ༈君☠纤༈ད༻的博客","link":"https://www.cnblogs.com/asio/","description":"欲买桂花同载酒，荒泷天下第一斗。","avatar":"https://pic.cnblogs.com/avatar/1924746/20200215183155.png"},{"name":"clash免费节点","link":"https://clashfree.eu.org/","description":"ssr/v2ray/clash免费节点分享","avatar":"https://clashfree.eu.org/wp-content/uploads/avatar.png"}]},"version":"4.2.3"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="❦༺  LONGZ ༻❦" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/favicon.ico">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               ドラゴンボールのBlog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box has-sub-menu">
+                            <a class="menu-text-color border-box" href="javascript:void(0);">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-book"></i>
+                                
+                                归档
+                                
+                                    <i class="menu-text-color collapse-icon fa-solid fa-angle-down"></i>
+                                
+                            </a>
+                            
+                                <ul class="sub-menu-list border-box">
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/archives">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-layer-group"></i>
+                                                
+                                                归档
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/tags">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-tags"></i>
+                                                
+                                                标签
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/links">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-link"></i>
+                                
+                                友链
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box has-sub-menu">
+                            <a class="menu-text-color border-box" href="javascript:void(0);">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-secret"></i>
+                                
+                                关于
+                                
+                                    <i class="menu-text-color collapse-icon fa-solid fa-angle-down"></i>
+                                
+                            </a>
+                            
+                                <ul class="sub-menu-list border-box">
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/gallery">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-image"></i>
+                                                
+                                                GALLERY
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/about">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-user-graduate"></i>
+                                                
+                                                关于
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box has-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="javascript:void(0);">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-book"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                            <i class="right-side collapse-icon fa-solid fa-angle-left"></i>
+                        
+                    </label>
+                    
+                        <ul class="drawer-sub-menu-list border-box">
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/archives">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-layer-group"></i>
+                                            </span>
+                                        
+                                        归档
+                                    </a>
+                                </li>
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/tags">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-tags"></i>
+                                            </span>
+                                        
+                                        标签
+                                    </a>
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/links">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-link"></i>
+                                </span>
+                            
+                            友链
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box has-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="javascript:void(0);">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-secret"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                            <i class="right-side collapse-icon fa-solid fa-angle-left"></i>
+                        
+                    </label>
+                    
+                        <ul class="drawer-sub-menu-list border-box">
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/gallery">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-image"></i>
+                                            </span>
+                                        
+                                        GALLERY
+                                    </a>
+                                </li>
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/about">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-user-graduate"></i>
+                                            </span>
+                                        
+                                        关于
+                                    </a>
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        Mysql使用命令备份和还原数据库
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="http://cdns.zhongshenglong.xyz/cdn-photos/img/custom/avatar1.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">岁月如梦</span>
+                                
+                                    <span class="author-badge">Lv4</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2022-03-06 20:10:12</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Wed Aug 10 2022 19:20:19 GMT+0800">2022-08-10 19:20:19</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E5%BF%83%E5%BE%97/">心得</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/mysql/">mysql</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>2.6k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>11 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h1 id="mysql数据库备份命令（mysql数据备份的三种方法）"><a href="#mysql数据库备份命令（mysql数据备份的三种方法）" class="headerlink" title="mysql数据库备份命令（mysql数据备份的三种方法）"></a>mysql数据库备份命令（mysql数据备份的三种方法）</h1><p>在操作数据过程中，可能会导致数据错误，甚至数据库奔溃，而有效的定时备份能很好地保护数据库。本篇文章主要讲述了几种方法进行 MySQL 定时备份数据库。</p>
+<h2 id="一-mysqldump命令备份数据"><a href="#一-mysqldump命令备份数据" class="headerlink" title="一. mysqldump命令备份数据"></a>一. mysqldump命令备份数据</h2><p>在MySQL中提供了命令行导出数据库数据以及文件的一种方便的工具mysqldump,我们可以通过命令行直接实现数据库内容的导出dump,首先我们简单了解一下mysqldump命令用法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u root -p --databases 数据库1 数据库2 &gt; xxx.sql</span><br></pre></td></tr></table></figure>
+
+<h2 id="二-mysqldump常用操作示例"><a href="#二-mysqldump常用操作示例" class="headerlink" title="二. mysqldump常用操作示例"></a>二. mysqldump常用操作示例</h2><h3 id="1-备份全部数据库的数据和结构"><a href="#1-备份全部数据库的数据和结构" class="headerlink" title="1. 备份全部数据库的数据和结构"></a>1. 备份全部数据库的数据和结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -p123456 -A &gt; /data/mysqlDump/mydb.sql</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-备份全部数据库的结构（加-d-参数）"><a href="#2-备份全部数据库的结构（加-d-参数）" class="headerlink" title="2.备份全部数据库的结构（加 -d 参数）"></a>2.备份全部数据库的结构（加 -d 参数）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -p123456 -A -d &gt; /data/mysqlDump/mydb.sql</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-备份全部数据库的数据-加-t-参数"><a href="#3-备份全部数据库的数据-加-t-参数" class="headerlink" title="3. 备份全部数据库的数据(加 -t 参数)"></a>3. 备份全部数据库的数据(加 -t 参数)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -p123456 -A -t &gt; /data/mysqlDump/mydb.sql</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-备份单个数据库的数据和结构-数据库名mydb"><a href="#4-备份单个数据库的数据和结构-数据库名mydb" class="headerlink" title="4.备份单个数据库的数据和结构(,数据库名mydb)"></a>4.备份单个数据库的数据和结构(,数据库名mydb)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot-p123456 mydb &gt; /data/mysqlDump/mydb.sql</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-备份单个数据库的结构"><a href="#5-备份单个数据库的结构" class="headerlink" title="5. 备份单个数据库的结构"></a>5. 备份单个数据库的结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -p123456 mydb -d &gt; /data/mysqlDump/mydb.sql</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-备份单个数据库的数据"><a href="#6-备份单个数据库的数据" class="headerlink" title="6. 备份单个数据库的数据"></a>6. 备份单个数据库的数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -p123456 mydb -t &gt; /data/mysqlDump/mydb.sql</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-备份多个表的数据和结构（数据，结构的单独备份方法与上同）"><a href="#7-备份多个表的数据和结构（数据，结构的单独备份方法与上同）" class="headerlink" title="7. 备份多个表的数据和结构（数据，结构的单独备份方法与上同）"></a>7. 备份多个表的数据和结构（数据，结构的单独备份方法与上同）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -p123456 mydb t1 t2 &gt; /data/mysqlDump/mydb.sql</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-一次备份多个数据库"><a href="#8-一次备份多个数据库" class="headerlink" title="8. 一次备份多个数据库"></a>8. 一次备份多个数据库</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -p123456 --databases db1 db2 &gt; /data/mysqlDump/mydb.sql</span><br></pre></td></tr></table></figure>
+
+<h2 id="三-还原-MySQL-备份内容"><a href="#三-还原-MySQL-备份内容" class="headerlink" title="三. 还原 MySQL 备份内容"></a>三. 还原 MySQL 备份内容</h2><p>有两种方式还原，第一种是在 MySQL 命令行中，第二种是使用 SHELL 行完成还原</p>
+<h3 id="1-在系统命令行中，输入如下实现还原："><a href="#1-在系统命令行中，输入如下实现还原：" class="headerlink" title="1. 在系统命令行中，输入如下实现还原："></a>1. 在系统命令行中，输入如下实现还原：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p123456 &lt; /data/mysqlDump/mydb.sql</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-在登录进入mysql系统中-通过source指令找到对应系统中的文件进行还原："><a href="#2-在登录进入mysql系统中-通过source指令找到对应系统中的文件进行还原：" class="headerlink" title="2. 在登录进入mysql系统中,通过source指令找到对应系统中的文件进行还原："></a>2. 在登录进入mysql系统中,通过source指令找到对应系统中的文件进行还原：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; source /data/mysqlDump/mydb.sql</span><br></pre></td></tr></table></figure>
+
+<p>在 Linux中，通常使用BASH脚本对需要执行的内容进行编写，加上定时执行命令crontab实现日志自动化生成。</p>
+<blockquote>
+<p>以下代码功能就是针对mysql进行备份，配合crontab，实现备份的内容为近一个月（31天）内的每天的mysql数据库记录。</p>
+</blockquote>
+<h3 id="3-编写BASH维护固定数量备份文件"><a href="#3-编写BASH维护固定数量备份文件" class="headerlink" title="3.编写BASH维护固定数量备份文件"></a>3.编写BASH维护固定数量备份文件</h3><p>在Linux中，使用vi或者vim编写脚本内容并命名为：mysql_dump_script.sh</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">#保存备份个数，备份31天数据</span><br><span class="line">number=31</span><br><span class="line">#备份保存路径</span><br><span class="line">backup_dir=/root/mysqlbackup</span><br><span class="line">#日期</span><br><span class="line">dd=`date +%Y-%m-%d-%H-%M-%S`</span><br><span class="line">#备份工具</span><br><span class="line">tool=mysqldump</span><br><span class="line">#用户名</span><br><span class="line">username=root</span><br><span class="line">#密码</span><br><span class="line">password=TankB214</span><br><span class="line">#将要备份的数据库</span><br><span class="line">database_name=edoctor</span><br><span class="line"></span><br><span class="line">#如果文件夹不存在则创建</span><br><span class="line">if [ ! -d $backup_dir ];</span><br><span class="line">then</span><br><span class="line">mkdir -p $backup_dir;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">#简单写法</span><br><span class="line">mysqldump -u root -p123456 users &gt; /root/mysqlbackup/users-$filename.sql</span><br><span class="line">$tool -u $username -p$password $database_name &gt; $backup_dir/$database_name-$dd.sql</span><br><span class="line"></span><br><span class="line">#写创建备份日志</span><br><span class="line">echo &quot;create $backup_dir/$database_name-$dd.dupm&quot; &gt;&gt; $backup_dir/log.txt</span><br><span class="line"></span><br><span class="line">#找出需要删除的备份</span><br><span class="line">delfile=`ls -l -crt $backup_dir/*.sql | awk &#x27;&#123;print $9 &#125;&#x27; | head -1`</span><br><span class="line"></span><br><span class="line">#判断现在的备份数量是否大于$number</span><br><span class="line">count=`ls -l -crt $backup_dir/*.sql | awk &#x27;&#123;print $9 &#125;&#x27; | wc -l`</span><br><span class="line"></span><br><span class="line">if [ $count -gt $number ]</span><br><span class="line">then</span><br><span class="line">#删除最早生成的备份，只保留number数量的备份</span><br><span class="line">rm $delfile</span><br><span class="line">#写删除文件日志</span><br><span class="line">echo &quot;delete $delfile&quot; &gt;&gt; $backup_dir/log.txt</span><br><span class="line">fi</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如上代码主要含义如下：</p>
+<blockquote>
+<p>1.首先设置各项参数，例如number最多需要备份的数目，备份路径，用户名，密码等。</p>
+<p>2.执行mysqldump命令保存备份文件，并将操作打印至同目录下的log.txt中标记操作日志。</p>
+<p>3.定义需要删除的文件：通过ls命令获取第九列，即文件名列，再通过实现定义操作时间最晚的那个需要删除的文件。</p>
+<p>4.定义备份数量：通过ls命令加上</p>
+<p>统计以sql结尾的文件的行数。</p>
+<p>5.如果文件超出限制大小，就删除最早创建的sql文件</p>
+</blockquote>
+<h2 id="使用crontab定期执行备份脚本"><a href="#使用crontab定期执行备份脚本" class="headerlink" title="使用crontab定期执行备份脚本"></a>使用crontab定期执行备份脚本</h2><p>在 Linux 中，周期执行的任务一般由cron这个守护进程来处理[ps -ef|grep cron]。cron读取一个或多个配置文件，这些配置文件中包含了命令行及其调用时间。cron的配置文件称为“crontab”，是“cron table”的简写。</p>
+<h3 id="cron服务"><a href="#cron服务" class="headerlink" title="cron服务"></a>cron服务</h3><p><strong>cron是一个 Liunx 下 的定时执行工具，可以在无需人工干预的情况下运行作业</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">service crond start //启动服务</span><br><span class="line"></span><br><span class="line">service crond stop //关闭服务</span><br><span class="line"></span><br><span class="line">service crond restart //重启服务</span><br><span class="line"></span><br><span class="line">service crond reload //重新载入配置</span><br><span class="line"></span><br><span class="line">service crond status //查看服务状态</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="crontab语法"><a href="#crontab语法" class="headerlink" title="crontab语法"></a>crontab语法</h3><p>crontab命令用于安装、删除或者列出用于驱动cron后台进程的表格。用户把需要执行的命令序列放到crontab文件中以获得执行。每个用户都可以有自己的crontab文件。&#x2F;var&#x2F;spool&#x2F;cron下的crontab文件不可以直接创建或者直接修改。该crontab文件是通过crontab命令创建的。</p>
+<p>在crontab文件中如何输入需要执行的命令和时间。该文件中每行都包括六个域，其中前五个域是指定命令被执行的时间，最后一个域是要被执行的命令。每个域之间使用空格或者制表符分隔。</p>
+<p>格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minute hour day-of-month month-of-year day-of-week commands</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>合法值 00-59 00-23 01-31 01-12 0-6 (0 is sunday)</strong></p>
+<p>除了数字还有几个个特殊的符号就是”<em>“、”&#x2F;“和”-“、”,”，</em>代表所有的取值范围内的数字，”&#x2F;“代表每的意思,”&#x2F;5”表示每5个单位，”-“代表从某个数字到某个数字,”,”分开几个离散的数字。</p>
+<p>-l 在标准输出上显示当前的crontab。</p>
+<p>-r 删除当前的crontab文件。</p>
+<p>-e 使用VISUAL或者EDITOR环境变量所指的编辑器编辑当前的crontab文件。当结束编辑离开时，编辑后的文件将自动安装。</p>
+<h3 id="创建cron脚本"><a href="#创建cron脚本" class="headerlink" title="创建cron脚本"></a>创建cron脚本</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">第一步：写cron脚本文件,命名为mysqlRollBack.cron。</span><br><span class="line"></span><br><span class="line">15,30,45,59 * * * * echo &quot;xgmtest.....&quot; &gt;&gt; xgmtest.txt 表示，每隔15分钟，执行打印一次命令</span><br><span class="line"></span><br><span class="line">第二步：添加定时任务。执行命令 “crontab crontest.cron”。搞定</span><br><span class="line"></span><br><span class="line">第三步：&quot;crontab -l&quot; 查看定时任务是否成功或者检测/var/spool/cron下是否生成对应cron脚本</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：这操作是直接替换该用户下的crontab，而不是新增<br>定期执行编写的定时任务脚本（记得先给shell脚本执行权限）<br>0 2 * * * &#x2F;root&#x2F;mysql_backup_script.sh<br>随后使用crontab命令定期指令编写的定时脚本<br>crontabmysqlRollback.cron<br>再通过命令检查定时任务是否已创建：</p>
+</blockquote>
+<h3 id="附-crontab-的使用示例："><a href="#附-crontab-的使用示例：" class="headerlink" title="附 crontab 的使用示例："></a><strong>附 crontab 的使用示例：</strong></h3><h4 id="1-每天早上6点"><a href="#1-每天早上6点" class="headerlink" title="1. 每天早上6点"></a>1. 每天早上6点</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0 6 * * * echo &quot;Good morning.&quot; &gt;&gt; /tmp/test.txt </span><br><span class="line">#注意单纯echo，从屏幕上看不到任何输出，因为cron把任何输出都email到root的信箱了。</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-每两个小时"><a href="#2-每两个小时" class="headerlink" title="2. 每两个小时"></a>2. 每两个小时</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 */2 * * * echo &quot;Have a break now.&quot; &gt;&gt; /tmp/test.txt</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-晚上11点到早上8点之间每两个小时和早上八点"><a href="#3-晚上11点到早上8点之间每两个小时和早上八点" class="headerlink" title="3. 晚上11点到早上8点之间每两个小时和早上八点"></a>3. 晚上11点到早上8点之间每两个小时和早上八点</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 23-7/2，8 * * * echo &quot;Have a good dream&quot; &gt;&gt; /tmp/test.txt</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-每个月的4号和每个礼拜的礼拜一到礼拜三的早上11点"><a href="#4-每个月的4号和每个礼拜的礼拜一到礼拜三的早上11点" class="headerlink" title="4. 每个月的4号和每个礼拜的礼拜一到礼拜三的早上11点"></a>4. 每个月的4号和每个礼拜的礼拜一到礼拜三的早上11点</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 11 4 * 1-3 command line</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-1-月-1-日早上-4-点"><a href="#5-1-月-1-日早上-4-点" class="headerlink" title="5.1 月 1 日早上 4 点"></a>5.1 月 1 日早上 4 点</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 4 1 1 * command line SHELL=/bin/bash PATH=/sbin:/bin:/usr/sbin:/usr/bin MAILTO=root #如果出现错误，或者有数据输出，数据作为邮件发给这个帐号 HOME=/</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-每小时执行-etc-cron-hourly内的脚本"><a href="#6-每小时执行-etc-cron-hourly内的脚本" class="headerlink" title="6. 每小时执行&#x2F;etc&#x2F;cron.hourly内的脚本"></a>6. 每小时执行&#x2F;etc&#x2F;cron.hourly内的脚本</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">01 * * * * root run-parts /etc/cron.hourly</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-每天执行-etc-cron-daily内的脚本"><a href="#7-每天执行-etc-cron-daily内的脚本" class="headerlink" title="7. 每天执行&#x2F;etc&#x2F;cron.daily内的脚本"></a>7. 每天执行&#x2F;etc&#x2F;cron.daily内的脚本</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">02 4 * * * root run-parts /etc/cron.daily</span><br></pre></td></tr></table></figure>
+
+<h4 id="8-每星期执行-etc-cron-weekly内的脚本"><a href="#8-每星期执行-etc-cron-weekly内的脚本" class="headerlink" title="8. 每星期执行&#x2F;etc&#x2F;cron.weekly内的脚本"></a>8. 每星期执行&#x2F;etc&#x2F;cron.weekly内的脚本</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">22 4 * * 0 root run-parts /etc/cron.weekly</span><br></pre></td></tr></table></figure>
+
+<h4 id="9-每月去执行-etc-cron-monthly内的脚本"><a href="#9-每月去执行-etc-cron-monthly内的脚本" class="headerlink" title="9. 每月去执行&#x2F;etc&#x2F;cron.monthly内的脚本"></a>9. 每月去执行&#x2F;etc&#x2F;cron.monthly内的脚本</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">42 4 1 * * root run-parts /etc/cron.monthly</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>: “run-parts” 这个参数了，如果去掉这个参数的话，后面就可以写要运行的某个脚本名，而不是文件夹名。</p>
+<h4 id="10-每天的下午4点、5点、6点的5-min、15-min、25-min、35-min、45-min、55-min时执行命令。"><a href="#10-每天的下午4点、5点、6点的5-min、15-min、25-min、35-min、45-min、55-min时执行命令。" class="headerlink" title="10. 每天的下午4点、5点、6点的5 min、15 min、25 min、35 min、45 min、55 min时执行命令。"></a>10. 每天的下午4点、5点、6点的5 min、15 min、25 min、35 min、45 min、55 min时执行命令。</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5，15，25，35，45，55 16，17，18 * * * command</span><br></pre></td></tr></table></figure>
+
+<h4 id="11-每周一，三，五的下午3：00系统进入维护状态，重新启动系统。"><a href="#11-每周一，三，五的下午3：00系统进入维护状态，重新启动系统。" class="headerlink" title="11. 每周一，三，五的下午3：00系统进入维护状态，重新启动系统。"></a>11. 每周一，三，五的下午3：00系统进入维护状态，重新启动系统。</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00 15 * * 1，3，5 shutdown -r +5</span><br></pre></td></tr></table></figure>
+
+<h4 id="12-每小时的10分，40分执行用户目录下的innd-bbslin这个指令："><a href="#12-每小时的10分，40分执行用户目录下的innd-bbslin这个指令：" class="headerlink" title="12. 每小时的10分，40分执行用户目录下的innd&#x2F;bbslin这个指令："></a>12. 每小时的10分，40分执行用户目录下的innd&#x2F;bbslin这个指令：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10，40 * * * * innd/bbslink</span><br></pre></td></tr></table></figure>
+
+<h4 id="13-每小时的1分执行用户目录下的bin-account这个指令："><a href="#13-每小时的1分执行用户目录下的bin-account这个指令：" class="headerlink" title="13. 每小时的1分执行用户目录下的bin&#x2F;account这个指令："></a>13. 每小时的1分执行用户目录下的bin&#x2F;account这个指令：</h4><p>以下是我的测试每分钟的截图效果，其对应代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * /root/mysql_backup_script.sh</span><br></pre></td></tr></table></figure>
+
+<p><strong>效果截图</strong>：</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220616184317.png"
+                       
+                 ></p>
+<p><strong>其中的log.txt记录备份的操作详细日志</strong>：<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220616184340.png"
+                       
+                 ></p>
+<p>————————————————————————————————————————————————————————————————————</p>
+<h2 id="crontab-定时语句"><a href="#crontab-定时语句" class="headerlink" title="crontab 定时语句"></a>crontab 定时语句</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 每天晚上7点定时备份mysql数据库</span><br><span class="line">0 19 * * * . /etc/profile;/bin/bash /u01/mysql/data_dump/bf_data_dump.sh &gt;&gt; /u01/mysql/data_dump/mrbf_log.txt</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>vi bf_data_dump.sh</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">#/bin/bash</span><br><span class="line">#This is mysql backup shell on 2022/8/10</span><br><span class="line">#longz 定时备份mysql脚本</span><br><span class="line"></span><br><span class="line">#BACKUP_DIR=/u01/mysql/data_dump/&#x27;date +%Y-%m-%d&#x27;</span><br><span class="line"></span><br><span class="line">#保存备份个数，备份31天数据</span><br><span class="line">number=7</span><br><span class="line"></span><br><span class="line">#备份保存路径</span><br><span class="line">BACKUP_DIR=/u01/mysql/data_dump</span><br><span class="line"></span><br><span class="line">#日期</span><br><span class="line">dd=$(date +%Y%m%d)</span><br><span class="line">dd1=_$(date +%Y%m%d_%H%M%S)</span><br><span class="line"></span><br><span class="line">##备份工具</span><br><span class="line">tool=/usr/bin/mysqldump</span><br><span class="line"></span><br><span class="line">#将要备份的数据库</span><br><span class="line">MYSQL_DB1=itcast_shop_bi</span><br><span class="line">MYSQL_DB2=kdy_zhongshengl</span><br><span class="line">MYSQL_DB3=kodbox</span><br><span class="line">MYSQL_DB4=myc</span><br><span class="line">MYSQL_DB5=mysql</span><br><span class="line">MYSQL_DB6=pixiv</span><br><span class="line"></span><br><span class="line">#用户名</span><br><span class="line">MYSQL_USER=root</span><br><span class="line">#密码</span><br><span class="line">MYSQL_PW=*********</span><br><span class="line">#端口号</span><br><span class="line">MYSQL_PORT=3306</span><br><span class="line"></span><br><span class="line">#判断用户是否为root，如果不是，自动退出；</span><br><span class="line"></span><br><span class="line">if [[ $UID -ne 0 ]]; then</span><br><span class="line">      echo &quot; This user must be root !!!</span><br><span class="line">	  此用户必须是root用户 !!! &quot;</span><br><span class="line">      sleep 2</span><br><span class="line">      exit 0</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">#判断目录是否存在</span><br><span class="line"></span><br><span class="line">if [[ ! -d $BACKUP_DIR/$dd ]]; then</span><br><span class="line">mkdir -p $BACKUP_DIR/$dd</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">#下面开始备份</span><br><span class="line">#简单写法 mysqldump -u root -p123456 users &gt; /root/mysqlbackup/users-$filename.sql</span><br><span class="line"></span><br><span class="line">$tool -u$MYSQL_USER -P$MYSQL_PORT -p$MYSQL_PW $MYSQL_DB1 | gzip &gt; $BACKUP_DIR/$dd/itcast_shop_bi-$dd1.sql.gz</span><br><span class="line">echo &quot;itcast_shop_bi_备份完成-$dd1&quot;</span><br><span class="line">#写创建备份日志</span><br><span class="line">echo &quot;create $BACKUP_DIR/itcast_shop_bi-$dd1.dupm&quot; &gt;&gt; $BACKUP_DIR/log.txt</span><br><span class="line"></span><br><span class="line">$tool -u$MYSQL_USER -P$MYSQL_PORT -p$MYSQL_PW $MYSQL_DB2 | gzip &gt; $BACKUP_DIR/$dd/kdy_zhongshengl-$dd1.sql.gz</span><br><span class="line">echo &quot;kdy_zhongshengl_备份完成-$dd1&quot;</span><br><span class="line">#写创建备份日志</span><br><span class="line">echo &quot;$dd1_create $BACKUP_DIR/kdy_zhongshengl-$dd1.dupm&quot; &gt;&gt; $BACKUP_DIR/log.txt</span><br><span class="line"></span><br><span class="line">$tool -u$MYSQL_USER -P$MYSQL_PORT -p$MYSQL_PW $MYSQL_DB3 | gzip &gt; $BACKUP_DIR/$dd/kodbox_shop_bi-$dd1.sql.gz</span><br><span class="line">echo &quot;kodbox_备份完成-$dd1&quot;</span><br><span class="line">#写创建备份日志</span><br><span class="line">echo &quot;create $BACKUP_DIR/kodbox_shop_bi-$dd1.dupm&quot; &gt;&gt; $BACKUP_DIR/log.txt</span><br><span class="line"></span><br><span class="line">$tool -u$MYSQL_USER -P$MYSQL_PORT -p$MYSQL_PW $MYSQL_DB4 | gzip &gt; $BACKUP_DIR/$dd/myc-$dd1.sql.gz</span><br><span class="line">echo &quot;myc_备份完成-$dd1&quot;</span><br><span class="line">#写创建备份日志</span><br><span class="line">echo &quot;create $BACKUP_DIR/myc-$dd1.dupm&quot; &gt;&gt; $BACKUP_DIR/log.txt</span><br><span class="line"></span><br><span class="line">$tool -u$MYSQL_USER -P$MYSQL_PORT -p$MYSQL_PW $MYSQL_DB5 | gzip &gt; $BACKUP_DIR/$dd/mysql-$dd1.sql.gz</span><br><span class="line">echo &quot;mysql_备份完成-$dd1&quot;</span><br><span class="line">#写创建备份日志</span><br><span class="line">echo &quot;create $BACKUP_DIR/mysql-$dd1.dupm&quot; &gt;&gt; $BACKUP_DIR/log.txt</span><br><span class="line"></span><br><span class="line">$tool -u$MYSQL_USER -P$MYSQL_PORT -p$MYSQL_PW $MYSQL_DB6 | gzip &gt; $BACKUP_DIR/$dd/pixiv-$dd1.sql.gz</span><br><span class="line">echo &quot;pixiv_备份完成-$dd1&quot;</span><br><span class="line">#写创建备份日志</span><br><span class="line">echo &quot;create $BACKUP_DIR/pixiv-$dd1.dupm&quot; &gt;&gt; $BACKUP_DIR/log.txt</span><br></pre></td></tr></table></figure>
+
+
+                    
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                Mysql使用命令备份和还原数据库
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                2022/03/06/Mysql使用命令备份和还原数据库/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">ドラゴンボールのLong</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2022-03-06 20:10</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="">
+                    <a href="https://zhongshenglong.xyz" target="_blank">
+                        
+                            Long License
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/linux/">linux</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E5%BF%83%E5%BE%97/">心得</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/mysql/">mysql</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+                    
+
+<div class="reward-author-container border-box flex-center">
+    <div class="reward-btn border-box flex-center tooltip tooltip-img"
+            data-tooltip-img-url="/images/reward.jpg"
+            data-tooltip-img-trigger="click"
+            data-tooltip-img-style="top: -6px;"
+    >
+        <i class="fa-solid fa-gift"></i>&nbsp;请作者喝咖啡
+    </div>
+</div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2022/04/06/Oracle11g%E6%90%AD%E5%BB%BAogg/"
+                                   title="Oracle11g搭建ogg"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Oracle11g搭建ogg</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2022/03/06/%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AE%E5%88%B0GitHub/"
+                                   title="上传项目到GitHub"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">上传项目到GitHub</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+    <div class="comments-container border-box">
+        <div id="comments-anchor" class="comment-area-title border-box">
+            <i class="fas fa-comments"></i>&nbsp;评论
+        </div>
+        <div class="comment-plugin-fail border-box">
+    <span class="fail-tip">评论插件加载失败</span>
+    <button class="reload keep-button">点击重新加载</button>
+</div>
+<div class="comment-plugin-loading flex-center border-box">
+    <i class="loading-icon fa-solid fa-spinner fa-spin"></i>
+    <span class="load-tip">正在加载评论插件</span>
+</div>
+<script data-pjax>
+  window.KeepCommentPlugin = {}
+  window.KeepCommentPlugin.hideLoading = () => {
+    const cplDom = document.querySelector('.comments-container .comment-plugin-loading')
+    cplDom.style.display = 'none'
+  }
+  window.KeepCommentPlugin.loadFailHandle = () => {
+    window.KeepCommentPlugin.hideLoading()
+    const cpfDom = document.querySelector('.comments-container .comment-plugin-fail')
+    cpfDom.style.display = 'flex'
+    cpfDom.querySelector('.reload').addEventListener('click', () => {
+      window.location.reload()
+    })
+  }
+</script>
+
+        
+            
+
+    <div class="valine-container">
+        <div id="vcomments"></div>
+        <script 
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        ></script>
+        <script 
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        >
+          window.KeepCommentPlugin.initValine = () => {
+            const config = {
+              el: '#vcomments',
+              appId: '2TGCOmDNikdxOnVmQJEFhTOK-gzGzoHsz',
+              appKey: 'lU21jvewvcy043UjfpHRXfvA',
+              meta: ['nick', 'mail', 'link'],
+              avatar: 'wavatar',
+              enableQQ: true,
+              placeholder: '😜 尽情吐槽吧~',
+              lang: 'zh-CN'.toLowerCase()
+            }
+
+            if ('') {
+              config.serverURLs = ''
+            }
+
+            if (window?.Valine) {
+              new Valine(config)
+              window.KeepCommentPlugin.hideLoading()
+            } else {
+              setTimeout(() => {
+                window.KeepCommentPlugin.initValine()
+              }, 1000)
+            }
+          }
+
+          if ('false' === 'true') {
+            setTimeout(() => {
+              window.KeepCommentPlugin.initValine()
+            }, 1200)
+          } else {
+            window.addEventListener('DOMContentLoaded', window.KeepCommentPlugin.initValine)
+          }
+        </script>
+    </div>
+
+
+        
+    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%87%E4%BB%BD%E5%91%BD%E4%BB%A4%EF%BC%88mysql%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">mysql数据库备份命令（mysql数据备份的三种方法）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80-mysqldump%E5%91%BD%E4%BB%A4%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.</span> <span class="nav-text">一. mysqldump命令备份数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C-mysqldump%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.2.</span> <span class="nav-text">二. mysqldump常用操作示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%A4%87%E4%BB%BD%E5%85%A8%E9%83%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%95%B0%E6%8D%AE%E5%92%8C%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 备份全部数据库的数据和结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%A4%87%E4%BB%BD%E5%85%A8%E9%83%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%BB%93%E6%9E%84%EF%BC%88%E5%8A%A0-d-%E5%8F%82%E6%95%B0%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.备份全部数据库的结构（加 -d 参数）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%A4%87%E4%BB%BD%E5%85%A8%E9%83%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%95%B0%E6%8D%AE-%E5%8A%A0-t-%E5%8F%82%E6%95%B0"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. 备份全部数据库的数据(加 -t 参数)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%A4%87%E4%BB%BD%E5%8D%95%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%95%B0%E6%8D%AE%E5%92%8C%E7%BB%93%E6%9E%84-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%8Dmydb"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.备份单个数据库的数据和结构(,数据库名mydb)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%A4%87%E4%BB%BD%E5%8D%95%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.5.</span> <span class="nav-text">5. 备份单个数据库的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%A4%87%E4%BB%BD%E5%8D%95%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">1.2.6.</span> <span class="nav-text">6. 备份单个数据库的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E5%A4%87%E4%BB%BD%E5%A4%9A%E4%B8%AA%E8%A1%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E5%92%8C%E7%BB%93%E6%9E%84%EF%BC%88%E6%95%B0%E6%8D%AE%EF%BC%8C%E7%BB%93%E6%9E%84%E7%9A%84%E5%8D%95%E7%8B%AC%E5%A4%87%E4%BB%BD%E6%96%B9%E6%B3%95%E4%B8%8E%E4%B8%8A%E5%90%8C%EF%BC%89"><span class="nav-number">1.2.7.</span> <span class="nav-text">7. 备份多个表的数据和结构（数据，结构的单独备份方法与上同）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E4%B8%80%E6%AC%A1%E5%A4%87%E4%BB%BD%E5%A4%9A%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.2.8.</span> <span class="nav-text">8. 一次备份多个数据库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89-%E8%BF%98%E5%8E%9F-MySQL-%E5%A4%87%E4%BB%BD%E5%86%85%E5%AE%B9"><span class="nav-number">1.3.</span> <span class="nav-text">三. 还原 MySQL 备份内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9C%A8%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%EF%BC%8C%E8%BE%93%E5%85%A5%E5%A6%82%E4%B8%8B%E5%AE%9E%E7%8E%B0%E8%BF%98%E5%8E%9F%EF%BC%9A"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. 在系统命令行中，输入如下实现还原：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%9C%A8%E7%99%BB%E5%BD%95%E8%BF%9B%E5%85%A5mysql%E7%B3%BB%E7%BB%9F%E4%B8%AD-%E9%80%9A%E8%BF%87source%E6%8C%87%E4%BB%A4%E6%89%BE%E5%88%B0%E5%AF%B9%E5%BA%94%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E8%BF%98%E5%8E%9F%EF%BC%9A"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. 在登录进入mysql系统中,通过source指令找到对应系统中的文件进行还原：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%BC%96%E5%86%99BASH%E7%BB%B4%E6%8A%A4%E5%9B%BA%E5%AE%9A%E6%95%B0%E9%87%8F%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.编写BASH维护固定数量备份文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8crontab%E5%AE%9A%E6%9C%9F%E6%89%A7%E8%A1%8C%E5%A4%87%E4%BB%BD%E8%84%9A%E6%9C%AC"><span class="nav-number">1.4.</span> <span class="nav-text">使用crontab定期执行备份脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cron%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.4.1.</span> <span class="nav-text">cron服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#crontab%E8%AF%AD%E6%B3%95"><span class="nav-number">1.4.2.</span> <span class="nav-text">crontab语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAcron%E8%84%9A%E6%9C%AC"><span class="nav-number">1.4.3.</span> <span class="nav-text">创建cron脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%84-crontab-%E7%9A%84%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="nav-number">1.4.4.</span> <span class="nav-text">附 crontab 的使用示例：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%AF%8F%E5%A4%A9%E6%97%A9%E4%B8%8A6%E7%82%B9"><span class="nav-number">1.4.4.1.</span> <span class="nav-text">1. 每天早上6点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%AF%8F%E4%B8%A4%E4%B8%AA%E5%B0%8F%E6%97%B6"><span class="nav-number">1.4.4.2.</span> <span class="nav-text">2. 每两个小时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%99%9A%E4%B8%8A11%E7%82%B9%E5%88%B0%E6%97%A9%E4%B8%8A8%E7%82%B9%E4%B9%8B%E9%97%B4%E6%AF%8F%E4%B8%A4%E4%B8%AA%E5%B0%8F%E6%97%B6%E5%92%8C%E6%97%A9%E4%B8%8A%E5%85%AB%E7%82%B9"><span class="nav-number">1.4.4.3.</span> <span class="nav-text">3. 晚上11点到早上8点之间每两个小时和早上八点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E6%AF%8F%E4%B8%AA%E6%9C%88%E7%9A%844%E5%8F%B7%E5%92%8C%E6%AF%8F%E4%B8%AA%E7%A4%BC%E6%8B%9C%E7%9A%84%E7%A4%BC%E6%8B%9C%E4%B8%80%E5%88%B0%E7%A4%BC%E6%8B%9C%E4%B8%89%E7%9A%84%E6%97%A9%E4%B8%8A11%E7%82%B9"><span class="nav-number">1.4.4.4.</span> <span class="nav-text">4. 每个月的4号和每个礼拜的礼拜一到礼拜三的早上11点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-%E6%9C%88-1-%E6%97%A5%E6%97%A9%E4%B8%8A-4-%E7%82%B9"><span class="nav-number">1.4.4.5.</span> <span class="nav-text">5.1 月 1 日早上 4 点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E6%AF%8F%E5%B0%8F%E6%97%B6%E6%89%A7%E8%A1%8C-etc-cron-hourly%E5%86%85%E7%9A%84%E8%84%9A%E6%9C%AC"><span class="nav-number">1.4.4.6.</span> <span class="nav-text">6. 每小时执行&#x2F;etc&#x2F;cron.hourly内的脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%E6%AF%8F%E5%A4%A9%E6%89%A7%E8%A1%8C-etc-cron-daily%E5%86%85%E7%9A%84%E8%84%9A%E6%9C%AC"><span class="nav-number">1.4.4.7.</span> <span class="nav-text">7. 每天执行&#x2F;etc&#x2F;cron.daily内的脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-%E6%AF%8F%E6%98%9F%E6%9C%9F%E6%89%A7%E8%A1%8C-etc-cron-weekly%E5%86%85%E7%9A%84%E8%84%9A%E6%9C%AC"><span class="nav-number">1.4.4.8.</span> <span class="nav-text">8. 每星期执行&#x2F;etc&#x2F;cron.weekly内的脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-%E6%AF%8F%E6%9C%88%E5%8E%BB%E6%89%A7%E8%A1%8C-etc-cron-monthly%E5%86%85%E7%9A%84%E8%84%9A%E6%9C%AC"><span class="nav-number">1.4.4.9.</span> <span class="nav-text">9. 每月去执行&#x2F;etc&#x2F;cron.monthly内的脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-%E6%AF%8F%E5%A4%A9%E7%9A%84%E4%B8%8B%E5%8D%884%E7%82%B9%E3%80%815%E7%82%B9%E3%80%816%E7%82%B9%E7%9A%845-min%E3%80%8115-min%E3%80%8125-min%E3%80%8135-min%E3%80%8145-min%E3%80%8155-min%E6%97%B6%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4%E3%80%82"><span class="nav-number">1.4.4.10.</span> <span class="nav-text">10. 每天的下午4点、5点、6点的5 min、15 min、25 min、35 min、45 min、55 min时执行命令。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-%E6%AF%8F%E5%91%A8%E4%B8%80%EF%BC%8C%E4%B8%89%EF%BC%8C%E4%BA%94%E7%9A%84%E4%B8%8B%E5%8D%883%EF%BC%9A00%E7%B3%BB%E7%BB%9F%E8%BF%9B%E5%85%A5%E7%BB%B4%E6%8A%A4%E7%8A%B6%E6%80%81%EF%BC%8C%E9%87%8D%E6%96%B0%E5%90%AF%E5%8A%A8%E7%B3%BB%E7%BB%9F%E3%80%82"><span class="nav-number">1.4.4.11.</span> <span class="nav-text">11. 每周一，三，五的下午3：00系统进入维护状态，重新启动系统。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-%E6%AF%8F%E5%B0%8F%E6%97%B6%E7%9A%8410%E5%88%86%EF%BC%8C40%E5%88%86%E6%89%A7%E8%A1%8C%E7%94%A8%E6%88%B7%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84innd-bbslin%E8%BF%99%E4%B8%AA%E6%8C%87%E4%BB%A4%EF%BC%9A"><span class="nav-number">1.4.4.12.</span> <span class="nav-text">12. 每小时的10分，40分执行用户目录下的innd&#x2F;bbslin这个指令：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-%E6%AF%8F%E5%B0%8F%E6%97%B6%E7%9A%841%E5%88%86%E6%89%A7%E8%A1%8C%E7%94%A8%E6%88%B7%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84bin-account%E8%BF%99%E4%B8%AA%E6%8C%87%E4%BB%A4%EF%BC%9A"><span class="nav-number">1.4.4.13.</span> <span class="nav-text">13. 每小时的1分执行用户目录下的bin&#x2F;account这个指令：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#crontab-%E5%AE%9A%E6%97%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.5.</span> <span class="nav-text">crontab 定时语句</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+		year - 作为date对象的年份，为4位年份值
+		month - 0-11之间的整数，做为date对象的月份
+		day - 1-31之间的整数，做为date对象的天数
+		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+		minutes - 0-59之间的整数，做为date对象的分钟数
+		seconds - 0-59之间的整数，做为date对象的秒数
+		microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+		var t1 = Date.UTC(2019,04,09,21,47,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML="❤亲爱的旅客,我已与你/妳相遇❤❤❤"+" 第 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒❤";
+	}/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+	siteTime();
+</script>
+
+<footer class="footer border-box">
+		
+	<a href="https://www.foreverblog.cn/" target="_blank" > <img src="https://img.foreverblog.cn/logo_en_default.png" alt="" style="width:auto;height:16px;"> </a>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            本站由 <span class="tooltip" data-tooltip-content="阿里云"><img src="/images/brands/aliyun.png"></span> 提供部署服务
+            
+        </div>
+    
+
+    
+        <div class="record-info info-item">
+		ICP备案号：【&nbsp;
+            
+                
+                    <div class="record-item border-box">
+                        <a class=""
+                           target="_blank"
+                           href="https://beian.miit.gov.cn"
+                        >
+                            苏ICP备20001538号-1
+                        </a>
+                    </div>
+                
+            
+		&nbsp;】&nbsp;
+        </div>
+    
+	
+    <div class="copyright-info info-item">
+        &copy;&nbsp;<span>2019</span>&nbsp;-&nbsp;2024
+        
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">ドラゴンボールのLong</a>
+        
+		&nbsp;&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        <div class="count-info info-item">
+            
+                <span class="count-item border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">125.5k</span>
+                </span>
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+	
+	<!--自定义了时间-->
+    <p id="sitetime" target="_blank"></p>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+            <li class="tools-item go-to-comments-tablet flex-center">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%87%E4%BB%BD%E5%91%BD%E4%BB%A4%EF%BC%88mysql%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">mysql数据库备份命令（mysql数据备份的三种方法）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80-mysqldump%E5%91%BD%E4%BB%A4%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.</span> <span class="nav-text">一. mysqldump命令备份数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C-mysqldump%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.2.</span> <span class="nav-text">二. mysqldump常用操作示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%A4%87%E4%BB%BD%E5%85%A8%E9%83%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%95%B0%E6%8D%AE%E5%92%8C%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 备份全部数据库的数据和结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%A4%87%E4%BB%BD%E5%85%A8%E9%83%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%BB%93%E6%9E%84%EF%BC%88%E5%8A%A0-d-%E5%8F%82%E6%95%B0%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.备份全部数据库的结构（加 -d 参数）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%A4%87%E4%BB%BD%E5%85%A8%E9%83%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%95%B0%E6%8D%AE-%E5%8A%A0-t-%E5%8F%82%E6%95%B0"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. 备份全部数据库的数据(加 -t 参数)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%A4%87%E4%BB%BD%E5%8D%95%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%95%B0%E6%8D%AE%E5%92%8C%E7%BB%93%E6%9E%84-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%8Dmydb"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.备份单个数据库的数据和结构(,数据库名mydb)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%A4%87%E4%BB%BD%E5%8D%95%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.5.</span> <span class="nav-text">5. 备份单个数据库的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%A4%87%E4%BB%BD%E5%8D%95%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">1.2.6.</span> <span class="nav-text">6. 备份单个数据库的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E5%A4%87%E4%BB%BD%E5%A4%9A%E4%B8%AA%E8%A1%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E5%92%8C%E7%BB%93%E6%9E%84%EF%BC%88%E6%95%B0%E6%8D%AE%EF%BC%8C%E7%BB%93%E6%9E%84%E7%9A%84%E5%8D%95%E7%8B%AC%E5%A4%87%E4%BB%BD%E6%96%B9%E6%B3%95%E4%B8%8E%E4%B8%8A%E5%90%8C%EF%BC%89"><span class="nav-number">1.2.7.</span> <span class="nav-text">7. 备份多个表的数据和结构（数据，结构的单独备份方法与上同）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E4%B8%80%E6%AC%A1%E5%A4%87%E4%BB%BD%E5%A4%9A%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.2.8.</span> <span class="nav-text">8. 一次备份多个数据库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89-%E8%BF%98%E5%8E%9F-MySQL-%E5%A4%87%E4%BB%BD%E5%86%85%E5%AE%B9"><span class="nav-number">1.3.</span> <span class="nav-text">三. 还原 MySQL 备份内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9C%A8%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%EF%BC%8C%E8%BE%93%E5%85%A5%E5%A6%82%E4%B8%8B%E5%AE%9E%E7%8E%B0%E8%BF%98%E5%8E%9F%EF%BC%9A"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. 在系统命令行中，输入如下实现还原：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%9C%A8%E7%99%BB%E5%BD%95%E8%BF%9B%E5%85%A5mysql%E7%B3%BB%E7%BB%9F%E4%B8%AD-%E9%80%9A%E8%BF%87source%E6%8C%87%E4%BB%A4%E6%89%BE%E5%88%B0%E5%AF%B9%E5%BA%94%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E8%BF%98%E5%8E%9F%EF%BC%9A"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. 在登录进入mysql系统中,通过source指令找到对应系统中的文件进行还原：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%BC%96%E5%86%99BASH%E7%BB%B4%E6%8A%A4%E5%9B%BA%E5%AE%9A%E6%95%B0%E9%87%8F%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.编写BASH维护固定数量备份文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8crontab%E5%AE%9A%E6%9C%9F%E6%89%A7%E8%A1%8C%E5%A4%87%E4%BB%BD%E8%84%9A%E6%9C%AC"><span class="nav-number">1.4.</span> <span class="nav-text">使用crontab定期执行备份脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cron%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.4.1.</span> <span class="nav-text">cron服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#crontab%E8%AF%AD%E6%B3%95"><span class="nav-number">1.4.2.</span> <span class="nav-text">crontab语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAcron%E8%84%9A%E6%9C%AC"><span class="nav-number">1.4.3.</span> <span class="nav-text">创建cron脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%84-crontab-%E7%9A%84%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="nav-number">1.4.4.</span> <span class="nav-text">附 crontab 的使用示例：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%AF%8F%E5%A4%A9%E6%97%A9%E4%B8%8A6%E7%82%B9"><span class="nav-number">1.4.4.1.</span> <span class="nav-text">1. 每天早上6点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%AF%8F%E4%B8%A4%E4%B8%AA%E5%B0%8F%E6%97%B6"><span class="nav-number">1.4.4.2.</span> <span class="nav-text">2. 每两个小时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%99%9A%E4%B8%8A11%E7%82%B9%E5%88%B0%E6%97%A9%E4%B8%8A8%E7%82%B9%E4%B9%8B%E9%97%B4%E6%AF%8F%E4%B8%A4%E4%B8%AA%E5%B0%8F%E6%97%B6%E5%92%8C%E6%97%A9%E4%B8%8A%E5%85%AB%E7%82%B9"><span class="nav-number">1.4.4.3.</span> <span class="nav-text">3. 晚上11点到早上8点之间每两个小时和早上八点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E6%AF%8F%E4%B8%AA%E6%9C%88%E7%9A%844%E5%8F%B7%E5%92%8C%E6%AF%8F%E4%B8%AA%E7%A4%BC%E6%8B%9C%E7%9A%84%E7%A4%BC%E6%8B%9C%E4%B8%80%E5%88%B0%E7%A4%BC%E6%8B%9C%E4%B8%89%E7%9A%84%E6%97%A9%E4%B8%8A11%E7%82%B9"><span class="nav-number">1.4.4.4.</span> <span class="nav-text">4. 每个月的4号和每个礼拜的礼拜一到礼拜三的早上11点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-%E6%9C%88-1-%E6%97%A5%E6%97%A9%E4%B8%8A-4-%E7%82%B9"><span class="nav-number">1.4.4.5.</span> <span class="nav-text">5.1 月 1 日早上 4 点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E6%AF%8F%E5%B0%8F%E6%97%B6%E6%89%A7%E8%A1%8C-etc-cron-hourly%E5%86%85%E7%9A%84%E8%84%9A%E6%9C%AC"><span class="nav-number">1.4.4.6.</span> <span class="nav-text">6. 每小时执行&#x2F;etc&#x2F;cron.hourly内的脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%E6%AF%8F%E5%A4%A9%E6%89%A7%E8%A1%8C-etc-cron-daily%E5%86%85%E7%9A%84%E8%84%9A%E6%9C%AC"><span class="nav-number">1.4.4.7.</span> <span class="nav-text">7. 每天执行&#x2F;etc&#x2F;cron.daily内的脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-%E6%AF%8F%E6%98%9F%E6%9C%9F%E6%89%A7%E8%A1%8C-etc-cron-weekly%E5%86%85%E7%9A%84%E8%84%9A%E6%9C%AC"><span class="nav-number">1.4.4.8.</span> <span class="nav-text">8. 每星期执行&#x2F;etc&#x2F;cron.weekly内的脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-%E6%AF%8F%E6%9C%88%E5%8E%BB%E6%89%A7%E8%A1%8C-etc-cron-monthly%E5%86%85%E7%9A%84%E8%84%9A%E6%9C%AC"><span class="nav-number">1.4.4.9.</span> <span class="nav-text">9. 每月去执行&#x2F;etc&#x2F;cron.monthly内的脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-%E6%AF%8F%E5%A4%A9%E7%9A%84%E4%B8%8B%E5%8D%884%E7%82%B9%E3%80%815%E7%82%B9%E3%80%816%E7%82%B9%E7%9A%845-min%E3%80%8115-min%E3%80%8125-min%E3%80%8135-min%E3%80%8145-min%E3%80%8155-min%E6%97%B6%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4%E3%80%82"><span class="nav-number">1.4.4.10.</span> <span class="nav-text">10. 每天的下午4点、5点、6点的5 min、15 min、25 min、35 min、45 min、55 min时执行命令。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-%E6%AF%8F%E5%91%A8%E4%B8%80%EF%BC%8C%E4%B8%89%EF%BC%8C%E4%BA%94%E7%9A%84%E4%B8%8B%E5%8D%883%EF%BC%9A00%E7%B3%BB%E7%BB%9F%E8%BF%9B%E5%85%A5%E7%BB%B4%E6%8A%A4%E7%8A%B6%E6%80%81%EF%BC%8C%E9%87%8D%E6%96%B0%E5%90%AF%E5%8A%A8%E7%B3%BB%E7%BB%9F%E3%80%82"><span class="nav-number">1.4.4.11.</span> <span class="nav-text">11. 每周一，三，五的下午3：00系统进入维护状态，重新启动系统。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-%E6%AF%8F%E5%B0%8F%E6%97%B6%E7%9A%8410%E5%88%86%EF%BC%8C40%E5%88%86%E6%89%A7%E8%A1%8C%E7%94%A8%E6%88%B7%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84innd-bbslin%E8%BF%99%E4%B8%AA%E6%8C%87%E4%BB%A4%EF%BC%9A"><span class="nav-number">1.4.4.12.</span> <span class="nav-text">12. 每小时的10分，40分执行用户目录下的innd&#x2F;bbslin这个指令：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-%E6%AF%8F%E5%B0%8F%E6%97%B6%E7%9A%841%E5%88%86%E6%89%A7%E8%A1%8C%E7%94%A8%E6%88%B7%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84bin-account%E8%BF%99%E4%B8%AA%E6%8C%87%E4%BB%A4%EF%BC%9A"><span class="nav-number">1.4.4.13.</span> <span class="nav-text">13. 每小时的1分执行用户目录下的bin&#x2F;account这个指令：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#crontab-%E5%AE%9A%E6%97%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.5.</span> <span class="nav-text">crontab 定时语句</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/lazyload.min.js"></script>
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+    
+        
+    
+        
+            
+<script class="custom-inject-js" src="/js/love.js" data-pjax></script>
+
+        
+    
+
+</body>
+</html>

@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="每日一句">
+    <meta name="author" content="ドラゴンボールのLong">
+    
+    <title>
+        
+            Mysql相关操作知识 |
+        
+        ドラゴンボールのBlog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/brands.min.css">
+    
+        
+            
+        
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"zhongshenglong.xyz","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"ドラゴンボールのBlog","author":"ドラゴンボールのLong","avatar":"https://cdn.jsdelivr.net/gh/longhz/cdn@1.0/img/custom/avatar1.jpg","logo":"/images/favicon.ico","favicon":"/images/favicon.ico"},"menu":{"home":"/ || fa-solid fa-home","归档":{"icon":"fa-solid fa-book","children":[{"archives":"/archives || fa-solid fa-layer-group"},{"tags":"/tags || fa-solid fa-tags"}]},"links":"/links|| fa-solid fa-link","about":{"icon":"fa-solid fa-user-secret","children":[{"gallery":"/gallery || fa-solid fa-image"},{"about":"/about || fa-solid fa-user-graduate"}]}},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"黄色的森林分出两条路 || 我选择人迹更少的那一条，从此决定我一生的道路。","hitokoto":true},"social_contact":{"enable":false,"links":{"github":"https://github.com/longhz","weixin":null,"qq":"https://wpa.qq.com/msgrd?v=3&uin=1084045717&site=qq&menu=yes","weibo":null,"bilibili":"https://space.bilibili.com/9317816/bangumi","wangyiyun":"https://music.163.com/user/home?id=1348254961","zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":{"custom_license":"Long License","custom_link":"https://zhongshenglong.xyz"},"share":true,"reward":{"enable":true,"img_link":"/images/reward.jpg","text":"请作者喝咖啡","icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"obsidian"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":true,"use":"valine","valine":{"appid":"2TGCOmDNikdxOnVmQJEFhTOK-gzGzoHsz","appkey":"lU21jvewvcy043UjfpHRXfvA","server_urls":null,"placeholder":"😜 尽情吐槽吧~"},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.36"},"waline":{"server_url":null,"reaction":false,"version":"3.2.1"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2019,"word_count":true,"site_deploy":{"enable":true,"provider":"aliyun","url":null},"record":{"enable":true,"list":[{"code":"苏ICP备20001538号-1","link":"https://beian.miit.gov.cn"}]}},"inject":{"enable":true,"css":[null],"js":[null,"/js/love.js"]},"aplayer":{"id":4900925608,"server":"netease","type":"playlist","fixed":true,"autoplay":false,"loop":"all","order":"random","preload":"auto","volume":0.7,"mutex":true},"live2d":{"enable":true,"scriptFrom":"local","pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"use":"live2d-widget-model-liveuu"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}},"root":"","source_data":{"links":[{"name":"IT诗人","link":"https://xpoet.cn/","description":"所有命运的馈赠，早已在暗中标好价格。","avatar":"https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/common-use/avatar.jpg"},{"name":"不知名艺术家","link":"https://jinzhanqi.com/","description":"love artist, love code.","avatar":"https://s3.ax1x.com/2020/11/17/DVvkB4.jpg"},{"name":"阮一峰","link":"http://www.ruanyifeng.com/blog/archives.html","description":"阮一峰的网络日志","avatar":"https://www.ruanyifeng.com/blog/images/person2_s.jpg"},{"name":"墨","link":"https://www.kura.ren/","description":"清水1024","avatar":"https://www.kura.ren/upload/2020/05/up-up-man-4d2d7e917c9d476b86373b0aa17fcafe.png"},{"name":"爱·绮梦","link":"https://x.iqimeng.com/","description":"学而时习之 不亦说乎","avatar":"https://x.iqimeng.com/images/avatar.jpg"},{"name":"Keep learning","link":"https://blog.gooday.press/","description":"爱好学习，不断提升自我","avatar":"https://cdn.jsdelivr.net/gh/cemonliu/blogpic@main/avatar.svg"},{"name":"CitingNutria","link":"https://citingnutria.github.io/","description":"まだ夢がある","avatar":"https://cdn.jsdelivr.net/gh/CitingNutria/image_hosting@master/avatar.jpg"},{"name":"小龙的跋涉","link":"https://www.eduorg.ltd/","description":"但行好事，莫问前程","avatar":"https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/blog/favicon.42reb4izcgs0.png"},{"name":"Eveneko","link":"https://eveneko.com/","description":"我们这一生，能做一个优秀的普通人已经足够厉害了！","avatar":"https://cdn.jsdelivr.net/gh/Eveneko/Image-Hosting@master/PicX/A1644732-0330-47D7-A2A1-4EBA8B3C2855.3gp6q5zr8180.jpeg"},{"name":"Nico","link":"https://www.lzp.zone/","description":"蝉歌星夜，月影婆娑","avatar":"https://tva1.sinaimg.cn/large/008i3skNly1gwpe11i8adj301s01smwx.jpg"},{"name":"KAI’S NOTE","link":"https://kainote.top/","description":"三天打鱼(⊙ˍ⊙)两天晒网","avatar":"https://s2.loli.net/2022/01/09/UtbhxHv2IA8jqwZ.jpg"},{"name":"April的记录小屋","link":"https://april-tong.com/","description":"热爱可抵岁月漫长。","avatar":"https://raw.githubusercontent.com/AprilTong/image/master/img/photo.jpeg"},{"name":"ZhengXi","link":"https://zhengxi.io/","description":"你的时间有限，不要为了别人而活","avatar":"https://vip2.loli.io/2022/01/28/8bTLXSIoDckrjfz.png"},{"name":"PMP项目管理","link":"https://pmp.saiita.cn/","description":"学习PMP项目管理的笔记.","avatar":"https://cdn.saiita.com.cn/picgo/P3260015.JPG"},{"name":"开心驿站","link":"https://www.kxyz.eu.org/","description":"steam游戏交流中心","avatar":"https://www.kxyz.eu.org/wp-content/uploads/logo.png"},{"name":"免费公益v2ray节点订阅","link":"https://www.v2rayfree.eu.org/","description":"免费公益v2ray节点订阅","avatar":"https://www.v2rayfree.eu.org/images/avatar.png"},{"name":"ZXC's Blog","link":"https://www.v2rayfree.eu.org/","description":"生命不息，代码不止","avatar":"https://cdn.jsdelivr.net/gh/XavierJiezou/picx-image-hosting@main/about/avatar.jpg"},{"name":"FallenGemini的博客","link":"https://paraderno.github.io/Blog.github.io/","description":"愿地狱的终点是天堂","avatar":"https://raw.githubusercontent.com/Paraderno/image-hosting/master/avatar.3co1ubx6en80.png"},{"name":"AomanHao的博客","link":"https://www.aomanhao.top/","description":"热爱图像处理，优化彩色世界","avatar":"https://www.aomanhao.top/images/Avatar.jpg"},{"name":"༺ཌ༈君☠纤༈ད༻的博客","link":"https://www.cnblogs.com/asio/","description":"欲买桂花同载酒，荒泷天下第一斗。","avatar":"https://pic.cnblogs.com/avatar/1924746/20200215183155.png"},{"name":"clash免费节点","link":"https://clashfree.eu.org/","description":"ssr/v2ray/clash免费节点分享","avatar":"https://clashfree.eu.org/wp-content/uploads/avatar.png"}]},"version":"4.2.3"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="❦༺  LONGZ ༻❦" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/favicon.ico">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               ドラゴンボールのBlog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box has-sub-menu">
+                            <a class="menu-text-color border-box" href="javascript:void(0);">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-book"></i>
+                                
+                                归档
+                                
+                                    <i class="menu-text-color collapse-icon fa-solid fa-angle-down"></i>
+                                
+                            </a>
+                            
+                                <ul class="sub-menu-list border-box">
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/archives">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-layer-group"></i>
+                                                
+                                                归档
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/tags">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-tags"></i>
+                                                
+                                                标签
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/links">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-link"></i>
+                                
+                                友链
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box has-sub-menu">
+                            <a class="menu-text-color border-box" href="javascript:void(0);">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-secret"></i>
+                                
+                                关于
+                                
+                                    <i class="menu-text-color collapse-icon fa-solid fa-angle-down"></i>
+                                
+                            </a>
+                            
+                                <ul class="sub-menu-list border-box">
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/gallery">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-image"></i>
+                                                
+                                                GALLERY
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/about">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-user-graduate"></i>
+                                                
+                                                关于
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box has-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="javascript:void(0);">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-book"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                            <i class="right-side collapse-icon fa-solid fa-angle-left"></i>
+                        
+                    </label>
+                    
+                        <ul class="drawer-sub-menu-list border-box">
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/archives">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-layer-group"></i>
+                                            </span>
+                                        
+                                        归档
+                                    </a>
+                                </li>
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/tags">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-tags"></i>
+                                            </span>
+                                        
+                                        标签
+                                    </a>
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/links">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-link"></i>
+                                </span>
+                            
+                            友链
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box has-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="javascript:void(0);">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-secret"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                            <i class="right-side collapse-icon fa-solid fa-angle-left"></i>
+                        
+                    </label>
+                    
+                        <ul class="drawer-sub-menu-list border-box">
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/gallery">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-image"></i>
+                                            </span>
+                                        
+                                        GALLERY
+                                    </a>
+                                </li>
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/about">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-user-graduate"></i>
+                                            </span>
+                                        
+                                        关于
+                                    </a>
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        Mysql相关操作知识
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="http://cdns.zhongshenglong.xyz/cdn-photos/img/custom/avatar1.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">岁月如梦</span>
+                                
+                                    <span class="author-badge">Lv4</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2021-08-06 08:19:24</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Thu Jun 16 2022 18:11:45 GMT+0800">2022-06-16 18:11:45</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E5%BF%83%E5%BE%97/">心得</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/mysql/">mysql</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>5.3k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>19 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h1 id="Mysql使用时的注意事项"><a href="#Mysql使用时的注意事项" class="headerlink" title="Mysql使用时的注意事项"></a>Mysql使用时的注意事项</h1><ol>
+<li><strong>每一条数据库操作语句都应该以分号；结尾，因为mysql支持换行操作</strong></li>
+<li><strong>mysql数据库对大小写不敏感，大小写皆可，通常关键字使用大写表示</strong></li>
+<li><strong>mysql数据库中库的名称应该以英文字符或者一些符号起始，但是不允许以数字起始</strong></li>
+<li><strong>mysql数据库中库的名称、表的名称、字段的名称都不能使用mysql关键字，比如create、database；如果非要使用，那就要用反引号括起来</strong></li>
+</ol>
+<h2 id="基础常用命令"><a href="#基础常用命令" class="headerlink" title="基础常用命令"></a>基础常用命令</h2><h3 id="本地登录："><a href="#本地登录：" class="headerlink" title="本地登录："></a><strong>本地登录</strong>：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p 密码;</span><br><span class="line">--也可以不带密码，之后输入本地登录</span><br></pre></td></tr></table></figure>
+
+<h3 id="远程登录："><a href="#远程登录：" class="headerlink" title="远程登录："></a><strong>远程登录</strong>：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -h 登录ip -p 端口(通常3306） -uroot -p密码;</span><br></pre></td></tr></table></figure>
+<p><strong>查看表的各个字段的属性，以及自增键</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desc 表名;</span><br></pre></td></tr></table></figure>
+<h3 id="导出数据库文件，保存"><a href="#导出数据库文件，保存" class="headerlink" title="导出数据库文件，保存"></a>导出数据库文件，保存</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u用户 -p 数据库名 &gt; xx.sql;</span><br></pre></td></tr></table></figure>
+
+<h3 id="导入数据库文件"><a href="#导入数据库文件" class="headerlink" title="导入数据库文件"></a><strong>导入数据库文件</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql -u用户 -p密码  数据库名&lt; xx.sql; </span><br><span class="line">--也可以选择登录进去，在选择数据库后，使用source命令导入数据</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a><strong>创建用户</strong></h3><p>ip是指用户登录mysql的电脑ip，可以写%，本地写localhost</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create user &#x27;用户名&#x27; @&#x27;ip&#x27; identified by &#x27;密码&#x27;; </span><br></pre></td></tr></table></figure>
+
+<h3 id="用户授权"><a href="#用户授权" class="headerlink" title="用户授权"></a><strong>用户授权</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant 权限(select/insert/updata/all priveleges) on 表/数据库名 to &#x27;用户&#x27;@&#x27;ip&#x27; identified by &#x27;密码&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a><strong>删除用户</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop user 用户名@ip ;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="库的操作"><a href="#库的操作" class="headerlink" title="库的操作"></a>库的操作</h2><p>查看mysql中所有的库：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases;</span><br></pre></td></tr></table></figure>
+<h3 id="创建库："><a href="#创建库：" class="headerlink" title="创建库："></a>创建库：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create database 库名称 default charset utf8;</span><br><span class="line">create database if not exists 库名称;</span><br><span class="line">## 如果不存在该库，则创建</span><br></pre></td></tr></table></figure>
+<h3 id="删除库："><a href="#删除库：" class="headerlink" title="删除库："></a>删除库：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop database 库名称;</span><br></pre></td></tr></table></figure>
+<h3 id="选择使用数据库"><a href="#选择使用数据库" class="headerlink" title="选择使用数据库"></a>选择使用数据库</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use 库名称;</span><br></pre></td></tr></table></figure>
+<h3 id="显示当前使用的数据库："><a href="#显示当前使用的数据库：" class="headerlink" title="显示当前使用的数据库："></a>显示当前使用的数据库：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select database();</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="数值类型"><a href="#数值类型" class="headerlink" title="数值类型"></a>数值类型</h3><p><strong>MySQL支持所有标准SQL数值数据类型。</strong></p>
+<blockquote>
+<p>这些类型包括严格数值数据类型(INTEGER、SMALLINT、DECIMAL和NUMERIC),<br>以及近似值数据类型（FLOAT、REAL和DOUBLE PRECISION）。</p>
+</blockquote>
+<blockquote>
+<p>#关键字 INT 是 INTEGER 的同义词，关键字 DEC 是 DECIMAL 的同义词。<br>BIT 数据类型保存位字段值，并且支持MylSAM、MEMORY、InnoDB和BDB表。</p>
+</blockquote>
+<p>作为SQL标准的扩展，Mysql也支持整数类型 TINYINT、MEDIUMINT 和 BIGINT。<br>下面的表显示了需要的每个整数类型的存储和范围。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612101357.png"
+                       
+                 ></p>
+<h3 id="日期和时间类型"><a href="#日期和时间类型" class="headerlink" title="日期和时间类型"></a>日期和时间类型</h3><blockquote>
+<p>表示时间值的日期和时间类型为 DATETIME、DATE、TIMESTAMP、TIME和YEAR</p>
+</blockquote>
+<p>每个时间类型有一个有效值范围和一个”零”值,当指定不合法的MySQL不能表示的值时使用”零”MySQL支持所有标准SQL数值数据类型。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612101833.png"
+                       
+                 ></p>
+<h3 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h3><blockquote>
+<p>字符串类型值 CHAR、VARCHAR、BINARY、VARBINARY、BLOG、TEXT、ENUM和SET</p>
+</blockquote>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612102227.png"
+                       
+                 ></p>
+<blockquote>
+<p>注意：</p>
+<ol>
+<li>char(n) 和 varchar(n) 中括号中 n 代表字符的个数，并不代表字节个数，比如 CHAR(30) 就可以存储 30 个字符。</li>
+<li>CHAR 和 VARCHAR 类型类似，但它们保存和检索的方式不同。它们的最大长度和是否尾部空格被保留等方面也不同。在存储或检索过程中不进行大小写转换。</li>
+<li>BINARY 和 VARBINARY 类似于 CHAR 和 VARCHAR，不同的是它们包含二进制字符串而不要非二进制字符串。也就是说，它们包含字节字符串而不是字符字符串。这说明它们没有字符集，并且排序和比较基于列值字节的数值值。</li>
+<li>BLOB 是一个二进制大对象，可以容纳可变数量的数据。有 4 种 BLOB 类型：TINYBLOB、BLOB、MEDIUMBLOB 和 LONGBLOB。它们区别在于可容纳存储范围不同。</li>
+<li>有 4 种 TEXT 类型：TINYTEXT、TEXT、MEDIUMTEXT 和 LONGTEXT。对应的这 4 种 BLOB 类型，可存储的最大长度不同，可根据实际情况选择。</li>
+</ol>
+</blockquote>
+<h2 id="表的操作"><a href="#表的操作" class="headerlink" title="表的操作"></a>表的操作</h2><p>显示库中所有的表：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show tables;</span><br></pre></td></tr></table></figure>
+
+<p>创建表：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">create table 表名(列名 数据类型 约束···，列名 数据类型 约束···）engine=innodb default charset=utf8   创建表</span><br><span class="line"></span><br><span class="line">create table 表名(列名 数据类型 primary key auto_increment,列名 数据类型 约束···）engine=innodb default charset=utf8 创建含主键的表</span><br><span class="line"></span><br><span class="line">create table 表名(列名 数据类型 primary key,列名 数据类型 constraint fk_外键名 foreign key (列名[,]) references 表名2（列名[,]）···）engine=innodb default charset=utf8  创建含外键的表</span><br><span class="line"></span><br><span class="line">create table if not exists tb_stu(id int,name varchar(3),age int, birth datetime);</span><br></pre></td></tr></table></figure>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612102644.png"
+                       
+                 ></p>
+<p>查看表结构：desc tb_stu</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612102820.png"
+                       
+                 ></p>
+<p>删除表：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop table tb_stu;</span><br></pre></td></tr></table></figure>
+
+<h3 id="表中数据的增删改查基础"><a href="#表中数据的增删改查基础" class="headerlink" title="表中数据的增删改查基础"></a>表中数据的增删改查基础</h3><h4 id="插入数据-insert"><a href="#插入数据-insert" class="headerlink" title="插入数据 insert"></a>插入数据 insert</h4><p><strong>指定列插入：可以指定单独个一个或几个列信息进程插入，并且前缀列信息</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into tb_stu(id,name) values (1,&quot;韩云溪&quot;);</span><br></pre></td></tr></table></figure>
+<p><strong>全列插入：可以省略前缀的列信息，按照列顺序插入所有列的数据</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">insert into tb_stu values (1,&quot;韩云溪&quot;,21,&quot;2000-03-19 12:00:00&quot;);</span><br><span class="line">insert into tb_stu values (2,&quot;夏紫藤&quot;,21,&quot;2000-05-18 11:00:00&quot;);</span><br><span class="line">insert into tb_stu values (3,&quot;三三&quot;,17,&quot;2021-06-26 11:43:01&quot;);</span><br><span class="line">insert into tb_stu values (4,&quot;四四&quot;,18,&quot;2021-06-26 11:43:01&quot;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>多行插入：<br>insert into tb_name values(val1,val2…),(val1,val2…),…;<br>insert into tb_stu values (3,”三三”,17,now()),(4,”四四”,18,now());</p>
+</blockquote>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612103152.png"
+                       
+                 ></p>
+<h4 id="查询数据-select"><a href="#查询数据-select" class="headerlink" title="查询数据 select"></a>查询数据 select</h4><p><strong>查询指定表中所有数据：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_stu;</span><br></pre></td></tr></table></figure>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612103435.png"
+                       
+                 ></p>
+<p><strong>指定列查询：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select name,birth from tb_stu;</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612103502.png"
+                       
+                 ></p>
+<p><strong>排序查询：按照年龄排序查询,默认为asc升序查询，desc为降序查询</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_stu order by age [asc]/desc;</span><br></pre></td></tr></table></figure>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612103543.png"
+                       
+                 ></p>
+<p><strong>多列排序：在第一列相同的情况下针对第二列进行排序：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_stu order by age ,id desc;</span><br></pre></td></tr></table></figure>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612103637.png"
+                       
+                 ></p>
+<p><strong>分页查询：通常搭配排序一起使用</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_stu limit m offset n;</span><br><span class="line">--分页查询，每页显示m条数据，偏移到第n条开始显示m条数据（即从第n条起，显示一页）</span><br></pre></td></tr></table></figure>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612103725.png"
+                       
+                 ></p>
+<p><strong>查询字段为表达式：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select name,id+age from tb_stu;</span><br><span class="line">--按照name和id+age的值分列查询</span><br></pre></td></tr></table></figure>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612103854.png"
+                       
+                 ></p>
+<p><strong>查询时，字段别名的使用：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select name,id+age [as] total from tb_stu; </span><br><span class="line">--给id+age起了个别名叫total，as可以省略</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612104646.png"
+                       
+                 ></p>
+<p><strong>去重：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select distinct age from tb_stu ;</span><br><span class="line">--根据age查询，并对age去重</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612104656.png"
+                       
+                 ></p>
+<h4 id="条件查询-where"><a href="#条件查询-where" class="headerlink" title="条件查询 where"></a>条件查询 where</h4><blockquote>
+<p>按照一定的限制条件进行查询，限制条件通过where子句给出</p>
+</blockquote>
+<p><strong>例如</strong>：按照id&gt;1的限制条件进行查询：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_stu where id&gt;1;</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612104809.png"
+                       
+                 ></p>
+<p><strong>where子句涉及的运算符：</strong></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612104826.png"
+                       
+                 ></p>
+<blockquote>
+<p>另外还有：&gt; &#x3D; &lt;（大于、等于、小于）可以和NULL进行比较<br>is NULL&#x2F;is not NULL 可以用来判断是否为空</p>
+</blockquote>
+<p><strong>IN的使用：</strong></p>
+<blockquote>
+<p>判断查询的数据是否是给予的多个选项之一</p>
+</blockquote>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_stu where name in(&quot;韩云溪&quot;,&quot;夏紫藤&quot;);</span><br><span class="line">--查询名字为韩云溪或夏紫藤的项，符合则显示，不符合则忽略</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612104944.png"
+                       
+                 ></p>
+<p><strong>between A and B 的使用</strong>：查询范围介于AB两者之间项</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_stu where id between 1 and 3; </span><br><span class="line">--查询id介于1和3之间的项</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612105054.png"
+                       
+                 ></p>
+<p><strong>LIKE 模糊匹配的使用</strong>：查询一个数据看起来像某个条件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_stu where name like &#x27;韩%&#x27;;</span><br><span class="line">--查询表中姓名以韩开头的项，%为通配符</span><br></pre></td></tr></table></figure>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612105131.png"
+                       
+                 ></p>
+<p><strong>逻辑运算符的使</strong>用：与and、 或or、 非not</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_stu where age&gt;17 and age&lt;22;</span><br><span class="line">--查询表中年龄大于17并且小于22的项</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612105221.png"
+                       
+                 ></p>
+<p><strong>连表操作</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select * from 表1 left join 表2 on 表1.列名=表2.列名;  左连接</span><br><span class="line"></span><br><span class="line">select * from 表1 right join 表2 on 表1.列名=表2.列名;  右连接</span><br><span class="line"></span><br><span class="line">select * from 表1 inner join 表2 on 表1.列名=表2.列名;  内连接</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意:如果超过3个表联合操作，如果其中两个表操作时已经改变了表结构，应该将这两个表操作的结果作为一个临时表再与第三个表联合操作。</p>
+</blockquote>
+<p><strong>临时表</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(select * from 表名)as e</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>修改数据</strong>：update</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">update tb_name set fields1=val1,fields2=val2 where condition;</span><br><span class="line">--尤其注意不要忘了where限制条件，否则整张表的该列数据都会更改</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除数据</strong>：<strong>Delete</strong>和<strong>Truncate</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">delete from tb_name where condition;</span><br><span class="line">--尤其注意不要忘了where限制条件，否则整张表的数据都会被删除</span><br><span class="line">--清除表(如果有自增id，id 不会重新开始)</span><br><span class="line">truncate table 表名;</span><br><span class="line">--清除表(如果有自增id，id 会重新开始)</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改表结构"><a href="#修改表结构" class="headerlink" title="修改表结构"></a>修改表结构</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名 auto_increment=value; 设置自增键起始值；</span><br><span class="line"></span><br><span class="line">alter table 表名 drop 列名; 删除列</span><br><span class="line"></span><br><span class="line">alter table 表名 add 列名 数据类型 约束; 增加列</span><br><span class="line"></span><br><span class="line">alter table 表名 change 旧列名 新列名 数据类型; 修改字段类型</span><br><span class="line"></span><br><span class="line">alter table 表名 modify 列名 数据类型; 修改数据类型</span><br><span class="line"></span><br><span class="line">alter table 旧表名 rename 新表名; 修改表名</span><br><span class="line"></span><br><span class="line">alter table 表名 drop primary key; 删除表中主键</span><br><span class="line"></span><br><span class="line">alter table 表名 add 列名 数据类型 primary key;添加主键</span><br><span class="line"></span><br><span class="line">alter table 表名 add primary key(列名); 设置主键</span><br><span class="line"></span><br><span class="line">alter table 表名 add column 列名 数据类型 after 列名; 在某一列后添加主键</span><br></pre></td></tr></table></figure>
+
+<h2 id="mysql进阶"><a href="#mysql进阶" class="headerlink" title="mysql进阶"></a>mysql进阶</h2><h3 id="外键"><a href="#外键" class="headerlink" title="外键"></a>外键</h3><p>外键适用于一对多，一对一，多对多三种情况</p>
+<p><strong>一对多</strong></p>
+<blockquote>
+<p>典型案例员工与部门，一个部门对应于多个员工，一个员工对应于一个部分，所以要在员工表中设置部门id列，并设置为外键，与部门表id关联。</p>
+</blockquote>
+<p><strong>一对一</strong></p>
+<blockquote>
+<p>案例博客园用户与博客，不是每个用户都写博客，写博客的用户与拥有的博客地址一一对应，所以在博客用户表user中设置blog_id，设置成外键和唯一索引，与博客表blog中id关联</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table user(id int not null auto_increment primary key,name char(10), blog_id int,unique uq1(blog_id),constraint fk_user_blog foreign key(blog_id) references blog(id) ) engine=innodb default charset=utf8;</span><br></pre></td></tr></table></figure>
+
+<p><strong>多对多</strong></p>
+<blockquote>
+<p>典型案例电脑与用户，一个用户可以使用多台电脑，一台电脑对应多个用户，多对多，此时一般选择新建一个表contact，在其中设置两个外键，同时关联用户表id与电脑表id</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table contact( id int not null auto_increment primary key,user_id int,computer_id int,unique uq2(user_id,computer_id),constraint fk_user foreign key(user_id) references user(id),constraint fk_user foreign key(computer_id) references computer(id) ) engine=innodb default charset=utf8;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可以看情况决定要不要把两个外键弄成联合唯一索引。</p>
+</blockquote>
+<h3 id="自增"><a href="#自增" class="headerlink" title="自增"></a>自增</h3><h4 id="查看表的创建信息"><a href="#查看表的创建信息" class="headerlink" title="查看表的创建信息"></a>查看表的创建信息</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show create table 表名 ;</span><br></pre></td></tr></table></figure>
+
+<p><strong>对于自增键，我们可以设置它的初始值以及与自增步长</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table auto_increment=value; --设置自增初始值</span><br></pre></td></tr></table></figure>
+
+<h3 id="对于自增步长有两种类型："><a href="#对于自增步长有两种类型：" class="headerlink" title="对于自增步长有两种类型："></a><strong>对于自增步长有两种类型：</strong></h3><h4 id="第一种："><a href="#第一种：" class="headerlink" title="第一种："></a><strong>第一种：</strong></h4><p><strong>基于会话级别(只对本次登录有效)</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">show session variables like &quot;auto_incre%&quot;;   -- 查看步长</span><br><span class="line"></span><br><span class="line">set session auto_increment_increment=value;  --改变步长</span><br><span class="line"></span><br><span class="line">set session auto_increment_offest=value;  --设置起始值(不常用，因为有之前的alter)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="第二种："><a href="#第二种：" class="headerlink" title="第二种："></a><strong>第二种：</strong></h4><p><strong>基于全局级别(对所有会话都有用)</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set global auto_increment_increment=value; --设置全局步长</span><br></pre></td></tr></table></figure>
+
+<h3 id="pymysql"><a href="#pymysql" class="headerlink" title="pymysql"></a><strong>pymysql</strong></h3><blockquote>
+<p>pymysql 是python第三方模块，主要用于python与mysql交互。</p>
+</blockquote>
+<h4 id="pymysql-方法"><a href="#pymysql-方法" class="headerlink" title="pymysql 方法:"></a>pymysql 方法:</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">connect(host=,user=,passwd=,database=) 连接数据库</span><br><span class="line"></span><br><span class="line">cursor() 建立游标</span><br><span class="line"></span><br><span class="line">execute(sql)执行sql语句</span><br><span class="line"></span><br><span class="line">fetchone()从查询结果中取出一条数据</span><br><span class="line"></span><br><span class="line">fetchmany(num)从查询结果中取出num条数据</span><br><span class="line"></span><br><span class="line">fetchall()从查询结果中取出所有数据</span><br><span class="line"></span><br><span class="line">commit() 改变(updata，insert，drop)数据库内容专用,execute sql语句后必须commit才能真正改变数据库</span><br><span class="line"></span><br><span class="line">close()注意最后有两个close,游标要关闭，连接也要关闭</span><br></pre></td></tr></table></figure>
+
+<h4 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h4><blockquote>
+<p>sql注入 就是通过把SQL命令插入到Web表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令。</p>
+</blockquote>
+<p><strong>实例如下：</strong></p>
+<blockquote>
+<p>假设我们输入用户名和密码，然后登录数据库，在数据库中查找用户和密码是否存在，存在即登录成功，否则登录失败</p>
+</blockquote>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612111800.png"
+                       
+                 ></p>
+<blockquote>
+<p>程序如上，一开始我们输入数据库存在的用户和密码，自然能够登录成功</p>
+</blockquote>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612111834.png"
+                       
+                 ></p>
+<blockquote>
+<p>输入错误用户和密码，也能成功</p>
+</blockquote>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612111851.png"
+                       
+                 ></p>
+<p><strong>追究其原有，原因出在sql语句字符串拼接上</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">拼接的字符串为 &#x27;&#x27; or 1=1 -- &#x27;&#x27; and passwd=&#x27;123&#x27;,有1=1，当然成立</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决办法：</strong></p>
+<blockquote>
+<p>将要拼接的内容放入execute括号中，由其自己拼接</p>
+</blockquote>
+<h4 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h4><blockquote>
+<p>视图是一种虚拟存在的表，本身不包含数据，作为一个select语句保存在数据库中。通俗的讲视图代表的是一条select语句产生的结果集。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create view 视图名称 as select语句; --创建视图 </span><br></pre></td></tr></table></figure>
+
+
+<p><strong>视图单独不能插入，修改数据，因为视图是虚拟的。<br>但可以修改select语句，改变视图结果集。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter view 视图名称 as sql语句; --修改结果集</span><br><span class="line">drop view 视图名称; --删除视图</span><br></pre></td></tr></table></figure>
+
+<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><blockquote>
+<p>定义:索引（Index）是帮助MYSQL高效获取数据的数据结构</p>
+</blockquote>
+<h4 id="索引的作用"><a href="#索引的作用" class="headerlink" title="索引的作用:"></a>索引的作用:</h4><ul>
+<li>约束，加速查找</li>
+</ul>
+<h4 id="索引种类"><a href="#索引种类" class="headerlink" title="索引种类"></a>索引种类</h4><ul>
+<li>普通索引: 加速查找</li>
+<li>主键索引: 加速查找；约束(主键不能为空，不能重复)</li>
+<li>唯一索引: 加速查找；约束(索引不能重复）</li>
+<li>组合索引: 多列组成一个索引(联合主键索引，联合唯一索引，联合普通索引)</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">create index 索引名 on 表名(列名[,列名]);创建[联合]普通索引</span><br><span class="line"></span><br><span class="line">create table 表名(列名 数据类型···index 索引名(列名[,列名])); 创建表时创建[联合]普通索引</span><br><span class="line"></span><br><span class="line">create unique index 索引名 on 表名(列名);创建唯一索引</span><br><span class="line"></span><br><span class="line">create table 表名(列名 数据类型···unique 索引名(列名)); 创建表时创建唯一索引</span><br><span class="line"></span><br><span class="line">create unique index 索引名 on 表名(列名,列名);创建联合唯一索引</span><br><span class="line"></span><br><span class="line">create table 表名(列名 数据类型···unique 索引名(列名,列名)); 创建表时创建联合唯一索引</span><br><span class="line"></span><br><span class="line">drop index 索引名 on 表名; 删除索引</span><br></pre></td></tr></table></figure>
+
+<h4 id="索引结构"><a href="#索引结构" class="headerlink" title="索引结构"></a>索引结构</h4><blockquote>
+<p>索引一般有两种结构:哈希索引和BTree索引</p>
+</blockquote>
+<h5 id="哈希索引"><a href="#哈希索引" class="headerlink" title="哈希索引"></a>哈希索引</h5><blockquote>
+<p>哈希索引会产生一张索引表，把数据通过算法换算成哈希值，索引表存储这些哈希值，并在表中保存指向数据的指针，值得注意的是索引表存储哈希值时打乱了原有的存储顺序。哈希索引查找一条数据时特别快速，优于BTree索引，但因为打乱了原有的数据顺序，不支持范围查找与排序功能。</p>
+</blockquote>
+<h5 id="BTree索引"><a href="#BTree索引" class="headerlink" title="BTree索引"></a>BTree索引</h5><p><strong>MYSQL普遍采用B+Tree结构</strong></p>
+<blockquote>
+<p>B+Tree所有索引数据都在叶子节点上，并且增加了顺序访问指针，每个叶子节点都有指向相邻叶子节点的指针。BTree索引查找单条数据的速度不如哈希索引，但是更加适用于范围查找与排序，所以用的最为广泛，引擎innodb与MyIsam都使用了BTree索引。</p>
+</blockquote>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612112343.png"
+                       
+                 ></p>
+<h4 id="索引是不是越多越好？"><a href="#索引是不是越多越好？" class="headerlink" title="索引是不是越多越好？"></a>索引是不是越多越好？</h4><blockquote>
+<p>不是的，索引越多，占据的物理空间越大；索引只是加快了查询速度，而减缓了插入和修改速度。</p>
+</blockquote>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><blockquote>
+<p>定义:在MYSQL中，事务其实是一个最小的不可分割的工作单元，事务能保证一个业务的完整性。</p>
+</blockquote>
+<p><strong>场景:在开发中，有多条语句可能会有同时成功的要求，如果只有一部分成功，则全部失败，回滚到原来的状态。</strong></p>
+<h4 id="mysql中如何控制事务"><a href="#mysql中如何控制事务" class="headerlink" title="mysql中如何控制事务"></a>mysql中如何控制事务</h4><p><strong>通过</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select @@autocommit; </span><br><span class="line">--语句查询自动提交是否开启，1表示开启，0表示没有开启</span><br><span class="line">--当查询结果为1时，自动提交开启，执行sql语句(insert into ，alter),</span><br><span class="line">--系统默认提交确认，在物理表生效</span><br><span class="line">--当查询结果为0时，自动提交关闭，执行sql语句，</span><br><span class="line">--系统会等待用户手动提交确认(commit;)</span><br><span class="line">--否则可以撤回修改,回滚为原状态(rollback;）</span><br></pre></td></tr></table></figure>
+
+<h4 id="开启事务"><a href="#开启事务" class="headerlink" title="开启事务"></a><strong>开启事务</strong></h4><p><strong>一般@@autocommit我们默认开启，否则每次都需手动提交太麻烦，但当我们想开启一个事务时应该怎么做？</strong></p>
+<blockquote>
+<p>我们可以通过 begin或start transaction 开启一个事务，最后以commit;或rollback;结束一个事务。</p>
+</blockquote>
+<h4 id="事务的四大特性-ACID"><a href="#事务的四大特性-ACID" class="headerlink" title="事务的四大特性(ACID)"></a><strong>事务的四大特性(ACID)</strong></h4><blockquote>
+<p>A 原子性:事务是最小的不可分割的工作单元<br>C 一致性:在一个事务中，事务前后数据的完整性必须保持一致，sql语句要么全部成功，要么失败，回滚到原状态。如银行转账，总的钱数不变<br>I 隔离性:不同事务之间具有隔离性<br>D 持久性:事务一旦结束，就不可以返回，不可以rollback </p>
+</blockquote>
+<h4 id="mysql事务四大隔离级别"><a href="#mysql事务四大隔离级别" class="headerlink" title="mysql事务四大隔离级别"></a><strong>mysql事务四大隔离级别</strong></h4><blockquote>
+<p>读未提交（read uncommitted）</p>
+<p>不可重复读（read committed）</p>
+<p>可重复读（repeatable read）</p>
+<p>串行化（serializable）</p>
+</blockquote>
+<p><strong>mysql事务隔离级别默认是可重复读(repeatable-read）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select @@ global.tx_isolation; --mysql(5.x版本)查看隔离级别</span><br><span class="line">set [global/session] transaction isolation level 隔离级别; --设置隔离级别</span><br></pre></td></tr></table></figure>
+
+<h4 id="四种隔离级别导致的问题："><a href="#四种隔离级别导致的问题：" class="headerlink" title="四种隔离级别导致的问题："></a><strong>四种隔离级别导致的问题：</strong></h4><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612113123.png"
+                       
+                 ></p>
+<blockquote>
+<ol>
+<li>脏读：事务1读到了事务2未提交的数据，如果事务2rollback，这些数据便是脏数据</li>
+<li>不可重复读：事务1对同一数据重复读，但是另一个事务不断修改这些数据，造成事务1每次读到的数据不一样</li>
+<li>幻读：是指当事务不是独立执行时发生的一种现象，例如第一个事务对一个表中的数据进行了修改，这种修改涉及到表中的全部数据行。同时，第二个事务也修改这个表中的数据，这种修改是向表中插入一行新数据。那么，以后就会发生操作第一个事务的用户在新开启的事务中发现表中还有没有修改的数据行，就好象发生了幻觉一样(用户1开启事务查看数据，然后同时有用户2开启事务对数据修改并提交，用户1在当前事务没有发现数据改变，结束事务，然后在新开启的事务中发现了新修改的数据，这像幻觉）</li>
+</ol>
+</blockquote>
+<p><strong>注意:不可重复读侧重修改，幻读侧重插入和删除</strong></p>
+<h5 id="幻读试验："><a href="#幻读试验：" class="headerlink" title="幻读试验："></a>幻读试验：</h5><p><strong>设置隔离级别</strong><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612113244.png"
+                       
+                 ></p>
+<p><strong>开启一个事务，查询数据</strong></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612113304.png"
+                       
+                 ></p>
+<p><strong>重新打开一个窗口登录，开启事务插入数据，并commit</strong></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612113353.png"
+                       
+                 ></p>
+<p><strong>先前的事务查询数据，看不到新增语句，解决了不可重复读问题</strong></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612113418.png"
+                       
+                 ></p>
+<p><strong>关闭先前事务，重新查询，查到新增数据，出现幻读</strong></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://cdn.jsdelivr.net/gh/longhz/cdn/images/blog/20220612113441.png"
+                       
+                 ></p>
+<h2 id="mysql重要知识点"><a href="#mysql重要知识点" class="headerlink" title="mysql重要知识点"></a>mysql重要知识点</h2><h3 id="innodb与MyIsam的区别"><a href="#innodb与MyIsam的区别" class="headerlink" title="innodb与MyIsam的区别"></a>innodb与MyIsam的区别</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">InnoDB支持事务，而MyISAM不支持事务;</span><br><span class="line">InnoDB支持行级锁，而MyISAM支持表级锁;</span><br><span class="line">InnoDB支持MVCC(多版本并发控制), 而MyISAM不支持;</span><br><span class="line">InnoDB支持外键，而MyISAM不支持;</span><br><span class="line">InnoDB不支持全文索引，而MyISAM支持;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="内连接，左连接，右连接的区别"><a href="#内连接，左连接，右连接的区别" class="headerlink" title="内连接，左连接，右连接的区别"></a>内连接，左连接，右连接的区别</h3><p><strong>内连接：返回两表指定列名相同的数据，如果没有返回空。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from 表1 inner join 表2 on 表1.列名=表2.列名;  --内连接</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>左连接:左边数据全显示，右边表只显示符合条件的数据，<br>如果右边没有相符数据或满足的数据少于左边数据行，以null代替(记录不足的地方以null代替)</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from 表1 left join 表2 on 表1.列名=表2.列名;  --左连接</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>右连接:与左连接相反</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from 表1 right join 表2 on 表1.列名=表2.列名;  --右连接</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="drop-delete与truncate的区别"><a href="#drop-delete与truncate的区别" class="headerlink" title="drop,delete与truncate的区别"></a>drop,delete与truncate的区别</h3><blockquote>
+<p>drop 直接删掉表</p>
+<p>truncate 删除表中数据，再插入时自增长id又从1开始</p>
+<p>delete 删除表中数据，可以加where字句,delete删除整个表数据时，再插入自增id不会从1开始</p>
+</blockquote>
+<h3 id="为什么用BTree做索引结构"><a href="#为什么用BTree做索引结构" class="headerlink" title="为什么用BTree做索引结构"></a>为什么用BTree做索引结构</h3><ol>
+<li><strong>哈希:虽然单词查询快，但是没有顺序，不适合范围查询</strong></li>
+<li><strong>二叉树：树的高度不均匀，不能自平衡，查找效率与树的高度有关，IO代价高</strong></li>
+<li><strong>红黑树：树的高度随数据量而变，IO代价高(数据量过大时，树的深度越高，IO读写越频繁)</strong></li>
+<li><strong>Btree:数据很大时，不可能放在内存，所以放在磁盘上，BTree 每层节点数多，层数少，减少了IO读写次数，查询结果更加稳定</strong></li>
+</ol>
+<h3 id="主键-外键"><a href="#主键-外键" class="headerlink" title="主键 外键"></a>主键 外键</h3><blockquote>
+<p>主键:数据库表中对储存数据对象予以唯一和完整标识的数据列或属性的组合。一个表只能有一个主键，且主键的取值不能缺失，即不能为空值(Null)。</p>
+<p>外键:在一个表中存在的另一个表的主键称此表的外键。</p>
+</blockquote>
+<h3 id="varchar与char区别"><a href="#varchar与char区别" class="headerlink" title="varchar与char区别"></a>varchar与char区别</h3><blockquote>
+<p>char是一种固定长度的类型，varchar则是一种可变长度的类型<br>char 长度是固定的，不管你存储的数据是多少他都会都固定的长度。而varchar则处可变长度<br>varchar(50)中50表示最多有50个字符<br>varchar节省空间，查询速度没有char速度快</p>
+</blockquote>
+<h3 id="行级锁和表级锁"><a href="#行级锁和表级锁" class="headerlink" title="行级锁和表级锁"></a>行级锁和表级锁</h3><blockquote>
+<p><strong>表级</strong>: 直接锁定整张表，在你锁定期间，其它进程无法对该表进行写操作。如果你是写锁，则其它进程则读也不允许<br><strong>行级</strong>: 仅对指定的记录进行加锁，这样其它进程还是可以对同一个表中的其它记录进行操作。</p>
+</blockquote>
+
+                    
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                Mysql相关操作知识
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                2021/08/06/Mysql基础知识/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">ドラゴンボールのLong</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2021-08-06 08:19</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="">
+                    <a href="https://zhongshenglong.xyz" target="_blank">
+                        
+                            Long License
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/linux/">linux</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E5%BF%83%E5%BE%97/">心得</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/mysql/">mysql</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+                    
+
+<div class="reward-author-container border-box flex-center">
+    <div class="reward-btn border-box flex-center tooltip tooltip-img"
+            data-tooltip-img-url="/images/reward.jpg"
+            data-tooltip-img-trigger="click"
+            data-tooltip-img-style="top: -6px;"
+    >
+        <i class="fa-solid fa-gift"></i>&nbsp;请作者喝咖啡
+    </div>
+</div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2021/08/06/rac%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E7%9F%A5%E8%AF%86/"
+                                   title="rac相关操作知识"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">rac相关操作知识</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2021/07/06/mysql%E6%8A%A5%E9%94%99-1130/"
+                                   title="Mysql报错-1130"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Mysql报错-1130</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+    <div class="comments-container border-box">
+        <div id="comments-anchor" class="comment-area-title border-box">
+            <i class="fas fa-comments"></i>&nbsp;评论
+        </div>
+        <div class="comment-plugin-fail border-box">
+    <span class="fail-tip">评论插件加载失败</span>
+    <button class="reload keep-button">点击重新加载</button>
+</div>
+<div class="comment-plugin-loading flex-center border-box">
+    <i class="loading-icon fa-solid fa-spinner fa-spin"></i>
+    <span class="load-tip">正在加载评论插件</span>
+</div>
+<script data-pjax>
+  window.KeepCommentPlugin = {}
+  window.KeepCommentPlugin.hideLoading = () => {
+    const cplDom = document.querySelector('.comments-container .comment-plugin-loading')
+    cplDom.style.display = 'none'
+  }
+  window.KeepCommentPlugin.loadFailHandle = () => {
+    window.KeepCommentPlugin.hideLoading()
+    const cpfDom = document.querySelector('.comments-container .comment-plugin-fail')
+    cpfDom.style.display = 'flex'
+    cpfDom.querySelector('.reload').addEventListener('click', () => {
+      window.location.reload()
+    })
+  }
+</script>
+
+        
+            
+
+    <div class="valine-container">
+        <div id="vcomments"></div>
+        <script 
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        ></script>
+        <script 
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        >
+          window.KeepCommentPlugin.initValine = () => {
+            const config = {
+              el: '#vcomments',
+              appId: '2TGCOmDNikdxOnVmQJEFhTOK-gzGzoHsz',
+              appKey: 'lU21jvewvcy043UjfpHRXfvA',
+              meta: ['nick', 'mail', 'link'],
+              avatar: 'wavatar',
+              enableQQ: true,
+              placeholder: '😜 尽情吐槽吧~',
+              lang: 'zh-CN'.toLowerCase()
+            }
+
+            if ('') {
+              config.serverURLs = ''
+            }
+
+            if (window?.Valine) {
+              new Valine(config)
+              window.KeepCommentPlugin.hideLoading()
+            } else {
+              setTimeout(() => {
+                window.KeepCommentPlugin.initValine()
+              }, 1000)
+            }
+          }
+
+          if ('false' === 'true') {
+            setTimeout(() => {
+              window.KeepCommentPlugin.initValine()
+            }, 1200)
+          } else {
+            window.addEventListener('DOMContentLoaded', window.KeepCommentPlugin.initValine)
+          }
+        </script>
+    </div>
+
+
+        
+    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql%E4%BD%BF%E7%94%A8%E6%97%B6%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.</span> <span class="nav-text">Mysql使用时的注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.1.</span> <span class="nav-text">基础常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E7%99%BB%E5%BD%95%EF%BC%9A"><span class="nav-number">1.1.1.</span> <span class="nav-text">本地登录：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%EF%BC%9A"><span class="nav-number">1.1.2.</span> <span class="nav-text">远程登录：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6%EF%BC%8C%E4%BF%9D%E5%AD%98"><span class="nav-number">1.1.3.</span> <span class="nav-text">导出数据库文件，保存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.4.</span> <span class="nav-text">导入数据库文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7"><span class="nav-number">1.1.5.</span> <span class="nav-text">创建用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E6%8E%88%E6%9D%83"><span class="nav-number">1.1.6.</span> <span class="nav-text">用户授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7"><span class="nav-number">1.1.7.</span> <span class="nav-text">删除用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%93%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">库的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%BA%93%EF%BC%9A"><span class="nav-number">1.2.1.</span> <span class="nav-text">创建库：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%BA%93%EF%BC%9A"><span class="nav-number">1.2.2.</span> <span class="nav-text">删除库：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.2.3.</span> <span class="nav-text">选择使用数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E4%BD%BF%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%9A"><span class="nav-number">1.2.4.</span> <span class="nav-text">显示当前使用的数据库：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.1.</span> <span class="nav-text">数值类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.2.</span> <span class="nav-text">日期和时间类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.3.</span> <span class="nav-text">字符串类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">1.4.</span> <span class="nav-text">表的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E4%B8%AD%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E5%9F%BA%E7%A1%80"><span class="nav-number">1.4.1.</span> <span class="nav-text">表中数据的增删改查基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE-insert"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">插入数据 insert</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE-select"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">查询数据 select</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2-where"><span class="nav-number">1.4.1.3.</span> <span class="nav-text">条件查询 where</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.4.1.4.</span> <span class="nav-text">修改表结构</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql%E8%BF%9B%E9%98%B6"><span class="nav-number">1.5.</span> <span class="nav-text">mysql进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E9%94%AE"><span class="nav-number">1.5.1.</span> <span class="nav-text">外键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%A2%9E"><span class="nav-number">1.5.2.</span> <span class="nav-text">自增</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA%E4%BF%A1%E6%81%AF"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">查看表的创建信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8E%E8%87%AA%E5%A2%9E%E6%AD%A5%E9%95%BF%E6%9C%89%E4%B8%A4%E7%A7%8D%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="nav-number">1.5.3.</span> <span class="nav-text">对于自增步长有两种类型：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%EF%BC%9A"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">第一种：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%EF%BC%9A"><span class="nav-number">1.5.3.2.</span> <span class="nav-text">第二种：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pymysql"><span class="nav-number">1.5.4.</span> <span class="nav-text">pymysql</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pymysql-%E6%96%B9%E6%B3%95"><span class="nav-number">1.5.4.1.</span> <span class="nav-text">pymysql 方法:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sql%E6%B3%A8%E5%85%A5"><span class="nav-number">1.5.4.2.</span> <span class="nav-text">sql注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE"><span class="nav-number">1.5.4.3.</span> <span class="nav-text">视图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95"><span class="nav-number">1.5.5.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.5.5.1.</span> <span class="nav-text">索引的作用:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%A7%8D%E7%B1%BB"><span class="nav-number">1.5.5.2.</span> <span class="nav-text">索引种类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.5.5.3.</span> <span class="nav-text">索引结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E7%B4%A2%E5%BC%95"><span class="nav-number">1.5.5.3.1.</span> <span class="nav-text">哈希索引</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BTree%E7%B4%A2%E5%BC%95"><span class="nav-number">1.5.5.3.2.</span> <span class="nav-text">BTree索引</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E6%98%AF%E4%B8%8D%E6%98%AF%E8%B6%8A%E5%A4%9A%E8%B6%8A%E5%A5%BD%EF%BC%9F"><span class="nav-number">1.5.5.4.</span> <span class="nav-text">索引是不是越多越好？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.5.6.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql%E4%B8%AD%E5%A6%82%E4%BD%95%E6%8E%A7%E5%88%B6%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.5.6.1.</span> <span class="nav-text">mysql中如何控制事务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.5.6.2.</span> <span class="nav-text">开启事务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7-ACID"><span class="nav-number">1.5.6.3.</span> <span class="nav-text">事务的四大特性(ACID)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql%E4%BA%8B%E5%8A%A1%E5%9B%9B%E5%A4%A7%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-number">1.5.6.4.</span> <span class="nav-text">mysql事务四大隔离级别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9B%E7%A7%8D%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AF%BC%E8%87%B4%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">1.5.6.5.</span> <span class="nav-text">四种隔离级别导致的问题：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%BB%E8%AF%BB%E8%AF%95%E9%AA%8C%EF%BC%9A"><span class="nav-number">1.5.6.5.1.</span> <span class="nav-text">幻读试验：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql%E9%87%8D%E8%A6%81%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">1.6.</span> <span class="nav-text">mysql重要知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#innodb%E4%B8%8EMyIsam%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.6.1.</span> <span class="nav-text">innodb与MyIsam的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E8%BF%9E%E6%8E%A5%EF%BC%8C%E5%B7%A6%E8%BF%9E%E6%8E%A5%EF%BC%8C%E5%8F%B3%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.6.2.</span> <span class="nav-text">内连接，左连接，右连接的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#drop-delete%E4%B8%8Etruncate%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.6.3.</span> <span class="nav-text">drop,delete与truncate的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8BTree%E5%81%9A%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.6.4.</span> <span class="nav-text">为什么用BTree做索引结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E9%94%AE-%E5%A4%96%E9%94%AE"><span class="nav-number">1.6.5.</span> <span class="nav-text">主键 外键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#varchar%E4%B8%8Echar%E5%8C%BA%E5%88%AB"><span class="nav-number">1.6.6.</span> <span class="nav-text">varchar与char区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E7%BA%A7%E9%94%81%E5%92%8C%E8%A1%A8%E7%BA%A7%E9%94%81"><span class="nav-number">1.6.7.</span> <span class="nav-text">行级锁和表级锁</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+		year - 作为date对象的年份，为4位年份值
+		month - 0-11之间的整数，做为date对象的月份
+		day - 1-31之间的整数，做为date对象的天数
+		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+		minutes - 0-59之间的整数，做为date对象的分钟数
+		seconds - 0-59之间的整数，做为date对象的秒数
+		microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+		var t1 = Date.UTC(2019,04,09,21,47,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML="❤亲爱的旅客,我已与你/妳相遇❤❤❤"+" 第 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒❤";
+	}/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+	siteTime();
+</script>
+
+<footer class="footer border-box">
+		
+	<a href="https://www.foreverblog.cn/" target="_blank" > <img src="https://img.foreverblog.cn/logo_en_default.png" alt="" style="width:auto;height:16px;"> </a>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            本站由 <span class="tooltip" data-tooltip-content="阿里云"><img src="/images/brands/aliyun.png"></span> 提供部署服务
+            
+        </div>
+    
+
+    
+        <div class="record-info info-item">
+		ICP备案号：【&nbsp;
+            
+                
+                    <div class="record-item border-box">
+                        <a class=""
+                           target="_blank"
+                           href="https://beian.miit.gov.cn"
+                        >
+                            苏ICP备20001538号-1
+                        </a>
+                    </div>
+                
+            
+		&nbsp;】&nbsp;
+        </div>
+    
+	
+    <div class="copyright-info info-item">
+        &copy;&nbsp;<span>2019</span>&nbsp;-&nbsp;2024
+        
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">ドラゴンボールのLong</a>
+        
+		&nbsp;&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        <div class="count-info info-item">
+            
+                <span class="count-item border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">125.5k</span>
+                </span>
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+	
+	<!--自定义了时间-->
+    <p id="sitetime" target="_blank"></p>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+            <li class="tools-item go-to-comments-tablet flex-center">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql%E4%BD%BF%E7%94%A8%E6%97%B6%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.</span> <span class="nav-text">Mysql使用时的注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.1.</span> <span class="nav-text">基础常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E7%99%BB%E5%BD%95%EF%BC%9A"><span class="nav-number">1.1.1.</span> <span class="nav-text">本地登录：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%EF%BC%9A"><span class="nav-number">1.1.2.</span> <span class="nav-text">远程登录：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6%EF%BC%8C%E4%BF%9D%E5%AD%98"><span class="nav-number">1.1.3.</span> <span class="nav-text">导出数据库文件，保存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.4.</span> <span class="nav-text">导入数据库文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7"><span class="nav-number">1.1.5.</span> <span class="nav-text">创建用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E6%8E%88%E6%9D%83"><span class="nav-number">1.1.6.</span> <span class="nav-text">用户授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7"><span class="nav-number">1.1.7.</span> <span class="nav-text">删除用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%93%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">库的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%BA%93%EF%BC%9A"><span class="nav-number">1.2.1.</span> <span class="nav-text">创建库：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%BA%93%EF%BC%9A"><span class="nav-number">1.2.2.</span> <span class="nav-text">删除库：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.2.3.</span> <span class="nav-text">选择使用数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E4%BD%BF%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%9A"><span class="nav-number">1.2.4.</span> <span class="nav-text">显示当前使用的数据库：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.1.</span> <span class="nav-text">数值类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.2.</span> <span class="nav-text">日期和时间类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.3.</span> <span class="nav-text">字符串类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">1.4.</span> <span class="nav-text">表的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E4%B8%AD%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E5%9F%BA%E7%A1%80"><span class="nav-number">1.4.1.</span> <span class="nav-text">表中数据的增删改查基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE-insert"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">插入数据 insert</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE-select"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">查询数据 select</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2-where"><span class="nav-number">1.4.1.3.</span> <span class="nav-text">条件查询 where</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.4.1.4.</span> <span class="nav-text">修改表结构</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql%E8%BF%9B%E9%98%B6"><span class="nav-number">1.5.</span> <span class="nav-text">mysql进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E9%94%AE"><span class="nav-number">1.5.1.</span> <span class="nav-text">外键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%A2%9E"><span class="nav-number">1.5.2.</span> <span class="nav-text">自增</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA%E4%BF%A1%E6%81%AF"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">查看表的创建信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8E%E8%87%AA%E5%A2%9E%E6%AD%A5%E9%95%BF%E6%9C%89%E4%B8%A4%E7%A7%8D%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="nav-number">1.5.3.</span> <span class="nav-text">对于自增步长有两种类型：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%EF%BC%9A"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">第一种：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%EF%BC%9A"><span class="nav-number">1.5.3.2.</span> <span class="nav-text">第二种：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pymysql"><span class="nav-number">1.5.4.</span> <span class="nav-text">pymysql</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pymysql-%E6%96%B9%E6%B3%95"><span class="nav-number">1.5.4.1.</span> <span class="nav-text">pymysql 方法:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sql%E6%B3%A8%E5%85%A5"><span class="nav-number">1.5.4.2.</span> <span class="nav-text">sql注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE"><span class="nav-number">1.5.4.3.</span> <span class="nav-text">视图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95"><span class="nav-number">1.5.5.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.5.5.1.</span> <span class="nav-text">索引的作用:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%A7%8D%E7%B1%BB"><span class="nav-number">1.5.5.2.</span> <span class="nav-text">索引种类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.5.5.3.</span> <span class="nav-text">索引结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E7%B4%A2%E5%BC%95"><span class="nav-number">1.5.5.3.1.</span> <span class="nav-text">哈希索引</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BTree%E7%B4%A2%E5%BC%95"><span class="nav-number">1.5.5.3.2.</span> <span class="nav-text">BTree索引</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E6%98%AF%E4%B8%8D%E6%98%AF%E8%B6%8A%E5%A4%9A%E8%B6%8A%E5%A5%BD%EF%BC%9F"><span class="nav-number">1.5.5.4.</span> <span class="nav-text">索引是不是越多越好？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.5.6.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql%E4%B8%AD%E5%A6%82%E4%BD%95%E6%8E%A7%E5%88%B6%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.5.6.1.</span> <span class="nav-text">mysql中如何控制事务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.5.6.2.</span> <span class="nav-text">开启事务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7-ACID"><span class="nav-number">1.5.6.3.</span> <span class="nav-text">事务的四大特性(ACID)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql%E4%BA%8B%E5%8A%A1%E5%9B%9B%E5%A4%A7%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-number">1.5.6.4.</span> <span class="nav-text">mysql事务四大隔离级别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9B%E7%A7%8D%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AF%BC%E8%87%B4%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">1.5.6.5.</span> <span class="nav-text">四种隔离级别导致的问题：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%BB%E8%AF%BB%E8%AF%95%E9%AA%8C%EF%BC%9A"><span class="nav-number">1.5.6.5.1.</span> <span class="nav-text">幻读试验：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql%E9%87%8D%E8%A6%81%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">1.6.</span> <span class="nav-text">mysql重要知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#innodb%E4%B8%8EMyIsam%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.6.1.</span> <span class="nav-text">innodb与MyIsam的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E8%BF%9E%E6%8E%A5%EF%BC%8C%E5%B7%A6%E8%BF%9E%E6%8E%A5%EF%BC%8C%E5%8F%B3%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.6.2.</span> <span class="nav-text">内连接，左连接，右连接的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#drop-delete%E4%B8%8Etruncate%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.6.3.</span> <span class="nav-text">drop,delete与truncate的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8BTree%E5%81%9A%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.6.4.</span> <span class="nav-text">为什么用BTree做索引结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E9%94%AE-%E5%A4%96%E9%94%AE"><span class="nav-number">1.6.5.</span> <span class="nav-text">主键 外键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#varchar%E4%B8%8Echar%E5%8C%BA%E5%88%AB"><span class="nav-number">1.6.6.</span> <span class="nav-text">varchar与char区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E7%BA%A7%E9%94%81%E5%92%8C%E8%A1%A8%E7%BA%A7%E9%94%81"><span class="nav-number">1.6.7.</span> <span class="nav-text">行级锁和表级锁</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/lazyload.min.js"></script>
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+    
+        
+    
+        
+            
+<script class="custom-inject-js" src="/js/love.js" data-pjax></script>
+
+        
+    
+
+</body>
+</html>

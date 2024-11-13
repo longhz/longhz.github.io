@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="每日一句">
+    <meta name="author" content="ドラゴンボールのLong">
+    
+    <title>
+        
+            Oracle11g搭建ogg |
+        
+        ドラゴンボールのBlog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/font/css/brands.min.css">
+    
+        
+            
+        
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"zhongshenglong.xyz","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"ドラゴンボールのBlog","author":"ドラゴンボールのLong","avatar":"https://cdn.jsdelivr.net/gh/longhz/cdn@1.0/img/custom/avatar1.jpg","logo":"/images/favicon.ico","favicon":"/images/favicon.ico"},"menu":{"home":"/ || fa-solid fa-home","归档":{"icon":"fa-solid fa-book","children":[{"archives":"/archives || fa-solid fa-layer-group"},{"tags":"/tags || fa-solid fa-tags"}]},"links":"/links|| fa-solid fa-link","about":{"icon":"fa-solid fa-user-secret","children":[{"gallery":"/gallery || fa-solid fa-image"},{"about":"/about || fa-solid fa-user-graduate"}]}},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"黄色的森林分出两条路 || 我选择人迹更少的那一条，从此决定我一生的道路。","hitokoto":true},"social_contact":{"enable":false,"links":{"github":"https://github.com/longhz","weixin":null,"qq":"https://wpa.qq.com/msgrd?v=3&uin=1084045717&site=qq&menu=yes","weibo":null,"bilibili":"https://space.bilibili.com/9317816/bangumi","wangyiyun":"https://music.163.com/user/home?id=1348254961","zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":{"custom_license":"Long License","custom_link":"https://zhongshenglong.xyz"},"share":true,"reward":{"enable":true,"img_link":"/images/reward.jpg","text":"请作者喝咖啡","icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"obsidian"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":true,"use":"valine","valine":{"appid":"2TGCOmDNikdxOnVmQJEFhTOK-gzGzoHsz","appkey":"lU21jvewvcy043UjfpHRXfvA","server_urls":null,"placeholder":"😜 尽情吐槽吧~"},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.36"},"waline":{"server_url":null,"reaction":false,"version":"3.2.1"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2019,"word_count":true,"site_deploy":{"enable":true,"provider":"aliyun","url":null},"record":{"enable":true,"list":[{"code":"苏ICP备20001538号-1","link":"https://beian.miit.gov.cn"}]}},"inject":{"enable":true,"css":[null],"js":[null,"/js/love.js"]},"aplayer":{"id":4900925608,"server":"netease","type":"playlist","fixed":true,"autoplay":false,"loop":"all","order":"random","preload":"auto","volume":0.7,"mutex":true},"live2d":{"enable":true,"scriptFrom":"local","pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"use":"live2d-widget-model-liveuu"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}},"root":"","source_data":{"links":[{"name":"IT诗人","link":"https://xpoet.cn/","description":"所有命运的馈赠，早已在暗中标好价格。","avatar":"https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/common-use/avatar.jpg"},{"name":"不知名艺术家","link":"https://jinzhanqi.com/","description":"love artist, love code.","avatar":"https://s3.ax1x.com/2020/11/17/DVvkB4.jpg"},{"name":"阮一峰","link":"http://www.ruanyifeng.com/blog/archives.html","description":"阮一峰的网络日志","avatar":"https://www.ruanyifeng.com/blog/images/person2_s.jpg"},{"name":"墨","link":"https://www.kura.ren/","description":"清水1024","avatar":"https://www.kura.ren/upload/2020/05/up-up-man-4d2d7e917c9d476b86373b0aa17fcafe.png"},{"name":"爱·绮梦","link":"https://x.iqimeng.com/","description":"学而时习之 不亦说乎","avatar":"https://x.iqimeng.com/images/avatar.jpg"},{"name":"Keep learning","link":"https://blog.gooday.press/","description":"爱好学习，不断提升自我","avatar":"https://cdn.jsdelivr.net/gh/cemonliu/blogpic@main/avatar.svg"},{"name":"CitingNutria","link":"https://citingnutria.github.io/","description":"まだ夢がある","avatar":"https://cdn.jsdelivr.net/gh/CitingNutria/image_hosting@master/avatar.jpg"},{"name":"小龙的跋涉","link":"https://www.eduorg.ltd/","description":"但行好事，莫问前程","avatar":"https://cdn.jsdelivr.net/gh/Xiaolong00/raines-photo@master/blog/favicon.42reb4izcgs0.png"},{"name":"Eveneko","link":"https://eveneko.com/","description":"我们这一生，能做一个优秀的普通人已经足够厉害了！","avatar":"https://cdn.jsdelivr.net/gh/Eveneko/Image-Hosting@master/PicX/A1644732-0330-47D7-A2A1-4EBA8B3C2855.3gp6q5zr8180.jpeg"},{"name":"Nico","link":"https://www.lzp.zone/","description":"蝉歌星夜，月影婆娑","avatar":"https://tva1.sinaimg.cn/large/008i3skNly1gwpe11i8adj301s01smwx.jpg"},{"name":"KAI’S NOTE","link":"https://kainote.top/","description":"三天打鱼(⊙ˍ⊙)两天晒网","avatar":"https://s2.loli.net/2022/01/09/UtbhxHv2IA8jqwZ.jpg"},{"name":"April的记录小屋","link":"https://april-tong.com/","description":"热爱可抵岁月漫长。","avatar":"https://raw.githubusercontent.com/AprilTong/image/master/img/photo.jpeg"},{"name":"ZhengXi","link":"https://zhengxi.io/","description":"你的时间有限，不要为了别人而活","avatar":"https://vip2.loli.io/2022/01/28/8bTLXSIoDckrjfz.png"},{"name":"PMP项目管理","link":"https://pmp.saiita.cn/","description":"学习PMP项目管理的笔记.","avatar":"https://cdn.saiita.com.cn/picgo/P3260015.JPG"},{"name":"开心驿站","link":"https://www.kxyz.eu.org/","description":"steam游戏交流中心","avatar":"https://www.kxyz.eu.org/wp-content/uploads/logo.png"},{"name":"免费公益v2ray节点订阅","link":"https://www.v2rayfree.eu.org/","description":"免费公益v2ray节点订阅","avatar":"https://www.v2rayfree.eu.org/images/avatar.png"},{"name":"ZXC's Blog","link":"https://www.v2rayfree.eu.org/","description":"生命不息，代码不止","avatar":"https://cdn.jsdelivr.net/gh/XavierJiezou/picx-image-hosting@main/about/avatar.jpg"},{"name":"FallenGemini的博客","link":"https://paraderno.github.io/Blog.github.io/","description":"愿地狱的终点是天堂","avatar":"https://raw.githubusercontent.com/Paraderno/image-hosting/master/avatar.3co1ubx6en80.png"},{"name":"AomanHao的博客","link":"https://www.aomanhao.top/","description":"热爱图像处理，优化彩色世界","avatar":"https://www.aomanhao.top/images/Avatar.jpg"},{"name":"༺ཌ༈君☠纤༈ད༻的博客","link":"https://www.cnblogs.com/asio/","description":"欲买桂花同载酒，荒泷天下第一斗。","avatar":"https://pic.cnblogs.com/avatar/1924746/20200215183155.png"},{"name":"clash免费节点","link":"https://clashfree.eu.org/","description":"ssr/v2ray/clash免费节点分享","avatar":"https://clashfree.eu.org/wp-content/uploads/avatar.png"}]},"version":"4.2.3"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="❦༺  LONGZ ༻❦" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/favicon.ico">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               ドラゴンボールのBlog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box has-sub-menu">
+                            <a class="menu-text-color border-box" href="javascript:void(0);">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-book"></i>
+                                
+                                归档
+                                
+                                    <i class="menu-text-color collapse-icon fa-solid fa-angle-down"></i>
+                                
+                            </a>
+                            
+                                <ul class="sub-menu-list border-box">
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/archives">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-layer-group"></i>
+                                                
+                                                归档
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/tags">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-tags"></i>
+                                                
+                                                标签
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/links">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-link"></i>
+                                
+                                友链
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box has-sub-menu">
+                            <a class="menu-text-color border-box" href="javascript:void(0);">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-secret"></i>
+                                
+                                关于
+                                
+                                    <i class="menu-text-color collapse-icon fa-solid fa-angle-down"></i>
+                                
+                            </a>
+                            
+                                <ul class="sub-menu-list border-box">
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/gallery">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-image"></i>
+                                                
+                                                GALLERY
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/about">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-user-graduate"></i>
+                                                
+                                                关于
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box has-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="javascript:void(0);">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-book"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                            <i class="right-side collapse-icon fa-solid fa-angle-left"></i>
+                        
+                    </label>
+                    
+                        <ul class="drawer-sub-menu-list border-box">
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/archives">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-layer-group"></i>
+                                            </span>
+                                        
+                                        归档
+                                    </a>
+                                </li>
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/tags">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-tags"></i>
+                                            </span>
+                                        
+                                        标签
+                                    </a>
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/links">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-link"></i>
+                                </span>
+                            
+                            友链
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box has-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="javascript:void(0);">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-secret"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                            <i class="right-side collapse-icon fa-solid fa-angle-left"></i>
+                        
+                    </label>
+                    
+                        <ul class="drawer-sub-menu-list border-box">
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/gallery">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-image"></i>
+                                            </span>
+                                        
+                                        GALLERY
+                                    </a>
+                                </li>
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/about">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-user-graduate"></i>
+                                            </span>
+                                        
+                                        关于
+                                    </a>
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        Oracle11g搭建ogg
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="http://cdns.zhongshenglong.xyz/cdn-photos/img/custom/avatar1.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">岁月如梦</span>
+                                
+                                    <span class="author-badge">Lv4</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2022-04-06 20:10:12</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Sun Jul 17 2022 16:02:26 GMT+0800">2022-07-17 16:02:26</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/oracle/">oracle</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E5%BF%83%E5%BE%97/">心得</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/ogg/">ogg</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>5.8k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>25 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h1 id="Oracle11g搭建ogg（简单的单向复制）"><a href="#Oracle11g搭建ogg（简单的单向复制）" class="headerlink" title="Oracle11g搭建ogg（简单的单向复制）"></a>Oracle11g搭建ogg（简单的单向复制）</h1><h2 id="1-环境介绍"><a href="#1-环境介绍" class="headerlink" title="1.环境介绍"></a>1.环境介绍</h2><blockquote>
+<p>主要介绍OGG的安装部署，下面是实验环境介绍。</p>
+</blockquote>
+<p><strong>实验规划</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>源环境</th>
+<th>目标环境</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>操作系统</td>
+<td>Red Hat Linux Server release 6.6</td>
+<td>Red Hat Linux Server release 6.6</td>
+</tr>
+<tr>
+<td>主机名</td>
+<td>ora11g-1</td>
+<td>ora11g-2</td>
+</tr>
+<tr>
+<td>IP地址</td>
+<td>192.168.65.139</td>
+<td>192.168.65.140</td>
+</tr>
+<tr>
+<td>数据库及版本</td>
+<td>ORACLE_11204</td>
+<td>ORACLE_11204</td>
+</tr>
+<tr>
+<td>数据库字符集</td>
+<td>AMERICAN_AMERICA.ZHS16GBK</td>
+<td>AMERICAN_AMERICA.ZHS16GBK</td>
+</tr>
+<tr>
+<td>ORACLE_SID</td>
+<td>orcl</td>
+<td>orcl</td>
+</tr>
+<tr>
+<td>GoldenGate用户</td>
+<td>ogg</td>
+<td>ogg</td>
+</tr>
+<tr>
+<td>GoldenGate版本</td>
+<td>112103</td>
+<td>112103</td>
+</tr>
+</tbody></table>
+<h2 id="2-实验步骤："><a href="#2-实验步骤：" class="headerlink" title="2.实验步骤："></a>2.实验步骤：</h2><h3 id="创建OGG操作系统用户"><a href="#创建OGG操作系统用户" class="headerlink" title="创建OGG操作系统用户"></a>创建OGG操作系统用户</h3><blockquote>
+<p>两台服务器都需要创建ogg操作系统用户(此步骤非必须，也可以使用Oracle用户安装)。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd -u 1003 -g oinstall -G dba ogg</span><br><span class="line">echo &quot;ogg&quot; | passwd --stdin ogg</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改OGG操作系统用户环境变量"><a href="#修改OGG操作系统用户环境变量" class="headerlink" title="修改OGG操作系统用户环境变量"></a>修改OGG操作系统用户环境变量</h3><h4 id="ogg1"><a href="#ogg1" class="headerlink" title="ogg1:"></a><strong>ogg1:</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">#创建OGG安装目录</span><br><span class="line">mkdir /u01/oracle/ogg</span><br><span class="line">chown -R ogg.oinstall /u01/oracle/ogg</span><br><span class="line"></span><br><span class="line">#切换至ogg用户</span><br><span class="line">su - ogg</span><br><span class="line"></span><br><span class="line">#配置环境变量</span><br><span class="line">vim .bash_profile</span><br><span class="line"># .bash_profile</span><br><span class="line"></span><br><span class="line"># Get the aliases and functions</span><br><span class="line">if [ -f ~/.bashrc ]; then</span><br><span class="line">        . ~/.bashrc</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># User specific environment and startup programs</span><br><span class="line"></span><br><span class="line">PATH=$PATH:$HOME/.local/bin:$HOME/bin</span><br><span class="line"></span><br><span class="line">export ORACLE_BASE=/u01/oracle/app</span><br><span class="line">export ORACLE_HOME=$ORACLE_BASE/oracle/product/11.2.0/dbhome_1</span><br><span class="line">export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH</span><br><span class="line">export ORACLE_SID=orcl</span><br><span class="line">export PATH=$ORACLE_HOME/bin:$ORACLE_HOME/jdk/bin:$PATH:/u01/oracle/ogg/</span><br><span class="line">alias sqlplus=&quot;rlwrap sqlplus&quot;</span><br><span class="line">alias ggsci=&quot;rlwrap ggsci&quot;</span><br><span class="line"></span><br><span class="line">#关于rlwrap</span><br><span class="line">需要单独下载安装包</span><br><span class="line">先下载安装包 https://github.com/hanslub42/rlwrap</span><br><span class="line">wget https://github.91chi.fun//https://github.com//hanslub42/rlwrap/releases/download/v0.45.2/rlwrap-0.45.2.zip</span><br><span class="line"></span><br><span class="line">解压： unzip rlwrap-0.45.2.zip</span><br><span class="line">cd rlwrap-0.45.2</span><br><span class="line">#安装rlwrap：</span><br><span class="line">./configure</span><br><span class="line">make install</span><br><span class="line">如果make没有，那么需要安装下面的</span><br><span class="line"></span><br><span class="line">安装readline包，安装镜像中提供了readline安装包</span><br><span class="line">yum install -y readline*</span><br></pre></td></tr></table></figure>
+<p>运行下面的命令使变量生效:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source .bash_profile</span><br></pre></td></tr></table></figure>
+
+<h4 id="ogg2"><a href="#ogg2" class="headerlink" title="ogg2:"></a><strong>ogg2:</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#创建OGG安装目录</span><br><span class="line">mkdir /u01/oracle/ogg</span><br><span class="line">chown -R ogg.oinstall /u01/oracle/ogg</span><br><span class="line"></span><br><span class="line">#切换至ogg用户</span><br><span class="line">su - ogg</span><br><span class="line"></span><br><span class="line">#配置环境变量</span><br><span class="line">vim .bash_profile</span><br><span class="line"># .bash_profile</span><br><span class="line"></span><br><span class="line"># Get the aliases and functions</span><br><span class="line">if [ -f ~/.bashrc ]; then</span><br><span class="line">        . ~/.bashrc</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># User specific environment and startup programs</span><br><span class="line"></span><br><span class="line">PATH=$PATH:$HOME/.local/bin:$HOME/bin</span><br><span class="line"></span><br><span class="line">export ORACLE_BASE=/u01/oracle/app</span><br><span class="line">export ORACLE_HOME=$ORACLE_BASE/oracle/product/11.2.0/dbhome_1</span><br><span class="line">export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH</span><br><span class="line">export ORACLE_SID=orcl</span><br><span class="line">export PATH=$ORACLE_HOME/bin:$ORACLE_HOME/jdk/bin:$PATH:/u01/oracle/ogg/</span><br><span class="line">alias sqlplus=&quot;/usr/bin/rlwrap sqlplus&quot;</span><br><span class="line">alias ggsci=&quot;/usr/bin/rlwrap ggsci&quot;</span><br><span class="line">alias sqlplus=&quot;rlwrap sqlplus&quot;</span><br><span class="line">alias ggsci=&quot;rlwrap ggsci&quot;</span><br></pre></td></tr></table></figure>
+<p>运行下面的命令使变量生效:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source .bash_profile</span><br></pre></td></tr></table></figure>
+
+<h2 id="上传OGG安装介质"><a href="#上传OGG安装介质" class="headerlink" title="上传OGG安装介质"></a>上传OGG安装介质</h2><p>将OGG安装文件上传到两台服务器的OGG操作系统用户的&#x2F;u01&#x2F;oracle&#x2F;ogg&#x2F;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">cd /u01/oracle/ogg/</span><br><span class="line"></span><br><span class="line">scp V34339-01.zip 192.168.65.140:/u01/oracle/ogg/</span><br><span class="line"></span><br><span class="line">unzip V34339-01.zipunzip V34339-01.zip</span><br><span class="line">rm -rf O*</span><br><span class="line"></span><br><span class="line">chown ogg:oinstall  fbo_ggs_Linux_x64_ora11g_64bit.tar</span><br><span class="line"></span><br><span class="line">su - ogg</span><br><span class="line"></span><br><span class="line">cd /u01/oracle/ogg/</span><br><span class="line">tar -xvf fbo_ggs_Linux_x64_ora11g_64bit.tar</span><br></pre></td></tr></table></figure>
+<p>将fbo_ggs_Linux_x64_ora11g_64bit.tar解包到&#x2F;u01&#x2F;oracle&#x2F;ogg目录(源和目标端都需要操作)</p>
+<h2 id="登录OGG测试"><a href="#登录OGG测试" class="headerlink" title="登录OGG测试"></a>登录OGG测试</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[ogg@ora11g-1 ogg]$ ./ggsci</span><br><span class="line"></span><br><span class="line">Oracle GoldenGate Command Interpreter for Oracle</span><br><span class="line">Version 11.2.1.0.3 14400833 OGGCORE_11.2.1.0.3_PLATFORMS_120823.1258_FBO</span><br><span class="line">Linux, x64, 64bit (optimized), Oracle 11g on Aug 23 2012 20:20:21</span><br><span class="line"></span><br><span class="line">Copyright (C) 1995, 2012, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">GGSCI (ora11g-1) 1&gt; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>如果LD_LIBRARY_PATH变量设置正确，会像上面演示一样正确进入命令行，如果提示找不到so文件，就需要 查看LD_LIBRARY_PATH变量是否正确设置。</p>
+<h2 id="建立OGG表空间-两个库都做"><a href="#建立OGG表空间-两个库都做" class="headerlink" title="建立OGG表空间(两个库都做)"></a>建立OGG表空间(两个库都做)</h2><p>ORACLE建议使用单独的表空间存放OGG数据，表空间大小50M就可以，但是最好设置数据文件的自动扩展。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">su - oracle</span><br><span class="line">mkdir -pv /u01/oracle/app/oradata/orcl/ogg</span><br><span class="line">sqlplus / as sysdba</span><br><span class="line">create tablespace tsp_ogg datafile &#x27;/u01/oracle/app/oradata/orcl/ogg/ogg01.dbf&#x27; size 100M autoextend on;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建OGG用户并授权-两个库都做"><a href="#创建OGG用户并授权-两个库都做" class="headerlink" title="创建OGG用户并授权(两个库都做)"></a>创建OGG用户并授权(两个库都做)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">create user ogg identified by ogg default tablespace tsp_ogg;</span><br><span class="line"></span><br><span class="line">#OGG用户需要以下权限，也有人为了省事，直接给OGG用户DBA权限。如果直接给了DBA权限也要执行一下下面</span><br><span class="line"></span><br><span class="line">grant connect,resource to ogg;</span><br><span class="line">grant select any dictionary,select any table to ogg;</span><br><span class="line">grant alter any table to ogg;</span><br><span class="line">grant flashback any table to ogg;</span><br><span class="line">grant execute on dbms_flashback to ogg;</span><br><span class="line">grant execute on utl_file to ogg;</span><br><span class="line">grant create table,create sequence to ogg;</span><br><span class="line">grant insert any table to ogg;</span><br><span class="line">grant update any table to ogg;</span><br><span class="line">grant delete any table to ogg;</span><br></pre></td></tr></table></figure>
+<p>不同的需求，OGG用户需要的权限也不一样，上面的权限基本可以支持大多数情况的数据复制，如上面的权限不足，需根据实际需求授权。</p>
+<h2 id="必须开归档，打开数据库的附加日志和force-log"><a href="#必须开归档，打开数据库的附加日志和force-log" class="headerlink" title="必须开归档，打开数据库的附加日志和force log"></a>必须开归档，打开数据库的附加日志和force log</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select NAME,OPEN_MODE,FORCE_LOGGING,SUPPLEMENTAL_LOG_DATA_MIN from v$database;</span><br><span class="line">NAME      OPEN_MODE            FOR SUPPLEME</span><br><span class="line">——— ——————– — ——–</span><br><span class="line">ORCL   READ WRITE           NO  NO</span><br></pre></td></tr></table></figure>
+<p>上面显示数据库的附加日志和force log都没有开启，使用下面的命令开启。（两个库都执行）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter database force logging;</span><br><span class="line">alter database add SUPPLEMENTAL log data;</span><br></pre></td></tr></table></figure>
+
+<p>开启下面的参数要不然运行支持DDL脚本的时候会报错，（两个库都执行）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">alter system set enable_goldengate_replication=true scope=both;</span><br><span class="line"></span><br><span class="line">select NAME,OPEN_MODE,FORCE_LOGGING,SUPPLEMENTAL_LOG_DATA_MIN from v$database;</span><br><span class="line">NAME      OPEN_MODE            FOR SUPPLEME</span><br><span class="line">——— ——————– — ——–</span><br><span class="line">ORCL   READ WRITE           YES YES</span><br></pre></td></tr></table></figure>
+
+<h2 id="运行OGG支持DDL脚本"><a href="#运行OGG支持DDL脚本" class="headerlink" title="运行OGG支持DDL脚本"></a>运行OGG支持DDL脚本</h2><blockquote>
+<p>如果要让OGG支持DDL操作，还需要额外运行几个脚本，这些脚本是OGG带的而不是ORACLE带的，<br>在OGG的安装目录都可以找到，如果在OGG的安装目录登录数据库，可以直接@加脚本的名字</p>
+</blockquote>
+<p><strong>源端与目标端都需要运行</strong>，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">su - ogg</span><br><span class="line">cd /u01/oracle/ogg/</span><br><span class="line">sqlplus / as sysdba</span><br><span class="line">@marker_setup.sql</span><br><span class="line">ogg</span><br><span class="line"></span><br><span class="line">@ddl_setup.sql</span><br><span class="line">ogg</span><br><span class="line"></span><br><span class="line">@role_setup.sql</span><br><span class="line">ogg</span><br><span class="line"></span><br><span class="line">@ddl_enable.sql</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>如果没有在OGG的安装目录登录数据库，需要指定脚本的位置，比如我的OGG安装目录为&#x2F;u01&#x2F;oracle&#x2F;ogg。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sqlplus / as sysdba</span><br><span class="line">@/u01/oracle/ogg/marker_setup.sql</span><br><span class="line">@/u01/oracle/ogg/ddl_setup.sql</span><br><span class="line">@/u01/oracle/ogg/role_setup.sql</span><br><span class="line">@/u01/oracle/ogg/ddl_enable.sql</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建OGG的管理目录"><a href="#创建OGG的管理目录" class="headerlink" title="创建OGG的管理目录"></a>创建OGG的管理目录</h2><blockquote>
+<p>在正式配置OGG之前，首先需要创建OGG的管理目录，源端和目标端都需要创建，登录OGG，<br>只需要执行create subdirs命令就可以了。</p>
+</blockquote>
+<p>源端 和 目标端 都要执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">ggsci</span><br><span class="line">----</span><br><span class="line"></span><br><span class="line">GGSCI (ora11g-1) 1&gt; create subdirs</span><br><span class="line"></span><br><span class="line">Creating subdirectories under current directory /u01/oracle/ogg</span><br><span class="line"></span><br><span class="line">Parameter files                /u01/oracle/ogg/dirprm: already exists</span><br><span class="line">Report files                   /u01/oracle/ogg/dirrpt: created</span><br><span class="line">Checkpoint files               /u01/oracle/ogg/dirchk: created</span><br><span class="line">Process status files           /u01/oracle/ogg/dirpcs: created</span><br><span class="line">SQL script files               /u01/oracle/ogg/dirsql: created</span><br><span class="line">Database definitions files     /u01/oracle/ogg/dirdef: created</span><br><span class="line">Extract data files             /u01/oracle/ogg/dirdat: created</span><br><span class="line">Temporary files                /u01/oracle/ogg/dirtmp: created</span><br><span class="line">Stdout files                   /u01/oracle/ogg/dirout: created</span><br><span class="line"></span><br><span class="line">----</span><br></pre></td></tr></table></figure>
+<h3 id="ogg管理目录的用途"><a href="#ogg管理目录的用途" class="headerlink" title="ogg管理目录的用途"></a>ogg管理目录的用途</h3><p>dirprm  存放ogg各参数的配置信息<br>dirrpt  存放进程报告文件<br>dirchk  存放检查点文件<br>dirpcs  存放进程状态文件<br>dirsql  存放SQL脚本文件<br>dirdef  存放DEFGEN工具生成的数据定义文件<br>dirdat  存放Trail文件,也就是Capture进程捕获的日志文件<br>dirtmp  当事务需要的内存超过已分配内存时，默认存储在这个目录</p>
+<h2 id="OGG复制流程"><a href="#OGG复制流程" class="headerlink" title="OGG复制流程"></a>OGG复制流程</h2><p>之前所做的只是准备工作，现在就可以正式配置OGG了，在配置OGG之前，先看下OGG的复制流程</p>
+<blockquote>
+<p>OGG和其他传统复制软件一样<br>1.通过源端捕获&#x2F;挖掘ORACLE的日志信息，<br>2.目标端根据源端传送过来的日志信息进行重塑，实现源端-目标端数据同步。<br>3.只有commit之后的日志信息才会被Capture进程捕获，未提交的事务OGG不会捕获。</p>
+</blockquote>
+<h2 id="建立测试表"><a href="#建立测试表" class="headerlink" title="建立测试表"></a>建立测试表</h2><h3 id="源端："><a href="#源端：" class="headerlink" title="源端："></a>源端：</h3><p>源端基于SCOTT用户的EMP和DEPT表建立EMP_OGG和DEPT_OGG测试表，包含数据。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># alter user scott account unlock identified by tiger;</span><br><span class="line">创建测试用户及数据</span><br><span class="line"></span><br><span class="line">create user scott identified by tiger;</span><br><span class="line"></span><br><span class="line">grant connect,resource to scott;</span><br><span class="line"></span><br><span class="line">conn scott/tiger</span><br><span class="line"></span><br><span class="line">--创建表</span><br><span class="line">create table emp_ogg (EMPNO  number,name varchar2(20));</span><br><span class="line"></span><br><span class="line">insert into emp_ogg  values(1,&#x27;lijiaman&#x27;);</span><br><span class="line">insert into emp_ogg  values(2,&#x27;xiaoming&#x27;);</span><br><span class="line">insert into emp_ogg  values(3,&#x27;xiaohua&#x27;);</span><br><span class="line"></span><br><span class="line">create table dept_ogg (DEPTNO  number,name varchar2(20));</span><br><span class="line"></span><br><span class="line">insert into dept_ogg values(1,&#x27;lijiaman1&#x27;);</span><br><span class="line">insert into dept_ogg values(2,&#x27;xiaoming1&#x27;);</span><br><span class="line">insert into dept_ogg values(3,&#x27;xiaohua1&#x27;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="目标端："><a href="#目标端：" class="headerlink" title="目标端："></a>目标端：</h3><p>目标端基于SCOTT用户的EMP和DEPT表建立EMP_OGG和DEPT_OGG测试表，不包含数据。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">create user scott identified by tiger;</span><br><span class="line"></span><br><span class="line">grant connect,resource to scott;</span><br><span class="line"></span><br><span class="line">conn scott/tiger</span><br><span class="line"></span><br><span class="line">--创建表</span><br><span class="line">create table emp_ogg (EMPNO  number,name varchar2(20));</span><br><span class="line"></span><br><span class="line">create table dept_ogg (DEPTNO  number,name varchar2(20));</span><br></pre></td></tr></table></figure>
+
+<p>源端和目标端分别在EMP_OGG和DEPT_OGG测试表上建立主键(或唯一键)。<br>源端和目标端：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table EMP_OGG add constraint PK_EMPNO_OGG primary key (EMPNO);</span><br><span class="line">alter table DEPT_OGG add constraint PK_DEPTNO_OGG primary key (DEPTNO);</span><br></pre></td></tr></table></figure>
+
+<h2 id="端添加表级TRANDATA"><a href="#端添加表级TRANDATA" class="headerlink" title="端添加表级TRANDATA"></a>端添加表级TRANDATA</h2><p>添加表级的trandata可以理解为需要将哪些用户的哪些表和目标库同步，其实也是添加表级的supplemental log，但是只有上文打开的minimal supplemental log后，这个才生效。<br>OGG用户从OGG登录源端数据库。</p>
+<p><strong>源端</strong>：<br>cd &#x2F;u01&#x2F;oracle&#x2F;ogg 执行ggsci的时候要注意路径要在&#x2F;u01&#x2F;oracle&#x2F;ogg下，要不然会报错</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 1&gt; DBLOGIN USERID ogg, PASSWORD ogg</span><br><span class="line">Successfully logged into database.</span><br></pre></td></tr></table></figure>
+<p>源端添加表级TRANDATA，本案例使用EMP_OGG和DEPT_OGG表。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 2&gt; add trandata scott.emp_ogg</span><br><span class="line">Logging of supplemental redo data enabled for table SCOTT.EMP_OGG.</span><br><span class="line"></span><br><span class="line">GGSCI (ora11g-1) 3&gt; add trandata scott.dept_ogg</span><br><span class="line">Logging of supplemental redo data enabled for table SCOTT.DEPT_OGG.</span><br></pre></td></tr></table></figure>
+<p>成功添加表级TRANDATA后，可以通过INFO命令查看哪些表被添加了TRANDATA.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 4&gt; INFO TRANDATA scott.*</span><br><span class="line">Logging of supplemental redo log data is enabled for table SCOTT.DEPT_OGG.</span><br><span class="line"></span><br><span class="line">Columns supplementally logged for table SCOTT.DEPT_OGG: DEPTNO.</span><br><span class="line"></span><br><span class="line">Logging of supplemental redo log data is enabled for table SCOTT.EMP_OGG.</span><br><span class="line"></span><br><span class="line">Columns supplementally logged for table SCOTT.EMP_OGG: EMPNO.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置MGR管理进程"><a href="#配置MGR管理进程" class="headerlink" title="配置MGR管理进程"></a>配置MGR管理进程</h2><p>源端：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 5&gt; EDIT PARAMS MGR</span><br><span class="line">#加入以下两行内容</span><br><span class="line">PORT 7809</span><br><span class="line">PURGEOLDEXTRACTS /u01/oracle/ogg/dirdat, USECHECKPOINTS</span><br></pre></td></tr></table></figure>
+
+<p>目标端：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-2) 1&gt; EDIT PARAMS MGR</span><br><span class="line">#加入以下两行内容</span><br><span class="line">PORT 7809</span><br><span class="line">PURGEOLDEXTRACTS /u01/oracle/ogg/dirdat, USECHECKPOINTS</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参数说明：<br>PORT 7809：OGG管理进程监控端口。<br>PURGEOLDEXTRACTS：清除不需要的trail文件。<br>&#x2F;u01&#x2F;oracle&#x2F;ogg&#x2F;dirdat：trail文件存放位置。<br>USECHECKPOINTS：使用检查点队列。</p>
+</blockquote>
+<p>配置完MGR管理进程后，就可以启动MGR管理进程(源端和目标端都需要启动)。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 6&gt; START MGR</span><br><span class="line">Manager started.</span><br></pre></td></tr></table></figure>
+
+<p>可以通过INFO命令查看进程的状态（最好每次启动时在两端都查看下）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 7&gt; INFO MGR</span><br><span class="line">Manager is running (IP port ora11g-1.7809).</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置初始化数据进程"><a href="#配置初始化数据进程" class="headerlink" title="配置初始化数据进程"></a>配置初始化数据进程</h2><blockquote>
+<p>由于在创建测试表的时候，源端的测试表有数据，而目标端的测试表只有结构，没有数据，所以需要初始化目标端的数据，所谓初始化，就是让目标端的数据和源端的数据在这个时间点是一模一样的，所以初始化工作并不需要一定使用OGG，也可以使用EXP、EXPDP、SQLLOAD等其他工具，本文主要介绍如何使用OGG进行数据初始化</p>
+</blockquote>
+<p>下面在源端配置捕获进程EINI_1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 9&gt; ADD EXTRACT EINI_1, SOURCEISTABLE</span><br><span class="line">EXTRACT added.</span><br></pre></td></tr></table></figure>
+
+<p>查看EINI_1进程状态</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 10&gt; INFO EXTRACT *, TASKS</span><br><span class="line"></span><br><span class="line">EXTRACT    EINI_1    Initialized   2022-07-11 21:13   Status STOPPED</span><br><span class="line">Checkpoint Lag       Not Available</span><br><span class="line">Log Read Checkpoint  Not Available</span><br><span class="line">                     First Record         Record 0</span><br><span class="line">Task                 SOURCEISTABLE</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>由于只是添加了捕获进程EINI_1，还没有进行配置和启动这个进程，所以现在的状态是STOPPED状态。</p>
+</blockquote>
+<p>源端编辑捕获进程EINI_1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 10&gt; EDIT PARAMS EINI_1</span><br><span class="line">#加入以下内容</span><br><span class="line">EXTRACT EINI_1</span><br><span class="line">SETENV (NLS_LANG=AMERICAN_AMERICA.ZHS16GBK)</span><br><span class="line">USERID ogg, PASSWORD ogg</span><br><span class="line">RMTHOST 192.168.65.140, MGRPORT 7809</span><br><span class="line">RMTTASK REPLICAT, GROUP RINI_1</span><br><span class="line">TABLE scott.EMP_OGG;</span><br><span class="line">TABLE scott.DEPT_OGG;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>参数介绍：<br>EXTRACT EINI_1：说明这是EXTRACT进程，名字是EINI_1<br>SETENV：环境变量，一定要设置和数据库字符集一样，否则可能会乱码<br>USERID：数据库OGG用户<br>PASSWORD：数据库用户OGG的密码<br>RMTHOST：目标端地址，如果在&#x2F;etc&#x2F;hosts文件里已经设置解析，可以写主机名<br>MGRPORT：目标端MGR管理进程监听的端口<br>RMTTASK REPLICAT：目标端REPLICAT应用进程的组和名字<br>TABLE：源端要初始化数据的表的名字 编辑好捕获进程EINI_1后，还需要在目标端配置REPLICAT应用进程，<br>名字要和源端的捕获进程EINI_1里面RMTTASK REPLICAT参数配置的一样， 也就是还需要在目标端配置RMTTASK<br>REPLICAT RINI_1。</p>
+</blockquote>
+<h2 id="配置目标端REPLICAT进程"><a href="#配置目标端REPLICAT进程" class="headerlink" title="配置目标端REPLICAT进程"></a>配置目标端REPLICAT进程</h2><p>目标端：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-2) 5&gt; EDIT PARAMS RINI_1</span><br><span class="line">#加入以下内容</span><br><span class="line">REPLICAT RINI_1</span><br><span class="line">SETENV (NLS_LANG=AMERICAN_AMERICA.ZHS16GBK)</span><br><span class="line">ASSUMETARGETDEFS</span><br><span class="line">USERID ogg, PASSWORD ogg</span><br><span class="line">DISCARDFILE /u01/oracle/ogg/dirrpt/RINIaa.dsc, PURGE</span><br><span class="line">MAP scott.*, TARGET scott.*;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参数介绍：<br>REPLICAT RINI_1：说明这是REPLICAT应用进程，名字叫RINI_1<br>SETENV：语言变量，同捕获进程EINI_1<br>ASSUMETARGETDEFS：告诉OGG目标端和源端需要同步的表的结构完全一致，不需要OGG去检查表的结构，包括表名、字段名、字段类型、字段长度等，如果目标端和源端同步的表的结构不一样，需要使用SOURCEDEFS参数，详见OGG官方文档。<br>USERID、PASSWORD：同捕获进程EINI_1<br>DISCARDFILE：错误信息存放位置及命名规则<br>MAP：源端捕获的表的名字 TARGET：目标端同步的表的名字，可以不在同一SCHEMA。</p>
+</blockquote>
+<h2 id="初始化数据"><a href="#初始化数据" class="headerlink" title="初始化数据"></a>初始化数据</h2><p>在目标服务器执行下面语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-2) 6&gt; ADD REPLICAT RINI_1,SPECIALRUN</span><br><span class="line">REPLICAT added.</span><br><span class="line"></span><br><span class="line">GGSCI (ora11g-2) 7&gt; INFO REPLICAT RINI_1 DETAIL</span><br><span class="line"></span><br><span class="line">REPLICAT   RINI_1    Initialized   2022-07-11 21:22   Status STOPPED</span><br><span class="line">Checkpoint Lag       00:00:00 (updated 00:00:13 ago)</span><br><span class="line">Log Read Checkpoint  Not Available</span><br><span class="line">Task                 SPECIALRUN</span><br><span class="line"></span><br><span class="line">  Extract Source                          Begin             End             </span><br><span class="line"></span><br><span class="line">  Not Available                           * Initialized *   First Record    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Current directory    /u01/oracle/ogg</span><br><span class="line"></span><br><span class="line">Report file          /u01/oracle/ogg/dirrpt/RINI_1.rpt (does not yet exist)</span><br><span class="line">Parameter file       /u01/oracle/ogg/dirprm/rini_1.prm</span><br><span class="line">Checkpoint file      /u01/oracle/ogg/dirchk/RINI_1.cpr</span><br><span class="line">Process file         /u01/oracle/ogg/dirpcs/RINI_1.pcr</span><br><span class="line">Stdout file          /u01/oracle/ogg/dirout/RINI_1.out</span><br><span class="line">Error log            /u01/oracle/ogg/ggserr.log</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="配置好目标端的应用进程RINI-1后，就可以启动源端的捕获进程进行捕获数据了。"><a href="#配置好目标端的应用进程RINI-1后，就可以启动源端的捕获进程进行捕获数据了。" class="headerlink" title="配置好目标端的应用进程RINI_1后，就可以启动源端的捕获进程进行捕获数据了。"></a>配置好目标端的应用进程RINI_1后，就可以启动源端的捕获进程进行捕获数据了。</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 1&gt; START EXTRACT EINI_1</span><br><span class="line"></span><br><span class="line">Sending START request to MANAGER ...</span><br><span class="line">EXTRACT EINI_1 starting</span><br></pre></td></tr></table></figure>
+
+<p>启动源端的捕获进程EINI_1后，正常情况下(如果配置没问题)，源端的数据已经传送到目标端了，可以通过VIEW命令查看源端捕获进程EINI_1的工作状态。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 11&gt; VIEW REPORT EINI_1</span><br><span class="line">#在最后部分会看到</span><br><span class="line">Output to RINI_1:</span><br><span class="line">From Table SCOTT.EMP_OGG:</span><br><span class="line">       #                   inserts:         3</span><br><span class="line">       #                   updates:         0</span><br><span class="line">       #                   deletes:         0</span><br><span class="line">       #                  discards:         0</span><br><span class="line">From Table SCOTT.DEPT_OGG:</span><br><span class="line">       #                   inserts:         3</span><br><span class="line">       #                   updates:         0</span><br><span class="line">       #                   deletes:         0</span><br><span class="line">       #                  discards:         0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">REDO Log Statistics</span><br><span class="line">  Bytes parsed                    0</span><br><span class="line">  Bytes output                  538</span><br></pre></td></tr></table></figure>
+
+<p>如果配置正确，会看到上面的日志，日志会告诉你在目标端SCOTT.EMP_OGG表INSERT了3条记录，SCOTT.DEPT_OGG表INSERT了3条记录。如果在上面日志的最后部分出现ERROR，就需要去检查OGG的安装目录下的ggserr.log日志，这个日志相当于数据库的告警日志。</p>
+<h2 id="验证初始化数据"><a href="#验证初始化数据" class="headerlink" title="验证初始化数据"></a>验证初始化数据</h2><p>登录目标端数据库，查看初始化是否成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">sqlplus / as sysdba</span><br><span class="line">conn scott/tiger</span><br><span class="line"></span><br><span class="line">SQL&gt; select * from emp_ogg;</span><br><span class="line"></span><br><span class="line">     EMPNO NAME</span><br><span class="line">---------- --------------------</span><br><span class="line">	 1 lijiaman</span><br><span class="line">	 2 xiaoming</span><br><span class="line">	 3 xiaohua</span><br><span class="line"></span><br><span class="line">SQL&gt; select * from dept_ogg;</span><br><span class="line"></span><br><span class="line">    DEPTNO NAME</span><br><span class="line">---------- --------------------</span><br><span class="line">	 1 lijiaman1</span><br><span class="line">	 2 xiaoming1</span><br><span class="line">	 3 xiaohua1</span><br></pre></td></tr></table></figure>
+<p>可以看到初始化是正确的。初始化之后，上文提到的初始化进程（EINI_1、RINI_1）自动停止，因为通常情况下初始化数据工作只会做一次。可以通过INFO命令查看进程的状态。</p>
+<p>源端：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 5&gt; INFO EXTRACT EINI_1</span><br><span class="line"></span><br><span class="line">EXTRACT    EINI_1    Last Started 2022-07-11 21:38   Status STOPPED</span><br><span class="line">Checkpoint Lag       Not Available</span><br><span class="line">Log Read Checkpoint  Table SCOTT.DEPT_OGG</span><br><span class="line">                     2022-07-11 21:38:21  Record 3</span><br><span class="line">Task                 SOURCEISTABLE</span><br></pre></td></tr></table></figure>
+
+<p>目标端：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-2) 1&gt; INFO REPLICAT RINI_1</span><br><span class="line"></span><br><span class="line">REPLICAT   RINI_1    Initialized   2022-07-11 21:22   Status STOPPED</span><br><span class="line">Checkpoint Lag       00:00:00 (updated 00:23:20 ago)</span><br><span class="line">Log Read Checkpoint  Not Available</span><br><span class="line">Task                 SPECIALRUN</span><br></pre></td></tr></table></figure>
+
+<h2 id="源端和目标端配置OGG的检查点"><a href="#源端和目标端配置OGG的检查点" class="headerlink" title="源端和目标端配置OGG的检查点"></a>源端和目标端配置OGG的检查点</h2><p>此步骤不是必须的，但是为了让OGG网络中断、服务器宕机、掉电等在突发情况也能正确断点续传，ORACLE建议配置OGG的检查点队列。</p>
+<p>源端和目标端都需配置。globals一定要是大写</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GGSCI&gt; EDIT PARAMS ./GLOBALS</span><br><span class="line">#加入以下信息</span><br><span class="line">CHECKPOINTTABLE ogg.ggschkpt</span><br></pre></td></tr></table></figure>
+<p>这就告诉OGG检查点存放到OGG用户下的GGSCHKPT表中，但是还需要使用OGG用户登录数据库，创建检查点表，此时需要退出OGG，重新登录，否则可能会遇到下面的错误:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 7&gt; ADD CHECKPOINTTABLE</span><br><span class="line">ERROR: Not logged into database, use DBLOGIN.</span><br><span class="line">或者</span><br><span class="line">ERROR: Missing checkpoint table specification.</span><br></pre></td></tr></table></figure>
+
+<p>退出OGG，重新登录，并使用OGG用户登录数据库，源端和目标端都需要执行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GGSCI&gt; exit</span><br><span class="line">ggsci</span><br><span class="line">GGSCI&gt; DBLOGIN userid ogg,PASSWORD ogg</span><br><span class="line">Successfully logged into database.</span><br></pre></td></tr></table></figure>
+<p>只需要执行ADD CHECKPOINTTABLE命令，OGG会自动在ORACLE的OGG用户下创建检查点，源端和目标端都需要执行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 2&gt; ADD CHECKPOINTTABLE</span><br><span class="line"></span><br><span class="line">No checkpoint table specified, using GLOBALS specification (ogg.ggschkpt)...</span><br><span class="line"></span><br><span class="line">Successfully created checkpoint table ogg.ggschkpt.</span><br></pre></td></tr></table></figure>
+<p>此时用OGG登录数据库，就可以看到OGG创建的检查点表。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[ogg@ora11g-1 ogg]$ sqlplus ogg/ogg</span><br><span class="line"></span><br><span class="line">SQL*Plus: Release 11.2.0.4.0 Production on Mon Jul 11 21:52:31 2022</span><br><span class="line"></span><br><span class="line">Copyright (c) 1982, 2013, Oracle.  All rights reserved.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Connected to:</span><br><span class="line">Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production</span><br><span class="line">With the Partitioning, OLAP, Data Mining and Real Application Testing options</span><br><span class="line"></span><br><span class="line">SQL&gt; select * from tab;</span><br><span class="line"></span><br><span class="line">TNAME			       TABTYPE	CLUSTERID</span><br><span class="line">------------------------------ ------- ----------</span><br><span class="line">GGSCHKPT		       TABLE</span><br><span class="line">GGSCHKPT_LOX		       TABLE</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="源端配置捕获进程"><a href="#源端配置捕获进程" class="headerlink" title="源端配置捕获进程"></a>源端配置捕获进程</h2><p>现在已经可以配置数据同步了，下面在源端配置捕获进程。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 10&gt; EDIT PARAMS EORA_1</span><br><span class="line">#加入以下内容</span><br><span class="line">EXTRACT EORA_1</span><br><span class="line">SETENV (NLS_LANG=AMERICAN_AMERICA.ZHS16GBK)</span><br><span class="line">USERID ogg, PASSWORD ogg</span><br><span class="line">EXTTRAIL /u01/oracle/ogg/dirdat/aa</span><br><span class="line">TABLE scott.EMP_OGG;</span><br><span class="line">TABLE scott.DEPT_OGG;</span><br></pre></td></tr></table></figure>
+<p>参数介绍：<br>以上参数基本都在上文提过，这里不在重复，说下EXTTRAIL参数，<br>EXTTRAIL参数是TRAIL队列文件存放的路径和命名格式，<br>TRAIL文件可以理解为存放捕获进程捕获的日志文件。此时还需要将捕获进程EORA_1添加到OGG。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 11&gt; ADD EXTRACT EORA_1, TRANLOG, BEGIN NOW</span><br><span class="line">EXTRACT added.</span><br><span class="line">GGSCI (ora11g-1) 12&gt; ADD EXTTRAIL /u01/oracle/ogg/dirdat/aa, EXTRACT EORA_1, MEGABYTES 5</span><br><span class="line">EXTTRAIL added.</span><br></pre></td></tr></table></figure>
+
+<p>上面的两个命令告诉OGG，捕获进程从启动起开始捕获，捕获数据保存到TRAIL文件，及TRAIL文件的路径、命名格式，单个TRAIL文件最大大小。</p>
+<p>现在就可以启动源端捕获进程EORA_1了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 13&gt; START EXTRACT EORA_1</span><br><span class="line">Sending START request to MANAGER …</span><br><span class="line">EXTRACT EORA_1 starting</span><br></pre></td></tr></table></figure>
+<p>使用INFO命令查看EORA_1进程是否是RUNNING状态。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 14&gt; INFO EXTRACT EORA_1</span><br><span class="line">EXTRACT    EORA_1    Last Started 2021-07-01 22:30   Status RUNNING</span><br><span class="line">Checkpoint Lag       00:00:00 (updated 00:00:07 ago)</span><br><span class="line">Log Read Checkpoint  Oracle Redo Logs</span><br><span class="line">                     2021-07-01 22:30:38  Seqno 17, RBA 35049472</span><br><span class="line">                     SCN 0.246224 (246224)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="源端配置PUMP传输进程"><a href="#源端配置PUMP传输进程" class="headerlink" title="源端配置PUMP传输进程"></a>源端配置PUMP传输进程</h2><p>此步骤也是非必须的，如果不配置传输进程，OGG会通过EXTRACT进程传输TRAIL队列文件，但是和检查点队列一样，为了保证断点续传ORACLE建议配置PUMP传输进程。</p>
+<p>新增抽取进程PORA_1，基于日志方式，立即生效</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GGSCI&gt; ADD EXTRACT PORA_1,TRANLOG,BEGIN NOW</span><br></pre></td></tr></table></figure>
+<p>生成并编辑同名配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 15&gt; EDIT PARAMS PORA_1</span><br></pre></td></tr></table></figure>
+
+<p>加入以下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">EXTRACT PORA_1</span><br><span class="line">USERID ogg,PASSWORD ogg</span><br><span class="line">SETENV (NLS_LANG=AMERICAN_AMERICA.ZHS16GBK)</span><br><span class="line">RMTHOST 192.168.65.140, MGRPORT 7809</span><br><span class="line">RMTTRAIL /u01/oracle/ogg/dirdat/pa</span><br><span class="line">DYNAMICRESOLUTION</span><br><span class="line">GETTRUNCATES</span><br><span class="line">TABLE scott.EMP_OGG;</span><br><span class="line">TABLE scott.DEPT_OGG;</span><br></pre></td></tr></table></figure>
+<p>参数说明</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">EXTRACT PORA_1                       #抽取进程名</span><br><span class="line">USERID ogg,PASSWORD ogg              #连接本机DB的帐号密码</span><br><span class="line">SETENV (NLS_LANG=AMERICAN_AMERICA.ZHS16GBK)</span><br><span class="line">RMTHOST 192.168.65.140, MGRPORT 7809   #目标数据库服务器地址和GG服务端口号</span><br><span class="line">RMTTRAIL /u01/oracle/ogg/dirdat/pa               #远程队列的位置（下一步建的东西）</span><br><span class="line">DYNAMICRESOLUTION					  #优化参数，动态分析表结构</span><br><span class="line">GETTRUNCATES						  #抓取truncate数据</span><br><span class="line">TABLE scott.EMP_OGG;                  #需要抽取的表，可以使用通配符</span><br><span class="line">TABLE scott.DEPT_OGG;</span><br></pre></td></tr></table></figure>
+
+<p>添加PUMP进程PORA_1到OGG，并指定本地的TRAIL文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 16&gt; ADD EXTRACT PORA_1, EXTTRAILSOURCE /u01/oracle/ogg/dirdat/aa</span><br><span class="line">EXTRACT added.</span><br></pre></td></tr></table></figure>
+
+<p>为PUMP进程PORA_1指定将本地TRAIL文件传输到目标端后保存成目标端TRAIL文件的名字。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 18&gt; ADD RMTTRAIL /u01/oracle/ogg/dirdat/pa, EXTRACT PORA_1, MEGABYTES 5</span><br><span class="line">RMTTRAIL added.</span><br></pre></td></tr></table></figure>
+<p>下面就可以启动PUMP进程PORA_1了，启动后看下PORA_1的状态。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 19&gt; START EXTRACT PORA_1</span><br><span class="line">Sending START request to MANAGER …</span><br><span class="line">EXTRACT PORA_1 starting</span><br></pre></td></tr></table></figure>
+<p>查看状态</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-1) 20&gt; INFO EXTRACT PORA_1</span><br><span class="line"></span><br><span class="line">EXTRACT    PORA_1    Last Started 2021-07-01 22:34   Status RUNNING</span><br><span class="line">Checkpoint Lag       00:03:22 (updated 00:00:04 ago)</span><br><span class="line">Log Read Checkpoint  Oracle Redo Logs</span><br><span class="line">                     2021-07-01 22:31:38  Seqno 17, RBA 35050000</span><br><span class="line">                     SCN 0.0 (0)</span><br></pre></td></tr></table></figure>
+
+<h2 id="目标数据库端添加复制应用进程（replicat-process）"><a href="#目标数据库端添加复制应用进程（replicat-process）" class="headerlink" title="目标数据库端添加复制应用进程（replicat process）"></a>目标数据库端添加复制应用进程（replicat process）</h2><p>在目标端GoldenGate命令行中配置复制进程：<br>–新增复制进程，使用对应的队列pa，即刻开始，使用文件检查点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-2)&gt;  ADD REPLICAT RORA_1 EXTTRAIL /u01/oracle/ogg/dirdat/pa,BEGIN NOW,NODBCHECKPOINT</span><br></pre></td></tr></table></figure>
+<p>配置复制进程参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-2)&gt;  EDIT PARAMS RORA_1 </span><br><span class="line"></span><br><span class="line">REPLICAT RORA_1</span><br><span class="line">SETENV (NLS_LANG=AMERICAN_AMERICA.ZHS16GBK)</span><br><span class="line">USERID ogg, PASSWORD ogg</span><br><span class="line">reperror default,discard </span><br><span class="line">HANDLECOLLISIONS</span><br><span class="line">ASSUMETARGETDEFS</span><br><span class="line">gettruncates</span><br><span class="line">DISCARDFILE /u01/oracle/ogg/dirrpt/RORA_aa.DSC,append,megabytes 100</span><br><span class="line">MAP scott.emp_ogg, TARGET scott.emp_ogg;</span><br><span class="line">MAP scott.dept_ogg, TARGET scott.dept_ogg;</span><br></pre></td></tr></table></figure>
+<p>参数说明</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">REPLICAT RORA_1                         #复制进程名</span><br><span class="line">SETENV (NLS_LANG=AMERICAN_AMERICA.ZHS16GBK)</span><br><span class="line">USERID ogg, PASSWORD ogg                #目标数据库的帐号密码</span><br><span class="line">reperror default,discard                #如果复制数据出错则忽略</span><br><span class="line">HANDLECOLLISIONS</span><br><span class="line">ASSUMETARGETDEFS                        #两台数据库数据结构一致则使用此参数</span><br><span class="line">gettruncates                            #复制truncate操作    </span><br><span class="line">DISCARDFILE /u01/oracle/ogg/dirrpt/RORA_aa.DSC,append,megabytes 100 #错误信息写入XXXX文件，追加模式，最大100m</span><br><span class="line">MAP scott.emp_ogg, TARGET scott.emp_ogg; #映射关系，注意target前必须留一个空格</span><br><span class="line">MAP scott.dept_ogg, TARGET scott.dept_ogg;</span><br></pre></td></tr></table></figure>
+
+<p>开启复制进程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (ora11g-2) 6&gt; START RORA_1</span><br><span class="line"></span><br><span class="line">Sending START request to MANAGER ...</span><br><span class="line">REPLICAT RORA_1 starting</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">GGSCI (ora11g-2) 7&gt; INFO RORA_1</span><br><span class="line"></span><br><span class="line">REPLICAT   RORA_1    Last Started 2021-07-01 22:45   Status RUNNING</span><br><span class="line">Checkpoint Lag       00:00:00 (updated 00:00:02 ago)</span><br><span class="line">Log Read Checkpoint  File /u01/oracle/ogg/dirdat/pa000000</span><br><span class="line">                     2021-07-01 22:44:44.000000  RBA 1012</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>至此，一个最简单的同步配置完成，对于源数据库相应表的insert，update，delete和truncate操作都将通过日志捕获并同步到目标数据库。</p>
+</blockquote>
+<h2 id="验证OGG复制"><a href="#验证OGG复制" class="headerlink" title="验证OGG复制"></a>验证OGG复制</h2><blockquote>
+<p>成功配置并启动以上进程后，就可以验证OGG数据同步了，最简单的测试就是修改源库同步的表的数据，测试需要测试DML和DDL</p>
+</blockquote>
+<h2 id="ogg-运维命令"><a href="#ogg-运维命令" class="headerlink" title="ogg 运维命令"></a>ogg 运维命令</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line">-管理进程命令</span><br><span class="line">INFO MANAGER                返回有关管理器端口和进程id的信息。</span><br><span class="line">START MANAGER              开启管理进程</span><br><span class="line">STATUS MANAGER            返回管理进程状态</span><br><span class="line">STOP MANAGER               停止管理进程</span><br><span class="line"></span><br><span class="line">--采集进程命令</span><br><span class="line">ADD EXTRACT                  添加一个采集组</span><br><span class="line">ALTER EXTRACT                更改采集组的属性</span><br><span class="line"></span><br><span class="line">CLEANUP EXTRACT          删除采集组的运行历史记录</span><br><span class="line"></span><br><span class="line">DELETE EXTRACT              删除采集组。</span><br><span class="line"></span><br><span class="line">INFO EXTRACT                 返回有关采集组的信息。</span><br><span class="line"></span><br><span class="line">KILL EXTRACT                   强制终止采集组。</span><br><span class="line"></span><br><span class="line">LAG EXTRACT                   返回有关采集延迟的信息。</span><br><span class="line"></span><br><span class="line">REGISTER EXTRACT          向Oracle数据库注册采集组START EXTRACT               启动采集组</span><br><span class="line"></span><br><span class="line">STATS EXTRACT               返回处理采集的统计信息。</span><br><span class="line"></span><br><span class="line">STATUS EXTRACT            返回采集组的状态</span><br><span class="line"></span><br><span class="line">STOP EXTRACT               停止采集组。</span><br><span class="line">FORCEAPPEND               允许data pump在现有的初始加载文件上添加新的跟踪文件</span><br><span class="line">UNREGISTER EXTRACT   从Oracle数据库注销采集组。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--Replicat 进程命令</span><br><span class="line"></span><br><span class="line">ADD REPLICAT                添加一个复制组</span><br><span class="line"></span><br><span class="line">ALTER REPLICAT              更改复制组的属性。</span><br><span class="line"></span><br><span class="line">CLEANUP REPLICAT        删除复制组的运行历史。</span><br><span class="line"></span><br><span class="line">DELETE REPLICAT           删除一个复制组。</span><br><span class="line"></span><br><span class="line">INFO REPLICAT              返回关于复制组的信息。</span><br><span class="line"></span><br><span class="line">KILL REPLICAT               强制终止一个复制组。</span><br><span class="line"></span><br><span class="line">LAG REPLICAT               返回关于复制延迟的信息。</span><br><span class="line"></span><br><span class="line">REGISTER REPLICAT       向Oracle数据库注册一个复制组。</span><br><span class="line"></span><br><span class="line">START REPLICAT             启动一个复制组。</span><br><span class="line"></span><br><span class="line">STATS REPLICAT             返回处理一个复制组的统计信息。</span><br><span class="line"></span><br><span class="line">STATUS REPLICAT           返回一个复制组的状态。</span><br><span class="line"></span><br><span class="line">STOP REPLICAT              停止复制组。</span><br><span class="line"></span><br><span class="line">-- ER 命令</span><br><span class="line">INFO ER *             返回有关指定的通配符组的信息。</span><br><span class="line"></span><br><span class="line">KILL ER *               强制终止指定的通配符组。</span><br><span class="line"></span><br><span class="line">LAG ER *               返回有关指定通配符组的滞后信息</span><br><span class="line"></span><br><span class="line">START ER *           启动指定的通配符组。</span><br><span class="line"></span><br><span class="line">STATS ER *            返回处理指定通配符的统计信息组。</span><br><span class="line"></span><br><span class="line">STATUS ER *          返回指定的通配符组的状态。</span><br><span class="line"></span><br><span class="line">STOP ER *             停止指定的通配符组。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--trail 文件相关命令</span><br><span class="line"></span><br><span class="line">ADD EXTTRAIL             添加到Oracle GoldenGate配置的本地跟踪。</span><br><span class="line"></span><br><span class="line">ADD RMTTRAIL           添加到Oracle GoldenGate配置的远程跟踪。</span><br><span class="line"></span><br><span class="line">ALTER EXTTRAIL          更改本地路径的属性。</span><br><span class="line"></span><br><span class="line">ALTER RMTTRAIL        更改远程跟踪的属性</span><br><span class="line"></span><br><span class="line">DELETE EXTTRAIL       从Oracle GoldenGate配置中移除本地踪迹。</span><br><span class="line"></span><br><span class="line">DELETE RMTTRAIL     从Oracle GoldenGate配置中删除远程跟踪。</span><br><span class="line"></span><br><span class="line">INFO EXTTRAIL         返回关于本地路径的信息。</span><br><span class="line"></span><br><span class="line">INFO RMTTRAIL        返回关于远程跟踪的信息。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--编辑配置相关</span><br><span class="line">EDIT PARAMS                在默认文本编辑器中打开参数文件</span><br><span class="line"></span><br><span class="line">SET EDITOR                  设置用于编辑参数文件的默认文本编辑器程序。</span><br><span class="line"></span><br><span class="line">VIEW PARAMS             在屏幕上以只读模式显示参数文件的内容。</span><br><span class="line"></span><br><span class="line">INFO PARAM                 返回参数定义信息。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--检查点相关命令</span><br><span class="line"></span><br><span class="line">Command                     Description</span><br><span class="line">ADD CHECKPOINTTABLE         创建一个检查点</span><br><span class="line"></span><br><span class="line">CLEANUP CHECKPOINTTABLE     删除不再需要的检查点记录。</span><br><span class="line"></span><br><span class="line">DELETE CHECKPOINTTABLE      删除检查点</span><br><span class="line"></span><br><span class="line">INFO CHECKPOINTTABLE        返回关于检查点的信息。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--系统命令</span><br><span class="line">INFO ALL                    显示系统上所有Oracle GoldenGate进程的状态和延迟。</span><br><span class="line">                   </span><br><span class="line"></span><br><span class="line">OBEY                         处理包含Oracle GoldenGate命令列表的文件。</span><br><span class="line"></span><br><span class="line">SHELL                        在GGSCI接口中执行shell命令。</span><br><span class="line"></span><br><span class="line">SHOW                       显示Oracle GoldenGate环境的属性。</span><br><span class="line"></span><br><span class="line">VERSIONS                 显示有关操作系统和数据库的信息。</span><br><span class="line"></span><br><span class="line">VIEW GGSEVT          显示Oracle GoldenGate错误日志(ggserr.logfile)。</span><br><span class="line"></span><br><span class="line">VIEW REPORT           显示由Extract或Replicat生成的进程报告或丢弃文件。</span><br></pre></td></tr></table></figure>
+
+                    
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                Oracle11g搭建ogg
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                2022/04/06/Oracle11g搭建ogg/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">ドラゴンボールのLong</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2022-04-06 20:10</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="">
+                    <a href="https://zhongshenglong.xyz" target="_blank">
+                        
+                            Long License
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/linux/">linux</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/oracle/">oracle</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E5%BF%83%E5%BE%97/">心得</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/ogg/">ogg</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+                    
+
+<div class="reward-author-container border-box flex-center">
+    <div class="reward-btn border-box flex-center tooltip tooltip-img"
+            data-tooltip-img-url="/images/reward.jpg"
+            data-tooltip-img-trigger="click"
+            data-tooltip-img-style="top: -6px;"
+    >
+        <i class="fa-solid fa-gift"></i>&nbsp;请作者喝咖啡
+    </div>
+</div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2022/06/06/RAC%E3%80%81DG%E5%92%8COGG%E7%9A%84%E5%8C%BA%E5%88%AB/"
+                                   title="RAC、DG和OGG的区别"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">RAC、DG和OGG的区别</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2022/03/06/Mysql%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E5%A4%87%E4%BB%BD%E5%92%8C%E8%BF%98%E5%8E%9F%E6%95%B0%E6%8D%AE%E5%BA%93/"
+                                   title="Mysql使用命令备份和还原数据库"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Mysql使用命令备份和还原数据库</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+    <div class="comments-container border-box">
+        <div id="comments-anchor" class="comment-area-title border-box">
+            <i class="fas fa-comments"></i>&nbsp;评论
+        </div>
+        <div class="comment-plugin-fail border-box">
+    <span class="fail-tip">评论插件加载失败</span>
+    <button class="reload keep-button">点击重新加载</button>
+</div>
+<div class="comment-plugin-loading flex-center border-box">
+    <i class="loading-icon fa-solid fa-spinner fa-spin"></i>
+    <span class="load-tip">正在加载评论插件</span>
+</div>
+<script data-pjax>
+  window.KeepCommentPlugin = {}
+  window.KeepCommentPlugin.hideLoading = () => {
+    const cplDom = document.querySelector('.comments-container .comment-plugin-loading')
+    cplDom.style.display = 'none'
+  }
+  window.KeepCommentPlugin.loadFailHandle = () => {
+    window.KeepCommentPlugin.hideLoading()
+    const cpfDom = document.querySelector('.comments-container .comment-plugin-fail')
+    cpfDom.style.display = 'flex'
+    cpfDom.querySelector('.reload').addEventListener('click', () => {
+      window.location.reload()
+    })
+  }
+</script>
+
+        
+            
+
+    <div class="valine-container">
+        <div id="vcomments"></div>
+        <script 
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        ></script>
+        <script 
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        >
+          window.KeepCommentPlugin.initValine = () => {
+            const config = {
+              el: '#vcomments',
+              appId: '2TGCOmDNikdxOnVmQJEFhTOK-gzGzoHsz',
+              appKey: 'lU21jvewvcy043UjfpHRXfvA',
+              meta: ['nick', 'mail', 'link'],
+              avatar: 'wavatar',
+              enableQQ: true,
+              placeholder: '😜 尽情吐槽吧~',
+              lang: 'zh-CN'.toLowerCase()
+            }
+
+            if ('') {
+              config.serverURLs = ''
+            }
+
+            if (window?.Valine) {
+              new Valine(config)
+              window.KeepCommentPlugin.hideLoading()
+            } else {
+              setTimeout(() => {
+                window.KeepCommentPlugin.initValine()
+              }, 1000)
+            }
+          }
+
+          if ('false' === 'true') {
+            setTimeout(() => {
+              window.KeepCommentPlugin.initValine()
+            }, 1200)
+          } else {
+            window.addEventListener('DOMContentLoaded', window.KeepCommentPlugin.initValine)
+          }
+        </script>
+    </div>
+
+
+        
+    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Oracle11g%E6%90%AD%E5%BB%BAogg%EF%BC%88%E7%AE%80%E5%8D%95%E7%9A%84%E5%8D%95%E5%90%91%E5%A4%8D%E5%88%B6%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">Oracle11g搭建ogg（简单的单向复制）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%8E%AF%E5%A2%83%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.</span> <span class="nav-text">1.环境介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">2.实验步骤：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAOGG%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%94%A8%E6%88%B7"><span class="nav-number">1.2.1.</span> <span class="nav-text">创建OGG操作系统用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9OGG%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%94%A8%E6%88%B7%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">修改OGG操作系统用户环境变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ogg1"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">ogg1:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ogg2"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">ogg2:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0OGG%E5%AE%89%E8%A3%85%E4%BB%8B%E8%B4%A8"><span class="nav-number">1.3.</span> <span class="nav-text">上传OGG安装介质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BB%E5%BD%95OGG%E6%B5%8B%E8%AF%95"><span class="nav-number">1.4.</span> <span class="nav-text">登录OGG测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8BOGG%E8%A1%A8%E7%A9%BA%E9%97%B4-%E4%B8%A4%E4%B8%AA%E5%BA%93%E9%83%BD%E5%81%9A"><span class="nav-number">1.5.</span> <span class="nav-text">建立OGG表空间(两个库都做)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAOGG%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8E%88%E6%9D%83-%E4%B8%A4%E4%B8%AA%E5%BA%93%E9%83%BD%E5%81%9A"><span class="nav-number">1.6.</span> <span class="nav-text">创建OGG用户并授权(两个库都做)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%85%E9%A1%BB%E5%BC%80%E5%BD%92%E6%A1%A3%EF%BC%8C%E6%89%93%E5%BC%80%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E9%99%84%E5%8A%A0%E6%97%A5%E5%BF%97%E5%92%8Cforce-log"><span class="nav-number">1.7.</span> <span class="nav-text">必须开归档，打开数据库的附加日志和force log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8COGG%E6%94%AF%E6%8C%81DDL%E8%84%9A%E6%9C%AC"><span class="nav-number">1.8.</span> <span class="nav-text">运行OGG支持DDL脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAOGG%E7%9A%84%E7%AE%A1%E7%90%86%E7%9B%AE%E5%BD%95"><span class="nav-number">1.9.</span> <span class="nav-text">创建OGG的管理目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ogg%E7%AE%A1%E7%90%86%E7%9B%AE%E5%BD%95%E7%9A%84%E7%94%A8%E9%80%94"><span class="nav-number">1.9.1.</span> <span class="nav-text">ogg管理目录的用途</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OGG%E5%A4%8D%E5%88%B6%E6%B5%81%E7%A8%8B"><span class="nav-number">1.10.</span> <span class="nav-text">OGG复制流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E6%B5%8B%E8%AF%95%E8%A1%A8"><span class="nav-number">1.11.</span> <span class="nav-text">建立测试表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BA%90%E7%AB%AF%EF%BC%9A"><span class="nav-number">1.11.1.</span> <span class="nav-text">源端：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E7%AB%AF%EF%BC%9A"><span class="nav-number">1.11.2.</span> <span class="nav-text">目标端：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%AF%E6%B7%BB%E5%8A%A0%E8%A1%A8%E7%BA%A7TRANDATA"><span class="nav-number">1.12.</span> <span class="nav-text">端添加表级TRANDATA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEMGR%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.13.</span> <span class="nav-text">配置MGR管理进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E6%8D%AE%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.14.</span> <span class="nav-text">配置初始化数据进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%9B%AE%E6%A0%87%E7%AB%AFREPLICAT%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.15.</span> <span class="nav-text">配置目标端REPLICAT进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E6%8D%AE"><span class="nav-number">1.16.</span> <span class="nav-text">初始化数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%A5%BD%E7%9B%AE%E6%A0%87%E7%AB%AF%E7%9A%84%E5%BA%94%E7%94%A8%E8%BF%9B%E7%A8%8BRINI-1%E5%90%8E%EF%BC%8C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E5%90%AF%E5%8A%A8%E6%BA%90%E7%AB%AF%E7%9A%84%E6%8D%95%E8%8E%B7%E8%BF%9B%E7%A8%8B%E8%BF%9B%E8%A1%8C%E6%8D%95%E8%8E%B7%E6%95%B0%E6%8D%AE%E4%BA%86%E3%80%82"><span class="nav-number">1.16.1.</span> <span class="nav-text">配置好目标端的应用进程RINI_1后，就可以启动源端的捕获进程进行捕获数据了。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E6%8D%AE"><span class="nav-number">1.17.</span> <span class="nav-text">验证初始化数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E7%AB%AF%E5%92%8C%E7%9B%AE%E6%A0%87%E7%AB%AF%E9%85%8D%E7%BD%AEOGG%E7%9A%84%E6%A3%80%E6%9F%A5%E7%82%B9"><span class="nav-number">1.18.</span> <span class="nav-text">源端和目标端配置OGG的检查点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%8D%95%E8%8E%B7%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.19.</span> <span class="nav-text">源端配置捕获进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E7%AB%AF%E9%85%8D%E7%BD%AEPUMP%E4%BC%A0%E8%BE%93%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.20.</span> <span class="nav-text">源端配置PUMP传输进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AB%AF%E6%B7%BB%E5%8A%A0%E5%A4%8D%E5%88%B6%E5%BA%94%E7%94%A8%E8%BF%9B%E7%A8%8B%EF%BC%88replicat-process%EF%BC%89"><span class="nav-number">1.21.</span> <span class="nav-text">目标数据库端添加复制应用进程（replicat process）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81OGG%E5%A4%8D%E5%88%B6"><span class="nav-number">1.22.</span> <span class="nav-text">验证OGG复制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ogg-%E8%BF%90%E7%BB%B4%E5%91%BD%E4%BB%A4"><span class="nav-number">1.23.</span> <span class="nav-text">ogg 运维命令</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+		year - 作为date对象的年份，为4位年份值
+		month - 0-11之间的整数，做为date对象的月份
+		day - 1-31之间的整数，做为date对象的天数
+		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+		minutes - 0-59之间的整数，做为date对象的分钟数
+		seconds - 0-59之间的整数，做为date对象的秒数
+		microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+		var t1 = Date.UTC(2019,04,09,21,47,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML="❤亲爱的旅客,我已与你/妳相遇❤❤❤"+" 第 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒❤";
+	}/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+	siteTime();
+</script>
+
+<footer class="footer border-box">
+		
+	<a href="https://www.foreverblog.cn/" target="_blank" > <img src="https://img.foreverblog.cn/logo_en_default.png" alt="" style="width:auto;height:16px;"> </a>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            本站由 <span class="tooltip" data-tooltip-content="阿里云"><img src="/images/brands/aliyun.png"></span> 提供部署服务
+            
+        </div>
+    
+
+    
+        <div class="record-info info-item">
+		ICP备案号：【&nbsp;
+            
+                
+                    <div class="record-item border-box">
+                        <a class=""
+                           target="_blank"
+                           href="https://beian.miit.gov.cn"
+                        >
+                            苏ICP备20001538号-1
+                        </a>
+                    </div>
+                
+            
+		&nbsp;】&nbsp;
+        </div>
+    
+	
+    <div class="copyright-info info-item">
+        &copy;&nbsp;<span>2019</span>&nbsp;-&nbsp;2024
+        
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">ドラゴンボールのLong</a>
+        
+		&nbsp;&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        <div class="count-info info-item">
+            
+                <span class="count-item border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">125.5k</span>
+                </span>
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+	
+	<!--自定义了时间-->
+    <p id="sitetime" target="_blank"></p>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+            <li class="tools-item go-to-comments-tablet flex-center">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Oracle11g%E6%90%AD%E5%BB%BAogg%EF%BC%88%E7%AE%80%E5%8D%95%E7%9A%84%E5%8D%95%E5%90%91%E5%A4%8D%E5%88%B6%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">Oracle11g搭建ogg（简单的单向复制）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%8E%AF%E5%A2%83%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.</span> <span class="nav-text">1.环境介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">2.实验步骤：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAOGG%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%94%A8%E6%88%B7"><span class="nav-number">1.2.1.</span> <span class="nav-text">创建OGG操作系统用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9OGG%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%94%A8%E6%88%B7%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">修改OGG操作系统用户环境变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ogg1"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">ogg1:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ogg2"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">ogg2:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0OGG%E5%AE%89%E8%A3%85%E4%BB%8B%E8%B4%A8"><span class="nav-number">1.3.</span> <span class="nav-text">上传OGG安装介质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BB%E5%BD%95OGG%E6%B5%8B%E8%AF%95"><span class="nav-number">1.4.</span> <span class="nav-text">登录OGG测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8BOGG%E8%A1%A8%E7%A9%BA%E9%97%B4-%E4%B8%A4%E4%B8%AA%E5%BA%93%E9%83%BD%E5%81%9A"><span class="nav-number">1.5.</span> <span class="nav-text">建立OGG表空间(两个库都做)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAOGG%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8E%88%E6%9D%83-%E4%B8%A4%E4%B8%AA%E5%BA%93%E9%83%BD%E5%81%9A"><span class="nav-number">1.6.</span> <span class="nav-text">创建OGG用户并授权(两个库都做)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%85%E9%A1%BB%E5%BC%80%E5%BD%92%E6%A1%A3%EF%BC%8C%E6%89%93%E5%BC%80%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E9%99%84%E5%8A%A0%E6%97%A5%E5%BF%97%E5%92%8Cforce-log"><span class="nav-number">1.7.</span> <span class="nav-text">必须开归档，打开数据库的附加日志和force log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8COGG%E6%94%AF%E6%8C%81DDL%E8%84%9A%E6%9C%AC"><span class="nav-number">1.8.</span> <span class="nav-text">运行OGG支持DDL脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAOGG%E7%9A%84%E7%AE%A1%E7%90%86%E7%9B%AE%E5%BD%95"><span class="nav-number">1.9.</span> <span class="nav-text">创建OGG的管理目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ogg%E7%AE%A1%E7%90%86%E7%9B%AE%E5%BD%95%E7%9A%84%E7%94%A8%E9%80%94"><span class="nav-number">1.9.1.</span> <span class="nav-text">ogg管理目录的用途</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OGG%E5%A4%8D%E5%88%B6%E6%B5%81%E7%A8%8B"><span class="nav-number">1.10.</span> <span class="nav-text">OGG复制流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E6%B5%8B%E8%AF%95%E8%A1%A8"><span class="nav-number">1.11.</span> <span class="nav-text">建立测试表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BA%90%E7%AB%AF%EF%BC%9A"><span class="nav-number">1.11.1.</span> <span class="nav-text">源端：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E7%AB%AF%EF%BC%9A"><span class="nav-number">1.11.2.</span> <span class="nav-text">目标端：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%AF%E6%B7%BB%E5%8A%A0%E8%A1%A8%E7%BA%A7TRANDATA"><span class="nav-number">1.12.</span> <span class="nav-text">端添加表级TRANDATA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEMGR%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.13.</span> <span class="nav-text">配置MGR管理进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E6%8D%AE%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.14.</span> <span class="nav-text">配置初始化数据进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%9B%AE%E6%A0%87%E7%AB%AFREPLICAT%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.15.</span> <span class="nav-text">配置目标端REPLICAT进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E6%8D%AE"><span class="nav-number">1.16.</span> <span class="nav-text">初始化数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%A5%BD%E7%9B%AE%E6%A0%87%E7%AB%AF%E7%9A%84%E5%BA%94%E7%94%A8%E8%BF%9B%E7%A8%8BRINI-1%E5%90%8E%EF%BC%8C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E5%90%AF%E5%8A%A8%E6%BA%90%E7%AB%AF%E7%9A%84%E6%8D%95%E8%8E%B7%E8%BF%9B%E7%A8%8B%E8%BF%9B%E8%A1%8C%E6%8D%95%E8%8E%B7%E6%95%B0%E6%8D%AE%E4%BA%86%E3%80%82"><span class="nav-number">1.16.1.</span> <span class="nav-text">配置好目标端的应用进程RINI_1后，就可以启动源端的捕获进程进行捕获数据了。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E6%8D%AE"><span class="nav-number">1.17.</span> <span class="nav-text">验证初始化数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E7%AB%AF%E5%92%8C%E7%9B%AE%E6%A0%87%E7%AB%AF%E9%85%8D%E7%BD%AEOGG%E7%9A%84%E6%A3%80%E6%9F%A5%E7%82%B9"><span class="nav-number">1.18.</span> <span class="nav-text">源端和目标端配置OGG的检查点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%8D%95%E8%8E%B7%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.19.</span> <span class="nav-text">源端配置捕获进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E7%AB%AF%E9%85%8D%E7%BD%AEPUMP%E4%BC%A0%E8%BE%93%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.20.</span> <span class="nav-text">源端配置PUMP传输进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AB%AF%E6%B7%BB%E5%8A%A0%E5%A4%8D%E5%88%B6%E5%BA%94%E7%94%A8%E8%BF%9B%E7%A8%8B%EF%BC%88replicat-process%EF%BC%89"><span class="nav-number">1.21.</span> <span class="nav-text">目标数据库端添加复制应用进程（replicat process）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81OGG%E5%A4%8D%E5%88%B6"><span class="nav-number">1.22.</span> <span class="nav-text">验证OGG复制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ogg-%E8%BF%90%E7%BB%B4%E5%91%BD%E4%BB%A4"><span class="nav-number">1.23.</span> <span class="nav-text">ogg 运维命令</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/lazyload.min.js"></script>
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.3/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+    
+        
+    
+        
+            
+<script class="custom-inject-js" src="/js/love.js" data-pjax></script>
+
+        
+    
+
+</body>
+</html>
